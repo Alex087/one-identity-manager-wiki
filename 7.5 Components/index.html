@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>7.5 Components - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>7.5 Components</p>
+<p>24 ноября 2025 г.</p>
+<p>10:35</p>
+<p><strong># One Identity Manager Web portal</strong></p>
+<p>This is the main application of the product. It contains features for
+managers, auditors, normal users and so on. It can be categorized into
+the following parts.</p>
+<p>For a more detailed description, please read the Web Portal
+Documentation.</p>
+<p><strong>## 1. IT-Shop</strong></p>
+<p>The IT-Shop allows the user to request products. This requests will be
+decided through configurable workflows, that can be combinations of
+automated processes and user approvals.</p>
+<p><strong>## 2. Data Management</strong></p>
+<p>The main part of data management is handled through the <em>_Data
+Explorer_</em> and the <em>_My Responsibilities_</em> view, which look quite
+similar. The <em>_Data Explorer_</em> is used by administrators or auditors,
+the <em>_My Responsibilities_</em> by managers. The objects that can be
+handled are determined by the dynamic One Identity Manager modules the
+company has installed.</p>
+<p>Under the menu item <em>_Statistics_</em> managers and administrators can
+look into the statistics.</p>
+<p><strong>## 3. Attestation</strong></p>
+<p>This concerns everything attestation related. Users can manage
+attestation policies, handle attestation runs and decide the attestation
+of objects. Attestation is a dynamic library, which needs the
+corresponding One Identity Manager module to be installed.</p>
+<p><strong>## 4. Setup</strong></p>
+<p>Under the menu item <em>_Setup_</em> users can manage shops, service items,
+service categories or reports.</p>
+<p>The following libraries are available. Which libraries will be used,
+depends on the configuration of the installation.</p>
+<p>|Library name | Description|</p>
+<p>|---|---|</p>
+<table>
+<thead>
+<tr>
+<th>Library name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>qbm</td>
+<td>This is the base library. It contains all the base components, like the data table and the column dependent references.</td>
+</tr>
+<tr>
+<td>qer</td>
+<td>This is the Identity Management base library. It contains the basic components for identity management, like the Data Explorer.</td>
+</tr>
+<tr>
+<td>aob</td>
+<td>This is the applications library. It contains the components, that are needed to assign entitlements to application bundles.</td>
+</tr>
+<tr>
+<td>apc</td>
+<td>This is a library, that is linked into the Data Explorer. It is used to manage software, that is assigned to users.</td>
+</tr>
+<tr>
+<td>att</td>
+<td>This is the attestation library. It contains everything, that is attestation related, like attesting objects, manage attestation runs, etc.</td>
+</tr>
+<tr>
+<td>cpl</td>
+<td>This is the compliance library. It is used to handle compliance violations and manage compliance rules.</td>
+</tr>
+<tr>
+<td>hds</td>
+<td>This is the help desk library. It contains components to resolve help desk tickets or create new ones.</td>
+</tr>
+<tr>
+<td>olg</td>
+<td>This is the One Login library. It handles the one login multi factor authentication process.</td>
+</tr>
+<tr>
+<td>pol</td>
+<td>This is the policy library. It is used to handle policy violations and manage company policies.</td>
+</tr>
+<tr>
+<td>rmb</td>
+<td>This is the business role library. It is linked into the Data Explorer and is used to manage business roles.</td>
+</tr>
+<tr>
+<td>rms</td>
+<td>This is the system role library. It is linked into the Data Explorer and is used to manage system roles.</td>
+</tr>
+<tr>
+<td>rps</td>
+<td>This is the report library. It contains components to manage reports and assign them to other users. It handles report subscriptions as well.</td>
+</tr>
+<tr>
+<td>sac</td>
+<td>This is the SAP R/3 Compliance Add-on Module. It adds some SAP features to the request process.</td>
+</tr>
+<tr>
+<td>tsb</td>
+<td>This is the target system library. It is linked into the Data Explorer and is used to manage system entitlements and user accounts from different target systems.</td>
+</tr>
+</tbody>
+</table></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

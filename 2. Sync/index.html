@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>2. Sync - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            
+            <li class="nav-item" data-bs-level="1"><a href="#onenotesection-idredacted_user" class="nav-link">[Отправка сообщений об ошибках процесса синхронизации](onenote:#section-id=[REDACTED_USER]</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#data-import" class="nav-link">Data Import</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Автоматическое создание проектов синхронизации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link">Создание проекта синхронизации из шаблона</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#schema-class-unscontainer" class="nav-link">Маппинг в несколько одинаковых Schema Class (например, в несколько UNSContainer)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link">Членство в группе</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-update-delete-insert-log2console" class="nav-link">У коннектора почему-то Update и Delete как Insert срабатывают (видно было, через Log2Console)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#unsgroupb-powershell" class="nav-link">Трабла с тем, что не передавалось измененное свойство членства в UNSGroupB в коннектор PowerShell</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#there-is-no-mapping-for-this-schema-type-which-was-defined-many-to-many-mapping-multi-reference-mapping-rule" class="nav-link">Предупреждение "There is no mapping for this schema type, which was defined many-to-many mapping" при маппинге Multi-reference mapping rule</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link">Основной процесс синхронизации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#postsync" class="nav-link">PostSync</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_5" class="nav-link">Отправка сообщений об ошибках процесса синхронизации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>2. Sync</p>
+<p>7 июля 2021 г.</p>
+<p>11:44</p>
+<h4 id="synchronization-editor-problem-mapping-property-with-script-retrieve-object-forum-identity-manager-community-one-identity-community"><a href="https://www.oneidentity.com/community/identity-manager/f/forum/21645/synchronization-editor-problem-mapping-property-with-script-retrieve-object"><em>Synchronization editor problem: mapping property with script retrieve object - Forum - Identity Manager Community - One Identity Community</em></a></h4>
+<h1 id="onenotesection-idredacted_user">[Отправка сообщений об ошибках процесса синхронизации](onenote:#section-id=[REDACTED_USER]</h1>
+<h1 id="data-import">Data Import</h1>
+<p><img src="../media/2. Sync/media/image1.png"
+style="width:8.44792in;height:4.70833in"
+alt="Figure 12: Example of synchronizing user data with different systems Secondary System CSV import Synchronization FirstName One Identity Manager Template rule FirstName Template rule Given Name Synchronization Provisioning Synchronization Provision i ng Primary System FirstName LastName Directory " /></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/target-system-synchronization-reference-guide/7">Identity Manager 8.1.2 - Target System Synchronization Reference Guide
+(oneidentity.com)</a></p>
+<p>У нас есть две системы (CSV и SAP). При синхронизации с CSV у нас
+меняется имя и фамилия у Person и это сразу должно отображаться в SAP.</p>
+<p>Поэтому, CSV (вторичной системы) мы ставим галку Data Import, что
+означает, что значение переменной FULLSYNC = FALSE. Это приведет к тому,
+что будут работать многие шаблоны и скрипты при синхронизации с
+вторичной системой и будут вносится изменения в SAP.</p>
+<p>Если галки не стоит, то FULLSYNC = TRUE и многие шаблоны не срабатывают!</p>
+<p>Это можно делать для Workflow импорта данных в 1IM (???? походу нет, так
+как у связанных учеток сразу будут срабатывает изменения и данные будут
+отправляться в подключенные системы )</p>
+<p><strong>To prevent immediately provisioning of a primary system during
+synchronization, open the primary system synchronization project and
+disable the Import data option in the synchronization step.</strong></p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/target-system-synchronization-reference-guide/7">https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/target-system-synchronization-reference-guide/7</a>&gt;</em></p>
+<p>То есть, связанные с этой персоной учетки из других систем сразу получат
+изменения!</p>
+<p>Пример скрипта шаблона</p>
+<p><strong><span class="mark">If Not CBool(Variables("FULLSYNC"))</span></strong> Then</p>
+<blockquote>
+<p>If Not String.IsNullOrEmpty(\$UID_UNSRootB\$) AndAlso _</p>
+<p>Not String.IsNullOrEmpty(\$cn\$) Then</p>
+<p>If String.IsNullOrEmpty(\$UID_ParentUNSContainerB\$) Then</p>
+<p>Value = TSB_CreateDN( _</p>
+<p>"CN", _</p>
+<p>\$cn\$,\$FK(UID_UNSRootB).DistinguishedName\$)</p>
+<p>Else</p>
+<p>Value = TSB_CreateDN( _</p>
+<p>"CN", _</p>
+<p>\$cn\$,\$FK(UID_ParentUNSContainerB).DistinguishedName\$)</p>
+<p>End If</p>
+<p>End If</p>
+</blockquote>
+<p>End If</p>
+<p><strong><span class="mark">В общем - включение параметра может приводить к не
+хорошим последствиям в виде запуска процессов не нужных!</span></strong></p>
+<p><strong>----</strong></p>
+<h1 id="_1">Автоматическое создание проектов синхронизации</h1>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.1/target-system-synchronization-reference-guide/40">Identity Manager 8.1.1 - Target System Synchronization Reference Guide
+(oneidentity.com)</a></p>
+<h1 id="_2">Создание проекта синхронизации из шаблона</h1>
+<ol>
+<li>Включаем Extert mode в настройках</li>
+</ol>
+<blockquote>
+<p><img src="../media/2. Sync/media/image2.png"
+style="width:6.0625in;height:2.04167in"
+alt="Make global changes to program settings. General Security General Enable expert mode Language " /></p>
+</blockquote>
+<ol>
+<li>Выбираем наш проект, который будет шаблоном</li>
+</ol>
+<blockquote>
+<p>Edit -&gt; Create Template</p>
+<p><img src="../media/2. Sync/media/image3.png"
+style="width:6.1875in;height:1.86458in"
+alt="Create template... Create your templates here. Enter the template name and a description of the contents. Display name Script language Description GreenPIum Cluster I Visual Basic .Net " /></p>
+</blockquote>
+<ol>
+<li>Этот шаблон будет виден в Database -&gt; Manage Templates</li>
+</ol>
+<blockquote>
+<p><img src="../media/2. Sync/media/image4.png"
+style="width:5.65625in;height:1.86458in"
+alt="Manage project templates... List of all available project templates from every target system. You can filter this all the changes to the database. Template Custom project templates GreenPIum Cluster I Target system DB (ADO.Net) Supported versior 7.0.2015.402 " /></p>
+</blockquote>
+<ol>
+<li>В существующем проекте идем в Target System -&gt; Edit Connection -&gt;
+    Пробегаемся по шагам и сохраняем Config file</li>
+</ol>
+<blockquote>
+<p><img src="../media/2. Sync/media/image5.png"
+style="width:6.84375in;height:2.79167in"
+alt="Create system connection... Save configuration Saue current configuration as template. You can saue the current configuration to use later as a template for connecting to a system of the same type. Select. a file to saue the template in or leaue this field empty. Configuration file " /></p>
+</blockquote>
+<ol>
+<li>
+<p>Создаем новый проект того же типа, что и шаблон</p>
+</li>
+<li>
+<p>Указываем параметры подключения и потом наш сохраненный Conf File</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/2. Sync/media/image6.png"
+style="width:5.98958in;height:2.78125in"
+alt="Create system connection... Load configuration Enter a file containing the connection configuration to load. You can load a preuiously saued configuration from file. The data from a this configuration is used as a templ customized in each subsequent step. Without a template, you must define all the data from scratch for each step. Configuration file 2021 .xml " /></p>
+</blockquote>
+<ol>
+<li>После этого выбираем наш шаблон</li>
+</ol>
+<blockquote>
+<p><img src="../media/2. Sync/media/image7.png"
+style="width:4.71875in;height:3.04167in"
+alt="Create synchronization project... Select project template Select. a project. template for synchronization behauior. The list below shows you all existing project. templates. Select. one and click Net Create blank project. use this option if you do not want to apply a project template. This add an empt " /></p>
+</blockquote>
+<ol>
+<li>Base Object можно указать после того, как будет создана Custom
+    Target System (можно сначала ее создать)</li>
+</ol>
+<p>После можно сохранить проект с расширением sews - подправить его и
+импортнуть, через командую строку с указанием значений параметров - это
+автоматическая установка.</p>
+<p><strong>----</strong></p>
+<h1 id="schema-class-unscontainer">Маппинг в несколько одинаковых Schema Class (например, в несколько UNSContainer)</h1>
+<p>Проблема в том, что пытается удалять существующие объекты, так как
+справа данные разные, а слева - одни</p>
+<p><img src="../media/2. Sync/media/image8.png"
+style="width:10.51042in;height:4.90625in"
+alt="Mappings Hadoop_Policy Yarn_Policy Hadoop_PolicyltemA... Hadoop [REDACTED_IP] 95\OneIM Behavior CanonicalName Description DistinguishedName DomainDispIayName Object-GUID DID ParentlJNSConta... UID UNSContainerB UID UNSR00tB VRT UID ParentConta... VRT UID UNSR00tB XObjectKey Edit map... Customized mapping General Mapping name Mapping dire&amp;on Description Relation One Identity Manager schema d... Target system schema class Hadoop_policy Both directions Hierarchy synchronizaton Only suitable for updates Maps objects referenced by multiple references Hadoop Hadoop_PoIicy (all) Making changes to properties of an existing mapping can cause errors. Click &quot;Edit&quot; to edit the property anyway. " /></p>
+<p><img src="../media/2. Sync/media/image9.png"
+style="width:11.25in;height:5.15625in"
+alt="Mappings Hadoop_Policy Yarn_Polig Hadoop_PolicyRemA... [REDACTED_IP] 95\OneIM Behavior CanonicalName Description DistinguishedName DomainDispIayName Object-GUID DID ParentlJNSConta... UID UNSContainerB UID UNSR00tB VRT UID ParentConta... VRT UID UNSR00tB XObjectKey Edit map... Customized mapping General Mapping name Mapping dire&amp;on Description Relation One Identity Manager schema d... Target system schema class Both directions Hierarchy synchronizaton Only suitable for updates Maps objects referenced by multiple references Yarn_PoIicy (all) Making changes to properties of an existing mapping can cause errors. Click &quot;Edit&quot; to edit the property anyway. " /></p>
+<p><img src="../media/2. Sync/media/image10.png"
+style="width:9.76042in;height:7.20833in"
+alt="General One Identity Manager (1 72.25.32.Ig5\OneIM) Edit schema class... Edit schema class. Schema type Display name Class name Description LINSContainerB Reference scope Connection parameters Schema classes Schema Wpe / Schema class LINSAccountB LINSAccountB (all) Edit reference scope Define the schema class using hmo filters. Filter &#39;Select objects&#39; provides the actual schema clas O objects. To accelerate loading schema class system objects considerably you should also defin system. Ensure that &#39;System filter&#39; never filters more system objects than &#39;Select objects&#39;. Select objects System filter UNSAccountBInUNSGroupB UNSAccountBInUNSGroupB (all) LINSAccountBInLlNSGroupB (effective assig... LINSContainerB Hadoop LINSContainerB (all) UNSGroupB UNSGroupB (all) UNSR00tB UNSR00tB (all) Condition o Scripting " /></p>
+<hr />
+<h1 id="_3">Членство в группе</h1>
+<p><span class="mark">Важно!!!</span></p>
+<p>Для маппинга членства в группе выбирать отличительные свойства!!!
+Например, DistinguishedName</p>
+<p>Чтобы, если совпадут имена пользователей из разных систем - не было
+сложности в определении, из какой системы надо сопоставлять
+пользователя!!!</p>
+<p><img src="../media/2. Sync/media/image11.png"
+style="width:8.54167in;height:5.65625in"
+alt="Edit properw... Change the schema property of type &quot;Members of M:N schema types&#39; Display name YR T Mambers Users YR T Mambers Users Ignore case Enable relatiue complement handling (required for member rules) Try to mark the object for deletion (outstanding) LINSAccountBHasLlNSItemB (effective assignments) Member key properties must be unique across schema Wpes. Only the first member found is assigned! Base schema type UNSItemB M:N schema type LINSAccountBHasLlNSItemB (effective assignments) UID UNSItemB UID UNSAccountB Members UNSAccountB Prima ke ro e DistinguishedName AccountName CanonicalName " /></p>
+<p><img src="../media/2. Sync/media/image12.png"
+style="width:5.65625in;height:6.78125in"
+alt="Edit properw... Change the schema property of type &quot;Script property&quot;. Display name Data type Description VRT Users Multi-ualue Ignore script execution enors Read script Write script Implement the script to read the schema properw value. Leave the script empw if the O You must use $&lt;propefty name&gt;$to access other schema properties. return $FirstName$, $LastName$) Public Function GetVaIue(ByRef schemaproperty as ISchemaProperty, ByVaI options as SchemaPr( $ Users$ users As String — vrtUsers Split (users, vrtUsersI List user as String vrtUsers vrtUsersI. add + user + &quot; , system=Ranger2 Next String ,vrtUsersI) vrtUsers2 Split ( qw, vrtUsers21 " /></p>
+<p>Dim users As String = \$Users\$</p>
+<p>Dim vrtUsers As String() = Split(users, ",")</p>
+<p>Dim vrtUsers1 As New List(Of String)</p>
+<p>For Each user as String In vrtUsers</p>
+<blockquote>
+<p>vrtUsers1.add("CN=" + user + ",system=Ranger2")</p>
+</blockquote>
+<p>Next</p>
+<p>Dim qw As String = string.Join(";",vrtUsers1)</p>
+<p>Dim vrtUsers2 As String() = Split(qw, ";")</p>
+<p>return vrtUsers2</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.4/target-system-synchronization-reference-guide/8#TOPIC-1525581"><span class="mark">Identity Manager 8.1.4 - Target System
+Synchronization Reference Guide
+(oneidentity.com)</span></a></p>
+<p>Для условия Update AdHoc можно прописать</p>
+<p>\$XDateSubItem[o]:Date\$ \&lt;&gt; \$XDateSubItem:Date\$</p>
+<hr />
+<h1 id="-update-delete-insert-log2console">У коннектора почему-то Update и Delete как Insert срабатывают (видно было, через Log2Console)</h1>
+<p>Фишка в том, что принудительно не передавались PolicyID и Permission в
+шаге AdHoc процесса Update UNSGroupB. Надо было использовать параметр
+ForceSyncOf: Value = "UNSContainerB.ObjectGUID,Description".</p>
+<p>И он, когда не смог выполнить Update - выполнял Insert.</p>
+<hr />
+<h1 id="unsgroupb-powershell">Трабла с тем, что не передавалось измененное свойство членства в UNSGroupB в коннектор PowerShell</h1>
+<p><strong>Было</strong></p>
+<p><img src="../media/2. Sync/media/image13.png"
+style="width:15.35417in;height:2.75in"
+alt="IsForITShop IslTShopOnIy MatchPatternForMembership ObjectGUID Risklndex DID AccProduct UID LINSContainerB UID UNSGroupB UID UNSR00tB Members From 11M DID Container Schema properw in One Identity Manager Description DistinguishedName Group Type Members DID Container UID UNSR00tB Information Schema properw in the target system Description Accesses VRT DN users VRT UID UNSR00tB VRT DN VRT RootDN VRT UID UNSR00tB VRT Users VRT Users From11M fil@ fil@ fil@ " /></p>
+<p><strong>Стало</strong></p>
+<p><img src="../media/2. Sync/media/image14.png"
+style="width:15.13542in;height:2.22917in"
+alt="IsForITShop IslTShopOnIy MatchPatternForMembership ObjectGUID UID AccProduct UID UNSContainer8 LID UNSGroup8 ea LID UNSRoot8 V RT Members V RT MembersJoin Schema property in One Identity Manager Description DistinguishedName GroupType V RT Members MembersJcin V RT UID Container LID UNSRoot8 Information Schema propeO&#39; in the target system Description Accesses VRT DN Service VRT Users VRT UsersOut PolicyID VRT UD UNSRoot8 Service VRT DN VRT RootDN VRT LID UNSRoot8 VRT Users : VRT_ " /></p>
+<p>Я стал передавать из 1IM не массив строк, а строку (Join массива)</p>
+<p>Разделил один процесс, который включал в себя и чтение и заполнение
+свойства в Target system, на 2 отдельных.</p>
+<hr />
+<h1 id="there-is-no-mapping-for-this-schema-type-which-was-defined-many-to-many-mapping-multi-reference-mapping-rule">Предупреждение "There is no mapping for this schema type, which was defined many-to-many mapping" при маппинге Multi-reference mapping rule</h1>
+<p>Надо в схеме пользователей, на которые ссылается атрибут M:N слева с
+галкой <strong>Enable relative complement</strong> установить галку <strong>Maps objects
+referenced by multiple references</strong></p>
+<p><img src="../media/2. Sync/media/image15.png"
+style="width:6.39583in;height:3in"
+alt="Edit propety... Change the schema property of type &quot;Members of M:N schema types&quot; D&#39; Name Display name VRT MembersArr VRT MembersArr Ignore case Z] Enable relativecomplement (required for member rues) O Tryto mark the object for deletion (outstardirÄ LINSAcccunt81nLlNSGrcup8 (effective assignments) " /></p>
+<p><img src="../media/2. Sync/media/image16.png"
+style="width:6.53125in;height:4.71875in"
+alt="Edit map... Customized mapping Mappirrg name aase mapping Mappirrg directon Description Users One Identity Manager O Hierarcfwsynchronization Onlysuitable for updates Mapsobjects referenced refereres. One Identity Manager schema cl... Ta system schema class Rangerl Accounts user (all) " /></p>
+<hr />
+<h1 id="_4">Основной процесс синхронизации</h1>
+<p><strong>DPR_DPRProjectionStartInfo_Run_Synchronization</strong></p>
+<hr />
+<h1 id="postsync">PostSync</h1>
+<p>В процессе DPR_DPRProjectionStartInfo_Run_Synchronization имеется шаг по
+созданию события PostSync для таблицы (BaseObject) с передачей
+дополнительных параметров, например uidDprJournal - чтобы можно было
+отфильтровать нужный журнал для этой синхронизации.</p>
+<p>Если мы определим процесс для этой таблицы по событию PostSync - то он
+будет запущен после синхронизации и можно подхватить дополнительные
+параметры.</p>
+<p>the logged Information of the synchronization runs are stored in the One
+Identity Manager database in the tables starting with DPRJournal...</p>
+<p>You can use the report DPR_Journal_Summary to export the complete log
+using the report component.</p>
+<p>To generate the report the Parameter uidDPRJournal has to be set to the
+UID_DPRJournal of the synchronization journal you want to export.</p>
+<p>But you have to fetch the UID_DPRJournal from the database using the
+Information about the start stratup configuration in your process chain.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/5033/send-synchronization-editor-log-with-a-mail/13122">https://www.oneidentity.com/community/identity-manager/f/forum/5033/send-synchronization-editor-log-with-a-mail/13122</a>&gt;</em></p>
+<hr />
+<h1 id="_5">Отправка сообщений об ошибках процесса синхронизации</h1>
+<p>Имеется таблица <strong>DPRJournal</strong> - в ней поле UID_DPRProjectionConfig</p>
+<p>Можно настроить процесс на событие Insert и Update (там запись
+обновляется, если ошибка) с фильтром по UID_DPRProjectionConfig и
+отлавливать ошибки синхронизации ProjectionState = Error</p>
+<p>Ещё имеется таблица DPRJournalMessage, в которой хранится описание
+ошибки и ссылка на DPRJournal.</p>
+<p>The process tasks FullProjection and AdHocProjection provide an
+out-parameter called UID_DialogJournal that provide the UID of the
+created synchronization journal for further processing.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/26100/custom-logging-on-sync-events">https://www.oneidentity.com/community/identity-manager/f/forum/26100/custom-logging-on-sync-events</a>&gt;</em></p>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

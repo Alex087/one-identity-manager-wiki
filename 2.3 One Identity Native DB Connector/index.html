@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>2.3 One Identity Native DB Connector - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#postgesql" class="nav-link">Настройка подключения к PostgeSQL</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#system-dsn-odbc" class="nav-link">Либо указываем System DSN которую прописали в Панели управления ODBC</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#system-filter-scope-1im" class="nav-link">System Filter для Scope 1IM</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#mapping-rules" class="nav-link">Mapping Rules</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link">Членство в группах</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#adhoc-assignremove-insertdelete" class="nav-link">Для AdHoc преобразование событий Assign/Remove в Insert/Delete</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#assign-adsaccountbinadsgroupb-adhoc-provisionning" class="nav-link">Трабла с событием Assign ADSAccountBInADSGroupB - не запускается ADHoc Provisionning на это событие</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#accountname-unsaccountb-usename-postgres" class="nav-link">При провижининге игнорит отправку AccountName UNSAccountB в usename Postgres</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#force-mapping-against-direction-of-synchronization-objectguid" class="nav-link">Не работает Force mapping against direction of synchronization - не обновляется ObjectGuid после провижиннинга</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_5" class="nav-link">Маппинги</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#verify-project" class="nav-link">Трабла с проверкой проекта (verify project)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#objectguid-unsaccountb-read" class="nav-link">Трабла с тем, что не заполнялся ObjectGUID у UNSAccountB после создания и вызова события Read.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#unsaccountbinunsgroupb" class="nav-link">Фильтр UNSAccountBInUNSGroupB</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#unsrootb" class="nav-link">Фильтр UNSRootB</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_6" class="nav-link">Экспорт проекта синхронизации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_7" class="nav-link">Перенос проекта синхронизации (экспорт/импорт)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#acc-definition-unsaccountb" class="nav-link">Трабла с тем, что при назначении Acc Definition не создается UNSAccountB и ругается на политику паролей</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#deferred" class="nav-link">Удаление учетной записи без ожидание периода Deferred</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#update-adhoc" class="nav-link">Не запускается Update AdHoc</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#objectguid" class="nav-link">Не обновлялся ObjectGUID после создания пользователя или группы</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#objectguid_1" class="nav-link">Запускается процесс обновления пользователя и подгружает правильный ObjectGUID</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_8" class="nav-link">Преобразование даты в строку с последующим фильтром строки</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_9" class="nav-link">Откат изменений из целевой системы</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#failover" class="nav-link">Failover</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#adhoc-data" class="nav-link">Для процессов AdHoc, чтобы узнать, что находится в data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#adhoc-data_1" class="nav-link">Для процессов AdHoc вывести данные data в лог</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#remove-unsaccountbinunsgroupb" class="nav-link">Не отрабатывает процесс на удаление членства пользователя в группе по событию Remove таблицы UNSAccountBInUNSGroupB</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#object-browser-view-1-objects-should-be-reloaded-but" class="nav-link">В Object Browser при обращении к view членства (группа - пользователь) выходит ошибка "1 object(s) should be reloaded but … "</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#postgresgreenplum" class="nav-link">Postgres/Greenplum скрипт коннектора</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>2.3 One Identity Native DB Connector</p>
+<p>22 марта 2021 г.</p>
+<p>16:11</p>
+<h1 id="postgesql">Настройка подключения к PostgeSQL</h1>
+<blockquote>
+<p>DSN</p>
+<p>PostgreSQL35W</p>
+<p>Driver={PostgreSQL
+UNICODE};Database=test001;Server=[REDACTED_HOST];Port=5432;Uid=[REDACTED_USER];Pwd=;</p>
+<p>Эту строку прописываем сюда</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image1.png"
+style="width:6.90625in;height:4.3125in"
+alt="Create system connection... Database connection Define interface and connection parameters Database providers installed in the system Odbc Data Provider System.Data.Odbc.OdbcFactory, System.Data, Version=4.O.O.O, Culture—neutral, PublicKeyToken=b77a5c561934e089 Connection data Test " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image2.png"
+style="width:4.53125in;height:2.82292in"
+alt="Enter the database connection data. Misc database port server Named ConnectionString Security Driver mdw.open.ru {PostgreSQL ANSI) " /></p>
+</blockquote>
+<h1 id="_1"></h1>
+<h1 id="system-dsn-odbc">Либо указываем System DSN которую прописали в Панели управления ODBC</h1>
+<blockquote>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image3.png"
+style="width:7.61458in;height:3.54167in"
+alt="Control Panel System and Security Administrative Tools Set up ODBC data sources (32-bit) Set up ODBC data sources (64-bit) O Searc ODBC Data Source Administrator (64-bit) User DSN System DSN file DSN Drivers Tracing Connection Pooling About System Data Sources Platform 644)it ver PostgreSQL Unicode(x64) " /></p>
+</blockquote>
+<h1 id="_2"></h1>
+<h1 id="_3"></h1>
+<h1 id="system-filter-scope-1im">System Filter для Scope 1IM</h1>
+<blockquote>
+<p>CanonicalName = 'GreenPlum' and UID_DPRNameSpace = (select
+UID_DPRNameSpace from DPRNameSpace where Ident_DPRNameSpace =
+'GreenPlum')</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image4.png"
+style="width:9.6875in;height:4.35417in"
+alt="All schema types UNSRoot8 UNSContainer8 UNSAccount8 UNSGroup8 UNSAccount8 UNSGroup8 UNSAccount81nUNSGro... UNSGroup81nUNSGroup8 Condition Is filtere... 9 9 9 9 System filter Object filter Define two filters to be applied in sequence to the system objects. O The target system filter directly affects the target system. This filter is more effective and should take precedence. The system object filter applies to already loaded system objects. Therefore, it is not as fast but is more flexible than a target system filter in many target systems which are not database-based. System filter Object filter This filter only works when loading existing system objects. &#39; encl 71 D (select 71 D frc:m " /></p>
+</blockquote>
+<h1 id="mapping-rules">Mapping Rules</h1>
+<blockquote>
+<p><strong>Направление синхронизации</strong></p>
+<p>Taken from mapping - это значит, что будет браться направление из
+свойства самого маппинга, а не из конкретного шага маппинга
+(конкретного маппинга атрибутов)</p>
+<p><strong>Ignore mapping direction restrictions on adding</strong></p>
+<p>При создании новых объектов игнорируется заданное направление, то есть
+если задан маппинг имени пользователя только в 1IM при этом флажке
+значение будет отправлено в таргет систем.</p>
+<p>Например, при создании пользователя AD указано напраление GUID только
+в 1IM. Если этот флаг установлен - данные будут отправляться в AD, что
+нам не нужно. Нужно убирать этот флаг для свойств, которые генерятся
+на стороне управляемой системы.</p>
+<p><strong>Force mapping against direction of synchronization</strong></p>
+<p>Это означает, что если у нас есть workflow провизионнинга и в нем не
+указана отправка данных GUID в управляемую систему - то с этим флагом,
+после провизионнинга - данные GUID из таргет системы будут отправлены
+в 1IM. (после того, как там сформируется GUID)</p>
+<p><strong>Detecting rogue modifications</strong></p>
+<p>Будет определять изменения в таргет системе, котороые были совершены
+без ведома 1IM и писать их в лог.</p>
+<p><strong>Correct rogue modifications</strong></p>
+<p>Будет корректровать изменения в таргет системе на основе данных из 1IM</p>
+</blockquote>
+<h1 id="_4"><span class="mark">Членство в группах</span></h1>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/target-system-synchronization-reference-guide/8#:~:text=Single%20Membership%20Provisioning,-During%20the%20membership&amp;text=If%20a%20membership%20in%20One,deleted%20memberships%20are%20added%20again.">Identity Manager 8.0 - Target System Synchronization Reference Guide
+(oneidentity.com)</a></p>
+<p>Для того, чтобы в 1IM корректно отображалось членство аккаунтов в
+группах - надо настроить связь M:N (многие ко многим).</p>
+<p>Создаем поле в маппинге кастомной таблицы VRT_Members</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image5.png"
+style="width:9.80208in;height:5.32292in"
+alt="Stan page G roups X UNSGroup8 (all) [REDACTED_IP]\OnelM Object matching rules Schema property in One Identity Manager cn Property mapping rules Edit propety... Change the schema property of type &quot;Script property&quot;. pg_group (all) postg res Property Canonical Name Description DisplayName DistinguishedName GroupType IsForITShop IslTShopOnIy MatchPatternForMe... ObjectGUID Risklndex UID AccProduct UID UNSContainer8 LID UNSGroup8 LID UNSRoot8 VRT Member VRT_ObjectGUIDAsInt... VRT LID UNSRoot8 vrtRevisionDate GO vrtScopeParentRefere... XDateInserted XDateSubItem XDateUpdated XMarkedForDeIetion XObjectKey XTouched Behavior fil@ Information Primary rule Schema propeO&#39; in the target system groname Property CCC VRT DN CCC VRT RootDN CCC vrt UNSRoot8 . groiist groname grosysid Behavior fil@ D&#39; Name Display name Data type Description Read script Write script VRT Members String Multi-value Ignorescriptexecutionerroß Implement the script to read the schema property value. Leave the script empty if the propety is write-only. O You must use S&lt;property name&gt; S to access other schema properties. Example: return SFirstNameS, SLastNameS) Public Function GetVaIue(8yRef schemaproperty as ISchemaProperty, 8yVaI options as SchemaPropertyGetVaIueOption) as StringO $ grolist$ Dim Members As SC ling Dim stIResuIC As SC ling = Members . Replace ( Dim a: IResuIC As SC ling O s CIResuIC stIResuIC . Replace (&quot;Y &quot; a: IResuIC Split (stIResuIC,&quot; „ Return a: IResuIC Activate Windows Go to Settings to activate Windows. " /></p>
+<p><strong>Скрипт чтения</strong></p>
+<p>Dim Members As String = \$grolist\$</p>
+<p>Dim strResult As String = Members.Replace("{","")</p>
+<p>Dim arrResult As String()</p>
+<p>strResult = strResult.Replace("}","")</p>
+<p>arrResult = Split(strResult,",")</p>
+<p>Return arrResult</p>
+<p><strong>Скрипт записи</strong></p>
+<p>Dim VRT_Members As String() = value</p>
+<p>Dim str As String = ""</p>
+<p>Dim trimChars As Char() = {CChar(",")}</p>
+<p>if ( VRT_Members IsNot Nothing AndAlso VRT_Members.Length &gt; 0 ) then</p>
+<p>For Each VRT_Member As String in VRT_Members</p>
+<p>str = str &amp; "," &amp; VRT_Member</p>
+<p>Next</p>
+<p>str = "{" &amp; str.TrimStart(trimChars) &amp; "}"</p>
+<p>\$grolist\$ := str</p>
+<p>Else</p>
+<p>\$grolist\$ := Nothing</p>
+<p>End If</p>
+<p>Затем, в таблице UNSGroupB создаем поле M:N (VRT_Member)</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image6.png"
+style="width:10.09375in;height:4.5625in"
+alt="Start page G roups X UNSGroup8 (all) [REDACTED_IP]\OnelM Edit propety... Change the schema property of type &quot;Members of M:N schema types&quot; Property CanonicalName Description DisplayName DistinguishedName GroupType IsForITShop IslTShopOnIy MatchPatternForMe... ObjectGUID Risklndex UID AccProduct UID UNSContainer8 LID UNSGroup8 LID UNSRoot8 VRT Member VRT_ObjectGUIDAsInt... VRT LID UNSRoot8 vrtRevisionDate GO vrtScopeParentRefere... XDateInserted XDateSubItem XDateUpdated XMarkedForDeIetion XObjectKey XTouched Behavior fil@ fil@ D&#39; Name Display name VRT Member VRT Member Ignore case Enable relativecomplement (required for member rues) O Tryto mark theobjectfordeletion(outstardiro LINSAcccunt81nLlNSGrcup8 (all) UNSGroup81nUNSGroup8 (all) Member key properties must be unique across schema types. Only the first member found is assigned! Base schema type UNSGroupB M:N schema type UNSAccount31nUNSGroup3 (all) UD UNSGroup3 UNSAccount3 Members U NSAccountB Prima k ro ObjectGUID Additional k ro ties o ional AccountName Canonical Name Description " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image7.png"
+style="width:10.11458in;height:4.46875in"
+alt="Stan page G roups X UNSGroup8 (all) [REDACTED_IP]\OnelM Edit propety... Change the schema property of type &quot;Members of M:N schema types&quot; Property CanonicalName Description Display Name DistinguishedName GroupType IsForITShop IslTShopOnIy MatchPatternForMe... ObjectGUID Risklndex UID AccProduct UID UNSContainer8 LID UNSGroup8 LID UNSRoot8 VRT Member VRT_ObjectGUIDAsInt... VRT LID UNSRoot8 vrtRevisionDate GO vrtScopeParentRefere... XDateInserted XDateSubItem XDateUpdated XMarkedForDeIetion XObjectKey XTouched Behavior fil@ fil@ D&#39; Name Display name VRT Member VRT Member Ignore case Enable relativecomplement (required for member rues) O Tryto marktheobjectfordeletion(outstardiro UNSAccount81nUNSGroup8 (all) UNSGrcup81nUNSGrcup8 (all) Member key properties must be unique across schema types. Only the first member found is assigned! Base schema type UNSGroupB UNSGroup31nUNSGroup3 (all) UD UNSGroup3Parent M:N schema type UD UNSGroup3ChiId Members UNSGroupB Prima k ro ObjectGUID Additional k ro ties o ional CanonicalName Description DisplayName " /></p>
+<p>Делаем маппинг VRT_Member - VRT_Members</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image8.png"
+style="width:9.13542in;height:3.90625in"
+alt="Edit mapping rule... Edit the rule of type (Value comparison rule). Rule name Display name Mappirrg directon Description One Identity Manager Schema propety O VRT Member VRT Members VRT Member &lt; &gt; VRT Members One Identity Manager Ignore map p i ng direction restrictions on Force map p i tv against n ofsyrrchro nizabon Detect rogue modificatiom Ignore case sensitivity Disable merge mode support Correct rogue modificatiom Target system Schema propety VRT Member Do notoverwrite Hardlefirstpropertyvalueassiroevalue VRT Members Do notoverwrite Hardlefirstpropertyvalueassiroevalue " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image9.png"
+style="width:11.09375in;height:3.875in"
+alt="Start page G roups X UNSGroup8 (all) [REDACTED_IP]\OnelM Property Canonical Name Description DisplayName DistinguishedName GroupType IsForITShop IslTShopOnIy MatchPatternForMe.. ObjectGUID Risklndex UID AccProduct UID UNSContainer8 UD UNSGroup8 •a LID UNSRoot8 VRT Member VRT_ObjectGUIDAsInt... VRT LID UNSRoot8 Behavior Object matching rules Schema property in One Identity Manager cn Property mapping rules Schema property in One Identity Manager Distinguished Name ObjectGUIDAsInteger VRT LID UNSRoot8 Member Information Primary rule Information Schema propeO&#39; in the target system groname Schema propeO&#39; in the target system groname CCC VRT DN grosysid CCC UNSRoot8 Name VRT Members pg_group (all) postg res Property CCC VRT DN CCC VRT RootDN CCC vrt UNSRoot8 groiist groname grosysid VRT Members vrtPrimaryKey Behavior fil@ fil@ fil@ " /></p>
+<hr />
+<p><strong><span class="mark">В общем</span></strong>, надо после сопоставления
+атрибутов VRT_Member - VRT_Member сделать процесс на <strong>Update
+UNS_GroupB</strong> ADHoc и в поле ForceSyncOf для шага ProjectorComponent -
+AdHocProjection указать виртуальное поле VRT_Member (на стороне
+UNS_GroupB которое меняется)</p>
+<p>I have added the virtual attribute to the ForceSyncOf parameter of the
+"Update Account" step of the "ADS_ADSAccount_Update/(De-)activate"
+process.</p>
+<p>That seems to do the trick.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/26629/virtual-mapping-attribute-object-reference-not-provisioned-in-adhoc">https://www.oneidentity.com/community/identity-manager/f/forum/26629/virtual-mapping-attribute-object-reference-not-provisioned-in-adhoc</a>&gt;</em></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image10.png"
+style="width:4.55208in;height:3.58333in"
+alt="Param eters Parameter name U date user CSV GrænPlum Parameterualue CausingEntityPatch Connectionprouider ConnectionString UID DPRProjectionco... UID DPRsystem&#39;%riabl... ForceSyncOf Authenticationstring = VID = VID = DPRProjectionConfigurationl.ToString0 = DPRSystemhÆriabIeSetl.ToString0 Member&quot; = Connectionlnfo.AuthString " /></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.4/target-system-synchronization-reference-guide/8#TOPIC-1525581"><span class="mark">Identity Manager 8.1.4 - Target System
+Synchronization Reference Guide
+(oneidentity.com)</span></a></p>
+<hr />
+<p>Чтобы работало добавление и удаление для поля, а не перезатирание при
+Update группы, надо для поля M:N (VRT_Members) поставить галку</p>
+<p>"<strong>Enable relative complement handling (requred for member rules)</strong>"</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image11.png"
+style="width:5.0625in;height:2.51042in"
+alt="Edit properw... Change the schema property of type &quot;Members of M:N schema types&#39;. Display name YR T Members Ignore case *Enable relatiue complement handling (required for member Try to mark the object for deletion (outstanding) UNSAccountBInUNSGroupB (all) " /></p>
+<p>НО! маппить в таком случае надо в целевой системе с полем типа
+SystemObjectData (свойство из целевой системы, у которого стоят галки</p>
+<p><strong>IsMultiValue</strong> и <strong>IsReference</strong></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image12.png"
+style="width:4.85417in;height:5.15625in"
+alt="Edit properw... Change the schema property. Display name Base property Data type Access constraint Mandatory Maximum length Description Referenced schema types uttMembersAIIDn DN of all group members (SID for F SP only) None Multi-ualue Unique builtinDomain contact. domainDNS msDS-PasswordSettin s organizationall_lnit Is reference Reuision counter " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image13.png"
+style="width:6.5625in;height:3.94792in"
+alt="Edit mapping rule... Edit the rule of type (Multi-reference mapping rule). Display name Mapping dire&amp;on Description One &quot;entity Manager Schema properw Members OUT Members OUT Target system O Ignore mapping direction restrictons on adding O Detect. rogue modificatons vrtMembersAIIObj Correct. rogue modificatons Do not ouenmrite Member filter Target system Schema properw Member filter Only include these Name computer contact inetOrgPerson O builtinDomain vrtMembersAIIDn Do not ouenmrite o Exclude these " /></p>
+<p><strong><span class="mark">Описание в доке OneIM Synchronization Technology
+(Multi-reference mapping rule, Enable relative complement
+handling)</span></strong></p>
+<hr />
+<p>Если не надо каждый раз перезатирать членство, то нужно поставить
+галки Enable merging</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image14.png"
+style="width:5.92708in;height:3.38542in" alt="0 SW MS wobsn3 0 " /></p>
+<p>В таком случае, операции по добавлению в группу будут отображаться в
+таблице DPRMemberShipAction.</p>
+<hr />
+<p><span class="mark">Did you tried to use the events ASSIGN and REMOVE
+instead of INSERT and DELETE? For M:N tables these are the ones to go.
+In addition, what type of connector are you using? </span></p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/29657/adhocprojection-works-for-insert-but-not-for-delete">https://www.oneidentity.com/community/identity-manager/f/forum/29657/adhocprojection-works-for-insert-but-not-for-delete</a>&gt;</em></p>
+<hr />
+<p>Если членство хранится не в группе, а в пользователе (он член групп)
+то это сложнее - предлагают обратиться в ТП</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/31711/how-does-accountingroup-ad-hoc-provisioning-work-how-to-update-multi-valued-attrib-on-account-not-group">How does AccountInGroup Ad-Hoc Provisioning work? =&gt; how to update
+multi-valued attrib on account not group - Forum - Identity Manager
+Community - One Identity
+Community</a></p>
+<hr />
+</blockquote>
+<h3 id="can-forcesyncof-functionality-inserts-an-account-at-target-if-not-found">Can forcesyncof functionality inserts an account at target if not found?</h3>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/32031/can-forcesyncof-functionality-inserts-an-account-at-target-if-not-found">https://www.oneidentity.com/community/identity-manager/f/forum/32031/can-forcesyncof-functionality-inserts-an-account-at-target-if-not-found</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="adhoc-assignremove-insertdelete">Для AdHoc преобразование событий Assign/Remove в Insert/Delete</h1>
+<blockquote>
+<p>If you move to ASSIGN/REMOVE events then that would also have to align
+correctly. If needed, there is an example with the Azure Connector
+pre-script where it transforms ASSIGN/REMOVE to INSERT/DELETE before
+calling Get_AdHocData(), so that the Provisioning process operation
+would have 'Insert' in it.</p>
+<p>Dim evt as String = EventName</p>
+<p>If evt.Equals("Assign", StringComparison.OrdinalIgnoreCase) _</p>
+<p>OrElse evt.Equals("HandleOutStanding",
+StringComparison.OrdinalIgnoreCase) then</p>
+<p>evt = "Insert"</p>
+<p>ElseIf evt.Equals("Remove", StringComparison.OrdinalIgnoreCase) then</p>
+<p>evt = "Delete"</p>
+<p>End If</p>
+<p>Imports System.Collections.Generic</p>
+<p>Dim data As IDictionary(Of String,string) = DPR_GetAdHocData( _</p>
+<p>\$FK(UID_AADUser).FK(UID_AADOrganization).XObjectKey\$, _</p>
+<p>"AzureAD","",evt)</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/20874/sync-project---inserting-objects-works-but-not-the-update">Sync Project - inserting objects works but not the update - Forum -
+Identity Manager Community - One Identity
+Community</a></p>
+<hr />
+</blockquote>
+<h1 id="assign-adsaccountbinadsgroupb-adhoc-provisionning">Трабла с событием Assign ADSAccountBInADSGroupB - не запускается ADHoc Provisionning на это событие</h1>
+<blockquote>
+<p>Надо во 1х заменить Assign на Insert. чтобы передавался в проект
+синхронизации (В PreScript)</p>
+<p>Dim evt as String = EventName</p>
+<p>If evt.Equals("Assign", StringComparison.OrdinalIgnoreCase) _</p>
+<p>OrElse evt.Equals("HandleOutStanding",
+StringComparison.OrdinalIgnoreCase) then</p>
+<p><span class="mark">evt</span> = "Insert"</p>
+<p>End If</p>
+<p>data =
+DPR_GetAdHocData(\$FK(UID_UNSGroupB).FK(UID_UNSRootB).XObjectKey\$,"DB","",<span class="mark">evt</span>)</p>
+<p>Во вторых - убрать Condition из шага процесса AdHoc Provisioning, так
+как он в values("NeedExecute") пишет False почему то</p>
+<hr />
+<p>Сначала создает Single Object Operation - указываем событие и потом, в
+pre-script AdHoc процесса, который на событии таблицы - указываем это
+событие в</p>
+<p>DPR_GetAdHocData</p>
+<p><em>data =
+DPR_GetAdHocData(\$FK(UID_UNSAccountB).FK(UID_UNSRootB).XObjectKey\$,"DB","","Delete")</em></p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.1/target-system-synchronization-reference-guide/40#TOPIC-1246704">https://support.oneidentity.com/technical-documents/identity-manager/8.1.1/target-system-synchronization-reference-guide/40#TOPIC-1246704</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="accountname-unsaccountb-usename-postgres">При провижининге игнорит отправку AccountName UNSAccountB в usename Postgres</h1>
+<blockquote>
+<p>Для правила CN \&lt;- usename надо убрать галку Ignore mapping direction
+restriction on adding</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image15.png"
+style="width:10.72917in;height:4.71875in"
+alt="Edit mapping rule... Edit the rule of type (Value comparison rule). Rule name Display name Mappirrg directon Description One Identity Manager Schema propety O cn usename Name &lt; &gt; usename One Identity Manager Ignore map p i ng direction restrictions on additv Force map p i tv against direction nizabon Detect rogue modificatiom Ignore case sensitivity Disable merge mode support Correct rogue modificatiom Target system Schema propety Z] Do notoverwrite Cl Hardlefirstpropertyvalueassinglevalue usename Do notoverwrite Cl Hardlefirstpropertyvalueassinglevalue " /></p>
+<hr />
+</blockquote>
+<h1 id="force-mapping-against-direction-of-synchronization-objectguid">Не работает Force mapping against direction of synchronization - не обновляется ObjectGuid после провижиннинга</h1>
+<blockquote>
+<p>Сделал событие Read на UNSAccountB и UNSGroupB.</p>
+<p>Там запилил процесс ProjectorComponent - UpdateProjection</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image16.png"
+style="width:8.13542in;height:5.9375in"
+alt="Read user Green Plum Red in m Param eters Parameter name Connectionprovider ConnectionString UlD_DPRProjectionco. UlD_DPRsystemVanabl. EntityToUpdateKey Authenticationstring EntityToUpdatePatch OverrideVariabIes TargetSystemConnectE... UD DPRJournal Parameter value Value = VIO Connectionprovider&#39;l Value = VID_GetVaIueOfDiaIogdatabasesCConnectionString•) Value = Value = SX0bJectKeyS Value = Value = Connectionlnfo.AuthString Value = Value = Hidden E ncryp ted Partial en.. " /></p>
+<p>Затем, в событии Insert добавил вызов события Read после создания
+пользователя / группы (HandleObjectComponent - FireGenEvent)</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image17.png"
+style="width:9.03125in;height:6.11458in"
+alt="Param eters Parameter name Authenticationstring Connectionprovider ConnectionString Event Name ObjectType WhereCIause ParamNameI CCC_UNSAccou n tB_ Insert_Ad Hoc Create user GreenPIum Cræte Read lum user Update D Value = •Read Parameter value &#39;value = Connectionlnfo.ÅuthString Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo.ConnectionString Value = •UNSAccounta• Dim f As ISqIFormatter = Connection.SqIFormatterVaIue = f.ComparisonCcn•, ValWpe.String, CompareOperator.EquaI) Value = [Name of parameter] " /></p>
+</blockquote>
+<h1 id="_5">Маппинги</h1>
+<blockquote>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image18.png"
+style="width:19.28125in;height:5.4375in"
+alt="Navigation Mappings Groups Users Group - user Group in Group Group - user (filtered) Group - Group (filtered) Stan page G roups X UNSGroupa (all) [REDACTED_IP]\OnelM Property Canonical Name Description DisplayName DistinguishedName GroupType IsForITShop IslTShopOnIy MatchPatternForMembership ObjectGUID Risklndex UID AccProduct UID UNSContainer8 LID UNSGroup8 LID UNSRoot8 VRT Member VRT_ObjectGUIDAsInteger VRT LID UNSRoot8 vrtRevisionDate Behavior fil@ Object matching rules Schema property in One Identity Manager cn VRT ObjectGUIDAsInteger Property mapping rules Schema property in One Identity Manager Distinguished Name VRT ObjectGUIDAsInteger VRT LID UNSRoot8 Information Primary rule Alternate rule Information Schema propeO&#39; in the target system groname g rosysid Schema propeO&#39; in the target system groname CCC VRT DN grosysid CCC Vit UNSRoot8 Name pg_group (all) postg res Property CCC VRT DN CCC VRT RootDN CCC vrt UNSRoot8 grolist groname grosysid VRT Members vrtPrimaryKey Behavior fil@ fil@ " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image19.png"
+style="width:19.40625in;height:4.4375in"
+alt="Navigation Mappings Groups Group - user Group in Group Group - user (filtered) Group - Group (filtered) Stan page Users X UNSAccount8 (all) [REDACTED_IP]\OnelM Property AccountDisabled AccountExpires AccountName CanonicalName Description DisplayName DistinguishedName FirstName dentityType IsGroupAccount IsPriviIegedAccount Last Logon Last Name Behavior Object matching rules Schema property in One Identity Manager AccountName VRT ObjectGUIDAsInteger2 Property mapping rules Schema property in One Identity Manager AccountName DistinguishedName VRT ObjectGUIDAsInteger2 VRT LID UNSRoot8 pg_user (all) postg res Information Primary rule Alternate rule Information Schema propeO&#39; in the target system usename usesysid Schema propeO&#39; in the target system use name use name CCC VRT DN usesysid CCC UNSRoot8 Name Property CCC VRT DN CCC VRT RootDN CCC vrt UNSRoot8 usecreatedb usename userepl usesuper usesysid valuntil vrtPrimaryKey Behavior fil@ " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image20.png"
+style="width:19.5in;height:5.4375in"
+alt="Navigation Mappings Groups Users Group - user Group in Group Group - user (filtered) Group - Group (filtered) Stan page Group - User (filtered) UNSAccount81nUNSGroup8 (all) [REDACTED_IP]\OnelM Property RiskIndexCaIcuIated LID UNSAccount8 UID_UNSGroup8 VRT_Group VRT_GroupAsInteger VRT_GroupName VRT Member VRT_MemberAsInteger VRT MemberName vrtRevisionDate XDateInserted XDateUpdated XlsInEffect XMarkedForDeIetion XObjectKey XOrigin XTouched XUserInserted XUserUpdated x Behavior Object matching rules Schema property in One Identity Manager VRT_Group, LID UNSGroup8, VRT Member, LID UNSAccount8 Property mapping rules Schema property in One Identity Manager VRT_Group VRT Member pg_auth_members_users (all) postg res Information Primary rule Information Schema propeO&#39; in the target system VRT_roIeidAsString, roleid, VRT_memberAsString, member Schema propeO&#39; in the target system VRT_roIeidAsString VRT_memberAsString Property admin_option grantor member roleid VRT_memberAsString VRT_roIeidAsString vrtPrimaryKey Behavior " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image21.png"
+style="width:19.1875in;height:4.02083in"
+alt="Navigation Mappings Groups Users Group - user Group in Group Group - user (filtered) Group - Group (filtered) Stan page Group - Group (filtered) UNSGroup81nUNSGroup8 (all) x [REDACTED_IP]\OnelM Property LID UNSGroup8ChiId LID UNSGroup8Parent VRT_Group VRT_GroupMember vrtRevisionDate XDateInserted XMarkedForDeIetion XObjectKey XTouched XUserInserted XUserUpdated Object matching rules Schema property in One Identity Manager VRT_Group, UID UNSGroup8Parent, VRT_GroupMember, UID Property mapping rules Schema property in One Identity Manager VRT_Group VRT_GroupMember pg_auth_members_groups postg res Behavior Information Primary rule Information Schema propeO&#39; in the target system VRT_roIeidAsString, roleid, VRT_memberAsString, member Schema propeO&#39; in the target system VRT_roIeidAsString VRT_memberAsString Property admin_option grantor member roleid VRT_memberAsString VRT_roIeidAsString vrtPrimaryKey Behavior " /></p>
+</blockquote>
+<h1 id="verify-project">Трабла с проверкой проекта (verify project)</h1>
+<blockquote>
+<p>Поставил в Workflow</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image22.png"
+style="width:7.9375in;height:3.59375in"
+alt="Edit workflow... Edit a synchronization workflow. General Wo rkfiowdisp lay name Synchro nization indirection Revision filtering Exception hardling Deperdercy• re-so ution Description InitialSync Defined by execution Use revision filter Continue on error Manual Log variablesetcontents O O " /></p>
+</blockquote>
+<h1 id="objectguid-unsaccountb-read">Трабла с тем, что не заполнялся ObjectGUID у UNSAccountB после создания и вызова события Read.</h1>
+<blockquote>
+<p>Решилась путем настройки паузы между созданием и чтением атрибута = 2
+мин.</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image23.png"
+style="width:8.85417in;height:7.34375in"
+alt="Navigation Process Orchestration Processes Custom processes DialogScheduIe DPRMemberShipActlon UNSAccount8 ccc CCC U Hoc ccc g] ccc U NSAcco _Script UNSAccount81nUNSGroup8 ccc g] ccc UNSGroup8 ccc ccc ccc ccc UNSGroup81nUNSGroup8 ccc ccc Process automation Objects without processes Value = •n• O Getting Started Configuration parameters CCC_UNSAccou n tB_ Insert_Ad Hoc Create user Green Plum Cræte in GrænPlum Read Green Plum user Ll &quot;Ste ObjEtGl_l D Getting Started One Identity Manager Schema Permissions Process Orchestration Script Library user Interface Mail Templates Param eters Parameter name Connectionprovider ConnectionString Delaylntervall DelayTime JoblD Parameter value Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo. ConnectionString Value = 2 Value = JoblD " /></p>
+</blockquote>
+<h1 id="unsaccountbinunsgroupb">Фильтр UNSAccountBInUNSGroupB</h1>
+<blockquote>
+<p>UID_UNSAccountB IN (select UID_UNSAccountB from UNSAccountB JOIN
+UNSRootB ON UNSAccountB.UID_UNSRootB = UNSRootB.UID_UNSRootB where
+UNSRootB.Ident_UNSRoot = 'GreenPlum2')</p>
+<p>Для групп в группах</p>
+<p>UID_UNSGroupBChild IN (select UID_UNSGroupB from UNSGroupB JOIN
+UNSRootB ON UNSGroupB.UID_UNSRootB = UNSRootB.UID_UNSRootB where
+UNSRootB.Ident_UNSRoot = 'GreenPlum1')</p>
+<p><strong>UID_UNSGroupBChild IN (select UID_UNSGroupB from UNSGroupB JOIN
+UNSRootB ON UNSGroupB.UID_UNSRootB = UNSRootB.UID_UNSRootB where
+UNSRootB.Ident_UNSRoot =
+<span class="mark">'\$UNSRootB_Name\$'</span>)</strong></p>
+</blockquote>
+<h1 id="unsrootb">Фильтр UNSRootB</h1>
+<blockquote>
+<p>CanonicalName = '\$UNSRootB_Name\$' and UID_DPRNameSpace = (select
+UID_DPRNameSpace from DPRNameSpace where Ident_DPRNameSpace =
+'\$Ident_DPRNameSpace\$')</p>
+<p>В \$ - переменные</p>
+<hr />
+</blockquote>
+<h1 id="_6">Экспорт проекта синхронизации</h1>
+<blockquote>
+<p>Start the Synchronization Editor with option "-d" using a command
+line:</p>
+<p>E.g.: C:\Program Files\One Identity\One Identity
+Manager\SynchronizationEditor.exe -d</p>
+<p>When the Synchronization Editor opens there will be additional save
+and export options:</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image24.png"
+style="width:5in;height:3.02083in"
+alt="Synchronization Editor ( Help *Commit to database • Navigation Configuration G Remote connection... Start page General No synchronization project loaded. Select a synchronization project from the list below by double clic Delete Synchronization projects Start a new synchronization project Select to create a new synchronization project. " /></p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/identity-manager/kb/187752/how-to-export-the-synchronization-project-shell-from-the-synchronization-editor">https://support.oneidentity.com/identity-manager/kb/187752/how-to-export-the-synchronization-project-shell-from-the-synchronization-editor</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="_7">Перенос проекта синхронизации (экспорт/импорт)</h1>
+<blockquote></blockquote>
+<ol>
+<li>
+<p>Сделать бекап!</p>
+</li>
+<li>
+<p>Установить драйвер ODBC (psqlodbc_13_00_0000) на админскую станцию и
+    на JobServer!</p>
+</li>
+<li>
+<p>[Сделать экспорт проекта
+    синхронизации](onenote:#One%20Identity%20Native%20DB%20Connector&amp;section-id=[REDACTED_USER]</p>
+</li>
+<li>
+<p>Сделать экспорт Custom Processes</p>
+</li>
+<li>
+<p>Проверить, что есть необходимый компонент для проекта синхронизации
+    (Native Database Connector, например)</p>
+</li>
+<li>
+<p>Импортировать проект синхронизации</p>
+</li>
+<li>
+<p>Настроить подключение к БД (Target System -&gt; Edit Connection)</p>
+</li>
+<li>
+<p>В Manager Создать Target System Type (указать таблицы для
+    синхронизации и group merging behavior - если необходимо) и сами
+    Custom Target Systems</p>
+</li>
+<li>
+<p>Добавить Base Object в проект синхронизации и указать JobServer (у
+    него должен быть указан тип под этот коннектор!)</p>
+</li>
+<li>
+<p>Добавить триггеры для операций (Insert/Update/Delete) AdHoc (в
+    дизайнере - Single Object Operations)</p>
+</li>
+<li>
+<p>Импортировать Custom Processes чтобы связать операции с UNS
+    таблицами и вызов Workflow</p>
+</li>
+</ol>
+<!-- -->
+
+<ol>
+<li><strong>Сделать Acc Definitions!</strong></li>
+</ol>
+<blockquote>
+<hr />
+</blockquote>
+<h1 id="acc-definition-unsaccountb">Трабла с тем, что при назначении Acc Definition не создается UNSAccountB и ругается на политику паролей</h1>
+<blockquote>
+<p>Причина в том, что для дефолтной политики не был указан дефолтный
+пароль и при сработке скрипта onSaving брался этот null пароль и он не
+подпадал под эту же политику.</p>
+<p>Создал отдельную политику паролей для этого <strong>UNSRootB</strong></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image25.png"
+style="width:6.45833in;height:6.0625in"
+alt="Designer - (Main Database) Qatabase Object filter Yiew Help e aack• *Next •I O Commit to database Navigation Base Data General Security settirrgs Authentication modules Database server permissions PrOgrams &quot;E Web server configurations &quot;E HTML applications Connection data OAuth 2.0,&#39;OpenID Connect configuration f&#39; Password policies Restricted passwords • Installation Localization Advanced Getting Started One Identity Manager Schema Permissions Process Orchestration Script Library user Interface Mail Templates Documentation Base Data Favorites Search DefaultInitlaIPassword Y • Process Orchestration Password policies List Editor UNSAccount8 Active Directory password policy GreenPIum password policy One Identity Manager password policy password policy for central password of employees GreenPlum password policy Schema Editor Description Predefined password po Predefined password po Predefined password po Display name Description Erro r message Assignment Passwo rd co umn Ap p to Password poloj GreenPIum password policy Cl Default policy Password Character classes Scripts Remove Test Assignments Apply to GreenPIum I (GreenPIumIl LINSAccounta - Password GreenPIum I (GreenPIumI) GreenPIum password policy Passwo rd co um n LINSAccountS - Password " /></p>
+<hr />
+</blockquote>
+<h1 id="deferred">Удаление учетной записи без ожидание периода Deferred</h1>
+<blockquote>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image26.png"
+style="width:6.27083in;height:6.30208in"
+alt="Commit to database Navigation Identity Manager Schema ShoppirrgCartOrder ShoppirrgCartPattern ShoppingCartPatternItem TS&amp;AccountDef TS3AccountDefHas3ehavior TS83ehavior TS81TData TS81TDataMapping TS8PersonUsesAccount UNSAccountB UNSAccount8HasUNSltem8 UNSAccount81nUNSGroup8 UNscontainer8 UNSGroup8 UNSGroup3collection UNSGroup8Exclusion UNSGroup8HasUnsItem8 UNSGroup81nUNSGroup8 UNSItem8 UNSRoot8 WorkDesk WorkDeskHasESet WorkDeskState Getting Started One Identity Manager Schema Permissions Process Orchestration Script Library user Interface Mail Templates Documentation Next • „ Search DefaultImtlaIPassword 10036 • I V X O UNSAccounta Col um ns UNSAcc Columns AccountDisabIed AccountExpires AccountName CanonicalName Description DisplayName DistinguishedName FirstName Identitywpe IsGroupAccount IsPrwiIegedAccount Table properties Display name (sirrgular) Display name (plural) Display pattem Display pattern (10 ng) Hierarch] path Remarks Cache information Prep rocesso r co ndition Deferred deletion [days] Icon &amp;ackgro co Ior Schema Editor X i Display name user account is disabled Account expiry date Login name Canonical name Name Description Display name Distinguished name First name Identity Groups can be inherited Privileged user account user account user accounts UNSRoot81Ull not Ioa Disabled by preprocessor • UNS Acco unt " /></p>
+</blockquote>
+<h1 id="update-adhoc">Не запускается Update AdHoc</h1>
+<blockquote>
+<p>Надо из условия шага убрать</p>
+<p>Value = Cbool(values("NeedExecute"))</p>
+</blockquote>
+<h1 id="objectguid">Не обновлялся ObjectGUID после создания пользователя или группы</h1>
+<blockquote>
+<p>Странная штука, стандартный метод отрабатывает не всегда</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image27.png"
+style="width:11.85417in;height:5.77083in"
+alt="Property UNSAccount8 (all) [REDACTED_IP]\OnelM usesysid Object matching rules Schema property in One Identity Manager Account Name VRT ObjectGUIDAsInteger2 Property mapping rules Schema property in One Identity Manager AccountName DistinguishedName IsGroupAccount VRT_ObjectGUIDAsInteger2 VRT LID U VRT CCC Ac Edit mapping rule.. Edit the rule of type (Value comparison rule). pg_user (all) postg res Behavior Information Primary rule Alternate rule Information Schema propeO&#39; in the target system use name usesysid Schema propeO&#39; in the target system use name use name CCC VRT DN CCC_isGroupAccount usesysid Property Behavior Description DisplayName DistinguishedName First Name dentityType IsGroupAccount IsPriviIegedAccount Last Logon Last Name MatchPatternForMe... MemberOf ObjectGUID assword PWDLastSet Riskl ndexCaIcuIated UID Person LID TS8AccountDef LID TS88ehavior LID UNSAccount8 UID UNSContainer8 LID UNSRoot8 VRT CCC AccountDis... @ Member VRT ObjectGUIDAsInt... CCC_isGroupAccount @ CCC VRT DN CCC VRT RootDN CCC vrt UNSRoot8 rolconnlimit use createdb usename userepl usesuper valuntil VRT CCC RolConnLi... vrtPrimaryKey Activ e Windows fil@ fil@ Rule name Display name Mappirrg directon Description One Identity Manager Schema propety ObjectGUID_usesysid Object GUID &lt; &gt; usesysid One Identity Manager Ignore map p i ng direction restrictions on additv Force map p i tv against direction nizabon Detect rogue modificatiom Ignore case sensitivity Disab le merge mode support VRT ObjectGUIDAsInteger2 Cl Correct rogue modificatiom Target system Schema propety Go to S ttings to activate Windows. 172.25.32.19510nelM (Main Database) viadmin " /></p>
+<p>Пришлось делать ожидание в процессе ADHoc и затем чтение объекта для
+обновления ObjectGUID</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image28.png"
+style="width:5.30208in;height:4.15625in"
+alt="UNSAccountB GP Insert Ad Create user Green Plum in Plum Read Green Plum user Ll &quot;Ste ObjEtGl_l D 10 " /></p>
+<p>В процессе чтения из БД важно установить
+<strong><span class="mark">ProjectorComponent -
+UpdateProjectionSingle</span></strong></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image29.png"
+style="width:4.42708in;height:6.25in"
+alt="Read group Green Plum Red m Process step properties ;eneral Generation Process tracking Error handling Extended &#39;rocess task ription &#39;rocess information &#39;rioritj Read group GreenPIum Pro dat±ProæctionSin Read groupin GreenPIum Full process tracking Notification (error) Notification (success) Process history D&amp;Queue does not wait Disabled by preprocessor " /></p>
+<p><strong>-----</strong></p>
+<p><strong>И эта штука не всегда работает(((</strong></p>
+<p><strong>В общем, пока остановился на том, что после создания пользователя -
+обновляю ему ObjectGUID рандомным числом</strong></p>
+<p><strong>В Pre-Script процесса</strong></p>
+<p>Dim rndObjectGUID As Integer = CInt(Int((50000 * Rnd())))</p>
+<p><strong>values("rndObjectGUID") = rndObjectGUID</strong></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image30.png"
+style="width:6.96875in;height:4.09375in"
+alt="Update ObjectGUID Param eters Parameter name Authenticationstring Connectionprovider ConnectionString Objectwpe WhereCIause val_0bjectGUlD ConnectionVariabIes Parameter value Value = Connectionlnfo.AuthString Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo. ConnectionString Value = •UNSAccounta• Dim f As ISqIFormatter = Connection.SqIFormatterVaIue = f.UidComparisonCUID_UNSAccoun.. Value = valuesCrndObjectGUICY) Value = •VarllVar21VarY " /></p>
+</blockquote>
+<h1 id="objectguid_1">Запускается процесс обновления пользователя и подгружает правильный ObjectGUID</h1>
+<blockquote></blockquote>
+<h1 id="_8">Преобразование даты в строку с последующим фильтром строки</h1>
+<blockquote>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image31.png"
+style="width:13.19792in;height:6.5in"
+alt="Property UNSAccount8 (all) [REDACTED_IP]\OnelM Behavior Object matching rules Schema property in One Identity Manager AccountName VRT ObjectGUIDAsInteger2 Property mapping rules Schema property in One Identity Manager Account Name DistinguishedName IsGroupAccount VRT ObjectGUIDAsInteger2 VRT LID UNSRoot8 VRT AccountExpiresAsStri Edit propety... pg_user (all) postg res Information Primary rule Alternate rule Information Schema propeO&#39; in the target system usename usesysid Schema propeO&#39; in the target system use name use name CCC VRT DN CCC_ isGroupAccount usesysid CCC UNSRoot8 Name VRT valuntil Property Behavior AccountName Canonical Name Description DisplayName DistinguishedName FirstName dentityType IsGroupAccount IsPriviIegedAccount Last Logon Last Name MatchPatternForMe... MemberOf ObjectGUID assword PWDLastSet RiskIndexCaIcuIated UID Person LID TS8AccountDef LID TS88ehavior LID UNSAccount8 UID UNSContainer8 LID UNSRoot8 VRT_Accou nt ExpiresA... VRT CCC AccountD15... • CCC_isGroupAccount @ CCC VRT DN CCC VRT RootDN CCC vrt UNSRoot8 rolconnlimit usecreatedb usename userepl usesuper usesysid valuntil VRT CCC RolConnLi... fil@ Change the schema property of type &quot;Data conversion&quot;. D&#39; Name Display name aase propertj Description New data type Special date format La ng cage code Time zone of base value VRT Account expiry date AccountExpires Expiry date for the user account. String my MM-dd use default language [SO format Activ Go to S vrtPrimaryKey e Windows ings to activate Windows. Moscow, St. Petersburg " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image32.png"
+style="width:6.94792in;height:5.58333in"
+alt="Edit propety... Change the schema property of type &quot;Script property&quot;. D&#39; Name Display name Data type Description Read script Write script VRT valuntil VRT valuntil String Multi-value Ignorescriptexecutionerroß Move to script library Apply your script to write the schema property value. Leave the script empty if the propety is read-only. O You must use S&lt;propety name&gt; S to access other schema properties. Example: SLastNameS CStr(vaIue)SpIit(&quot; SFirstNameS Public Sub SetVaIue(8yRef schemaproperty as ISchemaProperty, 8yRef value as String, 8yRef options as SchemaProperty•SetVaIueOption) If value &quot;0001-01-01&quot; Then val ue End If End Sub Debug Compile Cancel " /></p>
+<p>Read script пуст, так как только provisioning работает в custom target
+system</p>
+<p>И ещё фишка- при обновлении пользователя в скрипте коннектора</p>
+<p>If column = "valuntil" Then</p>
+<p>sql.AppendFormat("ALTER ROLE {0} VALID UNTIL {1};", """" &amp;
+record.GetValue("usename", "") &amp; """",
+<strong><span class="mark">"'"</span></strong> &amp; record.GetValue("valuntil", "") &amp;
+<strong><span class="mark">"'"</span></strong>)</p>
+<p>sql.AppendLine()</p>
+<p>End If</p>
+<p><strong>Дату надо заключать в аппострофы, а не в кавычки!!!</strong></p>
+</blockquote>
+<h1 id="_9">Откат изменений из целевой системы</h1>
+<blockquote>
+<p>В SyncEditor для изменений в целевой системе делаем MarkAsOutstanding</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image33.png"
+style="width:10.51042in;height:4.85417in"
+alt="Navigation Workflows InitialSync Provisioning Stan page General InitialSync x Initia[Sync Wo lay name [7 Edit Workflow Groups Users 172.25.32.1g5\OneIM UNSAccount8 (all) Mappirrg step generated by template Group - user (filtered) Group - Group (filtered) Edit synchronization step... Modify the synchronization step. General Processing Quotas Rule filter Extended Run the following methods in the target system when synchronizing from One Identity Manager to the target system: Objects only found in One Identity Manager are: Objects only found in the target system are: Objects with modfied properties: Objects without modfications: Do nothing Do nothing Do nothing Do nothing Run the following methods in One Identity Manager when synchronizing from the target system to One Identity Manager: Objects only found in the target system are: Objects only found in One Identity Manager are: Objects with modfied properties: Objects without modfications: Insert Delete MarkAsOutsta ng Do nothing " /></p>
+<p>Таким образом, изменившиеся учетки будут попадать в</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image34.png"
+style="width:10.60417in;height:4.20833in"
+alt="Manager - (Main Database) Database Object Yiew Help Home Back • Forward • Database search New Navigation Custom Target Systems csvl (csvl) GreenPIum I (GreenPIumI) user accounts Groups Container structure Permissions contro Is GreenPIum 2 (GreenPIum2) Target system synchronization: CSV Target G}Gtem onchronization: GreenPIum UNSAccount8 UNSAccount81nUNSGroup8 UNSGroup8 UNSGroup81nUNSGroup8 Troubleshooting x Result list GreenPIum X Delete Table &#39;Object user accounts (I) " /></p>
+<p>Если нажмем на Publish для учетки, то сработает событие
+HandleOutstanding (HANDLEOUTSTANDING - UNSAccountB), которое будем
+ловить отдельным процессом</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image35.png"
+style="width:8.15625in;height:7.5in"
+alt="Designer - (Main Database) Qatabase Process Process step Yiew Help a Commit to database •e Sack • Next • • Search Navigation Process Orchestration Processes - Custom p rocesses ADSAccount ccc DialogScheduIe DPRMemberShipAction PersonWa ntsOrg UNSAccount8 ccc CCC UNSAccountB GP_ ccc ccc ccc UNSAccount8 Insert CreateRoIeInGreenPIum UNSAccount81nUNSGroup8 UNSGroup8 UNSGroup81nUNSGroup8 Process automation Objects without processes Process components Object events Getting Started One Identity Manager Schema Permissions Process Orchestration Script Library user Interface Mail Templates Documentation Process - n tB_GP Update user GrænPIum Llpdäte Process properties General process tracking Name Table Description Pre-script for generatirrg Generatirrg cordition Remarks Extended LINSAccounta If Not CSOOI (Connection. Variables (&quot;FULLSYNC UNSRoocB) .NamespaceManagedBy:st Value Not CSOOI (Connection. Variables $FK (OID UNSRootB) . NamespaceManagecIBy: St Iinv; Do notgenerate Disabled by preprocessor " /></p>
+<p><strong><span class="mark">Чтобы работал Publish надо поставить галку Can be
+Published!</span></strong></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image36.png"
+style="width:17.45833in;height:3.76042in"
+alt="Manager - (Main Database) Database Object Yiew Help Back • *Forward • *Database search Z New R Save Home Navigation Custom Target Systems GreenPIum 2 (GreenPIum2) Target system synchronization: CSV [35 Target system synchronization: Greenplum UNSAccount8 UNSAccount81nUNSGroup8 UNSGroup8 UNSGroup81nUNSGroup8 Troubleshooting Synchronization logs [30&quot; &amp;asic configuration data &#39; Target system types x Target system types (2) Recently used CSV csv GreenPIum GreenPIum X Target systemtvpes: assignedtables LINSAccountE UNSAccountE1nUNSGroupE UNSGroupE UNSGroupE1nUNSGroupB Can be published Merge mode Condition " /></p>
+<p><strong>Pre-Script</strong></p>
+<p>If Not CBool(Connection.Variables("FULLSYNC")) AndAlso _</p>
+<p>\$FK(UID_UNSRootB).NamespaceManagedBy:String\$.Equals("VISYNC",StringComparison.OrdinalIgnoreCase)
+Then</p>
+<p>Imports System.Collections.Generic</p>
+<p>Dim data As IDictionary(Of String,string) = Nothing</p>
+<p>values("AdHocDataFound") = False                </p>
+<p>values("NeedExecute") = False</p>
+<p>values("SystemType") = "DB"</p>
+<p>Dim dbDataFound As Boolean = true</p>
+<p>' try to get DB data:</p>
+<p>' the second parameter has to correspond to the SystemType field of
+the DPRSchema.</p>
+<p>'</p>
+<p>Try</p>
+<p>data =
+DPR_GetAdHocData(\$FK(UID_UNSRootB).XObjectKey\$,"DB","","Update")</p>
+<p>'values("SyncType") = "DB"</p>
+<p>Catch ex As Exception</p>
+<p>dbDataFound = false</p>
+<p>End Try</p>
+<p>If Not data is Nothing</p>
+<p>values("AdHocDataFound") = True</p>
+<p>values("NeedExecute") =
+DPR_NeedExecuteWorkflow(data("ProjectionConfigUID").ToString(),entity)</p>
+<p>values("ObjectKey") = New
+DbObjectKey(base.Tablename,\$UID_UNSAccountB\$).ToXmlString()</p>
+<p>values("UID_DPRSystemVariableSet") = data("VariableSetUID")</p>
+<p>values("UID_DPRProjectionConfiguration") = data("ProjectionConfigUID")</p>
+<p>values("UID_QBMServer") = data("ExecutionServerUID")</p>
+<p>values("cn") = \$cn\$</p>
+<p>End if</p>
+<p>'VID_Write2Log("C:\temp\GreenPlum.txt", \$AccountName\$ &amp; " will
+created in GreenPlum " &amp; "AdHocDataFound=" &amp;
+CStr(values("AdHocDataFound")).toString() )</p>
+<p>End If</p>
+<p><strong>Condition</strong></p>
+<p>Value = Not CBool(Connection.Variables("FULLSYNC")) AndAlso _</p>
+<p>\$FK(UID_UNSRootB).NamespaceManagedBy:String\$.Equals("VISYNC",StringComparison.OrdinalIgnoreCase)
+AndAlso _</p>
+<p>Cbool(values("AdHocDataFound"))</p>
+<p><strong>--</strong></p>
+<p><strong>Затем, запускаем процесс Update user GreenPlum</strong></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image37.png"
+style="width:5.0625in;height:6.8125in"
+alt="Process - • CCC UNSAccountB GP Handleou nding Update user GreenPIum Update Process step properties General Generation Process tracking Error handling Extended Name Process task Description Process information Prioritj Ll dat± ProjectorComponent - AdHocProjectionSingIe Update user GreenPIum Full process tracking Notification (error) Notification (success) Process history D&amp;Queue does not wait Disabled by preprocessor " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image38.png"
+style="width:5.8125in;height:7.875in"
+alt="Process -CCC • CCC UNSAccountB GP Handleou nding U pdate user Green Plum Update Process step properties General Generation process tracking Error handling Extended Pre-script for generatirrg Generatirrg cordition Server furrction Script for server selection Prep rocesso r co nd ition Val ue values (&quot;OID QBMServeI&quot;) " /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image39.png"
+style="width:6.59375in;height:6.875in"
+alt="Process -CCC • CCC UNSAccountB GP Handleou nding U pdate user GreenPIum Update u Param eters Parameter name Parameter value CausingEntit}Patch &#39;value = Connectionprovider ConnectionString JID DPRProjectionConfiguration UlD_DPRsystemVanableset ForceSyncOf Authenticationstring MemberShipActionPartionSize Value= 1024 OverrideVariabIes TargetSystemConnectError UD DPRJournal Process - CCC Value = Value = VID_GetVaIueOfDiaIogdatabasesCConnectionString•) Value = Value = Value = •AccountName,cn• Value = Connectionlnfo.AuthString Value = " /></p>
+<p><strong>В ForceSyncOf указываем поля для принудительного обновления в
+написании, как в ObjectBrowser!</strong></p>
+</blockquote>
+<h1 id="failover">Failover</h1>
+<blockquote>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/31749/failover-mechanism-for-active-directory-connector">Failover mechanism for Active Directory connector - Forum - Identity
+Manager Community - One Identity
+Community</a></p>
+<p>You could convert the CP_ADServer variable into a scripted variable in
+the sync project (for a FullSync my comments from above apply. No
+synchronization optimization allowed then).</p>
+<p>In the script, you could determine a DC of your domain and do some
+other checks as well (ping, login, whatsoever).</p>
+<p>The sample script is just taking the first domain controller it gets
+from the collection: Further enhancements would be to check the DC
+classes, ping time, etc.</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/31749/failover-mechanism-for-active-directory-connector">Fullscreen</a></p>
+<p>References System.DirectoryServices.dll</p>
+<p>Imports System.DirectoryServices.ActiveDirectory</p>
+<p>Dim RootDN as String = VariableSet.Item("CP_ADRootdn")</p>
+<p>Dim DomainName As String =
+RootDN.Replace(",dc=",".").Replace("dc=","")</p>
+<p>Dim DomainCon As New DirectoryContext(DirectoryContextType.Domain,
+DomainName)</p>
+<p>Dim DCs As DomainControllerCollection =
+Domain.GetDomain(DomainCon).DomainControllers</p>
+<p>Return DCs.Item(0).Name</p>
+<p>'For Each DC As DirectoryServices.ActiveDirectory.DomainController In
+DCs</p>
+<p>' Return DC.Name</p>
+<p>'Next</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/31749/failover-mechanism-for-active-directory-connector">https://www.oneidentity.com/community/identity-manager/f/forum/31749/failover-mechanism-for-active-directory-connector</a>&gt;</em></p>
+<p><strong>-----</strong></p>
+<p><strong><span class="mark">Работает указание серверов, через
+запятую!</span></strong></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image40.png"
+style="width:5.08333in;height:2.44792in"
+alt="Enter the database connection data. Misc database port server Named ConnectionString Security Driver mdw.open.ru,smdw.open.ru {PostgreSQL ANSI) " /></p>
+<p><strong>----</strong></p>
+</blockquote>
+<h1 id="adhoc-data">Для процессов AdHoc, чтобы узнать, что находится в data</h1>
+<blockquote>
+<p>В PreScript</p>
+<p>data =
+<strong>DPR_GetAdHocData</strong>(\$FK(UID_UNSGroupB).FK(UID_UNSRootB).XObjectKey\$,"DB","",evt)</p>
+<p>Итого параметры подключения определяются на основании вот такого
+запроса</p>
+<p>select * from DPRRootObjConnectionInfo where (ObjectKeyRoot =
+'\&lt;Key&gt;\&lt;T&gt;UNSRootB\&lt;/T&gt;\&lt;P&gt;82b349c1-8d67-4b65-b26a-bdc9d15233bc\&lt;/P&gt;\&lt;/Key&gt;')
+and (UID_DPRSystemConnection IN ( Select UID_DPRSystemConnection FROM
+DPRSystemConnection WHERE UID_DPRSchema IN ( Select UID_DPRSchema FROM
+DPRSchema WHERE SystemType = N'Posh') And isnull(Name, N'') \&lt;&gt;
+N'MainConnection'))</p>
+<hr />
+</blockquote>
+<h1 id="adhoc-data_1">Для процессов AdHoc вывести данные data в лог</h1>
+<blockquote>
+<p>VID_Write2Log("C:\..",xObjectKey)</p>
+<p>VID_Write2Log("C:\..",ex.ErrorString) (в Catch)</p>
+<p>--</p>
+<p>for each item as KeyValuePair(of String, String) in data</p>
+<p>VID_Write2Log("C:\..",item.key &amp; " -&gt; " &amp; item.Value)</p>
+<p>Next</p>
+<p>--</p>
+<p>VID_Write2Log("C:\..",dbDataFound.tostring())</p>
+<hr />
+</blockquote>
+<h1 id="remove-unsaccountbinunsgroupb">Не отрабатывает процесс на удаление членства пользователя в группе по событию Remove таблицы UNSAccountBInUNSGroupB</h1>
+<blockquote>
+<p>Странная ситуация - если ловить только REMOVE - то PreScript
+отрабатывает на машине, на которой произошло непосредственно событие
+(На машине, где установлен Manager.) и в целевой системе изменение
+членства не отражается.</p>
+<p>Если ловить Delete - то отрабатывает нормально все.</p>
+<p>Как вариант, можно на REMOVE не вызывать ADHoc проекта синхронизации,
+а, например, через скрипт делать изменения в БД.</p>
+<p>Похожая трабла</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/29657/adhocprojection-works-for-insert-but-not-for-delete">https://www.oneidentity.com/community/identity-manager/f/forum/29657/adhocprojection-works-for-insert-but-not-for-delete</a></p>
+<hr />
+</blockquote>
+<h1 id="object-browser-view-1-objects-should-be-reloaded-but">В Object Browser при обращении к view членства (группа - пользователь) выходит ошибка "1 object(s) should be reloaded but … "</h1>
+<blockquote>
+<p>Для view, которые должны однозначно определяться по нескольким
+колонкам надо создавать Column group - это и будет уникальным ключем!</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image41.png"
+style="width:10.22917in;height:5.78125in"
+alt="Create system connection... Extend key information Define a unique key. Some tables in the schema haue no key or an unsuitable unique key. These tables cannot be defined. You haue the option to define new keys here. It is important that all tables haue well defined unique keys otherwise a serious error may occl Hide unconfigured tables Edit column group... Enter a unique name for the column group and select at least ovo columns. Schema 60]pg au members pg_auth members admin_option member uttPrimaryKey Column is key _grou users Column group Add... Add... Add... Add... Key name admin_option member vrtPrimayKey utLlserCoIumnGroupr... pg_group pg_user roleid member Cancel Cancel " /></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/native-database-connector-user-guide-for-connecting-oracle-databases/2">Identity Manager 8.0.1 - Native Database Connector User Guide for
+Connecting Oracle Databases
+(oneidentity.com)</a></p>
+<hr />
+</blockquote>
+<h1 id="postgresgreenplum">Postgres/Greenplum скрипт коннектора</h1>
+<p>Dim succProcessed As IList(Of CommitRecord) = New List(Of
+CommitRecord)()</p>
+<p>Dim sql As New StringBuilder()</p>
+<p>Dim strGroupName As String</p>
+<p>Dim strMemberName As String</p>
+<p>Dim strUseNameOld As String</p>
+<p>Dim strGroNameOld As String</p>
+<p>Dim strUseName As String</p>
+<p>Dim transaction As IDbTransaction = Nothing</p>
+<p>Try</p>
+<blockquote>
+<p>' Create transaction</p>
+<p>transaction = connection.BeginTransaction()</p>
+<p>' Create database command</p>
+<p>Using cmd As IDbCommand = connection.CreateCommand()</p>
+<p>' Assign transaction to SQL command</p>
+<p>cmd.Transaction = transaction</p>
+<p>' Loop through list of changed records</p>
+<p>For Each record As CommitRecord In records</p>
+<p>' Switch by operation type (INSERT, UPDATE or DELETE)</p>
+<p>Select Case operation</p>
+<p>Case MultiPassCommitStrategyOperation.ProcessInserts</p>
+<p>Select Case tableName.ToLowerInvariant()</p>
+<p>Case "pg_user"</p>
+<p>' Prepare SQL Statement</p>
+<p>' TODO format the value</p>
+<p>sql.AppendFormat("CREATE USER {0};", record.GetValue("usename", ""))</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>Exit Select</p>
+<p>Case "pg_group"</p>
+<p>sql.AppendFormat("CREATE ROLE {0};", record.GetValue("groname", ""))</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>Exit Select</p>
+<p>Case "pg_auth_members_users"</p>
+<p>'Log.Debug([String].Format("Select from pg_group"))</p>
+<p>sql.AppendFormat("SELECT groname FROM pg_group WHERE grosysid = {0};",
+record.GetValue(Of Int64)("roleid"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strGroupName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("SELECT usename FROM pg_user WHERE usesysid = {0};",
+record.GetValue(Of Int64)("member"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strMemberName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("GRANT {0} TO {1};", strGroupName, strMemberName)</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>Exit Select        </p>
+<p>Case "pg_auth_members_groups"</p>
+<p>Log.Debug([String].Format("Select from pg_group"))</p>
+<p>sql.AppendFormat("SELECT groname FROM pg_group WHERE grosysid = {0};",
+record.GetValue(Of Int64)("roleid"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strGroupName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("SELECT groname FROM pg_group WHERE grosysid = {0};",
+record.GetValue(Of Int64)("member"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strMemberName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("GRANT {0} TO {1};", strGroupName, strMemberName)</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>Exit Select        </p>
+<p>End Select</p>
+<p>Exit Select</p>
+<p>Case MultiPassCommitStrategyOperation.ProcessUpdates</p>
+<p>Select Case tableName.ToLowerInvariant()        </p>
+<p>Case "pg_user"</p>
+<p>For Each column As String In record.TouchedColumns</p>
+<p>If column = "usename" Then</p>
+<p>sql.AppendFormat("SELECT usename FROM pg_user WHERE usesysid = {0};",
+record.GetValue(Of Int64)("usesysid"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strUseNameOld = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("ALTER ROLE {0} RENAME TO {1};", strUseNameOld,
+record.GetValue("usename", ""))</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>End If</p>
+<p>Next</p>
+<p>Exit Select</p>
+<p>Case "pg_group"</p>
+<p>For Each column As String In record.TouchedColumns</p>
+<p>If column = "groname" Then</p>
+<p>sql.AppendFormat("SELECT groname FROM pg_group WHERE grosysid = {0};",
+record.GetValue(Of Int64)("grosysid"))</p>
+<p>'Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strGroNameOld = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("ALTER ROLE {0} RENAME TO {1};", strGroNameOld,
+record.GetValue("groname", ""))</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>End If</p>
+<p>Next</p>
+<p>Exit Select</p>
+<p>End Select</p>
+<p>Exit Select</p>
+<p>Case MultiPassCommitStrategyOperation.ProcessDeletes</p>
+<p>Select Case tableName.ToLowerInvariant()</p>
+<p>Case "pg_user"</p>
+<p>'sql.AppendFormat("delete pg_user where PKColumn = {0}",
+record.GetValue(Of [String])("PKColumn"))</p>
+<p>sql.AppendFormat("DROP ROLE {0};", record.GetValue(Of
+[String])("usename"))</p>
+<p>'TODO: Use correct datatype for your primary key column</p>
+<p>Exit Select</p>
+<p>Case "pg_group"</p>
+<p>sql.AppendFormat("DROP ROLE {0};", record.GetValue(Of
+[String])("groname"))</p>
+<p>Exit Select</p>
+<p>Case "pg_auth_members_users"</p>
+<p>sql.AppendFormat("SELECT groname FROM pg_group WHERE grosysid = {0};",
+record.GetValue(Of Int64)("roleid"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strGroupName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("SELECT usename FROM pg_user WHERE usesysid = {0};",
+record.GetValue(Of Int64)("member"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strMemberName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("REVOKE {0} FROM {1};", strGroupName, strMemberName)</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>Exit Select</p>
+<p>Case "pg_auth_members_groups"</p>
+<p>sql.AppendFormat("SELECT groname FROM pg_group WHERE grosysid = {0};",
+record.GetValue(Of Int64)("roleid"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strGroupName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("SELECT groname FROM pg_group WHERE grosysid = {0};",
+record.GetValue(Of Int64)("member"))</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>Using dbReader = cmd.ExecuteReader()</p>
+<p>While dbReader.Read()</p>
+<p>' Get string value of first result column</p>
+<p>strMemberName = If(Not dbReader.IsDBNull(0), dbReader.GetString(0),
+String.Empty)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>sql.Clear()</p>
+<p>sql.AppendFormat("REVOKE {0} FROM {1};", strGroupName, strMemberName)</p>
+<p>' TODO format the value</p>
+<p>sql.AppendLine()</p>
+<p>Exit Select</p>
+<p>End Select</p>
+<p>Exit Select</p>
+<p>End Select</p>
+<p>' Execute SQL command if something is to do</p>
+<p>If Not String.IsNullOrEmpty(sql.ToString()) Then</p>
+<p>' Execute SQL Command</p>
+<p>cmd.CommandText = sql.ToString()</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>' Add record to list of succesfull provisioned objects</p>
+<p>succProcessed.Add(record)</p>
+<p>End If</p>
+<p>Next</p>
+<p>' Commit transaction</p>
+<p>transaction.Commit()</p>
+<p>End Using</p>
+</blockquote>
+<p>Catch</p>
+<blockquote>
+<p>If transaction IsNot Nothing Then</p>
+<p>transaction.Rollback()</p>
+<p>End If</p>
+<p>Throw</p>
+</blockquote>
+<p>End Try</p>
+<p>Return succProcessed</p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image42.png"
+style="width:0.125in;height:0.33333in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image43.png"
+style="width:5.65625in;height:0.41667in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image44.png"
+style="width:0.13542in;height:0.33333in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image45.png"
+style="width:1.25in;height:0.38542in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image46.png"
+style="width:0.46875in;height:0.36458in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image47.png"
+style="width:0.125in;height:0.33333in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image48.png"
+style="width:0.625in;height:0.35417in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image49.png"
+style="width:0.89583in;height:0.36458in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image50.png"
+style="width:0.875in;height:0.42708in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image51.png"
+style="width:0.58333in;height:0.40625in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image52.png"
+style="width:2.14583in;height:0.38542in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image53.png"
+style="width:0.125in;height:0.33333in" /><img src="../media/2.3 One Identity Native DB Connector/media/image54.png"
+style="width:0.125in;height:0.33333in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image55.png"
+style="width:1.85417in;height:0.40625in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image56.png"
+style="width:0.15625in;height:0.35417in" /><img src="../media/2.3 One Identity Native DB Connector/media/image57.png"
+style="width:0.79167in;height:0.39583in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image58.png"
+style="width:1.86458in;height:0.40625in" /></p>
+<p><img src="../media/2.3 One Identity Native DB Connector/media/image59.png"
+style="width:0.125in;height:0.33333in" /></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

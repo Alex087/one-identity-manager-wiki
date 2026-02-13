@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>17. One Identity AD - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#identity-manager-81-administration-guide-for-connecting-to-active-directory-oneidentitycom" class="nav-link">Identity Manager 8.1 - Administration Guide for Connecting to Active Directory (oneidentity.com)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#how-to-create-employees-from-adsaccounts-150319" class="nav-link">How to Create Employees From ADSAccounts (150319)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#title" class="nav-link">Title</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#description" class="nav-link">Description</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#resolution" class="nav-link">Resolution</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#employee-ad-account" class="nav-link">Создание Employee на основе ad account только для одного домена</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ad-error-accessing-schema-directory-server" class="nav-link">Трабла с тем, что не загружается схема при создании коннектора к AD. Error accessing schema: Directory server.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ad" class="nav-link">Отказоустойчивость коннектора к AD</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>17. One Identity AD</p>
+<p>25 марта 2020 г.</p>
+<p>17:55</p>
+<h1 id="identity-manager-81-administration-guide-for-connecting-to-active-directory-oneidentitycom"><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-active-directory/2">Identity Manager 8.1 - Administration Guide for Connecting to Active Directory (oneidentity.com)</a></h1>
+<h1 id="_1"></h1>
+<blockquote>
+<p><strong>6) Соединение с AD</strong></p>
+<p>PersonAutoFullSync – Search - поиск и сцеление существующих
+пользователей в БД One identity.</p>
+<p>Если пользователя нет в БД, а в AD он есть - он не будет создаваться в
+БД.</p>
+<p>Search and Create - существующие будут сцепляться с аккаунтами из AD,
+а если нет пользователя в БД, а есть в AD - он будет создан в БД.</p>
+<p>Ставим <strong>SEARCH</strong></p>
+<p><strong>PersonAutoDefault</strong> - тоже, но в сторону AD (<strong>УТОЧНИТЬ!!!</strong>).
+Ставим <strong>SEARCH</strong></p>
+<p><strong>PersonUpdate</strong> - контроль данных между БД и AD.</p>
+<p>Изменения в AD приводят к изменениям в person. <strong>Выкл</strong></p>
+<p><strong>Создание пользователя в AD</strong></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/31">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/31</a></p>
+<p>Скрипт в таблице ADSAccount <strong>(Designer - Table – Person -
+ADSAccount)</strong></p>
+<hr />
+</blockquote>
+<h1 id="_2"></h1>
+<h1 id="how-to-create-employees-from-adsaccounts-150319">How to Create Employees From ADSAccounts (150319)</h1>
+<blockquote>
+<p>Return</p>
+<p>Was this article helpful?</p>
+<p>[Select Rating]</p>
+</blockquote>
+<h2 id="title">Title</h2>
+<blockquote>
+<p>How to Create Employees From ADSAccounts</p>
+</blockquote>
+<h2 id="description">Description</h2>
+<blockquote>
+<p>What are the steps required to provision Employee objects from
+ADSAccounts?</p>
+</blockquote>
+<h2 id="resolution">Resolution</h2>
+<blockquote>
+<p>***Please note: the following steps are specific to version 6.1.x. For
+version 7.x and above there is some overlap, but many of the specific
+process names, for example, have changed.  </p>
+<p>The creation of Employees based on ADSAccounts is implemented
+out-of-the-box.  </p>
+<p>To control the behavior there are the configuration parameters
+available:  </p>
+<ul>
+<li>
+<p>Using TargetSystem\ADS\PersonAutoFullSync with the CREATE option, a
+sync will create the Employees based on existing AD accounts.  </p>
+</li>
+<li>
+<p>Using TargetSystem\ADS\PersonAutoDefault will work as well, with
+CREATE, when an ADSAccount is created.  </p>
+</li>
+</ul>
+<p>One action is done by the FullSync
+(TargetSystem\ADS\PersonAutoFullSync), the other for all manual
+actions (TargetSystem\ADS\PersonAutoDefault).  </p>
+<p>In the end either the process "VI_ADS/EX2K_ADSAccount_Insert/Update
+(Fullsync)" will be generated (for inserts/updates of accounts by the
+sync) or the process "VI_ADS_ADSAccount_Update_UpdatePerson" (for
+manual inserts/updates).  </p>
+<p>Both processes contain a ScriptExec job which executes the script
+"VI_PersonUpdate_ADS" or "VI_PersonAuto_ADS".  </p>
+<p>The creation of an Employee for the given account is implemented in
+these scripts. So it would be possible use these scripts to create
+Employee objects: either call this script for single cases in the
+ObjectBrowser (ScriptTester) or in the Designer. Or create a custom
+defined process/script/... which calls one of the mentioned
+scripts.***</p>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/150319/how-to-create-employees-from-adsaccounts">https://support.oneidentity.com/identity-manager/kb/150319/how-to-create-employees-from-adsaccounts</a></p>
+<hr />
+</blockquote>
+<h1 id="employee-ad-account">Создание Employee на основе ad account только для одного домена</h1>
+<blockquote>
+<p>1) Выполнить настройку TargetSystem\ADS\PersonAutoFullSync = SEARCH
+AND CREATE</p>
+<p>2) На основе скрипта <strong>ADS_PersonAuto_Mapping_ADSAccount</strong> (процесс
+<strong>ADS_ADSDomain_SearchandCreate_Person_PostSync и процесс</strong> ) создать
+скрипт</p>
+<p>В нем в строке 215, где</p>
+<p>If String.IsNullOrEmpty(persUid) And InStr(1, VID_UCase(searchMode),
+"CREATE") &gt; 0</p>
+<p>Вставить</p>
+<p>If String.IsNullOrEmpty(persUid) And InStr(1, VID_UCase(searchMode),
+"CREATE") &gt; 0 And
+myAcc.CreateWalker(Session).GetValue("FK(UID_ADSDomain).DisplayName")
+= Connection.GetConfigParm("Custom\DomainAllowCreatePerson") Or
+String.IsNullOrEmpty(persUid) And InStr(1, VID_UCase(searchMode),
+"CREATE") &gt; 0 And
+Connection.GetConfigParm("Custom\DomainAllowCreatePerson") = "1" Then</p>
+<p>Перед этим создать параметр "<strong>Custom\DomainAllowCreatePerson</strong>"</p>
+<hr />
+</blockquote>
+<h1 id="ad-error-accessing-schema-directory-server">Трабла с тем, что не загружается схема при создании коннектора к AD. Error accessing schema: Directory server.</h1>
+<blockquote>
+<p>Проверить, что открыты:</p>
+<p><strong>TCP</strong></p>
+<p>445 (smb)</p>
+<p>88 (аутентификация для smb - kerb)</p>
+<p>389 (LDAP)</p>
+<p>636 (LDAPS)</p>
+<p><strong>UDP</strong></p>
+<p>389 (LDAP) - для обнаружения</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.4/administration-guide-for-connecting-to-active-directory/2#TOPIC-1523800">https://support.oneidentity.com/technical-documents/identity-manager/8.1.4/administration-guide-for-connecting-to-active-directory/2#TOPIC-1523800</a></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/32143/is-it-mandatory-to-open-port-445-for-ad-synchronization">Is it mandatory to open port 445 for AD synchronization. - Forum -
+Identity Manager Community - One Identity
+Community</a></p>
+<p>Потому, что SyncEditor использует pipe</p>
+<p>PIPE\wkssvc</p>
+<p>PIPE\lsarpc</p>
+<p><img src="../media/17. One Identity AD/media/image1.png"
+style="width:18.375in;height:5.08333in"
+alt="Time of Day 1 1 21 43550 1 82213 1 1 21 8841 0 1 1 21 75 1 1 210.0257174 1 1 21 80 1 1210.0272111 1 1 210.02722S7 1 1 210.027S80S 1 1 210.02800S7 1 1 210,0382753 1 1 210.03S2S57 1 1 210.03S307S 1 387 735441 735854 1 783080 Process Name SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe SynchronizationE ditOL exe Operation TCP Connect TCP Send TCP Receive TCP Send TCP Receive TCP Connect TCP Send TCP Receive TCP Send TCP Receive TCP Send TCP Receive TCP Send TCP Receive TCP Receive TCP Send TCP Receive CreateFiIe CreateFiIe rumskapp31 open ru: 53880 rumskapp31 open ru: 53880 rumskapp31 open ru: 53880 rumskapp31 open ru: 53880 rumskapp31 open ru: 53880 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 rumskapp31 open ru: 53881 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 WIN-LC5J1 11300 11300 Result SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS BAD NETWORK NAME SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS SUCCESS Detail Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: Length: O. mss: 1480. I SCI. startime: 108. seqnum: I SE. startime: 172. seqnum: O. mss: sackopt: I. tsopt: IJ usopt: I. rcvwin: 21 02400. rcvwinecele: 8. sad&quot;irscale: endtime: seqnum: O. ccnnid: O IJ connid: O endtime: O. ccnnid: O IJ connid: O sackopt: I. tsopt: IJ usopt: I. rcvwin: 21 02400. cvwinecele: 8. sad&quot;irscale: 1753. st3rtime: 13321 2883. endtime: 13821 2884. seqnum: IJ connid: O 285. seqnum: IJ connid: O 2211 statime: 13821 2884. endtime: 13821 2884. szqnum: IJ ccnnid: O 105. seqnum: IJ connid: O 288. statime: 13821 2884. endtime: 13821 2884. szqnum: IJ ccnnid: O 204. seqnum: IJ connid: O 204. statime: 13821 2885. endtime: 13821 2885. szqnum: IJ ccnnid: O 1024. seqnum: IJ connid: O 284. seqnum: IJ connid: O 1 411 statime: 13821 4072. endtime: 13821 4072. szqnum: IJ ccnnid: O 1 411 seqnum: IJ connid: O KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE \wkssvc SetPipeInformaÈ KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE \wkssvc WriteFiIe ReadFiIe KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE \wkssvc KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE \wkssvc FileSystemControI KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE \wkssvc CloseFiIe CreateFiIe KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE \wkssvc KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE Klsarpc SetPipeInformaÈ KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE Klsarpc WriteFiIe ReadFiIe KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE Klsarpc KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE Klsarpc FileSystemControI KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE Klsarpc Desired Access: Read Attributes. Disposition: Ogen. Options: Open Relarse Point. Attribut±s: n&#39;a. Desired Access: Generic Read/Write. Disposition: Open. Options: Attributes: n&#39;a. Sharehlode: Offset: IJ Lengtk: ISO. Priority: Normal Offset: IJ Lengtk: 118. Priority: Normal Control: FSCTL PIPE_TRANSCEIVE. WriteLength: 1 024 R%dLength: 118 Desired Access: Generic Read/Write. Disposition: Open. Options: Attributes: n&#39;a. Sharehlode: Offset: IJ Lengtk: ISO. Priority: Normal Offset: IJ Lengtk: 118. Priority: Normal Control: FSCTL PIPE_TRANSCEIVE. WriteLength: 1 024 R%dLength: 28 CloseFiIe KN&quot;in-Ic5iI u8rSkÈ testl local\PIPE Klsarpc " /></p>
+<hr />
+</blockquote>
+<h1 id="ad">Отказоустойчивость коннектора к AD</h1>
+<blockquote>
+<p>You could convert the CP_ADServer variable into a scripted variable in
+the sync project (for a FullSync my comments from above apply. No
+synchronization optimization allowed then).</p>
+<p>In the script, you could determine a DC of your domain and do some
+other checks as well (ping, login, whatsoever).</p>
+<p>The sample script is just taking the first domain controller it gets
+from the collection: Further enhancements would be to check the DC
+classes, ping time, etc.</p>
+<p>&gt;</p>
+<p>References System.DirectoryServices.dll</p>
+<p>Imports System.DirectoryServices.ActiveDirectory</p>
+<p>Dim RootDN as String = VariableSet.Item("CP_ADRootdn")</p>
+<p>Dim DomainName As String =
+RootDN.Replace(",dc=",".").Replace("dc=","")</p>
+<p>Dim DomainCon As New DirectoryContext(DirectoryContextType.Domain,
+DomainName)</p>
+<p>Dim DCs As DomainControllerCollection =
+Domain.GetDomain(DomainCon).DomainControllers</p>
+<p>Return DCs.Item(0).Name</p>
+<p>'For Each DC As DirectoryServices.ActiveDirectory.DomainController In
+DCs</p>
+<p>' Return DC.Name</p>
+<p>'Next</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/31749/failover-mechanism-for-active-directory-connector/77450">https://www.oneidentity.com/community/identity-manager/f/forum/31749/failover-mechanism-for-active-directory-connector/77450</a>&gt;</em></p>
+<hr />
+<p>Порты</p>
+<p><strong>Communications Port and Firewall Configuration</strong></p>
+<p>One Identity Manager is made up of several components that can be
+executed in different network segments. In addition, One Identity
+Manager requires access to various network services, which can also be
+installed in different network segments. You must open various ports
+depending on which components and services you want to install behind
+the firewall.</p>
+<p>The following ports are required:</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>Default port</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1433</td>
+<td>Port for communicating with the One Identity Manager database.</td>
+</tr>
+<tr>
+<td>1880</td>
+<td>Port for the HTTP protocol of One Identity Manager Service.</td>
+</tr>
+<tr>
+<td>2880</td>
+<td>Port for access tests with the Synchronization Editor, such as in the target system browser or for simulating synchronization.</td>
+</tr>
+<tr>
+<td>80</td>
+<td>Port for accessing web applications.</td>
+</tr>
+<tr>
+<td>88</td>
+<td>Kerberos authentication system. (if Kerberos authentication is implemented). Required for authentication against Active Directory.</td>
+</tr>
+<tr>
+<td>135</td>
+<td>Microsoft End Point Mapper (EPMAP) (also, DCE/RPC Locator Service).</td>
+</tr>
+<tr>
+<td>137</td>
+<td>NetBIOS Name Service.</td>
+</tr>
+<tr>
+<td>139</td>
+<td>NetBIOS Session Service.</td>
+</tr>
+<tr>
+<td>389</td>
+<td>Lightweight Directory Access Protocol (LDAP Standard). Target system server communications port.</td>
+</tr>
+<tr>
+<td>445</td>
+<td>Microsoft-DS Active Directory, Windows shares. Required for synchronization (TCP/UDP)</td>
+</tr>
+<tr>
+<td>53</td>
+<td>Domain Name System (DNS), mainly through UDP. Required for access to the Active Directory total structure.</td>
+</tr>
+<tr>
+<td>636</td>
+<td>Lightweight Directory Access Protocol using TLS/SSL (LDAP S). Required for access to the Active Directory total structure.</td>
+</tr>
+<tr>
+<td>3268</td>
+<td>Global catalog. Required for searching in the global catalog. Either port 3268 or 3269 should be open depending on the connection settings.</td>
+</tr>
+<tr>
+<td>3269</td>
+<td>Global catalog over SSL. Required for searching in the global catalog. Either port 3268 or 3269 should be open depending on the connection settings.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Table 3: Communications port</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-active-directory/2">https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-active-directory/2</a>&gt;</em></p>
+<p>Even for authentication to AD port 445 is needed according to
+Microsoft.</p>
+<p><strong>Authentication to AD</strong></p>
+<p>AD uses the following ports to support user and computer
+authentication, according to the <a href="http://technet.microsoft.com/en-us/library/dd772723(WS.10).aspx">Active Directory and Active
+Directory Domain Services Port
+Requirements</a> article:</p>
+</blockquote>
+<ul>
+<li>
+<p>SMB over IP (Microsoft-DS): port 445 TCP, UDP</p>
+</li>
+<li>
+<p>Kerberos: port 88 TCP, UDP</p>
+</li>
+<li>
+<p>LDAP: port 389 UDP</p>
+</li>
+<li>
+<p>DNS: port 53 TCP, UDP</p>
+</li>
+<li>
+<p>RPC: Dynamically-assigned ports TCP, unless restricted  </p>
+</li>
+</ul>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/33331/active-directory-schema-loading-crash-when-dc-in-dmz">https://www.oneidentity.com/community/identity-manager/f/forum/33331/active-directory-schema-loading-crash-when-dc-in-dmz</a>&gt;</em></p>
+<hr />
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

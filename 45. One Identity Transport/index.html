@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>45. One Identity Transport - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>45. One Identity Transport</p>
+<p>13 февраля 2026 г.</p>
+<p>12:06</p>
+<p>Нужно подготовить целевую 1IM (настроить Job Server, Application Server)</p>
+<p>Затем импортировать Schema Extensions!</p>
+<p>Затем скрипты (перед импортом проверить, что в каждом скрипте с
+зависимостями указан импорт нужных модулей)</p>
+<p>Правила (Rules)</p>
+<p><strong>Sys config</strong></p>
+<p><strong>Процессы импортируются, через ~~Sys config~~ Favorites Objects</strong></p>
+<p>Проекты синхронизации</p>
+<p>IT Shop не переехал(</p>
+<p>Business roles тоже не переехали. Можно попробовать перенести их
+таблицами.</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/26912/transport-of-it-shop-approval-workflows-and-policies">https://www.oneidentity.com/community/identity-manager/f/forum/26912/transport-of-it-shop-approval-workflows-and-policies</a></p>
+<p><strong>Перенос конфигурационных параметров - перенос таблицы
+DialogConfigParm</strong></p>
+<p>**Prerequisite  </p>
+<p>The schema of both One Identity Manager databases are identical.
+Customized schema extensions used in the mapping exist in both
+databases.  </p>
+<p>To export a synchronization project from one One Identity Manager
+database to another:  </p>
+<ol>
+<li>
+<p>Save the synchronization project in the source database with change
+labels. Add new changes labels to do this.  </p>
+</li>
+<li>
+<p>To save the synchronization project with change labels, open the
+Commit to database submenu and click Commit and assign a change
+label...  </p>
+</li>
+<li>
+<p>Create a transport package for the synchronization project using the
+Database Transporter.  </p>
+</li>
+</ol>
+<p>a. Select the export criteria Transport by change label.  </p>
+<p>b. Select the change label.  </p>
+<p>c. Click Options and set the Add dependent objects to transport file and
+Close change labels after export.  </p>
+<p>TIP: To display objects that belong to change labels, click Show.  </p>
+<ol>
+<li>
+<p>Import the transport package into the target database with the
+Database Transporter.  </p>
+</li>
+<li>
+<p>Edit the synchronization project in the target database.  </p>
+</li>
+</ol>
+<p>a. Add a new base object.  </p>
+<ul>
+<li>
+<p>Use the wizard to do this, if it is available.  </p>
+</li>
+<li>
+<p>The wizard creates a variable set with the given connection
+parameters. It adds the synchronization base object, for example, the
+actual Active Directory® domain you want to synchronize, as object in
+the One Identity Manager database.  </p>
+</li>
+</ul>
+<p>b. Customize the One Identity Manager database connection data.  </p>
+<ul>
+<li>Select the category Configuration | One Identity Manager connection
+| General and click Edit connection...  </li>
+</ul>
+<p>c. Customize the start configuration  </p>
+<ul>
+<li>
+<p>Assign a schedule.  </p>
+</li>
+<li>
+<p>Assign the variable that belongs to the associated base object.  </p>
+</li>
+</ul>
+<p>d. Run a consistency check.  </p>
+<p>e. Activate the synchronization project.**</p>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/202875/how-to-export-a-synchronization-configuration">https://support.oneidentity.com/identity-manager/kb/202875/how-to-export-a-synchronization-configuration</a></p>
+<p>Затем, чтобы импортировать пользователей из CSV - сначала надо
+импортировать департаменты!</p>
+<p><strong>После импорта делаем ещё раз компиляцию БД!</strong></p>
+<p><strong><span class="mark">Советы по переносу данных</span></strong></p>
+<p><strong><em>Before importing a transport package.</em></strong></p>
+<ul>
+<li>
+<p>Prevent individual properties in the target database from being
+  overwritten.</p>
+</li>
+<li>
+<p>Open the object you want to lock, in the Designer or Manager.</p>
+</li>
+<li>
+<p>Click on the property name and select the context menu <strong>Prohibit
+      modification</strong>.<br />
+      The input field is locked and grayed-out.</p>
+</li>
+</ul>
+<p><strong><em>After importing a transport package.</em></strong></p>
+<ul>
+<li>
+<p>Check the staging level of the target database.</p>
+</li>
+<li>
+<p>Select the category <strong>Base Data | General | Databases</strong> in the
+      Designer.</p>
+</li>
+<li>
+<p>Select the database and check the value of the property <strong>Staging
+      level</strong>.</p>
+</li>
+<li>
+<p>Check the configuration settings in the target database. Check at
+  least the configuration settings for the DBQueue Processor. The
+  settings are specified through the database staging level and
+  configuration parameters.</p>
+</li>
+<li>
+<p>Unlock the properties for editing again.</p>
+</li>
+<li>
+<p>Open the object you want to lock, in the Designer or Manager.</p>
+</li>
+<li>
+<p>Click on the property name and select the context menu <strong>Permit
+      modification</strong>.</p>
+</li>
+</ul>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/108">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/108</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

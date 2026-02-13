@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>7.8 Imxclient - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>7.8 Imxclient</p>
+<p>10 октября 2025 г.</p>
+<p>18:13</p>
+<blockquote>
+<p>Our database layer (VI.DB) automatically detects statetements that may
+be "harmful" or allow to access data bypassing security settings.</p>
+<p>Unfortunately some of the statements the API server uses fall under
+this category.</p>
+<p>One solution for this problem is to tell the database layer, that the
+statements come from a web application and that the web application
+takes care of preventing harmful access. To do so, the web
+application's entry in the database table QBMWebApplicationn stores
+a <em>Trusted Source Key</em> and the web application stores the same
+TrustedSourceKey in its web.config connectionStrings section.</p>
+<p>This source key is automatically added to the database and the
+web.config during the installation of the web application with the web
+installer and so you normally don't get bothered with that whole
+topic.</p>
+<p>When starting an API server locally using the ImxClient you can
+basically use the same mechanism but you have do configure it
+manually. This article tells you how to achieve that.</p>
+<p>Determine the TrustedSourceKey</p>
+<p>The easiest way is to install a web application and then copy the raw
+value from the deciphered web.config and the crypted value from the db
+table QBMWebApplication.</p>
+<p>Store the TrustedSourceKey in ImxClient.exe.config</p>
+</blockquote>
+<ol>
+<li>
+<p>If not present, add this section definition for
+    the connectionbehavior section to the configSections node.<br />
+    Here's an example of how this might look like:<br />
+    \&lt;configSections&gt;<br />
+    \&lt;section name="connectionbehaviour"
+    type="System.Configuration.NameValueSectionHandler" /&gt;<br />
+    \&lt;/configSections&gt;</p>
+</li>
+<li>
+<p>If not present add a section named connectionbehaviour to your
+    configuration.</p>
+</li>
+<li>
+<p>Within the connectionbehavior section add a value for the
+    key <em>TrustedSourceKey</em>.<br />
+    Here's an example of how the connectionbehaviour section could look
+    like:<br />
+    \&lt;connectionbehaviour&gt;<br />
+    \&lt;add key="TrustedSourceKey"
+    value="ELLZ5Z6VZ5ERGHIC1SQSEHFHNSV5444S" /&gt;<br />
+    \&lt;/connectionbehaviour &gt;</p>
+</li>
+</ol>
+<blockquote>
+<p>Store the TrustedSourceKey in the database</p>
+<p>In the database you want to connect to create an entry in the
+table QBMWebApplication with the following column values</p>
+</blockquote>
+<ul>
+<li>
+<p>BaseURL: <a href="http://localhost:8182">http://localhost:8182</a></p>
+</li>
+<li>
+<p>TrustedSourceKey: \&lt;the crypted trusted source key&gt;</p>
+</li>
+</ul>
+<blockquote>
+<p>You could use the ObjectBrowser to create this data or the
+Designer.exe.</p>
+<p>If you use the Designer.exe go to <em>Base data &gt; Security settings &gt;
+Web server configurations</em>.</p>
+<p>Start the local API server</p>
+<p>When starting the local APIServer you have to make sure to give the
+paramater for baseurl: /baseurl</p>
+<p>Even if you just use the default base url <a href="http://localhost:8182">http://localhost:8182</a> you
+have to pass /baseurl <a href="http://localhost:8182">http://localhost:8182</a> to make this solution
+work.</p>
+<p>So your call looks something like this:</p>
+<p>ImxClient.exe run-apiserver -B /htmldir ixweb /baseurl
+<a href="http://localhost:8182">http://localhost:8182</a></p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/36470/angular-development-and-potential-sql-injection-attack-imxclient-exe-config-settings-help/86223">https://www.oneidentity.com/community/identity-manager/f/forum/36470/angular-development-and-potential-sql-injection-attack-imxclient-exe-config-settings-help/86223</a>&gt;</em></p>
+<hr />
+<p>ImxClient.exe run-apiserver -B</p>
+<p>You need to provide a file named application.json in your binary
+directory where you start the imxclient.exe.</p>
+<p>{</p>
+<p>"ConnectionStrings": {</p>
+<p>"TrustedSourceKey": "YOURTRUSTEDSOURCEKEY"</p>
+<p>}</p>
+<p>}</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/37740/potentially-dangerous-behaviour-was-detected-the-request-will-be-ignored-810452/90951">https://www.oneidentity.com/community/identity-manager/f/forum/37740/potentially-dangerous-behaviour-was-detected-the-request-will-be-ignored-810452/90951</a>&gt;</em></p>
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

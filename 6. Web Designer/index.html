@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>6. Web Designer - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">Удаление строки</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link">Русификация портала</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#2" class="nav-link">Чтобы делать записи на 2х языках с переводом</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link">Условие для отображения меню</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link">Не работает поиск по индексу на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#app-server" class="nav-link">Переконфигурация портала и настройка поиска (app server)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#action" class="nav-link">Передача action из меню</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_5" class="nav-link">Проверка значения</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_6" class="nav-link">На карточке пользователя на портале не отображаются все свойства</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_7" class="nav-link">При выборе департамента в всплывающем окне отображается полный путь до департамента</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_8" class="nav-link">Передача определенного параметра в форму</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_9" class="nav-link">Изменения отображения поля</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#there-is-no-cursor-defined-on-the-collection" class="nav-link">Ошибка "There is no cursor defined on the collection"</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_10" class="nav-link">Корзина</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_11" class="nav-link">Возможность назначения продуктов всем сотрудникам</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_12" class="nav-link">Возможность назначения роли другим сотрудникам</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-" class="nav-link">-------------------------------</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#security-administrator-" class="nav-link">Чтобы руководитель мог назначать только своим подчиненным продукты, а Security Administrator - всем сотрудникам</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#uid" class="nav-link">Отображение в таблице имени по UID из другой таблицы</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_13" class="nav-link">Отображение подкатегорий на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#development-system-updates-pending" class="nav-link">На портале висит надпись вверху "Development system - Updates pending"</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#uid_department" class="nav-link">В корзине нужно отображать обязательное поле UID_Department</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#developement-system" class="nav-link">Убрать надпись Developement system из правого угла портала</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_14" class="nav-link">Создание выпадающего окна с требованием указать доп параметр</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_15" class="nav-link">Отключить возможность изменения поля</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_16" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_17" class="nav-link">В дополнение</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_18" class="nav-link">Колонки при указании параметров:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#shoppingcartitem" class="nav-link">являются колонками таблицы ShoppingCartItem</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_19" class="nav-link">В выпадающим окне сделать поле, которое будет отображаться в зависимости от условия</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#condition" class="nav-link">Условие Condition отображения контейнера</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_20" class="nav-link">Добавить поле на страницу нового сотрудника иностранного или по договору</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#upload-file" class="nav-link">Upload file</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_21" class="nav-link">Создание модуля для редактирования объектов</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#upload" class="nav-link">Сохранение существующего имени файла, через Upload</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#upload_1" class="nav-link">Изменение имени файла, через Upload</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_22" class="nav-link">Написать код в функцию</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#html" class="nav-link">Указать тег html</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_23" class="nav-link">Отображение полей редактируемой таблицы на форме</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_24" class="nav-link">Добавление нового элемента в таблицу</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_25" class="nav-link">Добавить колонку в индекс для поиска</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_26" class="nav-link">Добавить таблицу для поиска на портале</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_27" class="nav-link">Перевод колонки</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#click-here-if-you-do-not-have-an-account" class="nav-link">Отключить возможность саморегистрации на главной (Click here if you do not have an account.)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_28" class="nav-link">Перевести Строк верхнего уровня в Корзине</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_29" class="nav-link">Заказ продуктов Все для всех</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#daysago" class="nav-link">Чтобы даты отображались в архиве в нормальном формате, а не daysago</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_30" class="nav-link">Убрать поля в колонке справа</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#websql" class="nav-link">WEBSQL кусочек из строки взять</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#regex" class="nav-link">Проверка значений на корректность Regex</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_31" class="nav-link">Убрать сообщения об ошибках при логине на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_32" class="nav-link">Отображение категорий списком верхнеуровневым</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#it-shop" class="nav-link">Настройка опционального шага обоснования принятых решений по запросам на доступ в IT Shop</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_33" class="nav-link">Балансировщик</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_34" class="nav-link">Поиск</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#pwo" class="nav-link">Добавить дополнительную информацию в PWO для отображения на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#load-collection-where" class="nav-link">LOAD Collection условие WHERE</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_35" class="nav-link">Добавить кнопку для отображения уволенных при заказе продукта при выборе получателя</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#multi-request-resources" class="nav-link">Multi-request resources</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#object-dependent-references" class="nav-link">Для Object Dependent References привязать интерфейс к компоненту</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#validate" class="nav-link">Валидатор выкидывает ошибку (validate)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#where-clause" class="nav-link">Where Clause</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#viewing-permission-denied-for-value" class="nav-link">Не хватает прав на отображение поля на портале "Viewing permission denied for value"</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#itshop-unsgroupb-serviceitem-itshop-itshoporghasunsgroupb" class="nav-link">За связь ITShop и UNSGroupB (с имеющимся ServiceItem и галкой ITShop) отвечает таблица ITShopOrgHasUNSGroupB</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_36" class="nav-link">Быстрый вывод записей из таблицы (вывод сотрудников)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_37" class="nav-link">Выбор из множества записей</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ad-itshop" class="nav-link">Автопубликация AD групп в ITShop</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-select-reference-user" class="nav-link">Наследование полномочий - заказ продукта как у другого пользователя (select reference user)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_38" class="nav-link">Условие отображения меню для определенной категории, чтобы можно было указать связанного пользователя (заказать продукты как у другого пользователя)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#database-queries" class="nav-link">Использование Database queries</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fk" class="nav-link">Изменить отображение записей в модальном всплывающем окне выбора FK</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_39" class="nav-link">Кастомизация заказ продукта как у другого пользователя (только для определенной категории)</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#ccc_itshop_accproductgroupselector" class="nav-link">Вариант, через кнопку в компоненте CCC_ITShop_AccProductGroupSelector</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_40" class="nav-link">Аттестация. Отображение случаев аттестации сгруппированным и с бегунком по высоте страницы.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_41" class="nav-link">Изменение модального окна выбора дополнительных параметров продукта</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#candidates" class="nav-link">Скрыть продукты из отображения для выбора (Candidates)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_42" class="nav-link">Удаление родительского продукта из корзины</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#checkbox" class="nav-link">Сделать checkbox неактивным (серым) и с поставленной галочкой</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#multirequetable" class="nav-link">Отображение окна для Multirequetable ресурса если нет доступных (не заказанных) доп. Продуктов</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_43" class="nav-link">Убрать плашку аттестация сотрудников с главного экрана</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>6. Web Designer</p>
+<p>27 марта 2020 г.</p>
+<p>17:22</p>
+<blockquote>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/27167/grid-band-search-function">https://www.oneidentity.com/community/identity-manager/f/forum/27167/grid-band-search-function</a></p>
+<p>Чтобы создать новую страницу - надо сначала создать новый проект и для
+портала выбрать этот проект.</p>
+<p>If properties that are defined in the web project (languages, display
+settings, menu structure) are going to be changed, you must make a
+copy of the default web project.</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/web-designer-reference-guide/22">https://support.oneidentity.com/technical-documents/identity-manager/8.0/web-designer-reference-guide/22</a></p>
+<p>Затем создать новый модуль - это и будет страницв с ссылкой в меню.</p>
+<hr />
+<p>Добавление ячеек в таблицу</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/web-designer-reference-guide/39">https://support.oneidentity.com/technical-documents/identity-manager/8.0/web-designer-reference-guide/39</a></p>
+<hr />
+<p>Для того, чтобы отобразить данные из таблицы на странице</p>
+<p>Выбрать элемент на веб странице - он отобразиться на вкладке
+Properties</p>
+<p>Правой кнопкой по нему - Show definition object</p>
+<p>Выбрать Main - правой кнопкой - Structure nodes – Container</p>
+<p>Затем по созданному контейнеру правой кнопкой - выбрать элемент</p>
+<hr />
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/web-designer-reference-guide/30">https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/web-designer-reference-guide/30</a></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/web-designer-reference-guide/28"><strong>https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/web-designer-reference-guide/28</strong></a></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/web-designer-reference-guide/31#TOPIC-1136569">https://support.oneidentity.com/technical-documents/identity-manager/8.1/web-designer-reference-guide/31#TOPIC-1136569</a></p>
+<hr />
+<p>Добавить строку в таблицу</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/22545/webdesigner-question-again">https://www.oneidentity.com/community/identity-manager/f/forum/22545/webdesigner-question-again</a></p>
+<hr />
+<p><img src="../media/6. Web Designer/media/image1.png"
+style="width:5in;height:4in"
+alt="Cont*83 Gridl ed b.nd: PersonCOl_Test List view - definitions Gr&amp;OOterRow Add row Server action Insert: personCOU_Test Action after insert Save: persmCd_Test FirstName Database access options GridCoünnCobnnTemdate ColumnListI FrstName " /></p>
+<hr />
+<p><img src="../media/6. Web Designer/media/image2.png"
+style="width:3.5625in;height:3in"
+alt="Grid band: PersonCoII_Test List view GridFiIters1 Ron defnitons GridFooterRonI Add ron Container (Iteration): PersonCoII_Test Database access optons [3—+ GridCoIumnCoIumnTempIate ColumnListI First&#39;ame LastName " /></p>
+<hr />
+<p>Для того, чтобы иметь возможность добавить TextBox - надо сначала
+создать Container (Iteration) и в него уже поместить TextBox.</p>
+<p><img src="../media/6. Web Designer/media/image3.png"
+style="width:3.625in;height:5in"
+alt="Container 3 Grid band: PersonCOIl_Test Oat*uase &quot;Cess cotms List view ROW definitions GridFOOterRovvI Container (Iteration): personCoII_Test TextSox Server acton save: personc01_Test Ct«abon): TextBox3 Add row SeNer action Insert: persmCd_Test @ Acoon after insert FirstNarne Last•ame Gr dCoIumnC olumnTempIate I FirstName — i Column group " /></p>
+<hr />
+<p>Did you load the table ADSAccount? It seems like you are having
+trouble there as well....<br />
+In the initilizer choose the data action "load collection" and use a
+wise whereclause. Something like UID_Person=getuser(). You can have
+this whereclause on the collection itself as well...<br />
+Or are you ok with that?</p>
+<p>The filter on ADSAccount would be something like:<br />
+UID_Person = (from Person select current UID_Person)</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/5892/text-box-not-displaying-on-attribute-update-in-web-portal">https://www.oneidentity.com/community/identity-manager/f/forum/5892/text-box-not-displaying-on-attribute-update-in-web-portal</a></p>
+<hr />
+<p>Выделить надпись жирным</p>
+<p><img src="../media/6. Web Designer/media/image4.png"
+style="width:2.52083in;height:0.92708in"
+alt="COMPANYNAME Extended properties •style&#39; - &#39;font-weight " /></p>
+<hr />
+<p>Цвет верха страницы (синий) задан в переменной
+VI_Common_Color_MastHead</p>
+<p>Правка configuration keys.</p>
+<p><strong><em>To configure a web project</em></strong></p>
+</blockquote>
+<ol>
+<li>
+<p>Click <strong>Edit</strong> in the menu bar.</p>
+</li>
+<li>
+<p>Select <strong>Web project</strong> in the <strong>Configure project</strong> sub-menu</p>
+</li>
+</ol>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/web-designer-reference-guide/16">https://support.oneidentity.com/technical-documents/identity-manager/8.0/web-designer-reference-guide/16</a></p>
+<p>Отображение приветствия</p>
+<p>format("Hello, {0}!", from user select firstname)</p>
+<p>Надо изменить заголовок</p>
+<hr />
+</blockquote>
+<h2 id="_1">Удаление строки</h2>
+<blockquote>
+<p>Создаем контейнер итерации и накидываем на него кнопку</p>
+<p>Действие сервера - Delete</p>
+<p>Выбираем коллекцию. В Правило фильтрации "Collection with filter rule"
+пишем</p>
+<p><strong>FirstName = (select current FirstName from PersonColl_Test)</strong></p>
+<p><strong>А лучше выбирать UID!!!</strong></p>
+<p><img src="../media/6. Web Designer/media/image5.png"
+style="width:2.64583in;height:1.46875in"
+alt="Container (Iteration): PersonCoII_Test Delete: PersonCoII_Test [3 —i Extended proper bes • &#39;style&#39; - &#39;display:block&#39; " /></p>
+<p><strong>Кнопка</strong></p>
+<p><img src="../media/6. Web Designer/media/image6.png"
+style="width:5in;height:3.34375in"
+alt="• Server action Delete: CCCOrgUnitMappingCoII Extended properties e&#39; - display: Database access options GridCoIumnCoIumnTempIateI Title Containerl A PeaaKT&#39;4posaH&#39;•1e cooTseTCTSVIA OLI le editor t,&#39;le&#39; - (HTML attribute) Sorting -z; Grouping Show extension values &#39;style&#39; &#39; display: block; height: 9px &#39; " /></p>
+<hr />
+</blockquote>
+<h1 id="_2">Русификация портала</h1>
+<blockquote>
+<p>Заходим в дизайнер - Base Data – Databases - справа внизу Edit
+translation in database -</p>
+<p><strong><em>o import the files using the Designer</em></strong></p>
+</blockquote>
+<ol>
+<li>
+<p>In the lower pane of the navigation view, select <strong>Base Data</strong>.</p>
+</li>
+<li>
+<p>In the <strong>Language Editor Task</strong> pane (far right pane), select the
+    <strong>Edit translation in database</strong>.</p>
+</li>
+</ol>
+<blockquote>
+<p>The <strong>Language Editor</strong> appears.</p>
+</blockquote>
+<ol>
+<li>
+<p>Click the</p>
+</li>
+<li>
+<p><img src="../media/6. Web Designer/media/image7.png"
+    style="width:0.15625in;height:0.15625in" /></p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Import</strong> toolbar button.</p>
+<p><img src="../media/6. Web Designer/media/image8.png"
+style="width:5in;height:2.55208in"
+alt="Database Translations View a Commit to database Navigation Base Data [E} • General Databaklö TimeTracedatabases Configuration parameters Schedules Change labels Icons Large images @ Web services Getting Started One Identity Manager Schema Permissions Process Orchestration Script Library user Interface Mail Templates Documentation Base Data Favorites Help X Base Data State Search Job Server Editor Table Select Languages • Language Editor Column Usage ADSAccount ADSAccount ADSAccount ADSDomain ADSDomain ADSDomain ADSGroup ADSGroup ADSGroup ADSMachine ADSMachine ADSMachine AERole Search translation Search edsvaDeprovisionStatus edsvaDeprovisionStatus edsvaDeprovisionStatus NamespaceManaged8y NamespaceManaged8y NamespaceManaged8y edsvaDeprovisionStatus edsvaDeprovisionStatus edsvaDeprovisionStatus MachineRoIe MachineRoIe MachineRoIe Descri tion Source List of perm List of perm List of perm List of perm List of perm List of perm List of perm List of perm List of perm List of perm List of perm List of perm Data x Deprovisioni Deprovisioni No deprovisi %Globals.Ql FIM No synchron Deprovisioni Deprovisioni No deprovisi Domain con Server Workstation All resources to all emplo a lication r Tasks O Base data informabon Configura ton Editconfigurationparan*as Job Server Editor Edit]observer Language Editor Edittramslationindatabase " /></p>
+</blockquote>
+<ol>
+<li>Navigate to the required .csv language file, and click <strong>Open</strong>.</li>
+</ol>
+<blockquote>
+<p>The file import may take several minutes to complete. Click the</p>
+<p><img src="../media/6. Web Designer/media/image9.png"
+style="width:0.20833in;height:0.1875in" /></p>
+<p><strong>Commit to database</strong> toolbar button to save the files to the One
+Identity Manager database.</p>
+</blockquote>
+<p>| <img src="../media/6. Web Designer/media/image10.png"
+style="width:0.15625in;height:0.15625in" /> | <strong>Note:</strong> There are separate language packs for each module and each language, allowing you to install the required translations for the modules you have installed. Repeat this import process for each language pack to want to install. |
+|----|----|</p>
+<blockquote>
+<p>Once the language files are imported into One Identity Manager, there
+are no additional steps required to configure the web portal to
+display in a different language. The web portal will display in the
+current browser language. For information on installing the web
+portal, see the <em>One Identity Manager Installation Guide</em>.</p>
+<p>Заходим в IE и настраиваем на русский - чтобы первым был.</p>
+<hr />
+</blockquote>
+<h1 id="2">Чтобы делать записи на 2х языках с переводом</h1>
+<blockquote>
+<p>В значении указывать</p>
+<p>translate('#LDS#Test1')</p>
+<p>Затем идем в Edit – Captions и там добавляем ключ Test1 с текстом на
+русском.</p>
+<hr />
+</blockquote>
+<h1 id="_3">Условие для отображения меню</h1>
+<blockquote>
+<p>В проекте для пункта меню указать условие, например:</p>
+<p>Exists("personinaerole",sqland(sqlcompareuid("uid_person",getuser()),"xorigin
+&gt; 0 and uid_aerole in (select UID_Aerole from AErole where
+Ident_Aerole in ('CCC_gph_manager', 'CCC_trigram_manager',
+'CCC_allusers_view'))"))</p>
+<p>или для конкретного пункта меню</p>
+<p>Exists("personinaerole",sqland(sqlcompareuid("uid_person",getuser()),"xorigin
+&gt; 0 and uid_aerole in (select UID_Aerole from AErole where
+Ident_Aerole in ('CCC_allusers_view'))"))</p>
+<hr />
+</blockquote>
+<h1 id="_4">Не работает поиск по индексу на портале</h1>
+<blockquote>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/214091/error-the-search-index-is-currently-not-available-in-it-shop-search">https://support.oneidentity.com/identity-manager/kb/214091/error-the-search-index-is-currently-not-available-in-it-shop-search</a></p>
+<p><span class="mark">Не указывать балансировщик для поиска, а указывать
+конкретный App Server!!!</span></p>
+</blockquote>
+<h1 id="app-server">Переконфигурация портала и настройка поиска (app server)</h1>
+<blockquote>
+<p><span class="mark">In Web Portal bin folder, launch
+WebDesigner.ConfigFileEditor tool to check if App server connection
+defined in Search service section works. Most likely app server or its
+configuration has an issue. HTH.</span></p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/29663/intermittent-error-in-web-portal-when-searching">https://www.oneidentity.com/community/identity-manager/f/forum/29663/intermittent-error-in-web-portal-when-searching</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="action">Передача action из меню</h1>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image11.png"
+style="width:4.65625in;height:4.17708in"
+alt="Case I (Case) &#39;ndition Forms Forml Initalizer Person - CurrenGPHEmpIoyee Main El—i Switch I [3 e Case Container4 EditEmpIoyee &#39; &#39; ) = &#39;edi Sorting z; Aj Grouping 1 $ i snull ) Show extension va " /></p>
+<p>То есть, если у нас из меню приходит действие edit - он просто
+загружает текущего сотрудника из коллекции</p>
+<hr />
+</blockquote>
+<h1 id="_5">Проверка значения</h1>
+<blockquote>
+<p>from Person select not match(CCC_Trigramm, '^[A-z0-9_]*\$')</p>
+<p><img src="../media/6. Web Designer/media/image12.png"
+style="width:9.15625in;height:5.58333in"
+alt="airthDate CCC _ Trigramm TrigrammNotlJnique Container21 Container24 - Organisatonal data - Fields Container&quot; - Contactlnformaton - Fields nFormat (Validation) Sorting -z; Aj 1 Grouping Show extension values &#39; only digit s " /></p>
+<hr />
+</blockquote>
+<h1 id="_6">На карточке пользователя на портале не отображаются все свойства</h1>
+<blockquote>
+<p>Сначала думал, что проблема с правами на просмотр атрибутов.</p>
+<p>Атрибуты просто не были перечислены в конфиге, откуда функция
+(PropertyList()) берет их.</p>
+<p>Надо зайти в Edit – Configure Project – WebProject.</p>
+<p>Параметр называется VI_ObjectView_Person_Fields</p>
+<p><img src="../media/6. Web Designer/media/image13.png"
+style="width:7.03125in;height:3.5in"
+alt="Start page IVI_UserMenu Options Search results(l) columns of table Database column selection Available columns [3 Employees Actual employee Additional Email Additional Phones Answers to password question locked Canonical name Category Coda Central SAP user account Central password Central user account Certification status - Column settings CCC _ Perso le • VI m mo n_Obj ectSheet_Perso n Value (stardard) 13 column(sl selected used columns Primary department Primary cost center pnm ary location Manager Phona Mobile phone Building &#39; Floor 9030m &#39; Street CCC _ Perso Pro pertyViewer Configure project Value (custom) 28 column(sl selected iaIogCour nce RI, " /></p>
+<hr />
+</blockquote>
+<h1 id="_7">При выборе департамента в всплывающем окне отображается полный путь до департамента</h1>
+<blockquote>
+<p>Надо в компоненте VI_ObjectCollection_Hierarchical изменить текст</p>
+<p><img src="../media/6. Web Designer/media/image14.png"
+style="width:6.83333in;height:4.66667in"
+alt="Configuration Definition Initializer Container Container3 Container2 8—• Extended properties [3—+ Switchl [3-0 Casel - Tree Treel E]&quot; Tree band: HierarchyTabIe Database access options ControlListI A current GetParentKeyOfromhierarChytablein(fromhierarchytabIeseIectprimaryk Extended properties Multilingual Captions Captions.. i sel- Node Quick edit if (select f nm hierarchytable in hierarchytable select ) ) ) Gene else a pæt key that of this display, shN it DisplayLong f nm splay ( ) f nm " /></p>
+<p>На select current display() from hierarchytable (через Extension)</p>
+<hr />
+</blockquote>
+<h1 id="_8">Передача определенного параметра в форму</h1>
+<blockquote>
+<p>В модуле формы создания нового сотрудника (например) создаем
+ComponentInterface</p>
+<p><img src="../media/6. Web Designer/media/image15.png"
+style="width:7.89583in;height:3.09375in"
+alt="Componentlnteffacel Person EmployeeWpeO DepartpmentWhereCIauseO LanguageO Node editor Person - UID_DlaIogCuItureFormat (Update) General settings Collection Property Collection with filter rule Value Advanced Settings Person UID_DiaIogCuItureFormat I (No ass igned) L angu age " /></p>
+<p>Назначаем его на Update коллекции</p>
+<p><img src="../media/6. Web Designer/media/image16.png"
+style="width:5in;height:3.5625in"
+alt="save - SAVE [30 Server action Person - IsExternaI Person - CCC_EmpIoyeeType Person - LlIO_OiaIogCuIture Person - UID_DiaIogCuItureFormat Validate form values OnExist Action Redirects Redirect to a form component OnNotExist Action SaveChangesToPerson Person - Person WhereCIauseForExistingEmpIoyeesO - WhereCIauseForExistingEmpIoyeesO " /></p>
+<p>В модуле, откуда вызываем</p>
+<p><img src="../media/6. Web Designer/media/image17.png"
+style="width:4.21875in;height:2.28125in"
+alt="Main [3—+ Switchl Casel [3—+ Case2 Container (iteration): CurrenExernaIEmpIoyee Person - CurrenExernaIEmpIoyee DepartpmentWhereCIauseO - format( •UID_Departmen EmployeeType0 - •ForeignEmpIoyee• Language&#39;] - &#39;QSM-CLlLT-en-LlY Title " /></p>
+<hr />
+</blockquote>
+<h1 id="_9">Изменения отображения поля</h1>
+<blockquote>
+<p>{{ _currentColumn3.DatabaseSourceColumn.Columnname }} in
+("UID_DialogCulture")</p>
+<p><img src="../media/6. Web Designer/media/image18.png"
+style="width:7.53125in;height:4.19792in"
+alt="Start page I Customization overview CCC _ Extem a IE m ployee_ Ed it M asterData DateLastWorked CCC_Contract Container25 Extended properties Container29 codeLitera13 Container43 Extended properties Container26 - DepartmentCoIumn AdditionalContentHeader ShowChangeVaIueO - true EnableNavigationO - true NullTextO - is empty&#39;) EditTabIe - Person SdditionaI&#39;.VhereCIause0 - Departpment&#39;.VhereCIause0 Container2 " /></p>
+<p>Чтобы 2 поля не отображалось одновременно, надо в defaultColums
+прописать условие, например</p>
+<p>{{ _currentColumn2.DatabaseSourceColumn.Columnname }} in
+("ExitDate","DateLastWorked","CCC_Direction", "Title", "CCC_Contract")</p>
+<p>А вообще, я остановился на Задании правила для ячейки</p>
+<p><img src="../media/6. Web Designer/media/image19.png"
+style="width:4.375in;height:4.90625in"
+alt="HIE Street LlIO_OiaIogCuIture Container45 Extended properties Container47 Container53 - UID_DiaIogCuIture AdditionalContentHeader Node editor &#39; * UID DialogCuIture (Single property) Show General settings Property Sorting z; Grouping UID_DiaIogCuIture Database table name for artificial foreign-key relation Database column name for artificial foreign-key relation Rule Label Lue Lue a s s igned ) a s s igned ) a s s igned ) a s s igned ) " /></p>
+</blockquote>
+<h1 id="there-is-no-cursor-defined-on-the-collection">Ошибка "There is no cursor defined on the collection"</h1>
+<blockquote>
+<p>Надо указывать контейнере итерации и в нем компонент Column Editor</p>
+<p>"You are getting this error because the text box does not know which
+row of the ShoppingCartOrder collection it should bind to.</p>
+<p>You can try putting your textbox inside a container iteration."</p>
+<hr />
+</blockquote>
+<h1 id="_10">Корзина</h1>
+<blockquote>
+<p>При помещении продукта в корзину - создается запись в таблице
+ShopingCartOrder</p>
+<p>А сами продукты в корзине хранятся в таблице ShopingCartItem</p>
+<hr />
+</blockquote>
+<h1 id="_11">Возможность назначения продуктов всем сотрудникам</h1>
+<blockquote>
+<p>Конфиг параметр VI_ITShop_Filter_PersonOrderFor (Employee for whom a
+request can be placed)</p>
+<p>"uid_person in ( select uid_person from QER_VEditEmployee)"</p>
+<hr />
+</blockquote>
+<h1 id="_12">Возможность назначения роли другим сотрудникам</h1>
+<blockquote>
+<p>Модуль VI_ITShop_ProductSelection</p>
+<p>Функция CanOrderForSomebodyElse()</p>
+<p>exists("personinaerole",sqland(sqlcompareuid("uid_person",
+getuser()),"xorigin &gt; 0 and uid_aerole in (select UID_Aerole from
+AErole where Ident_Aerole in ('Security Administrator'))"))</p>
+</blockquote>
+<h1 id="-">-------------------------------</h1>
+<h1 id="security-administrator-">Чтобы руководитель мог назначать только своим подчиненным продукты, а Security Administrator - всем сотрудникам</h1>
+<blockquote>
+<p>1) Делаем копию модуля ITShop_ProductSelection с заменой</p>
+<p>2) Добавляем параметр VI_ITShop_Filter_PersonOrderFor1 (тип SQL
+Filter Condition)</p>
+<p>3) Прописываем значение только что созданного параметра</p>
+<p>"uid_person in ( select uid_person from QER_VEditEmployee)"</p>
+<p>4) В коллекции Container - uidPersonCandidate делаем модификацию
+Filter on candidate objects</p>
+<p>format("UID_Person in(</p>
+<p>select UID_Person from Person where {0}</p>
+<p>UNION</p>
+<p>select UID_Person from Person where {1}</p>
+<p>)",if( exists("personinaerole",sqland(sqlcompareuid("uid_person",
+getuser()),"xorigin &gt; 0 and uid_aerole in (select UID_Aerole from
+AErole where Ident_Aerole in ('Security Administrator'))")) ) then</p>
+<p>getconfig("VI_ITShop_Filter_PersonOrderFor1") else
+getconfig("VI_ITShop_Filter_PersonOrderFor"),</p>
+<p>if(PersonHasSubIdentity())then</p>
+<p>format("UID_Person in (select uid_person from {0})",
+SqlFunctionCallTable("QER", "GGetInfo", "FTPersonsAreMe",
+sqlformatvalue(getuser(), "string", "NonUnicodeLiterals")))</p>
+<p>else</p>
+<p>SqlCompareUid("UID_Person",GetUser())</p>
+<p>)</p>
+<p>Таким образом, если сотрудник имеет подчиненных, он сможет назначать
+продукты своим подчиненным.</p>
+<p>Если сотрудник Security Administrator - сможет назначать продукты всем
+сотрудникам.</p>
+<hr />
+<p>Ориг uidPersonCandidate</p>
+<p>format("UID_Person in(</p>
+<p>select UID_Person from Person where {0}</p>
+<p>UNION</p>
+<p>select UID_Person from Person where {1}</p>
+<p>)",</p>
+<p>getconfig("VI_ITShop_Filter_PersonOrderFor"),</p>
+<p>if(PersonHasSubIdentity())then</p>
+<p>format("UID_Person in (select uid_person from {0})",
+SqlFunctionCallTable("QER", "GGetInfo", "FTPersonsAreMe",
+sqlformatvalue(getuser(), "string", "NonUnicodeLiterals")))</p>
+<p>else</p>
+<p>SqlCompareUid("UID_Person",GetUser())</p>
+<p>)</p>
+<hr />
+</blockquote>
+<h1 id="uid">Отображение в таблице имени по UID из другой таблицы</h1>
+<blockquote>
+<p>from Point_of_View select CCC_PoV_Name where UID_CCCPoint_of_View =
+(from CCCPointOfViewInAccProd_Temp select current
+CCC_UID_Point_of_View)</p>
+<p><img src="../media/6. Web Designer/media/image20.png"
+style="width:10.36458in;height:6.4375in"
+alt="Tables I Node editor Sorting z; Grouping Database table name for artificial foreign-key relation Database column name for artificial foreign-key relation Rule Label Filter on candidate objects Condition Expression for display value Grid band: CCCPointOfViewInAccProd_Temp List view GridFilters1 Row definitions Database access options GridCoIumnCoIumnTempIateI ColumnListI HIE ccc Column group CUrrentcoIumn (Single property) &#39; Point a s s igned ) a s s igned ) a s s igned ) a s s igned ) specified Show extension values View &#39; ) f nm Point of View CCC UID select CCC POV N whe UID CCC Point View = f CCCPointOfViewInAeeProd Point of View ) " /></p>
+<hr />
+</blockquote>
+<h1 id="_13">Отображение подкатегорий на портале</h1>
+<blockquote>
+<p>Надо создать service category верхнего уровня и для категорий нижнего
+уровня указывать ее как Parent service category</p>
+<hr />
+</blockquote>
+<h1 id="development-system-updates-pending">На портале висит надпись вверху "Development system - Updates pending"</h1>
+<blockquote>
+<p>Надо обновить портала зайдя по адресу</p>
+<p><a href="https://nl-sd-idmweb01.ao.nlmk/IdentityManager/monitor">https://nl-sd-idmweb01.ao.nlmk/IdentityManager/monitor</a></p>
+<p><img src="../media/6. Web Designer/media/image21.png"
+style="width:12.65625in;height:4.71875in"
+alt="WebDesigner runtime status WebOesigner ru nti me status user account Memory usage (physical/virtual) Memory usage managed objects Web Application Sessions U p dates Active In maintenance mode, the application does not allow new sessions. Users trying to log in will see the file Maintenance.html from the folder on the Server. Make sure this file is updated as necessary. Start maintenance mode Active kb 952,496 kb 136,025 kb update Available update now Update when all user sessions are closed The application update uses the account AONLMK\nI-as-Iid-iis-t and writes to the folder Ensure that appropriate rights are configured. updating is only possible when new updates are available and there are no active sessions. During the update procedure, the web application including this monitor is not available. During the time the application is waiting for all user sessions to end in order to update, the application will be in maintenance mode. " /></p>
+</blockquote>
+<h1 id="uid_department">В корзине нужно отображать обязательное поле UID_Department</h1>
+<blockquote>
+<p>Надо в процессе Workflow у ITShop добавить Approval level – DP -
+Manager of department.</p>
+<p>Тогда при заказе продукта поле Департамент будет обязательным!</p>
+</blockquote>
+<h1 id="developement-system">Убрать надпись Developement system из правого угла портала</h1>
+<blockquote>
+<p>В Designer поставить <strong>Production system</strong></p>
+<p><img src="../media/6. Web Designer/media/image22.png"
+style="width:7.90625in;height:7.4375in"
+alt="Base Data General Databases TimeTracedatabases Configuration parameters Schedules Charrge labels Release management Icons Large images Web services Security settirrgs Installation Localization Ad va nced Getting Started One Identity Manager Schema Permissions Process Orchestration Script Library user Interface Mail Templates Documentation Base Data Data bases Main Database General Settings Extended Custo mer Description Customer ID Custo mer p refix Module owner Stagirrg level Custom stag i tv level Status bar color Last comp i ler relevant configurat... Simulation started Main database Maindatabase NLMK Main Database ccc ccc Production system FFFODF3F 7/28/2020 12:51 PM Stop D3Queue Processor Stop One IdentityManagerService Staging level Production system Font color " /></p>
+</blockquote>
+<h1 id="_14">Создание выпадающего окна с требованием указать доп параметр</h1>
+<blockquote>
+<p>Фишка в том, чтобы указать обязательный параметр для продукта. И уже
+выпадающей формой задавать этот параметр.</p>
+</blockquote>
+<ol>
+<li>
+<p>Создать в ITShop Request Property - с указанием Mandatory Field</p>
+</li>
+<li>
+<p>У ServiceItem указать в поле Request Properties (это
+    ShoppingCartItem) это новое поле</p>
+</li>
+<li>
+<p>Для того, чтобы у определенного продукта отображался определенный
+    компонент - надо настроить Object-depended references, чтобы
+    переопределить стандартные модули!</p>
+</li>
+</ol>
+<blockquote>
+<p>А именно:</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Insert Shopping Cart Item</strong></p>
+</li>
+<li>
+<p>Parameters Shopping Cart Items</p>
+</li>
+<li>
+<p>Edit Shopping Cart Item</p>
+</li>
+</ul>
+<blockquote></blockquote>
+<ol>
+<li>
+<p>Расширить схему параметрами для отображения</p>
+</li>
+<li>
+<p>Для того, чтобы выводить всплывающее окно после выбора продукта,
+    Object-depended references надо создать <strong>Insert_ShoppingCartItem</strong>
+    компонент указываем <strong>VI_Insert_ShoppingCartItem_Default</strong> (его
+    копию) (Этот компонент вызывается из
+    VI_Insert_ShoppingCartItem_Default)?.</p>
+</li>
+</ol>
+<blockquote>
+<p>Копия VI_Insert_ShoppingCartItem_Default вызывает компонент
+VI_ITShop_ShoppingCartItem_Editor, который мы и можем кастомизировать!</p>
+</blockquote>
+<ol>
+<li>
+<p>Пилим VI_ITShop_ShoppingCartItem_Editor (копию)</p>
+</li>
+<li>
+<p>Загрузка для коллекции ShoppingCartItem создаем виртуальные поля
+    (Webinar…)</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image23.png"
+style="width:2.44792in;height:2.04167in"
+alt="Componentlnteffacel ShoppingCartItem HIE External_mail File_exchanger ForMobile ITSupport ITDeveIoper " /></p>
+</blockquote>
+<ol>
+<li>Загружаем коллекцию Person</li>
+</ol>
+<blockquote>
+<p>Указываем Create interactive entitles</p>
+<p><img src="../media/6. Web Designer/media/image24.png"
+style="width:4.5625in;height:3.86458in"
+alt="Definition Initializer Load collection: POV Load collection: BalanceUnits Load collection: Person Database access options ShoppingCaftItem - Webinar ShoppingCartItem - Social ShoppingCartItem - External_mail ShoppingCartItem - File_exchanger ShoppingCartItem - ForMobiIe Action Load collection: AccProduct Node editor DbObJectLoadTypeIO (Database access options) General settings Sorting z; Grouping Show extension values Load foreign key displays for columns contained in the display pattern Load foreign key displays for all display columns Load foreign display values even when loading them is very expensive (single shot) Create interactive entities Do not create default ORDER BY clause and ignore display columns " /></p>
+</blockquote>
+<ol>
+<li>При инициализации загружаем значения полей у пользователя уже
+    прописанные</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image25.png"
+style="width:2.91667in;height:2.4375in"
+alt="Definition Initializer Load collection: POV Load collection: BalanceUnits Load collection: Person Database access options ShoppingCartItem ShoppingCartItem ShoppingCartItem ShoppingCartItem ShoppingCartItem Webinar - Social - External mail - File_exchanger - ForMobiIe " /></p>
+<p>Value берем из поля CCC_ExtendedInternetAccess (у поля значение 01010)</p>
+<p>if(Substring((select CCC_ExtendedInternetAccess from Person where
+UID_Person = getuser()),0,1) = '1' ) then 'true' else 'false'</p>
+</blockquote>
+<ol>
+<li>Запись в поле</li>
+</ol>
+<blockquote>
+<p>format("{0}{1}{2}{3}{4}",if(select current Webinar from
+ShoppingCartItem) = 'True' then '1' else '0',if(select current Social
+from ShoppingCartItem) = 'True' then '1' else '0',if(select current
+External_mail from ShoppingCartItem) = 'True' then '1' else
+'0',if(select current File_exchanger from ShoppingCartItem) = 'True'
+then '1' else '0',if(select current ForMobile from ShoppingCartItem) =
+'True' then '1' else '0')</p>
+<p><img src="../media/6. Web Designer/media/image26.png"
+style="width:4.10417in;height:2.35417in"
+alt="OK - Default autton Server action Validate form values Actions - MultiPerson Person - CCC_ExtendedInternetAccess a Shoppingcattltem - CustomPrope&#39;ty08 Save: Person Save: ShoppingCartItem Action3 - Add selected AccProducts to ShoppingCart Close popup OnlnsertSuccess Cancel " /></p>
+</blockquote>
+<ol>
+<li>Для того, чтобы настроить отображение полей в корзине - идем в
+    Object Depended References</li>
+</ol>
+<blockquote>
+<p>Связь VI_Interfaces_ObjectSwitch_<strong>Parameters_ShoppingCartItem</strong></p>
+</blockquote>
+<ol>
+<li>Затем, в ComponentInterface1 создаем CollectionExtension для
+    коллекции ShoppingCartItem</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image27.png"
+style="width:3.09375in;height:4.09375in"
+alt="[3—1&#39; Componentlnteffacel VirtualTabIeExtensionI Webinar Social External_mail File_exchanger HIE ForMobile Node editor VirtualTabIeExtensionI (Collection extension) iene ral settings Collection Object type Control ID Sorting -z; Grouping — ShoppingCartItem ShoppingCartItem VirtualTabIeExtensionI " /></p>
+<p>Добавляем Properties</p>
+<p>В Initialization обновляем эти поля</p>
+<p>if(Substring((select current CustomProperty08 from
+ShoppingCartItem),0,1) = '1' ) then 'true' else 'false'</p>
+<p>На форме отображаем эти поля</p>
+<p><img src="../media/6. Web Designer/media/image28.png"
+style="width:3.3125in;height:5.86458in"
+alt="Container Container2 - Additional Parameters Header Container3 É]5N LayoutPaneII Container 12 - Webinar A Webinar Containers Webinar Container4 - Social A Social Container6 Check80xI Container7 - Ex_mail A External_mail Container8 Checkaox2 de editor Webinar (Checkbox) Sorting -z; Grouping pety ShoppingCartItem Webinar I (No ass igned) " /></p>
+</blockquote>
+<h1 id="_15">Отключить возможность изменения поля</h1>
+<blockquote>
+<p>надо в Extensions HTML attr указать 'disabled' в обоих полях</p>
+<p><img src="../media/6. Web Designer/media/image29.png"
+style="width:3.09375in;height:2.51042in"
+alt="Node editor • disabled&#39; &#39;disabled&#39; (HTML attribute) General settings Identfier Value Advanced Settings Control ID Sorting -z; Grouping I &#39; disabled&#39; HtmlAttribute2 " /></p>
+</blockquote>
+<h1 id="_16"></h1>
+<h1 id="_17">В дополнение</h1>
+<h1 id="_18">Колонки при указании параметров:</h1>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image30.png"
+style="width:12.21875in;height:4.09375in"
+alt="Navigation IT Shop Basic configuration dat:a Processing status Standard reasons Approual procedures Approual policies Predefined Custom defined Mail templates Role classes Role types Business partners Functional areas Service categories questprope rties Chief approual team x Request properties groups (5) eatICIQYa Hadoop permissions Hiue permissions Modify Service Account Request Properties New Service Account Request Properti Yarn permissions O Home New Service Account Request Prop... Request properties group Description Column Displayualue Soft order Column Displayualue Soft order New Service Account Request Properties Mandatoryparameter Editable for apprcnrr Read-onb&#39; " /></p>
+</blockquote>
+<h1 id="shoppingcartitem"><span class="mark">являются колонками таблицы ShoppingCartItem</span></h1>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/9">https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/9</a></p>
+<p>При добавлении новых колонок, расширении ShoppingCartItem надо так же
+расширить таблицу PersonWantsOrg этой же колонкой! Так как данные
+уходят в PWO после Submit заказа.</p>
+<p>Только нужно не забыть про права на колонку новую! А то может не
+хватить прав у пользователя писать в нее!</p>
+<hr />
+</blockquote>
+<h1 id="_19">В выпадающим окне сделать поле, которое будет отображаться в зависимости от условия</h1>
+<ol>
+<li>
+<p>Сделать копию VI_Insert_ShoppingCartItem_Default
+    (CCC_Insert_ShoppingCartItem_TechOwner)</p>
+</li>
+<li>
+<p>В Object-Dependent установить для Insert SHoppingCartItem созданный
+    компонент CCC_Insert_ShoppingCartItem_TechOwner</p>
+</li>
+<li>
+<p>Сделать копию VI_ITShop_ShoppingCartItem_Editor
+    (CCC_ITShop_ShoppingCartItem_Editor_TechOwner)</p>
+</li>
+<li>
+<p>CCC_Insert_ShoppingCartItem_TechOwner будет открывать
+    CCC_ITShop_ShoppingCartItem_Editor_TechOwner если есть Request
+    Properties обязательные у ServiceItem</p>
+</li>
+<li>
+<p><img src="../media/6. Web Designer/media/image31.png"
+    style="width:8.4375in;height:6.5625in"
+    alt="Stat page from Acc Product (Ident Ac c P r o duct CCC Techow-n VI_StandardVVeb references Elfi Container Elfi Container2 Container3 PropertyList0 ColumnList3 LlID_VVorkDeskOrdered EnableNauigation0 - true EditTabIe - ShoppingCaftItem Container 7 PropertyList0 ColumnList4 EnableNauigation0 - true EditTabIe - ShoppingCaftItem Container6- auailable ACCProducts Popup80ttom CCC CCC CustomTechOwner PopupTitIe0 - if(Edit411EquaIAccProductsD and (O &lt; from ShoppingCartItem select count0 Where LJID_PersonOrdered &lt;&gt; (from shoppingcaltitem select current LJID_Per50nOrderedl Node editor Container 7 (Container) General settings Vie•.ming condition Grouping Shouu eRension values m ccc Server ccc Serve r Name Uh ERended properties Identifier (optional) Workflow Control Delay rendering of HTML content for this container " /></p>
+</li>
+<li>
+<p>У CCC_ITShop_ShoppingCartItem_Editor_TechOwner убрать стандартный
+    элемент PropertyEditor и дополнить самостоятельно нужными колонками,
+    в колонке, для которой нужно будет условие отображения - указать
+    поле Viewing condition (у ее контейнера)</p>
+</li>
+<li>
+<p>Для отображения колонки в поле деталей ShoppingCartItem (справа)
+    после помещения в корзину, нужно создать пустой компонент и
+    дополнить его полями для отображения из ShoppingCartItem (не из
+    Request Properties)</p>
+</li>
+<li>
+<p>В Object Dependent сделать для компонента Parameters
+    ShoppingCartItem - этот компонент будет отображаться ниже Request
+    Properties</p>
+</li>
+<li>
+<p><img src="../media/6. Web Designer/media/image32.png"
+    style="width:5.70833in;height:6.5in"
+    alt="Stat page VI_StandardVVeb ccc CCC CustomTechOwner Configuration Custom Techowner Load collection: CMD8 Servers Shoppingcaftltem- CCC_LII Container LayoutPaneII Elfi Container3 8,1aAeneu Elfi Containers ShowChangehÆIue0 - true DisplayNoPopup0 - false EnableNauigation0 - true AdditionalVVhereCIause0 - [E]ÉÉlä EditTabIe- ShoppingCaftItem EditCoIumn- CCC DID Person Object-dependentreferences Shouu eRension values Node editor Container I (Container) General settings Vie•.ming condition Identifier (optional) Grouping ShoppingCarCICem ERended properties s lect u rent CCC UID Person " /></p>
+</li>
+</ol>
+<blockquote>
+<hr />
+</blockquote>
+<h1 id="condition">Условие Condition отображения контейнера</h1>
+<blockquote>
+<p>from PersonWantsOrg select current (DisplayOrg in ('Доступ в
+интернет'))</p>
+<hr />
+<p>(IsNull(ShowCancelOrder(), true) = true)</p>
+<p>and</p>
+<p>(from PersonWantsOrg select top 1</p>
+<p>(Orderstate in
+('OrderProduct','OrderProlongate','OrderUnsubscribe', 'Granted')</p>
+<p>and (uid_personinserted =
+(select uid_person from user) or uid_personordered =
+(select uid_person from user))</p>
+<p>and convert(
+isnull(getconfig("VI_ITShop_OrderHistory_CancelOrder"), 'false'), 'System.Boolean')) where UID_PersonWantsorg
+= '\&lt;UID_PersonWantsOrg you are currently looking at&gt;')</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/6072/visibility-condition-for-withdraw-request-container">https://www.oneidentity.com/community/identity-manager/f/forum/6072/visibility-condition-for-withdraw-request-container</a>&gt;</em></p>
+<hr />
+<p>exists("personinaerole",sqland(</p>
+<p>sqlcompareuid("uid_person", getuser()),"xorigin &gt; 0 and uid_aerole in
+(select UID_Aerole from AErole where Ident_Aerole in ('IDM Operator'
+))"))</p>
+<hr />
+</blockquote>
+<h1 id="_20">Добавить поле на страницу нового сотрудника иностранного или по договору</h1>
+<blockquote>
+<p>Сначала расширить схему у Person.</p>
+<p>В WebDesigner помимо того, что добавить поле</p>
+<p>Надо в ColumsEditor проверить, что поле указано в условии отображения</p>
+<p><img src="../media/6. Web Designer/media/image33.png"
+style="width:9.78125in;height:4.36458in"
+alt="Container26 - DepartmentCoIumn Container23 - ManagerCoIumn Container41 - defaultCoIumns ColumnEditor3 EnableNavigationO - true Validator3 Container44 - Contactlnformation - Fields Container28 - AccessData - Fields Container8 - auttons Container (Container) Sorting -z; Aj Grouping &quot;CCC Contract &quot; , &quot;CCC Show extension values &quot; CCC Direction &quot; , &quot; " /></p>
+<hr />
+</blockquote>
+<h1 id="upload-file">Upload file</h1>
+<blockquote>
+<p>Имя файла</p>
+<p>format("C:\temp\0}",select filename from localvars)</p>
+<p>format("C:\temp\0}",select current UID_AccProduct from
+ShoppingCartItem)</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/6147/how-to-upload-a-file-through-a-form-in-it-shop">https://www.oneidentity.com/community/identity-manager/f/forum/6147/how-to-upload-a-file-through-a-form-in-it-shop</a>&gt;</em></p>
+<p>If you do, then the "File name" could be filled out with
+: format("C:\Upload\0}-{1}",
+from <strong>FileUploadLocalCollection</strong> select <strong>filename</strong>,
+FormatDate(getdate(), "yyyyMMdd-hhmmss"))</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/22202/web-designer-file-upload-node-retain-filename">https://www.oneidentity.com/community/identity-manager/f/forum/22202/web-designer-file-upload-node-retain-filename</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="_21">Создание модуля для редактирования объектов</h1>
+<ol>
+<li>
+<p>Надо создать модуль и повесить его на пункт меню</p>
+</li>
+<li>
+<p>В этом модуле указать коллекцию - объект БД</p>
+</li>
+<li>
+<p>Создать грид на форме для отображения данных из коллекции</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image34.png"
+style="width:2.63542in;height:3.65625in"
+alt="Ma•n 曰 1 CO 曰 』 G , i 矿 曰 Grid band; AccountprOduttGtOup O b 0 i01 Selection d - UIO Rediredl Gridftttersl | Row d in 0 ; 日 -4 Grid 〔 0 〔 0 m 〔 0 m Li 1 一 Oi y 日 一 - 「 0 mn 0r02p A C f00 " /></p>
+</blockquote>
+<ol>
+<li>
+<p>Создать коллекцию типа Single Row для хранения временных данных
+    (TempVars)</p>
+</li>
+<li>
+<p>Создать коллекцию для хранения выбранной записи из таблицы
+    (CurrentAccountProduct) - Object Type как у основной коллекции</p>
+</li>
+<li>
+<p>У грида основной таблицы указать Selection Action - сохранение в
+    временую коллекцию UID (from AccountProductGroup select current
+    uid_accproductgroup)</p>
+</li>
+<li>
+<p>Создать ещё одну форму</p>
+</li>
+<li>
+<p>Указать редирект на новую форму из действия Selection Action</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image35.png"
+style="width:2.40625in;height:3.64583in"
+alt="ROW definitions 一 ; Column " /></p>
+</blockquote>
+<ol>
+<li>
+<p>У новой формы сделать инициализацию коллекции Current с условием
+    WHERE (sqlcompareuid("uid_accproductgroup", from TempVars select
+    UID))</p>
+</li>
+<li>
+<p>Сделать итерацию по этой коллекции</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image36.png"
+style="width:2.5in;height:3.05208in"
+alt="Ang 4-+ p roperties &#39;style&#39; •margin-right: auto; upload rile Server action Popup editor (itUation); Sorting % Grouping ntProd up with filte " /></p>
+<p><img src="../media/6. Web Designer/media/image37.png"
+style="width:8.64583in;height:2.41667in"
+alt="| 410ns10np0 ; , 06-•upeoldn peoldn &#39;OllPa aPON " /></p>
+<hr />
+</blockquote>
+<h1 id="upload">Сохранение существующего имени файла, через Upload</h1>
+<blockquote>
+<p>If you do, then the "File name" could be filled out with
+: format("C:\Upload\0}-{1}",
+from <strong>FileUploadLocalCollection</strong> select <strong>filename</strong>,
+FormatDate(getdate(), "yyyyMMdd-hhmmss"))</p>
+<p>In my example, I defined a local single row collection called
+"FileUploadLocalCollection" with string Property "filename".</p>
+<p>With that, you must assign "Collection for file name" to
+"FileUploadLocalCollection", and "Property for file name" to
+"filename".</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/22202/web-designer-file-upload-node-retain-filename">https://www.oneidentity.com/community/identity-manager/f/forum/22202/web-designer-file-upload-node-retain-filename</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="upload_1">Изменение имени файла, через Upload</h1>
+<blockquote>
+<p>Надо создать 3 функции в модуле или компоненте</p>
+<p>**1)  FullFileName() **</p>
+<p>select filename from FileUploadLocalCollection</p>
+<p><strong>2) GetFileName()</strong></p>
+<p>Substring(FullFileName(), 0, Indexof(FullFileName(), ".", 0))</p>
+<p><strong>3) GetExtension()</strong></p>
+<p>Substring(FullFileName(), Indexof(FullFileName(), ".", 0), )</p>
+<p>Потом можно их использовать для составления имени файла</p>
+<p>format("C:\inetpub\wwwroot\IdentityManager\Doc\0}-{1}{2}",GetFileName(),FormatDate(getdate(),
+"dd-MM-yyyy-hhmmss"),GetExtension())</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/31505/web-designer-upload-file-and-change-name-with-same-extension">https://www.oneidentity.com/community/identity-manager/f/forum/31505/web-designer-upload-file-and-change-name-with-same-extension</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="_22">Написать код в функцию</h1>
+<blockquote>
+<p>{{ string.Concat(System.Linq.Enumerable.Repeat("--", length)) }}</p>
+<hr />
+</blockquote>
+<h1 id="html">Указать тег html</h1>
+<blockquote>
+<p>В Extended Properties создать Variable</p>
+<p>Идентификатор TagName</p>
+<p>значение - имя тега</p>
+<hr />
+</blockquote>
+<h1 id="_23">Отображение полей редактируемой таблицы на форме</h1>
+<ol>
+<li>
+<p>Создаем Container Iteration по Current объекту таблицы</p>
+</li>
+<li>
+<p>В нем property iteration и в нем Property list - перечисляем
+    свойства таблицы для редактирования</p>
+</li>
+<li>
+<p>Потом в property iteration создаем контейнер с расширенными
+    свойствами HTML Attribute - "class" -</p>
+</li>
+</ol>
+<blockquote>
+<p>"LayoutpPropRow"</p>
+</blockquote>
+<ol>
+<li>В этом контейнере создаем ещё контейнер со свойством class</li>
+</ol>
+<blockquote>
+<p>"imx-layoutpanel-cell imx-layoutpanel-mobileblock LayoutpPropCol
+LayoutpPropCol0 imx-flex-row"</p>
+<p>Там будет VI_Edit_PropertyCaption</p>
+</blockquote>
+<ol>
+<li>И создаем параллельно ещё контейнер с class</li>
+</ol>
+<blockquote>
+<p>"imx-layoutpanel-cell imx-layoutpanel-mobileblock LayoutpPropCol
+LayoutpPropCol1"</p>
+<p>в нем ещё один контейнер с Column-Depended Reference</p>
+<p><img src="../media/6. Web Designer/media/image38.png"
+style="width:6.16667in;height:4.15625in"
+alt="6 ddev. u 「 一 0 凵 凵 凵 艹 u ! :uo 一 0 凵 p 01 0 」 d p u 可 0 」 d p u 可 asnuwm•o * 可 " /></p>
+</blockquote>
+<h1 id="_24">Добавление нового элемента в таблицу</h1>
+<ol>
+<li>
+<p>Создаем новую коллекцию с типом объекта - наша таблица, куда будем
+    писать данные</p>
+</li>
+<li>
+<p>Создаем новую форму</p>
+</li>
+<li>
+<p>Делаем кнопку на основной форме и делаем Insert в новую коллекцию и
+    действие после Insert -&gt; переадресуем на новую созданную форму</p>
+</li>
+<li>
+<p>Новая форма - копия формы для редактирования таблицы, только
+    объект - новая коллекция</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image39.png"
+style="width:5.92708in;height:6.05208in"
+alt="Title A select CCC_CompanyName from NewCCCOrgUnitMapping Main Container (iterationl: NewCCCOrgUnitMapping ContainerCoIumnTempIate2 ColumnList3 CCC_CompanyName CCC_CompanyCode CCC_CompanySubCode ccc_clty CCC_OrganizationaIUmt CCC_CompanyMaiI CCC_CompanyRemark ContainerIO Extended properties Container13 Extended properties EditTabIe - NewCCCOrgUnitMapping EditCoIumn - currentcolumn Containerll Extended properties Container12 ColumnEditor2 Container; - auttons Save [30 Server action [9 Save: NewCCCOrgUnitMapping " /></p>
+</blockquote>
+<h2 id="_25">Добавить колонку в индекс для поиска</h2>
+<blockquote>
+<p>Browse the column in Designer, and assign an index weight (for example
+1). This will cause the description field to be included in the index
+for service items.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/28976/how-to-add-new-column-in-search-filter-for-web-portal">https://www.oneidentity.com/community/identity-manager/f/forum/28976/how-to-add-new-column-in-search-filter-for-web-portal</a>&gt;</em></p>
+<p>* *</p>
+<p><em>Потом можно перезапустить индекс - надо зайти на AppServer</em></p>
+<p><img src="../media/6. Web Designer/media/image40.png"
+style="width:10.26042in;height:2.15625in"
+alt="One Identity Manager ONE I DE N T I T Y One Identity Manager A Status Logs API Documentation 08:27 as 00 aa:27 20 Search... O About 00 Update immediately Update index " /></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/web-portal-user-guide/5#TOPIC-863684">Identity Manager 8.0 - Web Portal User Guide
+(oneidentity.com)</a></p>
+<hr />
+</blockquote>
+<h1 id="_26">Добавить таблицу для поиска на портале</h1>
+<blockquote>
+<p>Например, по дефолту на портале не ищутся сервисные категории.</p>
+<p>Чтобы добавить поиск по сервисным категориям, надо в WebDesigner зайти
+в модуль <strong>VI_Common_Search</strong> и добавить, как Extension новую таблицу</p>
+<p><img src="../media/6. Web Designer/media/image41.png"
+style="width:6.90625in;height:5.14583in"
+alt="projet_ VI Common Search Configuration Compilationsettingsl System.CoIIections.Generic Type member a Search - TeR Action2- Configure search tables Delete: Tables Insert: Tables Action after inset Insert column ualue Insert: Tables Action after inset Inset: Tables Inset: Tables Inset: Tables Inset: Tables Inset: Tables Inset: Tables VI Common Search Added in: VI Common Node editor Search Name (Insert column value) General settings Name &quot;Acc Condition Grouping Product Group &quot; Shouu eRension va!ues " /></p>
+<p><img src="../media/6. Web Designer/media/image42.png"
+style="width:6.57292in;height:3.125in"
+alt="Search results - One Identit... ONE IDENTITY One Identity Manager Request Attestation Responsibilities Search results View Settings Name Access L ifecycle • Anderegg, Access (ACCESSA) Setti Type Service ca tegory Employee " /></p>
+<hr />
+</blockquote>
+<h2 id="_27">Перевод колонки</h2>
+<blockquote>
+<p>Language dependent column name for displaying in the administration
+tool’s user interface. Translate the given text using the </p>
+<p><img src="../media/6. Web Designer/media/image43.png"
+style="width:0.13542in;height:0.13542in" /></p>
+<p>button.</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/30#TOPIC-860954">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/30#TOPIC-860954</a>&gt;</em></p>
+<p>Если на портале</p>
+<p>datacaption(personwantsorg,displayorg)</p>
+<p><img src="../media/6. Web Designer/media/image44.png"
+style="width:13.66667in;height:5.35417in"
+alt="Designer - AO.NLMQOnelM (Main Database) QataDase Optiom Yelp *Commit to database Back • Nau•gahon One Identity Manager Schema Most.te CERAssign u RE t titl—7tSOL.rce aERPolio• Getting Stan ed St2re ColumM CustomPtoperty10 OateAdivated OateHead Oecisionlevel OiSp15ßbjedKe•yAssignment Disploorg Oisplayorgparer,totparent Oisplaypersonordered Genproao Colin n properties d itor X Disol&#39;y æme no. 10 Activation date Deactivation date App mal dat e App Assignment app Requester pi ent h_mctional f led by D re, - Sort Oder Log Log user Column permissions scripts MulitJanguage dependencies Dependencies T, ble Column Display name prod u a Display name product requested. " /></p>
+</blockquote>
+<h2 id="click-here-if-you-do-not-have-an-account">Отключить возможность саморегистрации на главной (Click here if you do not have an account.)</h2>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image45.png"
+style="width:9.66667in;height:2.19792in"
+alt="十 一 ~ 一 0 こ と コ 」 &quot;O し ・ 、 [ 三 」 p 「 に ー キ 一 - 一 」 5 と ュ 、 」 ー ユ 045 ヒ 5 一 4 ! 、 一 1 ~ し : を 」 ー ユ 上 5 ヒ ー し し 」 一 Lu 「 一 , 一 し - を コ - 0 し 工 こ に ー 「 一 ′ 工 u ℃ こ ま ー ユ 、 よ 5 ヒ ー 」 し 」 ー - L コ - 0 し ℃ に 「 一 茎 て ℃ 覆 2 ー 」 上 い 」 5 「 を 一 一 を 一 い 一 ト 0 一 当 当 一 塁 ・ 第 2 0 -00- 一 0 - - に を 0 、 、 0 - 物 = ! - 0 こ 59 奄 の 00-0- du 」 奄 を ed 当 」 へ - と 第 0 奄 " /></p>
+</blockquote>
+<h2 id="_28">Перевести Строк верхнего уровня в Корзине</h2>
+<blockquote>
+<p>В переводах ключ WD_GridPagingTotalCountTopLevel</p>
+</blockquote>
+<h2 id="_29">Заказ продуктов Все для всех</h2>
+<blockquote>
+<p>Значение параметра VI_ITShop_Filter_PersonOrderFor</p>
+<p>заменить на</p>
+<p>"uid_person in ( select uid_person from QER_VEditEmployee)"</p>
+<p>У VI_ITShop_ProductSelection</p>
+<p>Collections - Container - uidPersonCandidate фильтр указать</p>
+<p>format("UID_Person in(select UID_Person from Person where
+{0})",getconfig("<strong>VI_ITShop_Filter_PersonOrderFor</strong>"))</p>
+</blockquote>
+<h2 id="daysago">Чтобы даты отображались в архиве в нормальном формате, а не daysago</h2>
+<blockquote>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/27926/change-the-date-display-in-itshop-s-requests/68531#68531">Change the date display in ITSHOP's requests - Forum - Identity
+Manager Community - One Identity
+Community</a></p>
+<p>There is an editor available for these column-dependent references.</p>
+<p>On the start-page click on <em>Column-dependent references</em>.</p>
+<p><img src="../media/6. Web Designer/media/image46.png"
+style="width:5.33333in;height:3.0625in" /></p>
+<p>Then go to the tab <em>Display values by column </em>and identify the columns
+that use the component <em>VI_Edit_View_DateTimeago.</em> Click on these
+columns and customize them to use the Component <em>VI_Edit_View_Date</em>.</p>
+<p><img src="../media/6. Web Designer/media/image47.png"
+style="width:5.22917in;height:4.125in"
+alt="Vl_Edt \ Oe 03t2Tn23 〕 Vl_Edit_Vrw_DateTmen ~ fg -0 423d VISdit_Vrvv_OateTmen Vl_Edt 03t2Tn23 〕 、 1- edit - -0 , 1 , , VISdit_Vrvv_OateTrne»:• VI_Edt 03t21h 3 ~ 〕 VI 一 t , 一 03 " /></p>
+<p>That should do the trick.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/27926/change-the-date-display-in-itshop-s-requests/68531#68531">https://www.oneidentity.com/community/identity-manager/f/forum/27926/change-the-date-display-in-itshop-s-requests/68531#68531</a>&gt;</em></p>
+<p>&gt;Но это не изменило отображение!</p>
+<p>Поэтому, я зашел в стандартный проект (Vi_StandartWeb) и удалили
+формат ячеек, через Extension</p>
+<p><img src="../media/6. Web Designer/media/image48.png"
+style="width:8.34375in;height:2.69792in"
+alt="r_Pe r&#39; ntsO tg. Datea d r_ ntsO _S ntil " /></p>
+<p>The WebDesigner component reponsible for the "user-friendly" display
+is called VI_Edit_View_DateTimeago. If you search for that name in
+WebDesigner, you will find component references that look like in the
+following screenshot. These rules say that the user-friendly display
+will be used to display values from the specified column.</p>
+<p>You can delete these rules and the display will revert to the
+"technical" display.</p>
+<p><img src="../media/6. Web Designer/media/image49.png"
+style="width:5.80208in;height:4.3125in"
+alt="丨 0 如 | 20 0 1 dno 20s O&#39; 屮 00d , ㄨ 0 吅 se , 0 虍 p , •:• 丬 04L 」 " /></p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/27926/change-the-date-display-in-itshop-s-requests/68531#68531">https://www.oneidentity.com/community/identity-manager/f/forum/27926/change-the-date-display-in-itshop-s-requests/68531#68531</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h2 id="_30">Убрать поля в колонке справа</h2>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image50.png"
+style="width:3.42708in;height:3.25in" alt="400 " /></p>
+<p><img src="../media/6. Web Designer/media/image51.png"
+style="width:6.78125in;height:3.51042in"
+alt="CCC help regarding a decision GndCcu Comm lccc b x Appro&quot;r ask a columns Of &#39;Req u p not defined Displaypemlnsuted, UlD_PWOState, OrduDate, WidFm, WdUntil, ulD_ProtitCentU, Specifi which fields ot this table displaßd the Web &quot;use fields QMOt be edited the Web VI. ObjutViu.Defun " /></p>
+</blockquote>
+<h2 id="websql">WEBSQL кусочек из строки взять</h2>
+<blockquote>
+<p>VI_Common_DecisionHistory</p>
+<p>Substring(from DecisionHistory select current
+displayvalue(UID_PWODecisionRule),5)</p>
+</blockquote>
+<h2 id="regex">Проверка значений на корректность Regex</h2>
+<blockquote>
+<p>Пишем скрипт</p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.Text.RegularExpressions</p>
+<p>#End If</p>
+<p>Public Function CCC_isWhiteSpace(ByVal str As String) As Boolean</p>
+<p>Dim pattern As String</p>
+<p>pattern = "^[\s|\|\]"</p>
+<p>If Not Regex.IsMatch(str, pattern, RegexOptions.IgnoreCase Or
+RegexOptions.CultureInvariant) Then</p>
+<p>Return False</p>
+<p>Else</p>
+<p>Return True</p>
+<p>End If</p>
+<p>End Function</p>
+<p>Public Function CCC_isPhoneNumber(ByVal str As String) As Boolean</p>
+<p>Dim pattern As String</p>
+<p>pattern = "^((8|\7)[\ ]?)?(\?\d{3}\?[\ ]?)?[\d\
+]{7,10}\$"</p>
+<p>If Not Regex.IsMatch(str, pattern, RegexOptions.IgnoreCase Or
+RegexOptions.CultureInvariant) Then</p>
+<p>Return False</p>
+<p>Else</p>
+<p>Return True</p>
+<p>End If</p>
+<p>End Function</p>
+<p>CCC_ITShop_Approvals</p>
+<p>В Веб дизайнере добавляем валидатор</p>
+<p><img src="../media/6. Web Designer/media/image52.png"
+style="width:4.5in;height:4.69792in"
+alt="container&quot; u10_QERJustincationoeny (Validation) Sorting % Grouping Show —tension values " /></p>
+<p>translate('#LDS#IncorrectValue')</p>
+<p>CCC_isWhiteSpace(from Vars select current ReasonDeny)</p>
+<p>И перевод не забыть добавить!</p>
+<p>Или можно ещё через FormatScript у поля сделать</p>
+<p><img src="../media/6. Web Designer/media/image53.png"
+style="width:8.5in;height:1.26042in"
+alt="rm attirg Not VID Throu Nev End If not a Valid SMTP EXC " /></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/21787/web-designer-validation-not-triggered">Web designer validation not triggered - Forum - Identity Manager
+Community - One Identity
+Community</a></p>
+<hr />
+<p>Imports System.Text.RegularExpressions</p>
+<p>Public Function CCC_ServiceAccount_CheckName(ByVal text As String) As
+Boolean</p>
+<p>Dim pattern As String = "[^A-Za-z0-9\]"</p>
+<p>Dim c As MatchCollection = Regex.Matches(text, pattern)</p>
+<p>Dim m As Match</p>
+<p>Return (c.count=0)</p>
+<p>End Function</p>
+<p>--</p>
+</blockquote>
+<h2 id="_31">Убрать сообщения об ошибках при логине на портале</h2>
+<blockquote>
+<p>Перевести портал в прод режим</p>
+<p>Just configure your web portal to run in production mode and not in
+debugging mode as it currently does.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/27929/information-in-error-popup-on-login-page">https://www.oneidentity.com/community/identity-manager/f/forum/27929/information-in-error-popup-on-login-page</a>&gt;</em></p>
+</blockquote>
+<h1 id="_32">Отображение категорий списком верхнеуровневым</h1>
+<blockquote>
+<p>\&lt;\&lt;HowTo ITShop Service catalog accordeon.docx&gt;&gt;</p>
+</blockquote>
+<h1 id="it-shop">Настройка опционального шага обоснования принятых решений по запросам на доступ в IT Shop</h1>
+<blockquote>
+<p>\&lt;\&lt;HowTo ITShop Simplified approval.docx&gt;&gt;</p>
+</blockquote>
+<h1 id="_33">Балансировщик</h1>
+<blockquote>
+<p>Hello Community,</p>
+<p>we have 1IM V8.1 running in the environment with 2 Application Servers
+connected via load balancer and 2 Web Servers connected via load
+balancer.</p>
+<p>Is it enough to configure the load balancer for the Application
+Servers as follows:</p>
+</blockquote>
+<ul>
+<li>
+<p>sticky sessions support from the load balancer</p>
+</li>
+<li>
+<p>ss-id cookies for Application Server</p>
+</li>
+<li>
+<p>the signing (session token) certificate of both application servers is
+  the same, which allows reusing a session from one application server
+  in case of a server switch.</p>
+</li>
+</ul>
+<blockquote>
+<p>Should the load balancer for Web Servers have a similar configuration?</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/29592/load-balancer-configuration-for-application-and-web-servers">Load balancer configuration for Application and Web Servers - Forum -
+Identity Manager Community - One Identity
+Community</a></p>
+</blockquote>
+<h1 id="_34">Поиск</h1>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.5/web-designer-reference-guide/9#TOPIC-1449763">Identity Manager 8.0.5 - Web Designer Reference Guide
+(oneidentity.com)</a></p>
+<p>Чтобы работал поиск у Grid, надо указать дополнительные Extended
+Properties</p>
+<p><img src="../media/6. Web Designer/media/image54.png"
+style="width:3.07292in;height:2.51042in"
+alt="Gridl [3æ Grid band: CCCOrgUnitMapping Database access options List view Selection action GridFilters1 Row definitions Extended properties IsSearchActive - true Renderlmmediately - true Z• Appl}FiIIedHeight - true " /></p>
+</blockquote>
+<h1 id="pwo">Добавить дополнительную информацию в PWO для отображения на портале</h1>
+<blockquote>
+<p>Поле PWO DisplayObjectKeyAssignment</p>
+<p><img src="../media/6. Web Designer/media/image55.png"
+style="width:5.75in;height:1.61458in"
+alt="Код режима режим доступа Согласование новой даты действия сотрудника категории б новая дата: Код услуги " /></p>
+</blockquote>
+<h1 id="load-collection-where">LOAD Collection условие WHERE</h1>
+<blockquote>
+<p>sqlcompareuid("uid_person", from Container select UID_PersonSelected)</p>
+<p>sqland("CCC_EmployeeType='Contractor'","IsInActive='1'")</p>
+<p><strong>format("UID_AccProduct in (select StructureDisplay1 from
+AttestationCase where StructureDisplay1 \&lt;&gt; '')")</strong></p>
+<p>Sqlcompareuid - возвращает только одно значение.</p>
+<hr />
+</blockquote>
+<h1 id="_35">Добавить кнопку для отображения уволенных при заказе продукта при выборе получателя</h1>
+<blockquote>
+<p>CCC_ITShop_ProductSelection из него идет VI_Edit_MultiFK</p>
+<p>Делаем копию VI_Edit_MultiFK</p>
+<p>Копируем кнопку Change</p>
+<p><img src="../media/6. Web Designer/media/image56.png"
+style="width:3.07292in;height:3.07292in"
+alt="Configuration [30 Definition Initializer Container containers - WITH popup Extended properties Container7 Container2 Extended properties Change Change with Server action [3—+ Extended properties •style• - •margin-left:7px• : container6 - WITHOUT popup " /></p>
+<p>Создаем Content1</p>
+<p><img src="../media/6. Web Designer/media/image57.png"
+style="width:7in;height:3.59375in"
+alt="Contentl Definition Control list ObjectSWltchContainerI TargetTabIe - Vars TargetWhereCIause - PreselectWhereCIause AdditionalWhereCIauseO - additionalwhereclauseo TableNameO - FKParentTabIeNameO Candidate - ChildCandidate Selectedltems - EditTabIe uidList - EditCoIumn8uffer UidListTextQuaIifierO - CandidateDbTabIe0 - FKParentTabIeNameO CandidateTargetVaIueO - objectwalker(select current GetParameterParentCoIumn(editcoIumn) from editable) CandidateTargetVaIueCoIumnO - select current GetParameterParentCoIumn(editcoIumn) from editable CandidateDbWhereCIauseO - " /></p>
+<p>CandidateDbWhereClause заменяем на ""</p>
+<p>У кнопки делаем ссылку на Content1</p>
+<p><img src="../media/6. Web Designer/media/image58.png"
+style="width:2.82292in;height:5.28125in"
+alt="Change with inactive Server action VI_Popup CssCIassO - Vimx-popup-largev PopupContent Container AdditionalContentHeader Contentl Popupaottom Container Close - Default autton Extended properties Server action CodeLitera14 Close popup Actionl Contentl (Control Ii ; following component: Sorting z; Grouping Contentl :ional) " /></p>
+<hr />
+</blockquote>
+<h1 id="multi-request-resources">Multi-request resources</h1>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image59.png"
+style="width:4.41667in;height:4.36458in"
+alt="Qatabase Object Home Sack Navigation Entitlements Info system Yiew Help Forward • Custom target system groups Active Directorygroups System roles Reso urces Multi-request resources for IT Req uested Assigned Types Predefined &quot;E Custom defined *Database search New Save x Multi-request resources (6) ala•ICAya Delete Active Directory group Modify Active Directory group New Active Directory distribution list New Active Directory security group New manager assignment Remove system entitlement memberships Multi requestable/unsubscribable resources for IT Sh Assignment resources for IT Shop Account definitions E Report subscriptions &amp;asic configuration data Employees Organizations • Business Roles Entitlements IT Shop Result list Tasks Tasks Favorites Cha nge p rod uct„ O Service item overview Change master data Assign extended properties Editservice item hierarch} Edit productdeperdencie-s for request • Assignbusinessroles Assignorganizatiom " /></p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/2">https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/2</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="object-dependent-references">Для Object Dependent References привязать интерфейс к компоненту</h1>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image60.jpg"
+style="width:9.61458in;height:4.26042in"
+alt="CCC • Definiti&quot; Node editor , -i Componenenterfacel So-ding Show Settings n e p em _ ShoppingCattnem " /></p>
+<hr />
+</blockquote>
+<h1 id="validate">Валидатор выкидывает ошибку (validate)</h1>
+<blockquote>
+<p>Функция exists ведет себя странно, вместо нее использовать можно count</p>
+<hr />
+</blockquote>
+<h1 id="where-clause">Where Clause</h1>
+<blockquote>
+<p>"(UID_WorkDeskType='e6e5472b-3fe0-4eb8-b5d9-84b3fa16c2a4')"</p>
+<p><img src="../media/6. Web Designer/media/image61.png"
+style="width:7.9375in;height:2.88542in"
+alt="Node edi HOFS_Permissions (Database Object) Sorting Grouping Shovm extension values al se ttings Identifier Interface updates 0b&#39; ect e Mandatory field WHERE clause HDFS_permissions Determine automatical* WorkDesk Dvn.rnically determine " /></p>
+<p>Или</p>
+<p><strong>sqlcompare ("LastName", "Schm*", "string", "LIKE")</strong></p>
+<hr />
+</blockquote>
+<h1 id="viewing-permission-denied-for-value">Не хватает прав на отображение поля на портале "Viewing permission denied for value"</h1>
+<blockquote>
+<p>Добавил сотрудника, под которым вхожу на портал в APP роль "Identity &amp;
+Access Governance\§Auditors"</p>
+<hr />
+</blockquote>
+<h1 id="itshop-unsgroupb-serviceitem-itshop-itshoporghasunsgroupb">За связь ITShop и UNSGroupB (с имеющимся ServiceItem и галкой ITShop) отвечает таблица ITShopOrgHasUNSGroupB</h1>
+<blockquote>
+<hr />
+</blockquote>
+<h1 id="_36">Быстрый вывод записей из таблицы (вывод сотрудников)</h1>
+<blockquote>
+<p>VI_ITShop_QueryToPerson</p>
+<hr />
+</blockquote>
+<h1 id="_37">Выбор из множества записей</h1>
+<blockquote>
+<p>VI_Edit_FK / VI_Edit_FK_AutoComplete</p>
+<p>Использовать поле FK! Которое ссылается на другую таблицу!</p>
+<p>Можно использовать виртуальную коллекцию.</p>
+<p><img src="../media/6. Web Designer/media/image62.png"
+style="width:5in;height:1.79167in" alt="image" /></p>
+<p>Смысл: Создаем виртуальную Single-row коллекцию, в ней определяем
+Column, как на скриншоте</p>
+<p>А в VI_Edit_FK_AutoComplete указываем эту колонку из Single-row
+коллекцию</p>
+<hr />
+</blockquote>
+<h1 id="ad-itshop">Автопубликация AD групп в ITShop</h1>
+<blockquote>
+<p>Процесс</p>
+<p>ADS_ADSGroup_Publish_to_ITShop</p>
+<p>Параметр для включения фичи</p>
+<p>QER\ITShop\GroupAutoPublish</p>
+<hr />
+</blockquote>
+<h1 id="-select-reference-user">Наследование полномочий - заказ продукта как у другого пользователя (select reference user)</h1>
+<blockquote>
+<p>Отвечают компоненты</p>
+<p>VI_ITShop_ProductSelectionByReferenceUser</p>
+<p>VI_ITShop_ProductSelection_ReferenceUser</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/27283/selecting-a-reference-user-to-copy-its-products-assigned-does-not-show-all-the-assigned-products-of-the-user">https://www.oneidentity.com/community/identity-manager/f/forum/27283/selecting-a-reference-user-to-copy-its-products-assigned-does-not-show-all-the-assigned-products-of-the-user</a>&gt;</em></p>
+<p><img src="../media/6. Web Designer/media/image63.png"
+style="width:11.97917in;height:2.04167in"
+alt="Stat page hfl_start reference Options Search results(3) Creating requests by reference employees is allowed Filter for requests which can be copied from a reference employee Selectable reference employees VI_StandardVVeb Value (custom) x Configure project Value (standard) &quot;IsNoCopyParametersPerson=O&#39; " /></p>
+<hr />
+</blockquote>
+<h1 id="_38">Условие отображения меню для определенной категории, чтобы можно было указать связанного пользователя (заказать продукты как у другого пользователя)</h1>
+<blockquote>
+<p>Для остальных категорий ссылка в меню будет скрыта</p>
+<p>Модуль VI_ITShop_ProductSelection</p>
+<p><img src="../media/6. Web Designer/media/image64.png"
+style="width:8.34375in;height:6.25in"
+alt="Start page IVI_Start IVI_StandarffWeb I Configure projet Configuration Colle&amp;ions Local components ÉIÜ Order Buttons Definition ÉIÜ Control list Containerl Extended properties Container4- toolbar button for various actions Extended properties ToolbarButtonI Menul Check requests for this recipient Select request template Node editor Selecta reference user (Menu item) Sorting Grouping Show extension values odud Selection General settfr•gs Action to execute Condition cute action A reference " /></p>
+<p>from Container select current WhereClauseGroup = "uid_accproductgroup
+= 'd492fba0-3be1-49df-a355-d84b3ad1eb20'"</p>
+<hr />
+<p><strong>Для более корректной работы я создал отдельный пункт меню:</strong></p>
+</blockquote>
+<ol>
+<li>
+<p>Делаем копию VI_ITShop_ProductSelection_ReferenceUser</p>
+</li>
+<li>
+<p>В компоненте VI_ITShop_ProductSelection добавляем расширением для
+    коллекции Container - параметр uidPersonReferenceSED такой же, как
+    uidPersonReferenceSED</p>
+</li>
+<li>
+<p>Добавляем пункт меню, как Select a reference user</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image65.png"
+style="width:5.05208in;height:5.15625in"
+alt="Stat page hfl_start PersonTMP Local components Order Buttons Control list Elfi Container I [0-+ ERended properties VI &quot;Shop_ProductSeIection Added in: Container4- toolbar button for uarious actions ERended properties Toolbarauttonl Check requests for this recipient Selecta request template Selecta reference user Show products other employees requested Selecta reference user for SED Server action VI_Popup PopupContent VI ITShop_ProductSeIection " /></p>
+</blockquote>
+<ol>
+<li>Условие отображения пункта меню делаем:</li>
+</ol>
+<blockquote>
+<p>from Container select current WhereClauseGroup = "uid_accproductgroup
+= 'd492fba0-3be1-49df-a355-d84b3ad1eb20'"</p>
+</blockquote>
+<ol>
+<li>Set Foreign Key ставим uidPersonReferenceSED</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image66.png"
+style="width:5.28125in;height:4.875in"
+alt="TableName0- &quot;Person&#39; CssCIass0 - imx-tabIe-{O}&quot;, DbVVhereCIause0 - HierarchyTabIe - PersonReference Popupaottom Added in: VI ITShop_ProductSeIection Node editor Set foreign key General settings Collection Child collection of the Grouping Container uidPersonReferenceSED PersonReference Shouu eRension values " /></p>
+</blockquote>
+<ol>
+<li>В Events добавляем событие на Update Container</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image67.png"
+style="width:6.92708in;height:5.27083in"
+alt="Inse du an Update • Container Load colletion: personReference Container- uidPersonReferenceSED CCCForeachRov,u1 Redirect to a form component Property watch Initializer El Forms Added in: Node editor &#39;@CCCAction2 (Action) Sorting % Grouping Show eRension values Identifier (optional) Execution condition Advanced Settings not ( isnullorempey( I trom container CCCAction2 Control ID • " /></p>
+</blockquote>
+<ol>
+<li>Load Collection - PersonReference условие Where</li>
+</ol>
+<blockquote>
+<p>format("uid_person = {0}", sqlformatvalue(from container select
+<span class="mark">uidpersonreferencesed</span>, "string",
+"NonUnicodeLiterals"))</p>
+</blockquote>
+<ol>
+<li>
+<p>Делаем редирект на копию VI_ITShop_ProductSelection_ReferenceUser</p>
+</li>
+<li>
+<p>Property watch = uidPersonReferenceSED</p>
+</li>
+</ol>
+<blockquote>
+<p>В копии VI_ITShop_ProductSelection_ReferenceUser через расширение
+удаляем</p>
+<p><img src="../media/6. Web Designer/media/image68.png"
+style="width:3.125in;height:1.6875in"
+alt="Description - Containerl VI _ Common_pageDescription [äE contained. ASSIGNMENT &#39;E ContainerA Text0 - is " /></p>
+</blockquote>
+<ol>
+<li>Через расширение для Fill Collection ObjectAssignment делаем условие
+    Where</li>
+</ol>
+<blockquote>
+<p>FullPath LIKE "SED*"</p>
+<hr />
+</blockquote>
+<h1 id="database-queries">Использование Database queries</h1>
+<blockquote>
+<p>Создать запросы в WebDesigner -&gt; Edit -&gt; Edit database queries</p>
+<p>Используем так:</p>
+<p><img src="../media/6. Web Designer/media/image69.png"
+style="width:6.1875in;height:8.03125in"
+alt="Advanced Settings General settings Node editor to - o a d Type* Maximumnumberofobjects SQLcommandidentifier* C o = t. n w Loadcollection:Person 工 asObjectAndPWO(Loadcollection) 一 … 一 Container VI_Roles Membership D efi n iti O n Configuration 田 TS8ACtion3-TS8A 冖 冖 ountDef 田 TS8ACtionl-l_lNSGroup 田 ActionIl-ESet 田 RPSActionlO-RPSRepott Ta b - es 1 C O ntro - 5 1 Initializer Actiong-Loadassignmentdatafromper50ntoobject5 Action2-Loadassignmentdatafromobjecttopersons C O d e Litera - 3 O d e Lite ra - 1 ReadOnlyTableModitierl Delete:PersonHasObject4ndPVVO Loadcollection:DynamicGroup Acti O n 1 3 • QE RR e u u S Acti O n 10 • QE RRes O u rce Fillcollection:PersonObjectS a d CO = e 一 O n … P 5 0 n H a 5 0 e n d Sorting ecutepreparedstatement rsonHasObject4ndPvVO - - Webp 0 rC al . VI ko 12 Memb r ship . P Grouping onT 0B as T r " /></p>
+<p><img src="../media/6. Web Designer/media/image70.png"
+style="width:4.625in;height:5.53125in" alt="image" /></p>
+<p><img src="../media/6. Web Designer/media/image71.png"
+style="width:5.08333in;height:5.53125in"
+alt="DynamicGroup ShoppingCaftOrder ShoppingCaftItem PersonForMembershipRequest PersonHasObject4ndPvV Node editor PersonHasObjectAndPWO (Database query) Shouu eRension values ieneral settings Interface updates Primary key Display properw SQL expression &#39;dyanced Settings Control ID w Grouping PersonHasObject4ndPvVO not reflect. data updates in the interface value assigned) value assigned) DataTabIeLimitedSQLI " /></p>
+<p>Грабли:</p>
+</blockquote>
+<ul>
+<li>Если создавали запрос не через wizard то потребуется добавить права
+  для групп. Ниже запрос который это делает. Нужно только поменять
+  название группы и название запроса.</li>
+</ul>
+<blockquote>
+<p>insert into
+QBMGroupHasLimitedSQL(UID_QBMLimitedSQL,UID_DialogGroup,XObjectKey)
+select
+UID_QBMLimitedSQL,UID_DialogGroup,concat('\&lt;Key&gt;\&lt;T&gt;QBMGroupHasLimitedSQL\&lt;/T&gt;\&lt;P&gt;',UID_QBMLimitedSQL,'\&lt;/P&gt;\&lt;P&gt;',UID_DialogGroup,'\&lt;/P&gt;\&lt;/Key&gt;')
+as XObjectKey from (select (select UID_DialogGroup from DialogGroup
+where GroupName = N'CCCViewPermissions') as UID_DialogGroup,(select
+UID_QBMLimitedSQL from QBMLimitedSQL where Ident_QBMLimitedSQL =
+N'CCC_CMDBGetParamFilter') as UID_QBMLimitedSQL) as x</p>
+</blockquote>
+<ul>
+<li>Нужно обязательно определить поля в коллекции, которые возвращает
+  запрос иначе будете получать исключение что запрос не возвращает некие
+  стандартные поля.</li>
+</ul>
+<blockquote>
+<hr />
+</blockquote>
+<h1 id="fk">Изменить отображение записей в модальном всплывающем окне выбора FK</h1>
+<blockquote>
+<p>Для самой колонки можно изменить Display в Designer</p>
+<p><img src="../media/6. Web Designer/media/image72.png"
+style="width:7.25in;height:6.21875in" /></p>
+<hr />
+</blockquote>
+<h1 id="_39">Кастомизация заказ продукта как у другого пользователя (только для определенной категории)</h1>
+<blockquote></blockquote>
+<ol>
+<li>
+<p>Создан кастомный модуль на основе
+    VI_ITShop_ProductSelection_ReferenceUser
+    (CCC_ITShop_ProductSelection_ReferenceUser_SED)</p>
+</li>
+<li>
+<p>В модуле VI_ITShop_ProductSelection (у заказчика
+    CCC_VI_ITShop_ProductSelection)</p>
+</li>
+</ol>
+<blockquote>
+<p>добавить в Collections - Container - Property
+(uidPersonReferenceSED) - как копия uidPersonReference</p>
+<p><img src="../media/6. Web Designer/media/image73.png"
+style="width:2.41667in;height:4.03125in" /></p>
+</blockquote>
+<ol>
+<li>
+<p>В ToolbarButton4 добавить как копию "Select a reference user" -
+    Select a reference user for SED - с переводом</p>
+</li>
+<li>
+<p>В ObjectSwitchContainer2 в Action - Set foreign key задать
+    Property - uidPersonReferenceSED</p>
+</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image74.png"
+style="width:4.75in;height:7.65625in" /></p>
+</blockquote>
+<ol>
+<li>Добавить сработку на событие Update - Container по полю
+    uidPersonReferenceSED и редирект на компонент
+    CCC_ITShop_ProductSelection_ReferenceUser_SED</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image75.png"
+style="width:5.53125in;height:7.6875in" /></p>
+</blockquote>
+<ol>
+<li>В компоненте CCC_ITShop_ProductSelection_ReferenceUser_SED для Fill
+    collection: ObjectsAssignment указываем правило фильтрации - только
+    продукты СЭД</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image76.png"
+style="width:5.28125in;height:8.16667in" /></p>
+</blockquote>
+<ol>
+<li>Для того, чтобы пункт меню отображался только для категорий СЭД -
+    надо установить условие отображения этого пункта в модуле
+    VI_ITShop_ProductSelection</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image77.png"
+style="width:9.26042in;height:5.61458in" /></p>
+</blockquote>
+<ol>
+<li>Для того, чтобы отображать только группы AD Sed - В компоненте
+    CCC_ITShop_ProductSelection_ReferenceUser_SED добавим таблицу
+    AccProductGroupCollection</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image78.png"
+style="width:4.11458in;height:5.09375in" /></p>
+</blockquote>
+<ol>
+<li>Загрузим коллекцию</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image79.png"
+style="width:8.6875in;height:4.70833in" /></p>
+</blockquote>
+<ol>
+<li>Загрузим только группы из этой коллекции</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image80.png"
+style="width:15.78125in;height:5.77083in" /></p>
+</blockquote>
+<ol>
+<li><span class="mark">Задать конфигурационный параметр - UID категории
+    СЭД!</span></li>
+</ol>
+<blockquote></blockquote>
+<h2 id="ccc_itshop_accproductgroupselector">Вариант, через кнопку в компоненте CCC_ITShop_AccProductGroupSelector</h2>
+<ol>
+<li>Из компонента VI_ITShop_ProductSelection скопировать VI_Popup из
+    Select reference user</li>
+</ol>
+<blockquote>
+<p><img src="../media/6. Web Designer/media/image81.png"
+style="width:4.65625in;height:4.64583in" /></p>
+<p>В Action кнопки компонента CCC_ITShop_AccProductGroupSelector</p>
+<p><img src="../media/6. Web Designer/media/image82.png"
+style="width:4.09375in;height:4.84375in" /></p>
+<p>В ComponentInterface1 в virtual collection Container добавить
+VirtualProperty uidpersonreference</p>
+<p><img src="../media/6. Web Designer/media/image83.png"
+style="width:3.51042in;height:5.20833in" /></p>
+<p>Добавить виртуальную коллекцию PersonReference</p>
+<p><img src="../media/6. Web Designer/media/image84.png"
+style="width:3.38542in;height:5.34375in" /></p>
+<p>Из компонента VI_ITShop_ProductSelection скопировать Event Update
+uidpersonreference</p>
+<p><img src="../media/6. Web Designer/media/image85.png"
+style="width:6.52083in;height:4.375in" /></p>
+<p>В CCC_ITShop_AccProductGroupSelector</p>
+<p><img src="../media/6. Web Designer/media/image86.png"
+style="width:3.38542in;height:1.84375in" /></p>
+<hr />
+</blockquote>
+<h1 id="_40">Аттестация. Отображение случаев аттестации сгруппированным и с бегунком по высоте страницы.</h1>
+<blockquote>
+<p>В компоненте CCC_Attestation_AttestationCase_ViewMultiplePolicy
+установить ApplyFilledHeight = false</p>
+<p><img src="../media/6. Web Designer/media/image87.png"
+style="width:3.38542in;height:6.0625in" /></p>
+<hr />
+</blockquote>
+<h1 id="_41">Изменение модального окна выбора дополнительных параметров продукта</h1>
+<blockquote>
+<p>Для отображения модального окна при помещении продукта в корзину
+используется компонент VI_ITShop_ShoppingCartItem_Editor</p>
+<p>Для получения списка параметров используется функция
+GetAccProductParams</p>
+<p><img src="../media/6. Web Designer/media/image88.png"
+style="width:7.375in;height:8.35417in" /></p>
+<hr />
+</blockquote>
+<h1 id="candidates">Скрыть продукты из отображения для выбора (Candidates)</h1>
+<blockquote>
+<p>В компоненте VI_ITShop_ProductSelection GridBand: AccProductCandidate
+меняем условие Where на</p>
+<p>from container select sqland(GetEffectiveGroupWhereClause(),
+whereclauseperson, <strong>"uid_AccProduct in (select UID_AccProduct from
+AccProduct where IsSpecialProduct = '0')"</strong>)</p>
+<p><img src="../media/6. Web Designer/media/image89.png"
+style="width:10.42708in;height:5.64583in" /></p>
+<p><strong>Вариант 2</strong></p>
+<p>В компоненте VI_ITShop_ProductSelection
+(ССС_VI_ITShop_ProductSelection)</p>
+</blockquote>
+<ol>
+<li>Добавляем функцию <strong>ExcludeHiddenAccProducts() со значением</strong></li>
+</ol>
+<blockquote>
+<p><strong>"uid_AccProduct in (select UID_AccProduct from AccProduct where
+XTouched = 'H')"</strong></p>
+</blockquote>
+<ol>
+<li>GridBand: AccProductCandidate меняем условие Where на</li>
+</ol>
+<blockquote>
+<p>from container select sqland(GetEffectiveGroupWhereClause(),
+whereclauseperson, <strong>ExcludeHiddenAccProducts()</strong>)</p>
+<p>Для продуктов с доп. параметрами (которые хотим скрыть) устанавливаем
+атрибут <strong>XTouched = 'H'</strong></p>
+<hr />
+</blockquote>
+<h1 id="_42">Удаление родительского продукта из корзины</h1>
+<blockquote>
+<p>В кастомном модуле CCC_ITShop_ShoppingCartItem_Editor_SED добавляем
+шаг удаление ShoppingCartItem из БД! С условием отбора - что это
+Parent продукт</p>
+<p>uid_shoppingcartitem = (from ShoppingCartItem select
+uid_shoppingcartitem where <strong>IsOptionalChild = False</strong>)</p>
+<p><img src="../media/6. Web Designer/media/image90.png"
+style="width:9.58333in;height:7.6875in" /></p>
+<hr />
+</blockquote>
+<h1 id="checkbox">Сделать checkbox неактивным (серым) и с поставленной галочкой</h1>
+<blockquote>
+<p>Для checkbox сделать Extended properties с Identifier:</p>
+<p>if (from AccProductOptional select current Orderable = false) then
+"checked disabled" else ""</p>
+<p><img src="../media/6. Web Designer/media/image91.png"
+style="width:9.01042in;height:2.84375in" /></p>
+<hr />
+</blockquote>
+<h1 id="multirequetable">Отображение окна для Multirequetable ресурса если нет доступных (не заказанных) доп. Продуктов</h1>
+<blockquote>
+<p>Надо сделать ещё один Action с условием:</p>
+<p>(select count() from AccProductOptional where Orderable = true) = 0
+and (from shoppingcartitem select current IsOptionalChild = false)</p>
+<p>И просто отображать PopUp с текстом</p>
+<p><img src="../media/6. Web Designer/media/image92.png"
+style="width:10.0625in;height:7.78125in" /></p>
+<hr />
+</blockquote>
+<h1 id="_43">Убрать плашку аттестация сотрудников с главного экрана</h1>
+<blockquote>
+<p>Надо в модуле VI_Start отключить, через расширение, Container3</p>
+<p><img src="../media/6. Web Designer/media/image93.png"
+style="width:3.85417in;height:8.66667in" /></p>
+<hr />
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

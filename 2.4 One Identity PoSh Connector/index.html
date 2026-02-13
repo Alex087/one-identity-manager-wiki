@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>2.4 One Identity PoSh Connector - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Членство в группе</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link">Передать полученный параметр в скрипт для дальнейшего использования</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>2.4 One Identity PoSh Connector</p>
+<p>26 сентября 2019 г.</p>
+<p>15:54</p>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/windows-powershell-connector-user-guide">https://support.oneidentity.com/technical-documents/identity-manager/8.0/windows-powershell-connector-user-guide</a></p>
+<p>Пример конфига</p>
+<p>"C:\distr\OIM81\Modules\TSB\dvd\AddOn\SDK\ADSample.xml"</p>
+<p>\&lt;\&lt;qv-connector-beta11.xml&gt;&gt;</p>
+<p>Структура файла:</p>
+</blockquote>
+<ol>
+<li>
+<p>Сначала определяем параметры, которые мы сможем задавать вне скрипта
+    (ConnectionParameters)</p>
+</li>
+<li>
+<p>Определяем CustomCommands, в которых будет содержаться команды,
+    доступные на всем протяжении работы коннектора - такие как импорт
+    модуля, создание сесии и т.п. - они не привязаны к какому то типу
+    схемы</p>
+</li>
+<li>
+<p>PredefinedCommands - команды, которые будут использоваться в типах
+    схемы (Get-ADUser, Set-ADUser … ).</p>
+</li>
+<li>
+<p>CommandSequence - будет последовательность команд, выполняющихся по
+    порядку, указанном в Order, например, создание сессии. Там блоки
+    Connect и Disconnect. Заканчивается Инициализация.</p>
+</li>
+<li>
+<p>Для параметров указывается Source и Value. Source отвечает за то,
+    откуда будет браться значение параметра. Value - откуда конкретно
+    будет браться значение</p>
+</li>
+</ol>
+<blockquote>
+<p>"<strong>Source</strong>" = the source for the value. Available sources are</p>
+</blockquote>
+<ul>
+<li>
+<p>"<strong>ConnectionParameter</strong>" ... value is taken from a passed connection
+  parameter) - из окна для параметров</p>
+</li>
+<li>
+<p>"<strong>FixedValue</strong>" ... a fixed value</p>
+</li>
+<li>
+<p>"<strong>FixedArray</strong>" ... a fixed array of values</p>
+</li>
+<li>
+<p>"<strong>SwitchParameter</strong>" ... a Powershell switch Parameter</p>
+</li>
+<li>
+<p>"<strong>GlobalVariable</strong>" ... value of a global variable</p>
+</li>
+</ul>
+<blockquote>
+<p>"<strong>Value</strong>" = meaning depends on "Source"</p>
+</blockquote>
+<ul>
+<li>
+<p>if source is "<strong>ConnectionParameter</strong>" then "Value" contains the name
+  of the connection parameter</p>
+</li>
+<li>
+<p>if source is "<strong>SwitchParameter</strong>" then "Value" can be omitted/has no
+  effect</p>
+</li>
+<li>
+<p>if source is "<strong>FixedValue</strong>" then "Value" contains a fixed value</p>
+</li>
+<li>
+<p>if source is "<strong>FixedArray</strong>" then "Value" contains a comma seperated
+  list of elements that are passed as an array</p>
+</li>
+<li>
+<p>if source is "<strong>GlobalVariable</strong>" then "Value" contains the name of
+  the variable to use.</p>
+</li>
+<li>
+<p>To set a global variable use <strong>\$global:\&lt;name&gt; = \&lt;value&gt;</strong></p>
+</li>
+<li>
+<p>Дальше уже идут классы, например User и Group</p>
+</li>
+</ul>
+<blockquote>
+<p>A Property element contains the definition of Schema property.</p>
+</blockquote>
+<ul>
+<li>
+<p>"<strong>Name</strong>" = The name of the property</p>
+</li>
+<li>
+<p>"<strong>DataType</strong>" = The data type (valid values are String, Int, Bool,
+  DateTime)</p>
+</li>
+<li>
+<p>"<strong>IsUniqueKey</strong>" = indicates, that the property can be used to
+  identify an object instance</p>
+</li>
+<li>
+<p>"<strong>IsMandatory</strong>" = indicates, that the property is mandatory</p>
+</li>
+<li>
+<p>"<strong>IsAutofill</strong>" = indicates, that the value of this property is
+  created by the system</p>
+</li>
+<li>
+<p>"<strong>IsDisplay</strong>" = indicates, that the value of this property is used
+  as a display</p>
+</li>
+<li>
+<p>"<strong>IsRevision</strong>" = indicates, that the value of this property is used
+  as revision</p>
+</li>
+</ul>
+<blockquote>
+<p><img src="../media/2.4 One Identity PoSh Connector/media/image1.png"
+style="width:8.51042in;height:0.69792in"
+alt="(Class (Properties) (Property Name-&quot;ld&quot; DataType-&quot;String&quot; " /></p>
+</blockquote>
+<ol>
+<li>
+<p>Указываются их свойства.</p>
+</li>
+<li>
+<p>Указываются CommandMapping. В какой командлет должно быть
+    отображенно значение свойства</p>
+</li>
+<li>
+<p>Указываются ReturnBindings. Указываются командлеты для вычитывания
+    конкретных свойств.</p>
+</li>
+<li>
+<p>ModifiedBy. Определяет, какой командлет фактически записывает
+    значение в систему.</p>
+</li>
+<li>
+<p>После идет блок ReadConfiguration для чтения информации из системы
+    целевой. Listing - указываются команды для получения всех объектов
+    этого типа из системы. Указывается дополнительная последовательность
+    для полной загрузки объекта со всеми свойствами, определенными в
+    схеме</p>
+</li>
+<li>
+<p>MethodConfiguration - для определения методов обработки объектов
+    (Insert, Update, Delete)</p>
+</li>
+</ol>
+<blockquote>
+<hr />
+</blockquote>
+<h1 id="_1">Членство в группе</h1>
+<blockquote>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/21199/powershell-connector-m-n-membership-provisions-fail">Powershell Connector M:N Membership Provisions fail - Forum -
+Identity Manager Community - One Identity
+Community</a></p>
+<hr />
+</blockquote>
+<h1 id="_2"></h1>
+<h1 id="_3">Передать полученный параметр в скрипт для дальнейшего использования</h1>
+<blockquote>
+<p>\&lt;Property Name="id" DataType="String" IsUniqueKey="true"
+IsMandatory="true" IsAutoFill="true"&gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-Policies" Path="id.ToString()"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;CommandMappings&gt;</p>
+<p><strong>\&lt;Map ToCommand="Get-PolicyPath" Parameter="id" /&gt;
+<span class="mark">(вот здесь передаем параметр полученный в команду,
+которая принимает этот паратетр)</span></strong></p>
+<p>\&lt;/CommandMappings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>Затем, получаем значение из команды</p>
+<p>\&lt;Property Name="Path" DataType="String" IsMultivalue="true"&gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p><span class="mark">\&lt;Bind CommandResultOf="Get-PolicyPath"
+Path="Paths"/&gt;</span></p>
+<p>\&lt;/ReturnBindings&gt;                </p>
+<p>\&lt;/Property&gt;</p>
+<p>И в конце</p>
+<p>\&lt;ReadConfiguration&gt;</p>
+<p>\&lt;ListingCommand Command="Get-Policies"&gt;</p>
+<p>\&lt;/ListingCommand&gt;</p>
+<p>\&lt;CommandSequence&gt;</p>
+<p>\&lt;Item Command="Get-Policy" Order="1" /&gt;</p>
+<p><span class="mark">\&lt;Item Command="Get-PolicyPath" Order="2"&gt;</span></p>
+<p>\&lt;/Item&gt;</p>
+<p>\&lt;/CommandSequence&gt;</p>
+<p>\&lt;/ReadConfiguration&gt;</p>
+<p>Сама команда</p>
+<p>\&lt;CustomCommand Name="Get-PolicyPath"&gt;</p>
+<p>\&lt;![CDATA[</p>
+<p>param(</p>
+<p>[parameter(Mandatory=\$true,ValueFromPipelineByPropertyName=\$true)]</p>
+<p>[ValidateNotNullOrEmpty()]</p>
+<p><span class="mark">[String]\$id</span></p>
+<p>)</p>
+<p>\$paths = @()</p>
+<p>\$policy = \$Global:policies | where id -eq \$id</p>
+<p>foreach(\$m in \$policy.resources.path.values)</p>
+<p>{</p>
+<p>\$paths += \$m</p>
+<p>}</p>
+<p>New-Object PSObject -Property @{</p>
+<p>Paths = \$paths</p>
+<p>}        </p>
+<p>]]&gt;</p>
+<p>\&lt;/CustomCommand&gt;</p>
+</blockquote>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<blockquote></blockquote>
+<ol>
+<li>Выводится список пользователей, но не отображается инфа по
+    конкретному пользователю (записи)</li>
+</ol>
+<blockquote>
+<p>В классе</p>
+<p>\&lt;ReadConfiguration&gt;</p>
+<p>\&lt;ListingCommand Command="Get-Users"&gt;</p>
+<p>\&lt;/ListingCommand&gt;</p>
+<p><strong>\&lt;CommandSequence&gt;</strong></p>
+<p><strong>\&lt;Item Command="Get-User" Order="1"&gt;</strong></p>
+<p><strong>\&lt;SetParameter Param="id" Source="FixedValue" Value="id"/&gt;</strong></p>
+<p><strong>\&lt;/Item&gt;</strong></p>
+<p><strong>\&lt;/CommandSequence&gt;</strong></p>
+<p>\&lt;/ReadConfiguration&gt;</p>
+<p>\&lt;/Class&gt;</p>
+<p><strong>Item Command</strong> отвечает за получение инфы по конкретному
+пользователю (записи)</p>
+<p><strong>ListingCommand</strong> - получает список всех записей.</p>
+<p>\&lt;?xml version="1.0" encoding="utf-8" ?&gt;</p>
+<p>\&lt;PowershellConnectorDefinition Id="SampleConnector" Version="1.0"
+Description="Sample Powershell Connector"&gt;</p>
+<p>\&lt;PluginAssemblies&gt;</p>
+<p>\&lt;!--\&lt;Assembly Path="VI.Projector.Exchange.Common.dll"/&gt;--&gt;</p>
+<p>\&lt;/PluginAssemblies&gt;</p>
+<p>\&lt;Initialization&gt;</p>
+<p>\&lt;CustomCommands&gt;</p>
+<p>\&lt;CustomCommand Name="Disconnect-SQL"&gt;</p>
+<p>\&lt;![CDATA[</p>
+<p>\$SqlConnection.Close()</p>
+<p>]]&gt;</p>
+<p>\&lt;/CustomCommand&gt;</p>
+<p>\&lt;CustomCommand Name="Get-Users"&gt;</p>
+<p>\&lt;![CDATA[</p>
+<p>\$SQLServer = "ip";</p>
+<p>\$SQLDBName = "Directum";</p>
+<p>\$user = "OneIMConnector";</p>
+<p>\$pass = "pass";</p>
+<p>\$SqlConnection = New-Object System.Data.SqlClient.SqlConnection;</p>
+<p>\$SqlConnection.ConnectionString = "Server=[REDACTED_HOST];
+Database=\$SQLDBName; User ID = [REDACTED_USER]; Password = [REDACTED];";</p>
+<p>\$SqlCmd = New-Object System.Data.SqlClient.SqlCommand;</p>
+<p>\$SqlCmd.Connection = \$SqlConnection;</p>
+<p>\$SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter;</p>
+<p>\$SqlQuery = "SELECT * from OneIM_Accounts;"</p>
+<p>\$SqlCmd.CommandText = \$SqlQuery;</p>
+<p>\$SqlAdapter.SelectCommand = \$SqlCmd;</p>
+<p>\$DataSet = New-Object System.Data.DataSet;</p>
+<p>\$i=\$SqlAdapter.Fill(\$DataSet);</p>
+<p>\$DataSet.Tables[0].Rows</p>
+<p>]]&gt;</p>
+<p>\&lt;/CustomCommand&gt;</p>
+<p>\&lt;CustomCommand Name="Get-Groups"&gt;</p>
+<p>\&lt;![CDATA[</p>
+<p>\$SQLServer = "ip";</p>
+<p>\$SQLDBName = "Directum";</p>
+<p>\$uid = "Administrator";</p>
+<p>\$pwd = "pass";</p>
+<p>\$SqlQuery = "SELECT * from OIM_Groups;"</p>
+<p>\$SqlConnection = New-Object System.Data.SqlClient.SqlConnection;</p>
+<p>\$SqlConnection.ConnectionString = "Server=[REDACTED_HOST];
+Database=\$SqlDBName; User ID = [REDACTED_USER]; Password = [REDACTED];"</p>
+<p>\$SqlCmd = New-Object System.Data.SqlClient.SqlCommand;</p>
+<p>\$SqlCmd.CommandText = \$SqlQuery;</p>
+<p>\$SqlCmd.Connection = \$SqlConnection;</p>
+<p>\$SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter;</p>
+<p>\$SqlAdapter.SelectCommand = \$SqlCmd;</p>
+<p>\$DataSet1 = New-Object System.Data.DataSet;</p>
+<p>\$i=\$SqlAdapter.Fill(\$DataSet1);</p>
+<p>\$DataSet1.Tables[0].Rows</p>
+<p>]]&gt;</p>
+<p>\&lt;/CustomCommand&gt;</p>
+<p>\&lt;CustomCommand Name="Get-GroupsToAccount"&gt;</p>
+<p>\&lt;![CDATA[</p>
+<p>\$SQLServer = "ip";</p>
+<p>\$SQLDBName = "Directum";</p>
+<p>\$uid = "Administrator";</p>
+<p>\$pwd = "pass";</p>
+<p>\$SqlQuery = "SELECT * from OIM_GroupsToAccount;"</p>
+<p>\$SqlConnection = New-Object System.Data.SqlClient.SqlConnection;</p>
+<p>\$SqlConnection.ConnectionString = "Server=[REDACTED_HOST];
+Database=\$SqlDBName; User ID = [REDACTED_USER]; Password = [REDACTED];"</p>
+<p>\$SqlCmd = New-Object System.Data.SqlClient.SqlCommand;</p>
+<p>\$SqlCmd.CommandText = \$SqlQuery;</p>
+<p>\$SqlCmd.Connection = \$SqlConnection;</p>
+<p>\$SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter;</p>
+<p>\$SqlAdapter.SelectCommand = \$SqlCmd;</p>
+<p>\$DataSet1 = New-Object System.Data.DataSet;</p>
+<p>\$i=\$SqlAdapter.Fill(\$DataSet1);</p>
+<p>\$DataSet1.Tables[0].Rows</p>
+<p>]]&gt;</p>
+<p>\&lt;/CustomCommand&gt;</p>
+<p>\&lt;/CustomCommands&gt;</p>
+<p>\&lt;PredefinedCommands&gt;</p>
+<p>\&lt;Command Name="Get-Location"/&gt;</p>
+<p>\&lt;/PredefinedCommands&gt;</p>
+<p>\&lt;EnvironmentInitialization&gt;</p>
+<p>\&lt;Connect &gt;</p>
+<p>\&lt;CommandSequence&gt;</p>
+<p>\&lt;Item Command="Get-Location" Order="1"/&gt;</p>
+<p>\&lt;/CommandSequence&gt;</p>
+<p>\&lt;/Connect&gt;</p>
+<p>\&lt;Disconnect&gt;</p>
+<p>\&lt;CommandSequence&gt;</p>
+<p>\&lt;Item Command="Disconnect-SQL" Order="1"/&gt;</p>
+<p>\&lt;/CommandSequence&gt;</p>
+<p>\&lt;/Disconnect&gt;</p>
+<p>\&lt;/EnvironmentInitialization&gt;</p>
+<p>\&lt;/Initialization&gt;</p>
+<p>\&lt;Schema&gt;</p>
+<p>\&lt;Class Name="Group"&gt;</p>
+<p>\&lt;Properties&gt;</p>
+<p>\&lt;Property Name="GroupID" DataType="String" IsUniqueKey="true" &gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-Groups" Path="GroupID"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;Property Name="GroupName" DataType="String" IsUniqueKey="false" &gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-Groups" Path="GroupName"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;/Properties&gt;</p>
+<p>\&lt;ReadConfiguration&gt;</p>
+<p>\&lt;ListingCommand Command="Get-Groups"&gt;</p>
+<p>\&lt;/ListingCommand&gt;</p>
+<p>\&lt;CommandSequence&gt;</p>
+<p>\&lt;Item Command="Get-Groups" Order="1" &gt;</p>
+<p>\&lt;/Item&gt;</p>
+<p>\&lt;/CommandSequence&gt;</p>
+<p>\&lt;/ReadConfiguration&gt;</p>
+<p>\&lt;/Class&gt;</p>
+<p>\&lt;Class Name="User"&gt;</p>
+<p>\&lt;Properties&gt;</p>
+<p>\&lt;Property Name="LoginName" DataType="String" IsUniqueKey="true" &gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-Users" Path="LoginName"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;Property Name="FullName" DataType="String" IsUniqueKey="false" &gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-Users" Path="FullName"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;Property Name="TabNum" DataType="String" IsUniqueKey="false" &gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-Users" Path="TabNum"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;Property Name="Status" DataType="String" IsUniqueKey="false"&gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-Users" Path="Status"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;/Properties&gt;</p>
+<p>\&lt;ReadConfiguration&gt;</p>
+<p>\&lt;ListingCommand Command="Get-Users"&gt;</p>
+<p>\&lt;/ListingCommand&gt;</p>
+<p>\&lt;CommandSequence&gt;</p>
+<p>\&lt;Item Command="Get-Users" Order="1" &gt;</p>
+<p>\&lt;/Item&gt;</p>
+<p>\&lt;/CommandSequence&gt;</p>
+<p>\&lt;/ReadConfiguration&gt;</p>
+<p>\&lt;/Class&gt;</p>
+<p>\&lt;Class Name="GroupsToAccount"&gt;</p>
+<p>\&lt;Properties&gt;</p>
+<p>\&lt;Property Name="UserName" DataType="String" IsUniqueKey="true" &gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-GroupsToAccount" Path="UserName"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;Property Name="GroupName" DataType="String" IsUniqueKey="true" &gt;</p>
+<p>\&lt;ReturnBindings&gt;</p>
+<p>\&lt;Bind CommandResultOf="Get-GroupsToAccount" Path="GroupName"/&gt;</p>
+<p>\&lt;/ReturnBindings&gt;</p>
+<p>\&lt;/Property&gt;</p>
+<p>\&lt;/Properties&gt;</p>
+<p>\&lt;ReadConfiguration&gt;</p>
+<p>\&lt;ListingCommand Command="Get-GroupsToAccount"&gt;</p>
+<p>\&lt;/ListingCommand&gt;</p>
+<p>\&lt;CommandSequence&gt;</p>
+<p>\&lt;Item Command="Get-GroupsToAccount" Order="1" &gt;</p>
+<p>\&lt;/Item&gt;</p>
+<p>\&lt;/CommandSequence&gt;</p>
+<p>\&lt;/ReadConfiguration&gt;</p>
+<p>\&lt;/Class&gt;</p>
+<p>\&lt;/Schema&gt;</p>
+<p>\&lt;/PowershellConnectorDefinition&gt;</p>
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

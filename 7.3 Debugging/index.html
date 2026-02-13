@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>7.3 Debugging - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p><strong>7.3 Debugging</strong></p>
+<p>25 ноября 2025 г.</p>
+<p>16:05</p>
+<ol>
+<li>
+<p>На машине должны быть установлены административные компоненты 1IM</p>
+</li>
+<li>
+<p>В папке C:\Program Files\One Identity\One Identity Manager\
+    открываем файл ImxClient.exe.config</p>
+</li>
+<li>
+<p>Раскомментируем и изменяем строки</p>
+</li>
+<li>
+<p><em>EXAMPLE MSSQL DB CONNECTION STRING</em></p>
+</li>
+</ol>
+<blockquote>
+<p>\&lt;add name="conn" connectionString="Data Source=SQL.FIRMA.COM;Initial
+Catalog=OneIM;User
+ID=[REDACTED_USER];Password=[REDACTED];Pooling=False"&gt;\&lt;/add&gt;</p>
+</blockquote>
+<ul>
+<li>
+<p><em>EXAMPLE SYSTEM USER AUTHENTICATION</em></p>
+</li>
+<li>
+<p><em>EXAMPLE key to configure the imxclient as a trusted application</em></p>
+</li>
+<li>
+<p>Запускам под администратором cmd и из папки выполняем</p>
+</li>
+</ul>
+<blockquote>
+<p>.\ImxClient.exe run-apiserver -B</p>
+</blockquote>
+<ol>
+<li>
+<p>Заходим в VS Code и в папке \imxweb выполняем npm run start
+    qer-app-portal</p>
+</li>
+<li>
+<p>В VS Code запускаем Debug QER App Portal (Chrome)</p>
+</li>
+</ol>
+<blockquote></blockquote>
+<p><strong>Debugging</strong></p>
+<p>Running and debugging HTML applications is possible with the Angular CLI
+toolchain's standard tools.</p>
+<p>For example, you can use the ng serve qer-app-portal command to debug
+the Web Portal HTML application.</p>
+<p><strong><em>To debug an HTML application</em></strong></p>
+<ol>
+<li>
+<p>Host the API Server locally (see <a href="https://support.oneidentity.com/de-de/technical-documents/doc1801986">Hosting API Servers
+    locally</a>).</p>
+</li>
+<li>
+<p>Start a command line program.</p>
+</li>
+<li>
+<p>Change to the Angular workspace directory.</p>
+</li>
+<li>
+<p>Run the following command:<br />
+    npm run start \&lt;HTML application&gt;<br />
+    This starts a web server that is accessible by default
+    under <a href="http://localhost:4200">http://localhost:4200</a> and hosts the HTML application.</p>
+</li>
+<li>
+<p>Start debugging in an appropriate development environment (for
+    example, Visual Studio Code).</p>
+</li>
+</ol>
+<p><strong>Hosting API Servers locally</strong></p>
+<p>To debug and develop an HTML application you need an instance of an API
+Server for connecting HTML applications. To do this, you can host an API
+Server locally.</p>
+<p><strong>NOTE:</strong> HTML applications connect with the API Server through the URL
+defined in the HTML application's environment.ts file. The default URL
+that runs under a locally hosted API Server, is <a href="http://localhost:8182">http://localhost:8182</a>.</p>
+<p><strong><em>To host an API Server locally</em></strong></p>
+<ol>
+<li>
+<p>Start a command line program.</p>
+</li>
+<li>
+<p>Change to the Angular workspace directory.</p>
+</li>
+<li>
+<p>Run the following command:<br />
+    imxclient.exe run-apiserver -B</p>
+</li>
+</ol>
+<p><strong>Debugging with plugins</strong></p>
+<p>You can also debug with plugins. Debugging with plugins only works if
+the local API Server can find the plugin.</p>
+<p><strong><em>To debug a static Angular library</em></strong></p>
+<ol>
+<li>
+<p>Host the API Server locally (see <a href="https://support.oneidentity.com/de-de/technical-documents/doc1801986">Hosting API Servers
+    locally</a>).</p>
+</li>
+<li>
+<p>Start a command line program.</p>
+</li>
+<li>
+<p>Change to the Angular workspace directory.</p>
+</li>
+<li>
+<p>Run the following command:<br />
+    npm run build:watch \&lt;Angular library&gt;</p>
+</li>
+<li>
+<p>Start another command line program.</p>
+</li>
+<li>
+<p>Change to the Angular workspace directory.</p>
+</li>
+<li>
+<p>Run the following command:<br />
+    npm run start \&lt;HTML application&gt;<br />
+    This starts a web server that is accessible by default
+    under <a href="http://localhost:4200">http://localhost:4200</a> and hosts the HTML application.</p>
+</li>
+<li>
+<p>Start debugging in an appropriate development environment (for
+    example, Visual Studio Code).</p>
+</li>
+</ol>
+<p><strong><em>To debug an Angular plugin library</em></strong></p>
+<ol>
+<li>
+<p>Host the API Server locally (see <a href="https://support.oneidentity.com/de-de/technical-documents/doc1801986">Hosting API Servers
+    locally</a>).</p>
+</li>
+<li>
+<p>Start a command line program.</p>
+</li>
+<li>
+<p>Change to the Angular workspace directory.</p>
+</li>
+<li>
+<p>Run the following command:<br />
+    npm run build:watch:dynamic \&lt;Angular plugin library&gt;</p>
+</li>
+<li>
+<p>Start another command line program.</p>
+</li>
+<li>
+<p>Change to the Angular workspace directory.</p>
+</li>
+<li>
+<p>Run the following command:<br />
+    npm run start \&lt;HTML application&gt;<br />
+    This starts a web server that is accessible by default
+    under <a href="http://localhost:4200">http://localhost:4200</a> and hosts the HTML application.</p>
+</li>
+<li>
+<p>Start debugging in an appropriate development environment (for
+    example, Visual Studio Code).</p>
+</li>
+</ol>
+<p><strong>Developing HTML applications with the Visual Studio Code extension</strong></p>
+<p>In this section, you will find information on how to use with the One
+Identity Visual Studio Code extension.</p>
+<p>You can use the Visual Studio Code extension to launch the ImxClient
+command line program directly in Visual Studio Code without any in-depth
+knowledge of the syntax:</p>
+<ul>
+<li>
+<p><a href="https://support.oneidentity.com/de-de/technical-documents/doc1801991">Connect</a> to
+  the database</p>
+</li>
+<li>
+<p><a href="https://support.oneidentity.com/de-de/technical-documents/doc1801992">Create</a> the
+  development folder</p>
+</li>
+<li>
+<p><a href="https://support.oneidentity.com/de-de/technical-documents/doc1801995">Manage and
+  use</a> compilation
+  branches</p>
+</li>
+<li>
+<p><a href="https://support.oneidentity.com/de-de/technical-documents/doc1801999">Update</a> HTML
+  applications with the same setup</p>
+</li>
+<li>
+<p><a href="https://support.oneidentity.com/de-de/technical-documents/doc1802000">Compile</a> a
+  HTML application</p>
+</li>
+<li>
+<p><a href="https://support.oneidentity.com/de-de/technical-documents/doc1801998">Update</a> the
+  base libraries (API Client)</p>
+</li>
+<li>
+<p><a href="https://support.oneidentity.com/de-de/technical-documents/doc1802001">Check</a> for
+  missing translations</p>
+</li>
+</ul>
+<p>The Visual Studio Code extension also provides you with the following
+helpful information:</p>
+<ul>
+<li>
+<p>Status of the current database connection</p>
+</li>
+<li>
+<p>Information about the ImxClient used</p>
+</li>
+<li>
+<p>Information about the API Client used</p>
+</li>
+<li>
+<p>Status of the development order</p>
+</li>
+<li>
+<p>Compilation branch display</p>
+</li>
+<li>
+<p>Information on the last translation check</p>
+</li>
+</ul>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/de-de/technical-documents/identity-manager/8.2.1/html5-development-guide/4#TOPIC-1801987">https://support.oneidentity.com/de-de/technical-documents/identity-manager/8.2.1/html5-development-guide/4#TOPIC-1801987</a>&gt;</em></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

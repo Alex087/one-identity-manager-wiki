@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>7.14 Menu - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#hide-menu-items" class="nav-link">Hide menu Items</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>7.14 Menu</p>
+<p>24 сентября 2025 г.</p>
+<p>17:09</p>
+<p>Поиск <strong>this.setupMenu();</strong></p>
+<p>projects\qer\src\lib\qer.service.ts</p>
+<h1 id="hide-menu-items">Hide menu Items</h1>
+<ol>
+<li>Скрытие из верхнего меню при нажатии на профиль</li>
+</ol>
+<blockquote>
+<p>projects\qer-app-portal\src\app\app.component.html</p>
+</blockquote>
+<ol>
+<li>Скрытие справки из верхнего меню</li>
+</ol>
+<blockquote>
+<p>projects\qbm\src\lib\mast-head\mast-head.component.html</p>
+</blockquote>
+<ol>
+<li>Сокрытие во вкладке «Запросы» скрыть модули «Новый запрос»</li>
+</ol>
+<blockquote>
+<p>projects\qer\src\lib\new-request\new-request.module.ts</p>
+<p>и «Пакеты продуктов».</p>
+<p>projects\qer\src\lib\itshop-pattern\itshop-pattern.module.ts</p>
+</blockquote>
+<ol>
+<li>Сокрытие Attestation в главном меню</li>
+</ol>
+<blockquote>
+<p>projects\att\src\lib\init.service.ts</p>
+<p>Закомментить <strong>//this.setupMenu();</strong></p>
+</blockquote>
+<ol>
+<li>Скрыть в меню Обязанности</li>
+</ol>
+<blockquote>
+<p>projects\qer\src\lib\team-responsibilities\team-responsibilities.module.ts</p>
+<p>export class TeamResponsibilitiesModule {</p>
+<p>constructor(private readonly menuService: MenuService, private
+readonly extService: ExtService, logger: ClassloggerService) {</p>
+<p>logger.info(this, '▶️ TeamResponsibilitiesModule loaded');</p>
+<p><strong>//this.setupMenu();</strong></p>
+<p>this.extService.register('Dashboard-SmallTiles', { instance:
+TeamResponsibilityTileComponent });</p>
+<p>}</p>
+<p>projects\tsb\src\lib\init.service.ts</p>
+<p>this.addRoutes(routes);</p>
+<p>//this.setupMenu(); //Добавлено в рамках ТЗ на доработки ITShop от
+18.09.2025</p>
+</blockquote>
+<ol>
+<li>Скрыть HyperView в профиле</li>
+</ol>
+<blockquote>
+<p>projects\qer\src\lib\profile\profile.component.html</p>
+<p>\&lt;mat-tab-group *ngIf="!mailToBeUnsubscribed; else
+unsubscribeDisplay" [(selectedIndex)]="tabIndex"&gt;</p>
+<p><strong>\&lt;!--\&lt;mat-tab label="{{ '#LDS#Heading Hyperview' | translate
+}}"&gt;</strong></p>
+<p><strong>\&lt;ng-template matTabContent&gt;</strong></p>
+<p><strong>\&lt;mat-card class="no-grow" *ngIf="canShowEntitlementsHyperview"&gt;</strong></p>
+<p><strong>\&lt;mat-card-content class="profile-hyperview"&gt;</strong></p>
+<p><strong>\&lt;mat-radio-group [(ngModel)]="isShowEntitlementsHyperview"&gt;</strong></p>
+<p><strong>\&lt;mat-radio-button [value]="false"&gt;</strong></p>
+<p><strong>\&lt;span translate&gt;#LDS#Identity overview\&lt;/span&gt;</strong></p>
+<p><strong>\&lt;/mat-radio-button&gt;</strong></p>
+<p><strong>\&lt;mat-radio-button [value]="true"&gt;</strong></p>
+<p><strong>\&lt;span translate&gt;#LDS#Assigned entitlements\&lt;/span&gt;</strong></p>
+<p><strong>\&lt;/mat-radio-button&gt;</strong></p>
+<p><strong>\&lt;/mat-radio-group&gt;</strong></p>
+<p><strong>\&lt;/mat-card-content&gt;</strong></p>
+<p><strong>\&lt;/mat-card&gt;</strong></p>
+<p><strong>\&lt;imx-object-hyperview [objectType]="'Person'"
+[objectUid]="userUid" [hyperviewName]="isShowEntitlementsHyperview
+? 'VI_Person_Person_Entitlements_Overview' : ''"&gt;</strong></p>
+<p><strong>\&lt;/imx-object-hyperview&gt;</strong></p>
+<p><strong>\&lt;/ng-template&gt;</strong></p>
+<p><strong>\&lt;/mat-tab&gt; --&gt;</strong></p>
+<p>\&lt;mat-tab label="{{ '#LDS#Heading Main Data' | translate }}"
+data-imx-identifier="profile-main-data"&gt;</p>
+</blockquote>
+<ol>
+<li>Скрыть возможность создания отчетов (вкладку в целом) для всех,
+    кроме администраторов IDM</li>
+</ol>
+<blockquote>
+<p>В projects\rps\src\lib\reports\edit-report.module.ts</p>
+<p>export class EditReportModule {</p>
+<p>constructor(</p>
+<p>private readonly menuService: MenuService,</p>
+<p>private readonly rpsPermissionService: RpsPermissionsService
+//Добавлено в рамках ТЗ на доработки ITShop от 18.09.2025</p>
+<p>) {</p>
+<p>this.initializeMenu(); //Добавлено в рамках ТЗ на доработки ITShop
+от 18.09.2025</p>
+<p>}</p>
+<p>//Добавлено в рамках ТЗ на доработки ITShop от 18.09.2025</p>
+<p>private async initializeMenu(): Promise\&lt;void&gt; {</p>
+<p>const isInGroup = false;</p>
+<p>const isRpsAdmin = await this.rpsPermissionService.isRpsAdmin();</p>
+<p>//console.log('isRpsAdmin: ', isRpsAdmin);</p>
+<p>if (isRpsAdmin) {</p>
+<p>this.setupMenu();</p>
+<p>}</p>
+<p>}</p>
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>30. One Identity HR - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>30. One Identity HR</p>
+<p>21 февраля 2020 г.</p>
+<p>15:29</p>
+<p>#IF NOT SCRIPTDEBUGGER</p>
+<p>Imports System.Collections.Generic</p>
+<p>#END IF</p>
+<p>Public Function Z_Aggregate_HR_User_Data_And_Update_Users() As String</p>
+<p>logger.trace("ENTER")</p>
+<p>'Z_Upload_UNS_Resources_From_CSV_For_System("LabUTK",
+"C:/Temp/dataimport/LabUTK/Лаборатория УТК - Режимы - new1.csv")</p>
+<p>'Z_Upload_Oracle_Assignments_Lab()</p>
+<p>'Z_Upload_UNS_Resources_From_CSV_For_System("SUMDP",
+"C:/Temp/dataimport/SUMDP/СУМ ДП - Режимы - new1.csv")</p>
+<p>'Z_Upload_Oracle_Assignments_SUMDP()</p>
+<p>'Z_Upload_Oracle_Assignments_Energy()</p>
+<p>'Return "ok"</p>
+<p>'Z_Upload_Oracle_Assignments_UM()</p>
+<p>'Z_Upload_Oracle_Assignments_SUP()</p>
+<p>'Z_Upload_Oracle_Assignments_Lab()</p>
+<p>'Z_Upload_Oracle_Assignments_SSMPDS()</p>
+<p>'Z_Upload_Oracle_Assignments_SUMDP()</p>
+<p>'Z_Upload_Oracle_Assignments_MTO()</p>
+<p>'Z_Upload_Oracle_Assignments_SSMPHPP()</p>
+<p>'Z_Upload_UNS_Resources_From_CSV_For_SSMPHPP_v2()</p>
+<p>'Z_Upload_Oracle_Assignments_SPEP()</p>
+<p>'Z_Upload_Oracle_Assignments_URA()</p>
+<p>'Return "ok"</p>
+<p>Try</p>
+<p>If False Then</p>
+<p>Z_SAP_Sync_Table_ALL_TABLES()</p>
+<p>Else</p>
+<p>Z_Run_Incremental_AD_Sync()</p>
+<p>Z_SAP_Sync_Table_ALL_TABLES()</p>
+<p>Connection.Variables.Put("FULLSYNC", True)</p>
+<p>Try</p>
+<p>Z_Aggregate_And_Update_Departments()</p>
+<p>Z_Aggregate_HR_User_Data()</p>
+<p>Z_Refresh_Users()</p>
+<p>'set "manager" field in persons</p>
+<p>Z_Sync_User_Managers()</p>
+<p>Finally</p>
+<p>Connection.Variables.Remove("FULLSYNC")</p>
+<p>End Try</p>
+<p>Z_Recon_AD_By_Login()</p>
+<p>Z_Connector_Skype_Recon_Incremental()</p>
+<p>Z_Connector_Skype_Link_By_GUID()</p>
+<p>Z_Provide_MNP_Access()</p>
+<p>End If</p>
+<p>logger.trace("EXIT")</p>
+<p>Catch ex As Exception</p>
+<p>Z_Send_Email_To_Error_Auditor("Idm. HR integration error.", "Error in HR
+integration." &amp; VbCrLf &amp; "Operation will be retried during next task
+run.", ex)</p>
+<p>End Try</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+<p>'true if first employment is 'less' than second; i.e. second one is
+primary</p>
+<p>Public Function Z_Compare_Employments(primaryEmployment As IColElem,
+nextEmployment As IColElem) As Boolean</p>
+<p>If "FIRED" = primaryEmployment.GetValue("CCC_Employee_Status").String
+And "WORKING" = nextEmployment.GetValue("CCC_Employee_Status").String
+Then</p>
+<p>Return True</p>
+<p>End If</p>
+<p>If Z_Is_Employment_GPH(primaryEmployment) AndAlso Not
+Z_Is_Employment_GPH(nextEmployment) Then</p>
+<p>Return True</p>
+<p>End If</p>
+<p>If "WORKING" = primaryEmployment.GetValue("CCC_Employee_Status").String
+And "FIRED" = nextEmployment.GetValue("CCC_Employee_Status").String Then</p>
+<p>Return False</p>
+<p>End If</p>
+<p>Return
+primaryEmployment.GetValue("XDateInserted").Date.CompareTo(nextEmployment.GetValue("XDateInserted").Date)
+&gt; 0</p>
+<p>End Function</p>
+<p>'Public Function Z_Get_Manager(departmentId As String, currentUserId As
+String) As String</p>
+<p>' Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>' If String.IsNullOrEmpty(departmentId) Then</p>
+<p>' Return Nothing</p>
+<p>' End If</p>
+<p>' Dim manId As String = Connection.GetSingleProperty("Department",
+"UID_PersonHead", f.UidComparison("UID_Department",
+departmentId)).String</p>
+<p>' If Not String.IsNullOrEmpty(manId) And manId \&lt;&gt; currentUserId Then</p>
+<p>' Return manId</p>
+<p>' End If</p>
+<p>' Return Z_Get_Manager(Connection.GetSingleProperty("Department",
+"UID_ParentDepartment", f.UidComparison("UID_Department",
+departmentId)).String, currentUserId)</p>
+<p>'End Function</p>
+<p>Public Function Z_Refresh_User(personId As String) As String</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim employmentsToUpdate As IColDbObject =
+Connection.CreateCol("CCCEmployment")</p>
+<p>Z_Add_All_Columns_To_Output_Result("CCCEmployment", employmentsToUpdate)</p>
+<p>employmentsToUpdate.Prototype.WhereClause =
+f.Comparison("CCC_UID_Person", personId, ValType.String )</p>
+<p>employmentsToUpdate.Load()</p>
+<p>Dim primaryEmployment As IColElem = Nothing</p>
+<p>Dim employmentsToSetDone As New List(Of String)</p>
+<p>For Each nextEmployment As IColElem In employmentsToUpdate</p>
+<p>If primaryEmployment Is Nothing Then</p>
+<p>primaryEmployment = nextEmployment</p>
+<p>Else</p>
+<p>If Z_Compare_Employments(primaryEmployment, nextEmployment) Then</p>
+<p>primaryEmployment = nextEmployment</p>
+<p>End If</p>
+<p>End If</p>
+<p>If nextEmployment.GetValue("CCC_done").Int = 0 Then</p>
+<p>employmentsToSetDone.Add(nextEmployment.GetValue("UID_CCCEmployment").String)</p>
+<p>End If</p>
+<p>Next</p>
+<p>Dim person As ISingleDbObject = Connection.CreateSingle("Person",
+personId)</p>
+<p>Dim personIsDisabled As Boolean = person.GetValue("IsInActive").Bool</p>
+<p>Dim primaryEmplIsDisabled = "FIRED" =
+primaryEmployment.GetValue("CCC_Employee_Status").String</p>
+<p>Dim dontProcessAttrUpdates As Boolean = False</p>
+<p>If personIsDisabled And primaryEmplIsDisabled Then</p>
+<p>' don't update attributes if user is still fired</p>
+<p>dontProcessAttrUpdates = True</p>
+<p>End If</p>
+<p>If Not personIsDisabled And primaryEmplIsDisabled Then</p>
+<p>' disable user; skip attribute updates</p>
+<p>VID_PutValueSafe(person, "ExitDate", DateAdd("d", -1, Now.Date()))</p>
+<p>VID_PutValueSafe(person, "IsInActive", 1)</p>
+<p>dontProcessAttrUpdates = True</p>
+<p>End If</p>
+<p>If personIsDisabled And Not primaryEmplIsDisabled Then</p>
+<p>' enable user; can't skip attribute updates - should update all
+attributes</p>
+<p>VID_PutValueSafe(person, "ExitDate", DBNull.Value)</p>
+<p>VID_PutValueSafe(person, "IsInActive", 0)</p>
+<p>End If</p>
+<p>If Not dontProcessAttrUpdates Then</p>
+<p>If Z_Is_Employment_GPH(primaryEmployment) Then</p>
+<p>VID_PutValueSafe(person, "UID_Department", Nothing)</p>
+<p>Else</p>
+<p>Dim idmDepartmentId As String =
+Z_Get_Department_By_SAP_Id(primaryEmployment.GetValue("CCC_Department_Id").String)</p>
+<p>VID_PutValueSafe(person, "UID_Department", idmDepartmentId)</p>
+<p>End If</p>
+<p>Z_Copy_General_Attrs_From_Employment_To_Person(person,
+primaryEmployment)</p>
+<p>'VID_PutValueSafe(person, "UID_PersonHead",
+Z_Get_Manager(idmDepartmentId, personId))</p>
+<p>End If</p>
+<p>person.Save()</p>
+<p>For Each employmentId As String In employmentsToSetDone</p>
+<p>Dim employment As ISingleDbObject =
+Connection.CreateSingle("CCCEmployment", employmentId)</p>
+<p>VID_PutValueSafe(employment, "CCC_done", 1)</p>
+<p>employment.Save()</p>
+<p>Next</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+<p>Private Sub Z_Copy_General_Attrs_From_Employment_To_Person(person As
+ISingleDbObject, employment As IValueProvider)</p>
+<p>VID_PutValueSafe(person, "PersonnelNumber",
+employment.GetValue("CCC_Employee_Number").String)</p>
+<p>VID_PutValueSafe(person, "CCC_RegionName",
+employment.GetValue("CCC_RegionName").String)</p>
+<p>VID_PutValueSafe(person, "Title",
+employment.GetValue("CCC_PositionName").String)</p>
+<p>VID_PutValueSafe(person, "City",
+employment.GetValue("CCC_CityName").String)</p>
+<p>VID_PutValueSafe(person, "CCC_SecClearance_IB",
+employment.GetValue("CCC_SecClearance_IB").Bool)</p>
+<p>VID_PutValueSafe(person, "CCC_SecClearance_KT",
+employment.GetValue("CCC_SecClearance_KT").Bool)</p>
+<p>VID_PutValueSafe(person, "CCC_SecClearance_PDN",
+employment.GetValue("CCC_SecClearance_PDN").Bool)</p>
+<p>VID_PutValueSafe(person, "CCC_CategoryCode",
+employment.GetValue("CCC_CategoryCode").String)</p>
+<p>VID_PutValueSafe(person, "CCC_CategoryName",
+employment.GetValue("CCC_CategoryName").String)</p>
+<p>VID_PutValueSafe(person, "CCC_QualificationName",
+employment.GetValue("CCC_QualificationName").String)</p>
+<p>VID_PutValueSafe(person, "CCC_CompanyCode",
+employment.GetValue("CCC_CompanyCode").String)</p>
+<p>VID_PutValueSafe(person, "CCC_CompanyName",
+employment.GetValue("CCC_CompanyName").String)</p>
+<p>VID_PutValueSafe(person, "CCC_CompanyShortName",
+employment.GetValue("CCC_CompanyShortName").String)</p>
+<p>VID_PutValueSafe(person, "CCC_EmployeeType", If
+(Z_Is_Employment_GPH(employment), "GPH", "Employee"))</p>
+<p>VID_PutValueSafe(person, "Street",
+employment.GetValue("CCC_Street").String)</p>
+<p>End Sub</p>
+<p>Private Function Z_Is_Employment_GPH(employment As IValueProvider) As
+Boolean</p>
+<p>Return "ГПХ" = employment.GetValue("CCC_CategoryName").String</p>
+<p>End Function</p>
+<p>Public Function Z_Refresh_Users() As String</p>
+<p>logger.Trace("ENTER")</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim employmentsToUpdate As IColDbObject =
+Connection.CreateCol("CCCEmployment")</p>
+<p>employmentsToUpdate.Prototype("CCC_UID_Person").IsDisplayItem = True</p>
+<p>employmentsToUpdate.Prototype.WhereClause = "ccc_done = 0"</p>
+<p>employmentsToUpdate.Load()</p>
+<p>Dim userIds As New List(Of String)</p>
+<p>For Each nextEmployment As IColElem In employmentsToUpdate</p>
+<p>Dim personId As String =
+nextEmployment.GetValue("CCC_UID_Person").String</p>
+<p>If Not userIds.Contains(personId) Then</p>
+<p>userIds.Add(personId)</p>
+<p>Z_Refresh_User(personId)</p>
+<p>End If</p>
+<p>Next</p>
+<p>logger.Trace("EXIT")</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+<p>Public Function Z_Get_Department_By_SAP_Id(department_id As String) As
+String</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim idmDepartmentId As String =
+Connection.GetSingleProperty("Department", "UID_Department",
+f.Comparison("ObjectId", "O " &amp; department_id, ValType.String)).String</p>
+<p>Return idmDepartmentId</p>
+<p>End Function</p>
+<p>Public Function Z_Aggregate_And_Update_Departments() As String</p>
+<p>logger.Trace("ENTER")</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim cycleNum As Integer = 0</p>
+<p>While cycleNum \&lt; 10</p>
+<p>Dim pendingOperations As IColDbObject =
+Connection.CreateCol("CCCSAPOrgsToUpdate")</p>
+<p>Z_Add_All_Columns_To_Output_Result("CCCSAPOrgsToUpdate",
+pendingOperations)</p>
+<p>pendingOperations.Load()</p>
+<p>logger.Trace("Iter#" &amp; cycleNum.ToString &amp; ": departments with pending
+updates: " &amp; pendingOperations.Count.ToString())</p>
+<p>If pendingOperations.Count = 0</p>
+<p>Exit While</p>
+<p>End If</p>
+<p>Dim hierChangeFound = False</p>
+<p>For Each nextOperation As IColElem In pendingOperations</p>
+<p>Dim l_hierChangeFound = False</p>
+<p>Dim depId As String = nextOperation.GetValue("UID_Department").String</p>
+<p>Dim parDepId As String =
+nextOperation.GetValue("UID_ParentDepartment").String</p>
+<p>Dim shortname As String = nextOperation.GetValue("shortname").String</p>
+<p>Dim fullname As String = nextOperation.GetValue("fullname").String</p>
+<p>logger.Trace("processing " &amp;
+nextOperation.GetValue("change_type").String &amp; " for " &amp; fullname &amp; " ("
+&amp; nextOperation.GetValue("department_sap_id").String &amp; ")")</p>
+<p>Try</p>
+<p>Dim departmentObj As ISingleDbObject = Nothing</p>
+<p>If String.IsNullOrEmpty(depId) Then</p>
+<p>departmentObj = Connection.CreateSingle("Department")</p>
+<p>VID_PutValueSafe(departmentObj, "ObjectID", "O " +
+nextOperation.GetValue("department_sap_id").String)</p>
+<p>VID_PutValueSafe(departmentObj, "ImportSource", "SAP")</p>
+<p>l_hierChangeFound = True</p>
+<p>Else</p>
+<p>departmentObj = Connection.CreateSingle("Department", depId)</p>
+<p>End If</p>
+<p>VID_PutValueSafe(departmentObj, "DepartmentName", VID_Left(fullname,
+128))</p>
+<p>VID_PutValueSafe(departmentObj, "Description", fullname)</p>
+<p>VID_PutValueSafe(departmentObj, "CustomProperty01",
+nextOperation.GetValue("abbrev").String)</p>
+<p>VID_PutValueSafe(departmentObj, "ShortName", VID_Left(shortname, 64))</p>
+<p>If Not String.IsNullOrEmpty(parDepId) Then</p>
+<p>If parDepId \&lt;&gt; departmentObj.GetValue("UID_ParentDepartment").String
+Then</p>
+<p>logger.trace("set UID_ParentDepartment = " &amp; parDepId &amp; " for " &amp;
+nextOperation.GetValue("department_sap_id").String)</p>
+<p>VID_PutValueSafe(departmentObj, "UID_ParentDepartment", parDepId)</p>
+<p>l_hierChangeFound = True</p>
+<p>End If</p>
+<p>End If</p>
+<p>departmentObj.Save()</p>
+<p>Catch ex As Exception</p>
+<p>logger.Error(ex, "error while processing department change for " &amp;
+fullname &amp; " (" &amp; nextOperation.GetValue("department_sap_id").String &amp;
+")")</p>
+<p>l_hierChangeFound = False</p>
+<p>End Try</p>
+<p>If l_hierChangeFound Then</p>
+<p>hierChangeFound = l_hierChangeFound</p>
+<p>End If</p>
+<p>Next</p>
+<p>If Not hierChangeFound Then</p>
+<p>Exit While</p>
+<p>End If</p>
+<p>cycleNum = cycleNum + 1</p>
+<p>End While</p>
+<p>Logger.Trace("EXIT")</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+<p>Public Function Z_Aggregate_HR_User_Data() As String</p>
+<p>logger.Trace("ENTER")</p>
+<p>Connection.Variables.Put("DONTGENERATEONPERSONINSERTPROCESS", True)</p>
+<p>Try</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim pendingOperations As IColDbObject =
+Connection.CreateCol("CCCHRUserChangesToHandle")</p>
+<p>Z_Add_All_Columns_To_Output_Result("CCCHRUserChangesToHandle",
+pendingOperations)</p>
+<p>pendingOperations.Load()</p>
+<p>logger.Trace("users with pending updates: " &amp;
+pendingOperations.Count.ToString())</p>
+<p>For Each nextOperation As IColElem In pendingOperations</p>
+<p>logger.Trace("processing " &amp;
+nextOperation.GetValue("operation_type").String &amp; " for " &amp;
+nextOperation.GetValue("employee_number").String)</p>
+<p>Connection.BeginTransaction()</p>
+<p>Try</p>
+<p>Dim operType As String = nextOperation.GetValue("operation_type").String</p>
+<p>Dim operDetails As String =
+nextOperation.GetValue("operation_details").String</p>
+<p>If "HIRE" = operType And String.IsNullOrWhiteSpace(operDetails) Then</p>
+<p>logger.trace("empty oper details for HIRE operation")</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>Dim employmentId = nextOperation.GetValue("UID_CCCEmployment").String</p>
+<p>'Dim title_id = nextOperation.GetValue("title_id").String</p>
+<p>Dim department_id = nextOperation.GetValue("department_id").String</p>
+<p>Dim position_id = nextOperation.GetValue("position_id").String</p>
+<p>Dim first_name = nextOperation.GetValue("first_name").String</p>
+<p>Dim last_name = nextOperation.GetValue("last_name").String</p>
+<p>Dim middle_name = nextOperation.GetValue("middle_name").String</p>
+<p>Dim birthDate As Date = nextOperation.GetValue("birth_date").Date</p>
+<p>Dim person As ISingleDbObject = Nothing</p>
+<p>Dim obj As ISingleDbObject = Nothing</p>
+<p>'init objects from DB</p>
+<p>If Not String.IsNullOrEmpty(employmentId) Then</p>
+<p>obj = Connection.CreateSingle("CCCEmployment", employmentId)</p>
+<p>person = Connection.CreateSingle("Person",
+obj.GetValue("CCC_UID_Person").String)</p>
+<p>logger.Trace("target person = " &amp;
+person.GetValue("CentralAccount").String)</p>
+<p>End If</p>
+<p>'check if user has "IgnoreHREvents" flag</p>
+<p>If person IsNot Nothing Then</p>
+<p>Dim ignEv As Boolean = Z_Check_If_Ignore_Events(person)</p>
+<p>logger.Trace("CCC_IgnoreHREvents = " &amp; ignEv)</p>
+<p>If ignEv Then</p>
+<p>logger.Trace("ignoring event")</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>End If</p>
+<p>If "FIRE" = operType Then</p>
+<p>VID_PutValueSafe(obj, "CCC_Employee_Status", "FIRED")</p>
+<p>'VID_PutValueSafe(obj, "CCC_End_Date", DateAdd("d", -1,
+nextOperation.GetValue("action_begda").Date))</p>
+<p>VID_PutValueSafe(obj, "CCC_done", 0)</p>
+<p>obj.Save()</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>If "HIRE" = operType Then</p>
+<p>obj = Connection.CreateSingle("CCCEmployment")</p>
+<p>End If</p>
+<p>VID_PutValueSafe(obj, "CCC_CategoryCode",
+nextOperation.GetValue("category_code").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_CategoryName",
+nextOperation.GetValue("category_name").String)</p>
+<p>Dim idmDepartmentId As String = Nothing</p>
+<p>If Not Z_Is_Employment_GPH(obj) Then</p>
+<p>If String.IsNullOrEmpty(department_id) Then</p>
+<p>logger.Trace("department_id is empty; skipping this record")</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>idmDepartmentId = Z_Get_Department_By_SAP_Id(department_id)</p>
+<p>If String.IsNullOrEmpty(idmDepartmentId) Then</p>
+<p>logger.Trace("cannot find idm department for " &amp; department_id &amp; ";
+skipping this record")</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>End If</p>
+<p>If String.IsNullOrEmpty(last_name) Then</p>
+<p>logger.Trace("last_name is empty; skipping this record")</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>If String.IsNullOrEmpty(first_name) Then</p>
+<p>logger.Trace("first_name is empty; skipping this record")</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>Dim isUserCreation As Boolean = False</p>
+<p>VID_PutValueSafe(obj, "CCC_RegionName",
+nextOperation.GetValue("region_name").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_CityName",
+nextOperation.GetValue("city_name").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_SecClearance_IB",
+nextOperation.GetValue("secclearance_ib").Bool)</p>
+<p>VID_PutValueSafe(obj, "CCC_SecClearance_KT",
+nextOperation.GetValue("secclearance_kt").Bool)</p>
+<p>VID_PutValueSafe(obj, "CCC_SecClearance_PDN",
+nextOperation.GetValue("secclearance_pdn").Bool)</p>
+<p>VID_PutValueSafe(obj, "CCC_QualificationName",
+nextOperation.GetValue("qualification_name").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_CompanyCode",
+nextOperation.GetValue("company_code").String)</p>
+<p>'logger.Trace("company_name = " &amp;
+nextOperation.GetValue("company_name").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_CompanyName",
+nextOperation.GetValue("company_name").String)</p>
+<p>'logger.Trace("company_name 2 = " &amp;
+obj.GetValue("CCC_CompanyName").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_CompanyShortName",
+nextOperation.GetValue("company_short_name").String)</p>
+<p>'logger.Trace("street = " &amp; nextOperation.GetValue("street").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_Street",
+nextOperation.GetValue("street").String)</p>
+<p>'logger.Trace("street 2= " &amp; obj.GetValue("CCC_Street").String)</p>
+<p>If Not Z_Is_Employment_GPH(obj) Then</p>
+<p>VID_PutValueSafe(obj, "CCC_PositionName",
+nextOperation.GetValue("position_name").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_Department_Id", department_id)</p>
+<p>VID_PutValueSafe(obj, "CCC_Position_id", position_id)</p>
+<p>'VID_PutValueSafe(obj, "CCC_Title_Id", title_id)</p>
+<p>Else</p>
+<p>VID_PutValueSafe(obj, "CCC_Department_Id", Nothing)</p>
+<p>VID_PutValueSafe(obj, "CCC_Position_id", Nothing)</p>
+<p>VID_PutValueSafe(obj, "CCC_Title_Id", Nothing)</p>
+<p>'VID_PutValueSafe(obj, "CCC_PositionName", Nothing)</p>
+<p>End If</p>
+<p>VID_PutValueSafe(obj, "CCC_SNILS",
+nextOperation.GetValue("snils").String)</p>
+<p>If "HIRE" = operType Then</p>
+<p>VID_PutValueSafe(obj, "CCC_Source_Id",
+nextOperation.GetValue("hr_source_id").String)</p>
+<p>VID_PutValueSafe(obj, "CCC_Employee_Number",
+nextOperation.GetValue("employee_number").String)</p>
+<p>Dim personId As String = Nothing</p>
+<p>If operDetails.Contains("Person") Then</p>
+<p>personId = Connection.CreateSingle(New
+DbObjectKey(operDetails)).getValue("UID_Person").string</p>
+<p>ElseIf False 'not automatic search</p>
+<p>'condition to search matching user by last name, first name, midle name,
+birth date</p>
+<p>Dim personWhereByFioAndDB As String = f.Comparison("LastName",
+last_name, ValType.String ) &amp; " and " &amp; f.Comparison("FirstName",
+first_name, ValType.String )</p>
+<p>If Not String.IsNullOrEmpty(middle_name) Then</p>
+<p>personWhereByFioAndDB = personWhereByFioAndDB &amp; " and " &amp;
+f.Comparison("MiddleName", middle_name, ValType.String )</p>
+<p>Else</p>
+<p>personWhereByFioAndDB = personWhereByFioAndDB &amp; " and MiddleName is
+null"</p>
+<p>End If</p>
+<p>personWhereByFioAndDB = personWhereByFioAndDB &amp; " and " &amp;
+f.Comparison("BirthDate", birthDate, ValType.Date )</p>
+<p>'condition to search maching user by snils</p>
+<p>Dim personWhereBySnils As String = Nothing</p>
+<p>If Not String.IsNullOrEmpty(nextOperation.GetValue("snils").String) Then</p>
+<p>Dim partNameMatchSqls As New List(Of String)</p>
+<p>partNameMatchSqls.Add("(" &amp; f.Comparison("p.LastName", last_name ,
+ValType.String) &amp; " and " &amp; f.Comparison("p.FirstName", first_name ,
+ValType.String) &amp; ")")</p>
+<p>partNameMatchSqls.Add("(" &amp; f.Comparison("p.LastName", last_name ,
+ValType.String) &amp; " and " &amp; f.Comparison("p.MiddleName", middle_name ,
+ValType.String) &amp; ")")</p>
+<p>partNameMatchSqls.Add("(" &amp; f.Comparison("p.MiddleName", middle_name ,
+ValType.String) &amp; " and " &amp; f.Comparison("p.FirstName", first_name ,
+ValType.String) &amp; ")")</p>
+<p>personWhereBySnils = "UID_Person in (select p.uid_person from person p
+inner join CCCEmployment e on e.CCC_UID_Person=p.uid_person and " &amp;
+f.Comparison("e.CCC_SNILS", nextOperation.GetValue("snils").String,
+ValType.String) &amp; " and (" &amp; String.Join(" or ", partNameMatchSqls) &amp;
+"))"</p>
+<p>End If</p>
+<p>For Each nextSql As String In {personWhereBySnils,
+personWhereByFioAndDB}</p>
+<p>If String.IsNullOrEmpty(nextSql) Then</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>personId = Connection.GetSingleProperty("Person", "UID_Person", nextSql)</p>
+<p>logger.Trace("Searching user with condition " &amp; nextSql)</p>
+<p>logger.Trace("result = " &amp; personId)</p>
+<p>If Not String.IsNullOrEmpty(personId) Then</p>
+<p>Exit For</p>
+<p>End If</p>
+<p>Next</p>
+<p>End If</p>
+<p>If Not String.IsNullOrEmpty(personId) Then</p>
+<p>logger.Trace("HIRE operation for already existing user " &amp; personId)</p>
+<p>person = Connection.CreateSingle("Person", personId)</p>
+<p>If Z_Check_If_Ignore_Events(person) Then</p>
+<p>logger.Trace("user has CCC_IgnoreHREvents flag")</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>Else</p>
+<p>person = Connection.CreateSingle("Person")</p>
+<p>isUserCreation = True</p>
+<p>VID_PutValueSafe(person, "UID_Department", idmDepartmentId)</p>
+<p>VID_PutValueSafe(person, "ImportSource", "SAP")</p>
+<p>logger.Trace("after setting ImportSource = " &amp;
+person.GetValue("ImportSource").String)</p>
+<p>'VID_PutValueSafe(person, "UID_PersonHead",
+Z_Get_Manager(idmDepartmentId, Nothing))</p>
+<p>'VID_PutValueSafe(person, "UID_PersonHead",
+Z_Get_User_Manager_By_Employee_number(nextOperation.GetValue("employee_number").String))</p>
+<p>Z_Copy_General_Attrs_From_Employment_To_Person(person, obj)</p>
+<p>End If</p>
+<p>Else</p>
+<p>'do nothing - already initiated in code above</p>
+<p>End If</p>
+<p>If isUserCreation OrElse person.GetValue("PersonnelNumber").String =
+nextOperation.GetValue("employee_number").String Then</p>
+<p>VID_PutValueSafe(person, "LastName", last_name)</p>
+<p>VID_PutValueSafe(person, "MiddleName", middle_name)</p>
+<p>VID_PutValueSafe(person, "FirstName", first_name)</p>
+<p>VID_PutValueSafe(person, "BirthDate", birthDate)</p>
+<p>End If</p>
+<p>'If isUserCreation AndAlso Not
+String.IsNullOrEmpty(nextOperation.GetValue("operation_details").String)</p>
+<p>If isUserCreation AndAlso operDetails.Contains("ADSAccount")</p>
+<p>Dim adacc As ISingleDbObject = Connection.CreateSingle(New
+DbObjectKey(operDetails))</p>
+<p>VID_PutValueSafe(person, "CentralAccount",
+adacc.GetValue("SAMAccountName").String)</p>
+<p>VID_PutValueSafe(person, "CentralSAPAccount",
+adacc.GetValue("ExtensionAttribute14").String)</p>
+<p>End If</p>
+<p>person.Save()</p>
+<p>If isUserCreation Then</p>
+<p>' Z_Sync_User_Managers(person.GetValue("UID_Person").String)</p>
+<p>End If</p>
+<p>If "HIRE" = operType Then</p>
+<p>VID_PutValueSafe(obj, "CCC_UID_Person",
+person.GetValue("UID_Person").String)</p>
+<p>End If</p>
+<p>VID_PutValueSafe(obj, "CCC_End_Date", DBNull.Value)</p>
+<p>VID_PutValueSafe(obj, "CCC_Employee_Status", "WORKING")</p>
+<p>'VID_PutValueSafe(obj, "CCC_done", If(isUserCreation, 1, 0))</p>
+<p>VID_PutValueSafe(obj, "CCC_done", 0)</p>
+<p>obj.Save()</p>
+<p>Connection.CommitTransaction</p>
+<p>Catch ex As Exception</p>
+<p>logger.error(ex, "error in hr aggregation")</p>
+<p>Connection.RollbackTransaction</p>
+<p>Finally</p>
+<p>If Connection.TransactionOpen</p>
+<p>Connection.CommitTransaction</p>
+<p>End If</p>
+<p>End Try</p>
+<p>Next</p>
+<p>'pendingOperations = Connection.CreateCol("CCCEmployment")</p>
+<p>'pendingOperations.Load()</p>
+<p>'Return "" &amp; pendingOperations.Count</p>
+<p>Finally</p>
+<p>Connection.Variables.Remove("DONTGENERATEONPERSONINSERTPROCESS")</p>
+<p>End Try</p>
+<p>logger.Trace("EXIT")</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+<p>Private Function Z_Check_If_Ignore_Events(person As ISingleDbObject) As
+Boolean</p>
+<p>If person.GetValue("CCC_IgnoreHREvents").Bool Then</p>
+<p>Dim ignoreUntil As Date =
+person.GetValue("CCC_IgnoreHREventsUntil").Date</p>
+<p>If ignoreUntil = Nothing</p>
+<p>Return True</p>
+<p>Else</p>
+<p>' if "ignore until" is in future then ignore event</p>
+<p>Return Date.Today().CompareTo(ignoreUntil) \&lt;= 0</p>
+<p>End If</p>
+<p>Else</p>
+<p>Return False</p>
+<p>End If</p>
+<p>End Function</p>
+<p>Public Function Z_Sync_Department_Managers() As String</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim pendingOperations As IColDbObject =
+Connection.CreateCol("CCCOrgsToChangeManager")</p>
+<p>pendingOperations.Prototype("NewManager").IsDisplayItem = True</p>
+<p>pendingOperations.Prototype("UID_Department").IsDisplayItem = True</p>
+<p>pendingOperations.Load()</p>
+<p>For Each nextOperation As IColElem In pendingOperations</p>
+<p>Dim obj As ISingleDbObject = Connection.CreateSingle("Department",
+nextOperation.GetValue("UID_Department").String)</p>
+<p>VID_PutValueSafe(obj, "UID_PersonHead",
+nextOperation.GetValue("NewManager").String)</p>
+<p>obj.Save()</p>
+<p>Next</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+<p>Public Function Z_Sync_User_Managers(Optional persId As String =
+Nothing) As String</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim pendingOperations As IColDbObject =
+Connection.CreateCol("CCCUsersToChangeManagers")</p>
+<p>pendingOperations.Prototype("newmanager").IsDisplayItem = True</p>
+<p>pendingOperations.Prototype("currentmanager").IsDisplayItem = True</p>
+<p>pendingOperations.Prototype("uid_person").IsDisplayItem = True</p>
+<p>If Not String.IsNullOrEmpty(persId) Then</p>
+<p>pendingOperations.Prototype.WhereClause = f.UidComparison("uid_person",
+persId)</p>
+<p>End If</p>
+<p>pendingOperations.Load()</p>
+<p>For Each nextOperation As IColElem In pendingOperations</p>
+<p>Dim obj As ISingleDbObject = Connection.CreateSingle("Person",
+nextOperation.GetValue("uid_person").String)</p>
+<p>VID_PutValueSafe(obj, "UID_PersonHead",
+nextOperation.GetValue("newmanager").String)</p>
+<p>obj.Save()</p>
+<p>Next</p>
+<p>Return "ok"</p>
+<p>End Function</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>29. One Identity BPM - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>29. One Identity BPM</p>
+<p>21 февраля 2020 г.</p>
+<p>15:26</p>
+<p>Imports System</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports System.Linq</p>
+<p>Imports System.Text</p>
+<p>Imports System.Threading</p>
+<p>Imports System.Threading.Tasks</p>
+<p>Imports System.IO</p>
+<p>Imports System.Net</p>
+<p>Imports Newtonsoft.Json</p>
+<p>Imports Newtonsoft.Json.Linq</p>
+<p>Dim NULL_GUID As String = "00000000-0000-0000-0000-000000000000"</p>
+<p>Public Function PrepareOdataRequest(ByVal localUrl As String, ByVal
+method As String, BPMCookieContainer As CookieContainer) As
+HttpWebRequest</p>
+<p>Dim url As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\URL")</p>
+<p>Dim request As HttpWebRequest = CType((WebRequest.CreateHttp(url &amp;
+localUrl)), HttpWebRequest)</p>
+<p>request.Method = method</p>
+<p>request.ContentType = "application/json;odata=verbose"</p>
+<p>request.CookieContainer = BPMCookieContainer</p>
+<p>request.Timeout=60000</p>
+<p>request.ReadWriteTimeout=60000</p>
+<p>Dim csrfCookie = BPMCookieContainer.GetCookies(New Uri(url))("BPMCSRF")</p>
+<p>If csrfCookie IsNot Nothing Then</p>
+<p>request.Headers.Add("BPMCSRF", csrfCookie.Value)</p>
+<p>End If</p>
+<p>request.Accept = "application/json;odata=verbose"</p>
+<p>'request.Headers.Add("Accept", "application/json")</p>
+<p>Return request</p>
+<p>End Function</p>
+<p>Public Function RemoteCertificateValidationCallback(ByVal sender As
+Object, ByVal certificate As
+System.Security.Cryptography.X509Certificates.X509Certificate, ByVal
+chain As System.Security.Cryptography.X509Certificates.X509Chain, ByVal
+sslPolicyErrors As System.Net.Security.SslPolicyErrors) As Boolean</p>
+<p>Return True</p>
+<p>End Function</p>
+<p>Public Function Z_BPM_Authenticate() As CookieContainer</p>
+<p>logger.Trace("ENTER")</p>
+<p>Dim userId As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\User")</p>
+<p>Dim pwd As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\Password")</p>
+<p>Dim url As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\URL")</p>
+<p>System.Net.ServicePointManager.ServerCertificateValidationCallback = New
+System.Net.Security.RemoteCertificateValidationCallback(AddressOf
+RemoteCertificateValidationCallback)</p>
+<p>Dim AuthServiceUrl As String = url &amp;
+"/ServiceModel/AuthService.svc/Login"</p>
+<p>Dim request As HttpWebRequest =
+CType((WebRequest.CreateHttp(AuthServiceUrl)), HttpWebRequest)</p>
+<p>request.Method = "POST"</p>
+<p>request.ContentType = "application/json"</p>
+<p>Dim BPMCookieContainer As CookieContainer = New CookieContainer()</p>
+<p>request.CookieContainer = BPMCookieContainer</p>
+<p>Using requestStream = request.GetRequestStream()</p>
+<p>Using streamWriter = New StreamWriter(requestStream)</p>
+<p>Dim authstr = New With {Key.UserName = userId, Key.UserPassword = [REDACTED]
+Key.TimeZoneOffset = -180}</p>
+<p>streamWriter.Write(JsonConvert.SerializeObject(authstr))</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>Dim response As String = request.GetResponse().ToString</p>
+<p>logger.Trace("Exit")</p>
+<p>Return BPMCookieContainer</p>
+<p>End Function</p>
+<p>Public Function Z_BPM_Create_Ticket(ByVal message As String, ByVal body
+As String, caseParams As Dictionary(Of String, String), Optional
+ext_BPMCookieContainer As CookieContainer = Nothing) As Dictionary(Of
+String, String)</p>
+<p>Dim url As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\URL")</p>
+<p>logger.Trace("ticket body = " &amp; body)</p>
+<p>Dim BPMCookieContainer As CookieContainer = If (Not
+(ext_BPMCookieContainer Is Nothing), ext_BPMCookieContainer,
+Z_BPM_Authenticate())</p>
+<p>'Dim caseDate = New With {Key.Subject = subject, Key.Symptoms = body,
+Key.ContactId="10a286ad-d460-4718-bc13-6a7bfbde59c4",
+Key.ServicePactId="7c978b89-5802-4595-8c35-277908d7842a",
+Key.ServiceItemId="b46b2ac5-4ce9-4f5e-9843-71d811472a6c",
+Key.CategoryId="69580569-9e16-4466-a1d8-849aa868a719"}</p>
+<p>Dim caseDate As New Dictionary(Of String, String)</p>
+<p>caseDate.Add("Subject", message)</p>
+<p>caseDate.Add("Symptoms", body)</p>
+<p>Dim allTicketParams As Dictionary(Of String, String) =
+Z_Dictionary_Merge(caseParams, caseDate)</p>
+<p>'For Each paramName As String In {"ContactId", "ServicePactId",
+"ServiceItemId", "CategoryId", "GroupId", "AccountId", "OriginId"}</p>
+<p>' caseDate.Add(paramName,
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\DefaultTicketParameters\
+&amp; paramName))</p>
+<p>' Next</p>
+<p>Dim ticketParamsStr As String =
+JsonConvert.SerializeObject(allTicketParams)</p>
+<p>logger.Trace("ticketParamsStr = " &amp; ticketParamsStr)</p>
+<p>'logger.Trace("sleeping...")</p>
+<p>'System.Threading.Thread.Sleep(30000)</p>
+<p>'logger.Trace("wake up!!!")</p>
+<p>Dim request2 As HttpWebRequest =
+PrepareOdataRequest("/0/ServiceModel/EntityDataService.svc/CaseCollection",
+"POST", BPMCookieContainer)</p>
+<p>Using requestStream = request2.GetRequestStream()</p>
+<p>Using streamWriter = New StreamWriter(requestStream)</p>
+<p>streamWriter.Write(ticketParamsStr)</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>Dim resp = CType(request2.GetResponse(), HttpWebResponse)</p>
+<p>If resp.StatusCode \&lt;&gt; HttpStatusCode.Created Then</p>
+<p>Throw New System.Exception("Ticket is not created; http status code = "
+&amp; resp.StatusCode.ToString())</p>
+<p>End If</p>
+<p>Dim resultBody = Z_Http_Extract_Response_Body(resp)</p>
+<p>Dim wrap As IDictionary(Of String,Object) =
+JsonConvert.DeserializeObject( Of IDictionary(Of
+String,Object))(resultBody)</p>
+<p>Dim pb As JObject = JObject.Parse(resultBody)</p>
+<p>' logger.Trace("number=" &amp; pb.SelectToken("d.Number").ToString())</p>
+<p>' logger.Trace("id=" &amp; pb.SelectToken("d.Id").ToString())</p>
+<p>If pb.SelectToken("d.Id") Is Nothing OrElse pb.SelectToken("d.Id").Type
+= JTokenType.Null OrElse
+String.IsNullOrEmpty(pb.SelectToken("d.Id").ToString()) Then</p>
+<p>Throw New System.Exception("Ticket id is not returned")</p>
+<p>End If</p>
+<p>Dim result As New Dictionary(Of String, String)</p>
+<p>result.Add("id", pb.SelectToken("d.Id").ToString())</p>
+<p>result.Add("number", pb.SelectToken("d.Number").ToString())</p>
+<p>Return result</p>
+<p>End Function</p>
+<p>'search BPM contact by full name and email. If more then one found then
+return null</p>
+<p>Public Function Z_BPM_Find_Contact(ByVal fullName As String, ByVal email
+As String, Optional ext_BPMCookieContainer As CookieContainer = Nothing)
+As String</p>
+<p>If String.IsNullOrEmpty(fullName) OrElse String.IsNullOrEmpty(email)
+Then</p>
+<p>Return Nothing</p>
+<p>End If</p>
+<p>Dim BPMCookieContainer As CookieContainer = If (Not
+(ext_BPMCookieContainer Is Nothing), ext_BPMCookieContainer,
+Z_BPM_Authenticate())</p>
+<p>Dim filterString = "Name eq '" &amp; fullName &amp; "' and Email eq '" &amp; email &amp;
+"'"</p>
+<p>logger.Trace("filterString: " &amp; filterString)</p>
+<p>Dim request As HttpWebRequest =
+PrepareOdataRequest("/0/ServiceModel/EntityDataService.svc/ContactCollection?\$filter="
+&amp; filterString, "GET", BPMCookieContainer)</p>
+<p>Dim resp = CType(request.GetResponse(), HttpWebResponse)</p>
+<p>Dim resultBody = Z_Http_Extract_Response_Body(resp)</p>
+<p>logger.Trace("body: " &amp; resultBody)</p>
+<p>Dim pb As JObject = JObject.Parse(resultBody)</p>
+<p>Dim resultsJArray As JArray = CType(pb.SelectToken("d.results"), JArray)</p>
+<p>logger.Trace("Found objects number: " &amp; resultsJArray.Count.ToString())</p>
+<p>If resultsJArray.Count&gt;1 Then</p>
+<p>Return Nothing</p>
+<p>ElseIf resultsJArray.Count=0 Then</p>
+<p>Return Nothing</p>
+<p>Else</p>
+<p>Return resultsJArray.First.SelectToken("Id").ToString()</p>
+<p>End If</p>
+<p>End Function</p>
+<p>Public Function Z_BPM_Get_Ticket_Status(ByVal ticketId As String,
+Optional ext_BPMCookieContainer As CookieContainer = Nothing) As
+Dictionary(Of String, String)</p>
+<p>Dim result As New Dictionary(Of String, String)</p>
+<p>If False Then</p>
+<p>Dim ticketStatus As String =
+My.Computer.FileSystem.ReadAllText("C:\Temp\bpm\ &amp; ticketId &amp; ".txt")</p>
+<p>result.Add("status", ticketStatus)</p>
+<p>result.Add("solutionText", "")</p>
+<p>Else</p>
+<p>logger.Trace("check ticket status for ticketId = " &amp; ticketId)</p>
+<p>Dim BPMCookieContainer As CookieContainer = If (Not
+(ext_BPMCookieContainer Is Nothing), ext_BPMCookieContainer,
+Z_BPM_Authenticate())</p>
+<p>Dim url As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\URL")</p>
+<p>logger.Trace("authenticated")</p>
+<p>Dim request2 As HttpWebRequest =
+PrepareOdataRequest("/0/ServiceModel/EntityDataService.svc/CaseCollection(guid'"
+&amp; ticketId &amp; "')", "GET", BPMCookieContainer)</p>
+<p>logger.Trace("request prepared")</p>
+<p>Dim resp = CType(request2.GetResponse(), HttpWebResponse)</p>
+<p>logger.Trace( "get response")</p>
+<p>Dim resultBody = Z_Http_Extract_Response_Body(resp)</p>
+<p>logger.Trace("response body obtained: " &amp; resultBody)</p>
+<p>'Dim wrap As IDictionary(Of String,Object) =
+JsonConvert.DeserializeObject( Of IDictionary(Of
+String,Object))(resultBody)</p>
+<p>Dim pb As JObject = JObject.Parse(resultBody)</p>
+<p>'logger.Trace("number=" &amp; pb.SelectToken("d.Number").ToString())</p>
+<p>Dim ticketStatus As String = "other"</p>
+<p>Dim solutionText As String = Nothing</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>If Connection.GetSingleProperty("DialogConfigParm", "Value",
+f.Comparison("FullPath",
+"TargetSystem\UNS\ITResource\BPM\Ticket\approved\StatusId[" &amp;
+pb.SelectToken("d.StatusId").ToString() &amp; "]\ClosureCodeId[" &amp;
+pb.SelectToken("d.ClosureCodeId").ToString() &amp; "]" , ValType.String)) =
+"1" Then</p>
+<p>ticketStatus = "approved"</p>
+<p>End If</p>
+<p>If Connection.GetSingleProperty("DialogConfigParm", "Value",
+f.Comparison("FullPath",
+"TargetSystem\UNS\ITResource\BPM\Ticket\rejected\StatusId[" &amp;
+pb.SelectToken("d.StatusId").ToString() &amp; "]\ClosureCodeId[" &amp;
+pb.SelectToken("d.ClosureCodeId").ToString() &amp; "]" , ValType.String)) =
+"1" Then</p>
+<p>ticketStatus = "rejected"</p>
+<p>End If</p>
+<p>If pb.SelectToken("d.Solution") IsNot Nothing AndAlso
+pb.SelectToken("d.Solution").Type \&lt;&gt; JTokenType.Null</p>
+<p>solutionText = pb.SelectToken("d.Solution").ToString()</p>
+<p>End If</p>
+<p>logger.Trace("ticketStatus=" &amp; ticketStatus)</p>
+<p>logger.Trace("solutionText=" &amp; solutionText)</p>
+<p>result.Add("status", ticketStatus)</p>
+<p>result.Add("solutionText", solutionText)</p>
+<p>End If</p>
+<p>Return result</p>
+<p>End Function</p>
+<p>'finds ServicePactId for given Contact</p>
+<p>Public Function Z_BPM_Find_Service_Pact_By_Contact(ByVal contactId As
+String, Optional ext_BPMCookieContainer As CookieContainer = Nothing) As
+String</p>
+<p>logger.Trace("contactId = " &amp; contactId)</p>
+<p>If String.IsNullOrEmpty(contactId) OrElse NULL_GUID = contactId Then</p>
+<p>logger.Trace("contactId is empty; no service pact ")</p>
+<p>Return Nothing</p>
+<p>End If</p>
+<p>Dim BPMCookieContainer As CookieContainer = If (Not
+(ext_BPMCookieContainer Is Nothing), ext_BPMCookieContainer,
+Z_BPM_Authenticate())</p>
+<p>'get AccountId (=ContractAgent) for given contact</p>
+<p>Dim request As HttpWebRequest =
+PrepareOdataRequest("/0/ServiceModel/EntityDataService.svc/ContactCollection(guid'"
+&amp; contactId &amp; "')", "GET", BPMCookieContainer)</p>
+<p>Dim resp = CType(request.GetResponse(), HttpWebResponse)</p>
+<p>Dim resultBody = Z_Http_Extract_Response_Body(resp)</p>
+<p>logger.Trace("contractagent search resultBody = " &amp; resultBody)</p>
+<p>Dim pb As JObject = JObject.Parse(resultBody)</p>
+<p>Dim accId As String = pb.SelectToken("d.AccountId").ToString()</p>
+<p>logger.Trace("accId = " &amp; accId)</p>
+<p>If String.IsNullOrEmpty(accId) OrElse NULL_GUID = accId Then</p>
+<p>Return Nothing</p>
+<p>End If</p>
+<p>'get service pacts linked to this contract agent</p>
+<p>Dim filterString = "Account/Id eq guid'" &amp; accId &amp; "'"</p>
+<p>request =
+PrepareOdataRequest("/0/ServiceModel/EntityDataService.svc/ServiceObjectCollection?\$filter="
+&amp; filterString, "GET", BPMCookieContainer)</p>
+<p>resp = CType(request.GetResponse(), HttpWebResponse)</p>
+<p>resultBody = Z_Http_Extract_Response_Body(resp)</p>
+<p>logger.Trace("servicepact search resultBody = " &amp; resultBody)</p>
+<p>pb = JObject.Parse(resultBody)</p>
+<p>Dim resultsJArray As JArray = CType(pb.SelectToken("d.results"), JArray)</p>
+<p>logger.Trace("servicepact number = " &amp; resultsJArray.Count.ToString())</p>
+<p>If resultsJArray.Count&gt;0 Then</p>
+<p>Return resultsJArray.First.SelectToken("ServicePactId").ToString()</p>
+<p>Else</p>
+<p>Return Nothing</p>
+<p>End If</p>
+<p>End Function</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>11. One Identity скрипт по импорту пользователей - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>11. One Identity скрипт по импорту пользователей</p>
+<p>6 ноября 2020 г.</p>
+<p>13:55</p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References VI.DataImport.dll</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports System.IO</p>
+<p>Imports System.Globalization</p>
+<p>Imports VI.DB.Entities</p>
+<p>Imports VI.DB.Specialized</p>
+<p>Imports VI.DataImport</p>
+<p>#End If</p>
+<p>Public Sub CCC_Person_Import (ByVal dfImport As DataFileImport)</p>
+<blockquote>
+<p>' Standard variables</p>
+<p>Dim logSection As IDisposable</p>
+<p>' Table</p>
+<p>Dim table = Connection.Tables("Person")</p>
+<p>' Line counter</p>
+<p>Dim counter As New LineCounter()</p>
+<p>' Value provider</p>
+<p>Dim lineData As New LineValueProvider(New String() {"ID", "FName",
+"LName", "SiteRegion", "OrigCostCenter", "ZeroFilledCostCenter",
+"Department", "employee_status", "Company", "DefaultYardID",
+"DefaultSiteID", "ExceptSiteID", "Title", "ExceptTitle",
+"ExceptTelephone", "ExceptFax",
+"UID_PersonHead","JobCode","JobCodeText", "JobCodeType", "", ""})</p>
+<p>' Import from an external database</p>
+<p>Dim lineProvider As ILineProvider</p>
+<p>Dim dbLineProvider As New DbLineProvider()</p>
+<p>dbLineProvider.ProviderName = "System.Data.SqlClient.SqlClientFactory,
+System.Data, Version=[REDACTED_IP], Culture=neutral,
+PublicKeyToken=b77a5c561934e089"</p>
+<p>dbLineProvider.ConnectionString = "Data Source=" +
+Connection.GetConfigParm("Custom\DataImport\EmployeeImport\dataSource")
+_</p>
+<p>+ ";Initial Catalog=" +
+Connection.GetConfigParm("Custom\DataImport\EmployeeImport\catalog")
+_</p>
+<p>+ ";User ID=" +
+Connection.GetConfigParm("Custom\DataImport\EmployeeImport\user") +
+";Password=" + dfIMport.Options + ";Pooling=False"</p>
+<p>dbLineProvider.TimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central
+Standard Time")</p>
+<p>' SQL statement</p>
+<p>Dim statement As New PlainSqlStatement()</p>
+<p>statement.Statement = "select
+ID,FName,LName,SiteRegion,OrigCostCenter,ZeroFilledCostCenter,Department,employee_status,Company,DefaultYardID,DefaultSiteID,ExceptSiteID,Title,ExceptTitle,ExceptTelephone,ExceptFax,UID_PersonHead,JobCode,
+JobCodeText, JobCodeType " &amp; _</p>
+</blockquote>
+<p>" from [dbo].[CCC_D1_Employee_Build]"</p>
+<p>'0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19</p>
+<p>'DefaultSiteID = CustomProperty08</p>
+<blockquote>
+<p>'ExceptSiteID = CustomProperty03</p>
+<p>dbLineProvider.Statement = statement</p>
+<p>lineProvider = dbLineProvider</p>
+<p>'</p>
+<p>' Configure column resolution</p>
+<p>'</p>
+<p>' Column indices</p>
+<p>Const iPersonnelNumber = 0</p>
+<p>Const iFirstName = 1</p>
+<p>Const iLastName = 2        </p>
+<p>Const iCustomProperty02 = 3</p>
+<p>Const iCustomProperty04 = 4</p>
+<p>Const iUID_ProfitCenter = 5</p>
+<p>Const iUID_Department = 6</p>
+<p>Const iCustomProperty10 = 7</p>
+<p>Const iCompanyMember = 8</p>
+<p>Const iCustomProperty01 = 9</p>
+<p>Const iCustomProperty08 = 10</p>
+<p>Const iCustomProperty03 = 11</p>
+<p>Const iPersonalTitle = 12</p>
+<p>Const iCustomProperty05 = 13</p>
+<p>Const iCustomProperty06 = 14</p>
+<p>Const iCustomProperty07 = 15</p>
+<p>Const iUID_PersonHead = 16</p>
+<p>Const iCCC_JobCode = 17</p>
+<p>Const iCCC_JobCodeText = 18</p>
+<p>Const iCCC_JobCodeType = 19</p>
+<p>' Resolver to get column data from import data</p>
+<p>Dim columnCompanyMember As IResolveImportValue = New
+ResolveImportValueSimple("CompanyMember")</p>
+<p>Dim columnCustomProperty01 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty01")</p>
+<p>Dim columnCustomProperty02 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty02")</p>
+<p>Dim columnCustomProperty03 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty03")</p>
+<p>Dim columnCustomProperty04 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty04")</p>
+<p>Dim columnCustomProperty05 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty05")</p>
+<p>Dim columnCustomProperty06 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty06")</p>
+<p>Dim columnCustomProperty07 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty07")</p>
+<p>Dim columnCustomProperty08 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty08")</p>
+<p>Dim columnCustomProperty09 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty09")</p>
+<p>Dim columnCustomProperty10 As IResolveImportValue = New
+ResolveImportValueSimple("CustomProperty10")</p>
+<p>Dim columnFirstName As IResolveImportValue = New
+ResolveImportValueSimple("FirstName")</p>
+<p>Dim columnLastName As IResolveImportValue = New
+ResolveImportValueSimple("LastName")</p>
+<p>Dim columnPersonalTitle As IResolveImportValue = New
+ResolveImportValueSimple("PersonalTitle")</p>
+<p>Dim columnPersonnelNumber As IResolveImportValue = New
+ResolveImportValueSimple("PersonnelNumber")</p>
+<p>' Build a dictionary: The last parameter forces exceptions when
+duplicate keys are found</p>
+<p>Dim columnUID_Department As New ResolveImportValueHashed( _</p>
+<p>Connection, _</p>
+<p>ObjectWalker.ColDefs(table, "FK(UID_Department).DepartmentName"),
+False)</p>
+<p>' Build a dictionary: The last parameter forces exceptions when
+duplicate keys are found</p>
+<p>Dim columnUID_Locality As New ResolveImportValueHashed( _</p>
+<p>Connection, _</p>
+<p>ObjectWalker.ColDefs(table, "FK(UID_Locality).Ident_locality"), False)</p>
+<p>' Build a dictionary: The last parameter forces exceptions when
+duplicate keys are found</p>
+<p>Dim columnUID_PersonHead As New ResolveImportValueHashed( _</p>
+<p>Connection, _</p>
+<p>ObjectWalker.ColDefs(table, "FK(UID_PersonHead).PersonnelNumber"),
+False)        </p>
+<p>'Dim columnUID_PersonHead As IResolveImportValue = New
+ResolveImportValueSimple("UID_PersonHead")</p>
+</blockquote>
+<p>Dim columnCCC_JobCode As IResolveImportValue = New
+ResolveImportValueSimple("CCC_JobCode")</p>
+<blockquote>
+<p>Dim columnCCC_JobCodeText As IResolveImportValue = New
+ResolveImportValueSimple("CCC_JobCodeText")</p>
+<p>Dim columnCCC_JobCodeType As IResolveImportValue = New
+ResolveImportValueSimple("CCC_JobCodeType")</p>
+<p>' Build a dictionary: The last parameter forces exceptions when
+duplicate keys are found</p>
+<p>Dim columnUID_ProfitCenter As New ResolveImportValueHashed( _</p>
+<p>Connection, _</p>
+<p>ObjectWalker.ColDefs(table, "FK(UID_ProfitCenter).AccountNumber"),
+False)</p>
+<p>Try</p>
+<p>'</p>
+<p>' Create a dictionary for the destination table</p>
+<p>'</p>
+<p>Dim colImport As IEntityCollection</p>
+<p>Dim elemsByKey As New Dictionary(Of String,
+IEntity)(StringComparer.OrdinalIgnoreCase)</p>
+<p>Dim imported As New HashSet(Of DbObjectKey)()</p>
+<p>logSection = dfImport.LogSection(#LD("Indexing existing data...")#)</p>
+<p>Try</p>
+<p>Dim query As Query = Query.From("Person").SelectNone()</p>
+<p>' Set keys and values as display items to load them with the
+collection</p>
+<p>query = query.Select("CompanyMember")</p>
+<p>query = query.Select("CustomProperty01")</p>
+<p>query = query.Select("CustomProperty02")</p>
+<p>query = query.Select("CustomProperty03")</p>
+<p>query = query.Select("CustomProperty04")</p>
+<p>query = query.Select("CustomProperty05")</p>
+<p>query = query.Select("CustomProperty06")</p>
+<p>query = query.Select("CustomProperty07")</p>
+<p>query = query.Select("CustomProperty08")</p>
+<p>query = query.Select("CustomProperty09")</p>
+<p>query = query.Select("CustomProperty10")</p>
+<p>query = query.Select("FirstName")</p>
+<p>query = query.Select("LastName")</p>
+<p>query = query.Select("PersonalTitle")</p>
+<p>query = query.Select("PersonnelNumber")</p>
+<p>query = query.Select("UID_Department")</p>
+<p>query = query.Select("UID_Locality")</p>
+<p>query = query.Select("UID_PersonHead")</p>
+<p>query = query.Select("UID_ProfitCenter")</p>
+<p>query = query.Select("xmarkedfordeletion")</p>
+<p>query = query.Select("CCC_JobCode")</p>
+<p>query = query.Select("CCC_JobCodeText")</p>
+<p>query = query.Select("CCC_JobCodeType")</p>
+<p>' Load the collection</p>
+<p>colImport = Session.Source().GetCollection(query,
+EntityCollectionLoadType.Slim)</p>
+<p>' Put the entries in the dictionary</p>
+<p>For Each elem In colImport</p>
+<p>Dim key As String</p>
+<p>key = elem.GetValue("PersonnelNumber").String</p>
+<p>If elemsByKey.ContainsKey(key) Then</p>
+<p>dfImport.Log(MsgSeverity.Serious, #LD("Duplicate key: {0}", key)#)</p>
+<p>Else</p>
+<p>elemsByKey.Add(key, elem)</p>
+<p>End If</p>
+<p>Next</p>
+<p>Finally</p>
+<p>If Not logSection Is Nothing Then</p>
+<p>logSection.Dispose()</p>
+<p>logSection = Nothing</p>
+<p>End If</p>
+<p>End Try</p>
+<p>logSection = dfImport.LogSection(#LD("Import data from file")#)</p>
+<p>Try</p>
+<p>For Each line As Line In lineProvider.GetLines(counter)</p>
+<p>' Pay attention to the Stop flag</p>
+<p>If StopProcessing Then</p>
+<p>dfImport.Log(MsgSeverity.Warning, #LD("Import was stopped.")#)</p>
+<p>Exit For</p>
+<p>End If</p>
+<p>Try</p>
+<p>' Get raw data from the current line</p>
+<p>Dim key As String</p>
+<p>line.Add("Fixed value")</p>
+<p>line.Add("Fixed value")</p>
+<p>Dim valCCC_JobCode As String</p>
+<p>Dim resCCC_JobCode As String</p>
+<p>Dim valCCC_JobCodeText As String</p>
+<p>Dim resCCC_JobCodeText As String</p>
+<p>Dim valCCC_JobCodeType As String</p>
+<p>Dim resCCC_JobCodeType As String</p>
+<p>Dim valCompanyMember As String</p>
+<p>Dim resCompanyMember As String</p>
+<p>Dim valCustomProperty01 As String</p>
+<p>Dim resCustomProperty01 As String</p>
+<p>Dim valCustomProperty02 As String</p>
+<p>Dim resCustomProperty02 As String</p>
+<p>Dim valCustomProperty03 As String</p>
+<p>Dim resCustomProperty03 As String</p>
+<p>Dim valCustomProperty04 As String</p>
+<p>Dim resCustomProperty04 As String</p>
+<p>Dim valCustomProperty05 As String</p>
+<p>Dim resCustomProperty05 As String</p>
+<p>Dim valCustomProperty06 As String</p>
+<p>Dim resCustomProperty06 As String</p>
+<p>Dim valCustomProperty07 As String</p>
+<p>Dim resCustomProperty07 As String</p>
+<p>Dim valCustomProperty08 As String</p>
+<p>Dim resCustomProperty08 As String</p>
+<p>Dim valCustomProperty09 As String</p>
+<p>Dim resCustomProperty09 As String</p>
+<p>Dim valCustomProperty10 As String</p>
+<p>Dim resCustomProperty10 As String</p>
+<p>Dim valFirstName As String</p>
+<p>Dim resFirstName As String</p>
+<p>Dim valLastName As String</p>
+<p>Dim resLastName As String</p>
+<p>Dim valPersonalTitle As String</p>
+<p>Dim resPersonalTitle As String</p>
+<p>Dim valPersonnelNumber As String</p>
+<p>Dim resPersonnelNumber As String</p>
+<p>Dim valUID_Department As String</p>
+<p>Dim resUID_Department As String</p>
+<p>Dim valUID_Locality As String</p>
+<p>Dim resUID_Locality As String</p>
+<p>Dim valUID_PersonHead As String</p>
+<p>Dim resUID_PersonHead As String</p>
+<p>Dim valUID_ProfitCenter As String</p>
+<p>Dim resUID_ProfitCenter As String</p>
+<p>valCompanyMember = line.GetValue(iCompanyMember)</p>
+<p>valCustomProperty01 = line.GetValue(iCustomProperty01)</p>
+<p>valCustomProperty02 = line.GetValue(iCustomProperty02)</p>
+<p>valCustomProperty03 = line.GetValue(iCustomProperty03)</p>
+<p>valCustomProperty04 = line.GetValue(iCustomProperty04)</p>
+<p>valCustomProperty05 = line.GetValue(iCustomProperty05)</p>
+<p>valCustomProperty06 = line.GetValue(iCustomProperty06)</p>
+<p>valCustomProperty07 = line.GetValue(iCustomProperty07)</p>
+<p>valCustomProperty08 = line.GetValue(iCustomProperty08)</p>
+<p>valCustomProperty09 = "Fixed value"</p>
+<p>valCustomProperty10 = line.GetValue(iCustomProperty10)</p>
+<p>valFirstName = line.GetValue(iFirstName)</p>
+<p>valLastName = line.GetValue(iLastName)</p>
+<p>valPersonalTitle = line.GetValue(iPersonalTitle)</p>
+<p>valPersonnelNumber = line.GetValue(iPersonnelNumber)</p>
+<p>valUID_Department = line.GetValue(iUID_Department)</p>
+<p>valUID_Locality = "Fixed value"</p>
+<p>valUID_PersonHead = line.GetValue(iUID_PersonHead)</p>
+<p>valUID_ProfitCenter = line.GetValue(iUID_ProfitCenter)</p>
+<p>valCCC_JobCode = line.GetValue(iCCC_JobCode)</p>
+<p>valCCC_JobCodeText = line.GetValue(iCCC_JobCodeText)</p>
+<p>valCCC_JobCodeType = line.GetValue(iCCC_JobCodeType)</p>
+<p>'</p>
+<p>' Here is the place to check and change raw data</p>
+<p>'</p>
+<p>lineData.Line = line</p>
+<p>Value = valCustomProperty09</p>
+<p>' Start of convert script for CustomProperty09</p>
+<p>Value="Feed Employee"</p>
+<p>' End of convert script for CustomProperty09</p>
+<p>valCustomProperty09 = DbVal.ConvertTo(Of String)(Value)</p>
+<p>'DefaultSiteID = CustomProperty08</p>
+<p>'ExceptSiteID = CustomProperty03</p>
+<p>Value = valUID_Locality</p>
+<p>'VID_WRITE2LOG("\DC1IAMOPSQAS01\c\$\working\Data_Import_Logs\personimport_locality.log",
+"Locality value = " &amp; valUID_Locality)</p>
+<p>'VID_WRITE2LOG("\DC1IAMOPSQAS01\c\$\working\Data_Import_Logs\personimport_locality.log",
+"ExceptSiteID = " &amp; valCustomProperty03)</p>
+<p>'VID_WRITE2LOG("\DC1IAMOPSQAS01\c\$\working\Data_Import_Logs\personimport_locality.log",
+"DefaultSiteID = " &amp; valCustomProperty08)</p>
+<p>' Start of convert script for UID_Locality</p>
+<p>If Not String.IsNullOrEmpty(valCustomProperty03)</p>
+<p>'Value = line.GetValue("ExceptSiteID").String</p>
+<p>Value = valCustomProperty03</p>
+<p>Else</p>
+<p>'Value = GetValue("DefaultSiteID").String</p>
+<p>Value = valCustomProperty08</p>
+<p>End If</p>
+<p>' End of convert script for UID_Locality</p>
+<p>valUID_Locality = DbVal.ConvertTo(Of String)(Value)</p>
+<p>'VID_WRITE2LOG("\DC1IAMOPSQAS01\c\$\working\Data_Import_Logs\personimport_locality.log",
+"Ending value = " &amp; valUID_Locality)</p>
+<p>' Convert raw data to final column data values</p>
+<p>resCompanyMember = DbVal.ConvertTo(Of
+String)(columnCompanyMember.ResolveValue(valCompanyMember),
+lineProvider.Culture)</p>
+<p>resCustomProperty01 = DbVal.ConvertTo(Of
+String)(columnCustomProperty01.ResolveValue(valCustomProperty01),
+lineProvider.Culture)</p>
+<p>resCustomProperty02 = DbVal.ConvertTo(Of
+String)(columnCustomProperty02.ResolveValue(valCustomProperty02),
+lineProvider.Culture)</p>
+<p>resCustomProperty03 = DbVal.ConvertTo(Of
+String)(columnCustomProperty03.ResolveValue(valCustomProperty03),
+lineProvider.Culture)</p>
+<p>resCustomProperty04 = DbVal.ConvertTo(Of
+String)(columnCustomProperty04.ResolveValue(valCustomProperty04),
+lineProvider.Culture)</p>
+<p>resCustomProperty05 = DbVal.ConvertTo(Of
+String)(columnCustomProperty05.ResolveValue(valCustomProperty05),
+lineProvider.Culture)</p>
+<p>resCustomProperty06 = DbVal.ConvertTo(Of
+String)(columnCustomProperty06.ResolveValue(valCustomProperty06),
+lineProvider.Culture)</p>
+<p>resCustomProperty07 = DbVal.ConvertTo(Of
+String)(columnCustomProperty07.ResolveValue(valCustomProperty07),
+lineProvider.Culture)</p>
+<p>resCustomProperty08 = DbVal.ConvertTo(Of
+String)(columnCustomProperty08.ResolveValue(valCustomProperty08),
+lineProvider.Culture)</p>
+<p>resCustomProperty09 = DbVal.ConvertTo(Of
+String)(columnCustomProperty09.ResolveValue(valCustomProperty09),
+lineProvider.Culture)</p>
+<p>resCustomProperty10 = DbVal.ConvertTo(Of
+String)(columnCustomProperty10.ResolveValue(valCustomProperty10),
+lineProvider.Culture)</p>
+<p>resFirstName = DbVal.ConvertTo(Of
+String)(columnFirstName.ResolveValue(valFirstName),
+lineProvider.Culture)</p>
+<p>resLastName = DbVal.ConvertTo(Of
+String)(columnLastName.ResolveValue(valLastName),
+lineProvider.Culture)</p>
+<p>resPersonalTitle = DbVal.ConvertTo(Of
+String)(columnPersonalTitle.ResolveValue(valPersonalTitle),
+lineProvider.Culture)</p>
+<p>resPersonnelNumber = DbVal.ConvertTo(Of
+String)(columnPersonnelNumber.ResolveValue(valPersonnelNumber),
+lineProvider.Culture)</p>
+<p>resUID_Department = DbVal.ConvertTo(Of
+String)(columnUID_Department.ResolveValue(valUID_Department),
+lineProvider.Culture)</p>
+<p>resUID_Locality = DbVal.ConvertTo(Of
+String)(columnUID_Locality.ResolveValue(valUID_Locality),
+lineProvider.Culture)</p>
+<p>resUID_PersonHead = DbVal.ConvertTo(Of
+String)(columnUID_PersonHead.ResolveValue(valUID_PersonHead),
+lineProvider.Culture)</p>
+<p>resUID_ProfitCenter = DbVal.ConvertTo(Of
+String)(columnUID_ProfitCenter.ResolveValue(valUID_ProfitCenter),
+lineProvider.Culture)</p>
+<p>resCCC_JobCode = DbVal.ConvertTo(Of
+String)(columnCCC_JobCode.ResolveValue(valCCC_JobCode),
+lineProvider.Culture)</p>
+<p>resCCC_JobCodeText = DbVal.ConvertTo(Of
+String)(columnCCC_JobCodeText.ResolveValue(valCCC_JobCodeText),
+lineProvider.Culture)</p>
+<p>resCCC_JobCodeType = DbVal.ConvertTo(Of
+String)(columnCCC_JobCodeType.ResolveValue(valCCC_JobCodeType),
+lineProvider.Culture)</p>
+<p>'</p>
+<p>' Here is the place to check and change final column data</p>
+<p>'</p>
+<p>'</p>
+<p>' Here starts the standard handling. It is recommended to not change
+anything beyond this point.</p>
+<p>'</p>
+<p>'</p>
+<p>' Create key for this line</p>
+<p>'</p>
+<p>key = DbVal.ConvertTo(Of String)(resPersonnelNumber)</p>
+<p>Dim elem As IEntity = Nothing</p>
+<p>Dim entity As IEntity = Nothing</p>
+<p>If elemsByKey.TryGetValue(key, elem) Then</p>
+<p>'</p>
+<p>' Found -&gt; Update</p>
+<p>'</p>
+<p>' Mark element for superset handling</p>
+<p>imported.Add(New DbObjectKey(table, elem))</p>
+<p>' Map values</p>
+<p>Dim fullEntity As New Lazy(Of IEntity)(Function()
+elem.Create(Session))</p>
+<p>If DbVal.Compare(elem.GetRaw("CompanyMember"), resCompanyMember,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CompanyMember", resCompanyMember)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty01"), resCustomProperty01,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty01", resCustomProperty01)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty02"), resCustomProperty02,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty02", resCustomProperty02)</p>
+<p>End If                                                </p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty03"), resCustomProperty03,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty03", resCustomProperty03)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty04"), resCustomProperty04,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty04", resCustomProperty04)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty05"), resCustomProperty05,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty05", resCustomProperty05)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty06"), resCustomProperty06,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty06", resCustomProperty06)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty07"), resCustomProperty07,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty07", resCustomProperty07)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty08"), resCustomProperty08,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty08", resCustomProperty08)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty09"), resCustomProperty09,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty09", resCustomProperty09)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CustomProperty10"), resCustomProperty10,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CustomProperty10", resCustomProperty10)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("FirstName"), resFirstName,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("FirstName", resFirstName)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("LastName"), resLastName, ValType.String)
+\&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("LastName", resLastName)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("PersonalTitle"), resPersonalTitle,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("PersonalTitle", resPersonalTitle)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("UID_Department"), resUID_Department,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("UID_Department", resUID_Department)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("UID_Locality"), resUID_Locality,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("UID_Locality", resUID_Locality)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("UID_PersonHead"), resUID_PersonHead,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("UID_PersonHead", resUID_PersonHead)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("UID_ProfitCenter"), resUID_ProfitCenter,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("UID_ProfitCenter", resUID_ProfitCenter)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CCC_JobCode"), resCCC_JobCode,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CCC_JobCode", resCCC_JobCode)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CCC_JobCodeText"), resCCC_JobCodeText,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CCC_JobCodeText", resCCC_JobCodeText)</p>
+<p>End If</p>
+<p>If DbVal.Compare(elem.GetRaw("CCC_JobCodeType"), resCCC_JobCodeType,
+ValType.String) \&lt;&gt; 0 Then</p>
+<p>fullEntity.Value.PutValue("CCC_JobCodeType", resCCC_JobCodeType)</p>
+<p>End If</p>
+<p>If fullEntity.IsValueCreated Or elem.IsDeleted() Then</p>
+<p>entity = fullEntity.Value</p>
+<p>Else</p>
+<p>counter.Increment(LineType.Unchanged)</p>
+<p>End If</p>
+<p>Else</p>
+<p>'</p>
+<p>' Not found -&gt; Insert</p>
+<p>'</p>
+<p>entity = Session.Source().CreateNew("Person")</p>
+<p>' Fill keys and values</p>
+<p>entity.PutValue("CompanyMember", resCompanyMember)</p>
+<p>entity.PutValue("CustomProperty01", resCustomProperty01)</p>
+<p>entity.PutValue("CustomProperty02", resCustomProperty02)</p>
+<p>entity.PutValue("CustomProperty03", resCustomProperty03)</p>
+<p>entity.PutValue("CustomProperty04", resCustomProperty04)</p>
+<p>entity.PutValue("CustomProperty05", resCustomProperty05)</p>
+<p>entity.PutValue("CustomProperty06", resCustomProperty06)</p>
+<p>entity.PutValue("CustomProperty07", resCustomProperty07)</p>
+<p>entity.PutValue("CustomProperty08", resCustomProperty08)</p>
+<p>entity.PutValue("CustomProperty09", resCustomProperty09)</p>
+<p>entity.PutValue("CustomProperty10", resCustomProperty10)</p>
+<p>entity.PutValue("FirstName", resFirstName)</p>
+<p>entity.PutValue("LastName", resLastName)</p>
+<p>entity.PutValue("PersonalTitle", resPersonalTitle)</p>
+<p>entity.PutValue("PersonnelNumber", resPersonnelNumber)</p>
+<p>entity.PutValue("UID_Department", resUID_Department)</p>
+<p>entity.PutValue("UID_Locality", resUID_Locality)</p>
+<p>entity.PutValue("UID_PersonHead", resUID_PersonHead)</p>
+<p>entity.PutValue("UID_ProfitCenter", resUID_ProfitCenter)</p>
+<p>entity.PutValue("CCC_JobCode", resCCC_JobCode)</p>
+<p>entity.PutValue("CCC_JobCodeText", resCCC_JobCodeText)</p>
+<p>entity.PutValue("CCC_JobCodeType", resCCC_JobCodeType)</p>
+<p>End If</p>
+<p>'</p>
+<p>' Additional values can be put into the entity here</p>
+<p>'</p>
+<p>If Not entity Is Nothing Then</p>
+<p>If entity.IsDeleted() Then</p>
+<p>' Recall deleted entity</p>
+<p>entity.MarkForRecall()</p>
+<p>End If</p>
+<p>Dim isUpdate As Boolean = entity.IsLoaded</p>
+<p>' Save it</p>
+<p>If entity.IsDifferent Then</p>
+<p>entity.Save(Session)</p>
+<p>If isUpdate Then</p>
+<p>counter.Increment(LineType.Updated)</p>
+<p>Else</p>
+<p>counter.Increment(LineType.Inserted)</p>
+<p>End If</p>
+<p>Else</p>
+<p>counter.Increment(LineType.Unchanged)</p>
+<p>End If</p>
+<p>If elem Is Nothing Then</p>
+<p>' Include in our collection to avoid double imports of elements</p>
+<p>Dim keyInsert As String</p>
+<p>keyInsert = entity.GetValue("PersonnelNumber").String</p>
+<p>elemsByKey(keyInsert) = entity</p>
+<p>imported.Add(New DbObjectKey(table, entity))</p>
+<p>End If</p>
+<p>End If</p>
+<p>Catch ex As Exception</p>
+<p>dfImport.Log(MsgSeverity.Serious, #LD("Error in line {0}: {1}",
+counter(LineType.Total), ViException.ErrorString(ex))#)</p>
+<p>dfImport.Log(MsgSeverity.Serious, #LD("Line data was: {0}",
+line.ToString())#)</p>
+<p>counter.Increment(LineType.Error)</p>
+<p>End Try</p>
+<p>If (counter(LineType.Total) Mod 100) = 0 Then</p>
+<p>dfImport.SetProgressInfo(#LD("{0} lines imported, {1} ignored, {2}
+inserted, {3} updated, {4} errors", counter(LineType.Total),
+counter(LineType.Unchanged), counter(LineType.Inserted),
+counter(LineType.Updated), counter(LineType.Error))#)</p>
+<p>End If</p>
+<p>Next ' ForEach line</p>
+<p>Finally</p>
+<p>If Not logSection Is Nothing Then</p>
+<p>logSection.Dispose()</p>
+<p>logSection = Nothing</p>
+<p>End If</p>
+<p>End Try</p>
+<p>'</p>
+<p>' No superset handling</p>
+<p>'</p>
+<p>Finally</p>
+<p>End Try</p>
+<p>Using dfImport.LogSection(#LD("Results")#)</p>
+<p>dfImport.Log(#LD("{0} lines imported", counter(LineType.Total))#)</p>
+<p>dfImport.Log(#LD("{0} header lines", counter(LineType.Header))#)</p>
+<p>dfImport.Log(#LD("{0} inserted", counter(LineType.Inserted))#)</p>
+<p>dfImport.Log(#LD("{0} changed", counter(LineType.Updated))#)</p>
+<p>dfImport.Log(#LD("{0} deleted", counter(LineType.Deleted))#)</p>
+<p>dfImport.Log(#LD("{0} not changed", counter(LineType.Unchanged))#)</p>
+<p>dfImport.Log(#LD("{0} not found", counter(LineType.NotFound))#)</p>
+<p>dfImport.Log(#LD("{0} empty lines", counter(LineType.Empty))#)</p>
+<p>dfImport.Log(#LD("{0} errors", counter(LineType.Error))#)</p>
+<p>End Using</p>
+</blockquote>
+<p>End Sub</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/22079/sync-process-fails-for-user-with-locked-property">https://www.oneidentity.com/community/identity-manager/f/forum/22079/sync-process-fails-for-user-with-locked-property</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

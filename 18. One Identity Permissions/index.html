@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>18. One Identity Permissions - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Отображение кастомных атрибутов на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>18. One Identity Permissions</p>
+<p>2 апреля 2020 г.</p>
+<p>14:54</p>
+<p>Чтобы Employee мог на портале видеть и редактировать кастомную таблицу
+надо</p>
+<p>1) В Manager в OneIM Manager – Base Role создать Application role с
+Perm Group = CCCEditRole</p>
+<p>2) Поместить Employee в эту App Role</p>
+<p>Не работает для сотрудника, к которому привязана административная
+системна уз 1IM</p>
+<hr />
+<h1 id="_1">Отображение кастомных атрибутов на портале</h1>
+<p>We need to ensure that any schema extensions get assigned access
+permissions.</p>
+<p>If you have a schema extension attribute, on Person say, and there are
+not permissions set then you will see this text: <strong>\&lt;hidden:XXXX&gt;</strong></p>
+<p><img src="../media/18. One Identity Permissions/media/image1.png"
+style="width:5in;height:3.9375in"
+alt="Requête Attestation Conformité Responsabilités Appels @Données principales - Abdo, Antoine (ANTOINE.A Date de naissance Numéro personnel Genre Compte d&#39;utilisateur central Adresse e-mail par défaut 0 - Inconnu ANTOINEABDO [redacted-email] Informations de l&#39;organisation Centre de coûts principal Département principal Employment Code (non attribué) Marketing &lt;hidden: Employment Code* Û Externe Attribuer Modifier " /></p>
+<p>Permission groups are created at Install time to help with this:</p>
+<p><strong>CCCEditPermissions</strong>, <strong>CCCViewPermisions</strong>, <strong>CCCEditRole</strong> and
+<strong>CCCViewRole</strong>.</p>
+<p>We just need to ensure that the standard permission groups inherit these
+new permissions. This is done in <strong>Designer-&gt;Permissions</strong>:</p>
+<p><img src="../media/18. One Identity Permissions/media/image2.png"
+style="width:7.17708in;height:4.03125in"
+alt="Qatabase permissions groups users Options Help a Commit to database e Back • + Next • • Search Navigation Permissions System user Permissions grot»s Permissions groups Role based permissionsgroups Disabled permissionsgroups By tables Program functions Getting Started One Identity Manager Schema O Permissions process Orchestration Script Library User Interface Mail Templates Documentation Base Data Favorites itor Base Data List Editor I ShoppingCartltem Schema Editor PersonWantsOrg Inheritance Direction Tasks O Permissions inform2ion Edit permissbrz User &amp; perm Gro. O Show/ edit permissions VI 4 ALLMANAGER VI-4_ALWSER 4 LUSER LOOKU NADMIN_AOMIN IVj-4-AUDITl UDITCR No object selected Everyone (Change) This is Make the OOTB permissions inherit from the default permissions for custom schema attributes. O CCCEditRole CCCVieWROl€ These permissions grups are used in the default application roles to grant permissions. " /></p>
+<p>Optional: Just verify the permission of the CCC*Permission roles:</p>
+<p><img src="../media/18. One Identity Permissions/media/image3.png"
+style="width:7.05208in;height:3.21875in"
+alt="Qatabase permissions Commit to database Navigation rrmsslons System user Permissions g Simulation options Yiew Help Next&#39; Back Search X ns Group Editor Designer - viadmin@demoapp1\D11M7 (Main Database) 1 Permissions group CCCViewRole Permissions Permissions Editor Permissi,„ - CCC Haircolor. x VI 4 ALLUSER Simulati„. I W CCCEditROle I X CCCViev,R01e List Editor Permissions groups Role based permissions groups Disabled permissionsgroups a Program functions Getting Started One Identity Manager Schema Permissions Process Orchestration Table Person ApprovalState AuthentifierLogins BirthDate Building CanonicalName ccc_Eyecolor ccc_HairC010r CentralAccount Centralpassword City Summary of all permissions for Person Permissions CCCEditPermissions CCCEditRole CCCViewPermissions CCCViewRole CCCVieWR01e1 Permission group being reviewed Permissions on the table and columns. Note: this does not show inherited View Edit Insert Viewing condition permissions. Insert condition Edit condition All Permissions on the Person table -rasks O Column overvie•.&#39; Schema Ednor Show column definition Show column Person - ccc_Haircolorjn schema Permissions Edi... Edit p emissions for column &#39;Person- CCC HairCoIor&#39; Language Edit translation column &#39;Person - CCC HairColor&#39; " /></p>
+<p>And now, alles gut. To avoid seeing a cached value of the web pages, you
+should:</p>
+<ul>
+<li>
+<p>Delete all the Cache directories in the Web Portal IIS AppData folder</p>
+</li>
+<li>
+<p>iisreset</p>
+</li>
+<li>
+<p>Login again to the portal</p>
+</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

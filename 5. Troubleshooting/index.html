@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>5. Troubleshooting - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#pwohelperpwo" class="nav-link">PWOHelperPWO</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#makedecision" class="nav-link">Не отрабатывает метод MakeDecision</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#html" class="nav-link">В письме (шаблон) не корректно отображается HTML, который был сформирован, через скрипт</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Параметры скриптов внутри почтовых уведомлений</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ad" class="nav-link">Для уз AD не проходит проверку пароль или он не генерируется корректно</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#custom-target-system-manager" class="nav-link">Не отображается меню Custom Target System в Manager</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>5. Troubleshooting</p>
+<p>19 мая 2022 г.</p>
+<p>13:53</p>
+<p><strong>1) Ошибка при импорте из CSV</strong></p>
+<p>Скорее всего, проблема с соответствием полей csv и столбцов таблицы,
+куда заносишь данные</p>
+<p>Может быть размер слишком мал по умолчанию для столбца или неправильно
+выбран - FullPath у Department, например, заполняется автоматически.</p>
+<p><strong>DEPARTMENTCODE = UID_DepartmentID</strong></p>
+<p><strong>PARENTCODE = UID_DepartmentParentID</strong></p>
+<p><strong>2) Не выполняются таски на JobServer</strong></p>
+<p>Проверить, что установлен .Net 4.7.2 на JobServer</p>
+<p><strong>3) Не подгружаются таблицы OneIM при маппинге новой системы</strong></p>
+<p>Надо сделать Refresh Schema для БД OneIM</p>
+<p><strong>4) Не запускается Process Plan для выгрузки пользователей из CSV.</strong></p>
+<p>Нужно правильно прописать Condition у Process Plan.</p>
+<p>Заходим в таблицу, куда мы сохраняли Custom Process (DialogSchedule) и
+находим имя процесса</p>
+<p>Name='SGP Export Person To CSV'</p>
+<p>Делаем Commit в базу.</p>
+<p>5) При импорте из БД в таблице OneIM сначала удаляются записи, а потом
+создаются снова (Delete -&gt; Insert )</p>
+<p>Надо в Mapping - создать Object Matching Rule</p>
+<p><img src="../media/5. Troubleshooting/media/image1.png"
+style="width:6.48958in;height:1.10417in"
+alt="Object matching rules Schema property in One Identity Manager LID UNSAccount8 Information Primary rule Schema propeO&#39; in the target system LOGIN " /></p>
+<p><strong>5) Мгновенное удаление аккаунта из AD</strong></p>
+<p><img src="../media/5. Troubleshooting/media/image2.png"
+style="width:6.45833in;height:4.94792in"
+alt="Designer - alex@t oneim db-4.sgp.ru\OneIM (Main Database) Qatabase Schema Options Yiew Help a Commit to database Back • Next • Navigation One Identity Manager Schema AccProductInFurKtionaIArea AccProductParamCategory AccProductParameter ADSAccount ADSAccountlnADSGroup ADSAccountSecretary ADscontact ADscontactlnADSGroup ADSContactSecretary ADSContainer ADSDomain ADSDomainsubType ADSForest ADSGroup ADSGroupCoIIection ADSGroupExcIusion ADSGrouplnADSGroup ADSGroupSecretary ADSMachine ADSMachinelnADSGroup ADSMachinelnADSSite ADSOtherSlD ADSOtherSlDlnADSGroup Search X Getting Started Col um ns ADSAcc Table properties Table Usage type Display name (sirrgular) Display name (plural) Display pattem Display pattern (10 ng) Hierarcfw path Remarks Cache information Prep rocesso r co nd ition Deferred deletion [days] Process - Display name AOSAccount ser data Active Directory account Active Directory user accounts (Lilo not load Disabled by preprocessor " /></p>
+<p><strong>+ в Manager зайти в Show Deffered operations и нажать Play для задачи
+отложенной</strong></p>
+<p><strong>6) Конвертирование даты в VB</strong></p>
+<p>Public Sub CCC_Test3(ByVal date1 As String)</p>
+<p>Dim date2 As DateTime = CType(DateTime.ParseExact(date1, "dd.mm.yyyy",
+System.Globalization.CultureInfo.InvariantCulture), DateTime)</p>
+<p>MsgBox(date2)</p>
+<p>End Sub</p>
+<p><strong>7) Запись даты в лог</strong></p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; Data: {1}",
+Now.ToString(), dbsUnsAccount.ToString()))</p>
+<p><strong>8) Фильтр синхронизации</strong></p>
+<p>В Sync Editor - Workflows – В Processing можно задать условие на
+действие - Insert, например</p>
+<p><strong>9) Права на самостоятельно созданные поля у пользователя UNSAccountB</strong></p>
+<p>В Manager – One Identity Manager Schema - выбираем таблицу - Справа Edit
+Permissions for table - Выбираем столбец и ставим галки на Insert</p>
+<p><strong>10) У Account Definition не активны галки Retain</strong></p>
+<p>Это значит, что Acc Def требует другую Acc Def - если убрать
+зависимость, то галки становятся активными</p>
+<p><strong>11) SDK скрипты OneIM</strong></p>
+<p>C:\distr\OIM81\Modules\QBM\dvd\AddOn\SDK\ScriptSamples</p>
+<p><strong>12) Синхронизация из нескольких Custom Target Systems</strong></p>
+<p>Если совпадают пользователи, то надо настраивать Scope для основной БД</p>
+<p><img src="../media/5. Troubleshooting/media/image3.png"
+style="width:5in;height:4.84375in"
+alt="One Identity Manager connection Config ure One Identity Manager database connection Target system Co nfig ure co nnected system co nnectio n Variables Define va lesets. Start up configurations Create start up co nfiguratiom Script library Edit scriptlibrar} Base objects Edit base o bject Schema Name All schema types UNSRootB UNSAccount8 UNSContainer8 UNSAccoun... UNSGroup8 UNSGroup8 Condition t-oneim-db4. sgp. rulOr Scope Is filtere... 9 9 System filter Define two filters to be applied in sequence to the O The target system filter directly affects the target The system object filter applies to already loaded System filter @ Condition Ident Object filter UNSRoot C) Scripting SIdentUNSRootS " /></p>
+<p>+ в настройках Workflow для Insert</p>
+<p><img src="../media/5. Troubleshooting/media/image4.png"
+style="width:1.6875in;height:2.21875in"
+alt="Edit condition... Define a condition Cher . &#39; Ignore case " /></p>
+<p><strong><span class="mark">13) ВАЖНО! Маппинг пользователей и групп</span></strong></p>
+<p><strong><span class="mark">Не переносить ничего в атрибуты UID_UNSAccountB и
+UID_UNSGroupB !</span></strong></p>
+<p><strong>Они генерятся сами, по своим законам, иначе потом могут быты проблемы
+с синхронизацией.</strong></p>
+<p><strong>14) Импорт связей в таблицу UNSAccountBInUnsGroupB</strong></p>
+<p>Если несколько Custom Target Systems, то при импорте связей
+пользователей и групп могут быть проблемы с удалением связей.</p>
+<p>Решается расширением таблицы UNSAccountBInUnsGroupB на столбец
+UID_UNSROOTB, который foreign key к UNSRootB</p>
+<p>После этого, в этот атрибут мапится значение UNSRootB Custom Target
+Sustem.</p>
+<p>Потом в Workflow у действия Delete прописывается</p>
+<p>Base.CCC_UID_UNSRootB=Other.vrtIdentUNSRoot</p>
+<p><strong>15) Использование дополнительных модулей в скриптах</strong></p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports System.Data</p>
+<p>#End If</p>
+<hr />
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References Devart.Data.Oracle.dll</p>
+<p>Imports Devart.Data.Oracle</p>
+<p>#End If</p>
+<p><strong>16) Matching rule для user – role</strong></p>
+<p>UID_UNSAccountB_LOGIN AND UID_UNSGroupB_Role_as_string</p>
+<p>Чтобы учитывать оба атрибута, так как может повторяться и логин и группа</p>
+<p><strong>17) Не импортируются пользователи HP без табельного номера</strong></p>
+<p>Надо делать Matching Rule AccountName – LoginToUpper</p>
+<p><strong>18) Не разрешались при импорте в UNSAccountVInUNSGroupB все
+UNSAccountB</strong></p>
+<p>Были загружены не все пользователи для этой системы.</p>
+<p>Надо делать было Matching Rule по логину, а не по табельному.</p>
+<p><strong>19) Directum процедура OIM_UpdateUser меняет FullName на основании
+переданного логина.</strong></p>
+<p><strong>20) Условие выполнения процесса</strong></p>
+<p>Value = \$UID_UNSRootB\$ Like "f0a34f8e-07c5-4800-9874-a0e8a313c051"</p>
+<p><strong>21) При импорте не создаются DisplayName корректные в Directum</strong></p>
+<p>Надо проверить, чтобы в схеме у поля не было безусловного правила, по
+которому создается значение этого поля. Происходит конфликт.</p>
+<p>Надо делать условие для поля.</p>
+<p><strong>22) ITShop столкнулся с проблемой, при которой при запросе на
+добавление в группу AD из ITShop пользователь физически не добавляется в
+эту группу в AD</strong></p>
+<p>Для продукта назначается бизнес роль, на которую нужно назначить группу
+AD.</p>
+<p><strong>23) Удаление Shelf из ITShop</strong></p>
+<ul>
+<li>
+<p>Убрать привязку к группе</p>
+</li>
+<li>
+<p>Убрать привязку Approval policy</p>
+</li>
+<li>
+<p>Удалить бизнес роль (или привязку к этой бизнес роли)</p>
+</li>
+<li>
+<p>Убрать привязку к каталогу</p>
+</li>
+<li>
+<p>Assignment resourse – Remove from all shelves</p>
+</li>
+<li></li>
+<li></li>
+</ul>
+<p><strong>Надо ждать, пока выполнятся все процессы.</strong></p>
+<p><strong>24) Web Designer</strong></p>
+<p>Не добавляется надпись - надо Text указывать в кавычках)</p>
+<p><strong>25) IT Shop не приходят письма о requests</strong></p>
+<p>Надо прописать Default email address у пользователя в закладке
+Miscellaneous</p>
+<p>+ в дизайнере указать "QER\ITShop\DefaultSenderAddress"</p>
+<p><strong><em>To use notification in the request process</em></strong></p>
+<ol>
+<li>
+<p>Ensure that the email notification system is configured in One
+    Identity Manager. For more detailed information, see the One
+    Identity Manager Configuration Guide.</p>
+</li>
+<li>
+<p>Set the configuration parameter "QER\ITShop\DefaultSenderAddress" in
+    the Designer and enter the sender address with which the email
+    notifications are sent.</p>
+</li>
+<li>
+<p>Ensure that all employees have a default email address.
+    Notifications are sent to this address. For more detailed
+    information, see the One Identity Manager Identity Management Base
+    Module Administration Guide.</p>
+</li>
+<li>
+<p>Ensure that a language culture can be determined for all employees.
+    Only then can they receive email notifications in their own
+    language. For more detailed information, see the One Identity
+    Manager Identity Management Base Module Administration Guide.</p>
+</li>
+<li>
+<p>Configure the notification procedure.</p>
+</li>
+</ol>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/it-shop-administration-guide/38#TOPIC-916350">https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/it-shop-administration-guide/38#TOPIC-916350</a></p>
+<p>И тут ещё</p>
+<p>SenderAddress=\&lt;Enter email address in configuration parameter
+"QER\RPS\DefaultSenderAddress"&gt;</p>
+<p>Для запросов используется таблица</p>
+<h1 id="pwohelperpwo">PWOHelperPWO</h1>
+<p><strong>26) Запуск очереди БД - если она не работает (wait for dbqueue
+processor)</strong></p>
+<p>Just, for clarification. You added another CPU to your system and then
+these Errors occur? Or did you do anything in addition?</p>
+<p>You could use the following SQL statements to remove and reinstall the
+SQL Agent Jobs:</p>
+<p>-- First check if there are sessions used by the DBProcessor. If so wait
+for them to be finished<br />
+SELECT spid, PROGRAM_NAME, login_time, hostname<br />
+FROM sys.sysprocesses<br />
+WHERE PROGRAM_NAME LIKE 'SQLAgent%'<br />
+AND dbid = DB_ID()  </p>
+<p>-- if you need to remove the sql agents for D1IM, exec:  </p>
+<p>EXEC QBM_PWatchDogPrepare 1<br />
+GO  </p>
+<p>EXEC QBM_PDBQueuePrepare 1<br />
+GO</p>
+<p>-- To re-initialize the sql agents for D1IM, exec:  </p>
+<p>EXEC QBM_PWatchDogPrepare 0<br />
+GO  </p>
+<p>EXEC QBM_PDBQueuePrepare 0, 1<br />
+GO</p>
+<p><strong>27) Не активны кнопки при подтверждении email при создании нового
+внешнего пользователя</strong></p>
+<p>Причина - не создается CentralAccount Name</p>
+<p>Решение - доработать скрипт, чтобы было достаточно только имени и
+фамилии, так как при регистрации по дефолту не спрашивается Отчество</p>
+<p><strong>28) Пустой отчет приходит на почту</strong></p>
+<p>Надо в настройках отчета сделать, чтобы заполнять дополнительную
+информацию при отправке</p>
+<p><strong>29) Outstanding - помечает на удаление</strong></p>
+<p><strong>Удаление помеченных объектов</strong></p>
+<p><a href="http://www.identitymanager.tech/viewtopic.php?t=38">http://www.identitymanager.tech/viewtopic.php?t=38</a></p>
+<p><strong>30) Пользователь AD не перемещается в нужную OU при изменении
+департамента в файле csv доверенной системы</strong></p>
+<p>Не генерируется CentralAccName</p>
+<p>В Workflow Sync Editor надо поставить галку Data Import, тогда флаг
+FULLSYNC не будет проставляться!</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/target-system-synchronization-reference-guide/7#TOPIC-863230">https://support.oneidentity.com/technical-documents/identity-manager/8.0/target-system-synchronization-reference-guide/7#TOPIC-863230</a></p>
+<p>Возможность отключать Data import сделана для того, чтобы не было
+накладок во время синхронизации с целевыми системами пока они
+синхронизируются.</p>
+<p>The session variable FullSync=FALSE is set if the option <strong>Data import</strong>
+is enabled.</p>
+<p>Еще как вариант решения - в Manager в AD – на домене - Execute Templates
+(получается, что в ручную)</p>
+<p>Чтобы процесс срабатывал только на синхронизацию из AD – надо прописать
+условие для процесса</p>
+<p>Value = CBool(Connection.Variables("FULLSYNC")) AndAlso _</p>
+<p>CBool(values("AdHocDataFound"))</p>
+<p><strong>31) Если пользователь не попадает в группу, через бизнес роль - надо
+проверить, чтобы у него стояла галка isGroupAccount</strong></p>
+<p><strong>32) Application Server устанавливаем из дистрибутива 1IM!!!</strong></p>
+<p><strong>33) После переноса данных (Transport) не работает синхронизация</strong></p>
+<p>Почему то не переносятся Base Object у проекта синхронизации.</p>
+<p>Надо создать Base Object</p>
+<p>И проверить Custom Target System в Manager</p>
+<p>Перед импортом пользователей из CSV надо импортировать департаменты!</p>
+<p><strong>34) History DB Не загружаются таблицы из основной БД при выполнении
+задачи</strong></p>
+<p><strong>Import Process Information directly</strong></p>
+<p>Нужно, чтобы в очереди основной БД ничего не было (очистить очередь -
+Ctrl + D по задаче)</p>
+<p><strong>35) Не сохраняются DataSources в отчетах</strong></p>
+<p>Не открывать на редактирование отчет. Добавить Data Source, сохранить и
+потом можно редактировать сам отчет.</p>
+<p><strong>36) Отчеты. Не отображаются группы пользователя.</strong></p>
+<p>Для отображения групп используем таблицу</p>
+<p>UNSAccountInUNSGroup</p>
+<p><strong>37) Почтовые шаблоны. Русские буквы печатаются иероглифами.</strong></p>
+<p>Не нужно использовать fakeSMTP.</p>
+<p>Можно развернуть Linux &amp; postfix &amp; dovecot на Windows 10 WSL.</p>
+<p>--</p>
+<p><strong>38) API. Русские буквы передаются иероглифами</strong></p>
+<p>Надо указывать charset=utf-8</p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person</a>" -WebSession
+\$wsession -Method Post -Body \$body -ContentType "application/json;
+<strong>charset=utf-8</strong>").uri</p>
+<p><strong>39) History DB Ошибка при вставке в таблицу</strong> UID_QBMDeployTarget</p>
+<p>Проверить версию SQL (если в ошибке встречается NULL)</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/29784/error-installing-job-server/72824#72824">https://www.oneidentity.com/community/identity-manager/f/forum/29784/error-installing-job-server/72824#72824</a></p>
+<p><strong>40) Маппинг пользователей. Одному Employee соответствует несколько AD
+аккаунтов</strong></p>
+<p>Маппить по ФИО недостаточно!</p>
+<p>ФИО + должность, например</p>
+<p><strong>41) Чтобы почистить таблицу Custom Target Sysstems - можно просто
+удалить коннектор в Sync Editor (не работает для AD коннектора)</strong></p>
+<p>Можно в Designer запустить SQL редактор и через него удалить записи из
+таблицы - система почистить взаимосвязи - это корректый способ удаления</p>
+<p><strong>42) Ошибка [System.IO.FileNotFoundException] Could not load file or
+assembly 'VI.Projector.ADS.JobComponent' or one of its dependencies. Не
+удается найти указанный файл.</strong></p>
+<p>Надо из дистрибутива</p>
+<p>C:\distr\OneIM8.1SP1\Modules\ADS\install\bin</p>
+<p>Скопировать файл в установочную директорию</p>
+<p>VI.Projector.ADS.JobComponent.dll</p>
+<p><strong>43) Не удается отправить письмо менеджеру при увольнении сотрудника</strong></p>
+<p>По событию UPDATE</p>
+<p><img src="../media/5. Troubleshooting/media/image5.png"
+style="width:3.75in;height:5in"
+alt="O New Employee Send ema&quot; Process properties General process tracking Name Table Description Pre-script for generatirrg Generating cordition Mail template &#39;Exit_person&#39; Extended CCC _ Process - Person value $1sInActive : Bool$ Do notgenerate Disabled by preprocessor " /></p>
+<p><strong>-------</strong></p>
+<p><img src="../media/5. Troubleshooting/media/image6.png"
+style="width:5in;height:2.39583in"
+alt="CCC Send _mail_when _inactik_Ä Sen d_email Process step properties General Generation Error handling Extended Pre-script for generatirrg values (&quot;ContactEmaiI&quot;) $ FK (OID Department) FK(UID PersonHead) Con tactEmai I $ " /></p>
+<hr />
+<p><img src="../media/5. Troubleshooting/media/image7.png"
+style="width:3.27083in;height:5in"
+alt="Param eters Parameter name V Authenticationstring Connectionprovider ConnectionString Maillo SenderAddress Address Culture HtmlEncoding ParamNameI Param Name2 ParamName3 ParamVaIueI CCC Send _mail_when _inactik_Ä Send _email Value = •ru• Value = •FIO Parameter value &#39;value = Connectionlnfo.ÅuthString Value = Connectionlnfo. Connectionprovider Value = Connectionlnfo.ConnectionString Value = •Exit_person• Value = •[redacted-email]• Value = valuesCContactEmaiI•) Value = •UTF&amp; Value = • ExitDate• Value = •ManagerEmaiI• SCustomProperty02S Value = " /></p>
+<p><strong>44) Администрация - не назначется руководитель, через csv</strong></p>
+<p>Ключом пользователя является его GUID - он мапится в CustomProperty01</p>
+<p><strong>45) ITShop. Не приходят уведомления аттестующим о запросах</strong></p>
+<p><img src="../media/5. Troubleshooting/media/image8.png"
+style="width:4.875in;height:5in"
+alt="QER Attestation CalculateRiskIndex ComplianceCheck ESet ITShop AutoCloseInactivePerson AutoDecision AutoRemovaIScope ChallengeRoIeRemovaI DecisionOnInsert DefaultSenderAddress Delegation DeleteCIosed Gapaehavior GroupAutoPubIish LimitOfNodeCheck Mail-approval MailTempIateIdents AnswerTcApprover InformAddingPerson InformDeIegatingPerson InformRequestorAboutMass.. InformRequestorAboutMass... ITShopApprovaI QueryFromApprover RequestÅpproverS}CoIIection AllStepsNoJump [redacted-email] IT Shop request - answer IT Shop request - approval of added step IT Shop request - approval of delegated step Delegation - mass delegation errors occurred Delegation - mass delegation removal errors occurred IT Shop - Approval by Mail IT Shop request - question IT Shop -pending requests for approver " /></p>
+<p><strong>46) ITShop. Не отправляются письма при approve в workflow</strong></p>
+<p>Событие Granted для таблицы PersonWantsOrg (для шага)</p>
+<p>OrderGranted - для всего запроса целиком</p>
+<hr />
+<p>Есть стандартный процесс "VI_ESS_PersonWantsOrg send mail when step
+granted"</p>
+<p><strong>Надо в Workflow (в Manager) процесса указать шаблон для Mail Template
+Approved, чтобы этот процесс заработал!</strong></p>
+<p><strong>Можно для почтового шаблона (IT Shop request - approval granted to
+approval step) поставить язык русский и запилить под этот язык шаблон -
+тогда будет работать.</strong></p>
+<p><strong>Язык шаблона определяется из параметров пользователя (employee)</strong></p>
+<p><img src="../media/5. Troubleshooting/media/image9.png"
+style="width:5in;height:2.09375in"
+alt="O Home Toolbox [7 Edit... Align layoLt Approval levels Add [7 Edit... Delete Approval steps Add [7 Edit... Assignm ene IDM-Da.GOR.EKB.l_AMonelM npoeKTHaq AemenbHOCTb workflow x npoeKTHaq memenbHOCTb workflow Approval level Compli ance check si mp lifi ed (CR - Comp liance check sim Approval level Recipient&#39;s manager (CM- Recipient&#39;s manager) Genera IT Shop Mail templates - pending requests for approver Mail template request Mail template approved Mail template denied Mail template remirder Mail template escalabon Mail template rejection Mail template delegation IT Shop request - approval granted to approva v IT Shop request - approval not granted to appl v Remove posibve Remove negative Remove reroute Remove escalaton " /></p>
+<hr />
+<p>IШаблоны можно копировать, через ObjectBrowser</p>
+<p>Вкладка Navigation</p>
+<p>Таблица</p>
+<p>DialogRichMailBody - там хранится HTML код для языков.</p>
+<p><strong>47) ITShop. При назначении нового менеджера сотруднику выходит ошибка:
+"You do not have permission to assign a new manager"</strong></p>
+<p>Даны права для всех для стандартного ITSHOP</p>
+<p>При ошибках в ITShop - надо проверить, что доступен стандартный ITShop,
+так как на него много чего завязано - и делегирование …</p>
+<p><strong>48) ITShop. При попытке делегировать права на портале выходит ошибка</strong></p>
+<p>Даны права для всех для стандартного ITSHOP</p>
+<p>При ошибках в ITShop - надо проверить, что доступен стандартный ITShop,
+так как на него много чего завязано - и дилегирование …</p>
+<p><strong>49) ITShop. Общий шаблон не отображается</strong></p>
+<p>Надо, чтобы стояли галки как Public так и Share</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr>
+<th>Public template</th>
+<th>Specifies whether the request template is available to all One
+Identity Manager users.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shared</td>
+<td><p>Specifies whether the request template is can be used by all One
+Identity Manager users. This option can only be changed in Manager
+through the user with the application role <strong>Request &amp;
+Fulfillment | IT Shop | Administrators</strong>.</p>
+<p>If the option <strong>Public template</strong> is not set on a shared
+template, the option <strong>Shared</strong> is also disabled.</p></td>
+</tr>
+</tbody>
+</table>
+
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/it-shop-administration-guide/57">https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/it-shop-administration-guide/57</a></p>
+<p><strong>50) Чтобы не удалялась учетка, когда отключается в 1IM</strong></p>
+<p>Надо в Account Definition поставить галки</p>
+<p><img src="../media/5. Troubleshooting/media/image10.png"
+style="width:3.59375in;height:1.40625in"
+alt="Z] Retainaccountdefinitionifpermanentlydiszbled Z] Retainaccountdefinition iftemporarilydiszbled Retainaccountdefinitionondeferred deletion Retainaccountdefinitiononsecurityrisk " /></p>
+<p><strong>51) Не переносится учетка AD, если галка DataImport не установлена у
+csv в Sync Editor</strong></p>
+<p>В таблице ADSAccount у поля UID_ADSContainer Template</p>
+<p>'\$FK(UID_Person).UID_Department\$</p>
+<p>'\$FK(UID_Person).UID_Locality\$</p>
+<p>'\$FK(UID_Person).UID_ProfitCenter\$</p>
+<p>#If ORG Then</p>
+<p>'\$FK(UID_Person).UID_Org\$</p>
+<p>#End If</p>
+<p>'If CBool(Connection.Variables.Get("FULLSYNC")) = False Then</p>
+<p>Select Case (\$FK(UID_TSBBehavior).ITDataUsage:Int\$)</p>
+<p>Case 0:'do not get data from employee</p>
+<p>Case -1:'fill property initially from the ITData of the employee</p>
+<p>If Not \$[IsLoaded]:Bool\$ Then</p>
+<p>If \$FK(UID_Person).IsInActive:Bool\$ Then</p>
+<p>Value = "d0c905f9-4b2d-4db0-a47a-396fd139f9a6"</p>
+<p>Else</p>
+<p>Value = TSB_ITDataFromOrg(\$UID_Person\$, \$UID_TSBAccountDef\$,
+Base.TableDef.Columns("UID_ADSContainer"))</p>
+<p>End If</p>
+<p>End If</p>
+<p>Case 1:'update property depending on ITData of the employee</p>
+<p>If \$FK(UID_Person).IsInActive:Bool\$ Then 'перемещаем учетку в OU
+"уволенные сотрудники", если она заблокирована</p>
+<p>Value = "d0c905f9-4b2d-4db0-a47a-396fd139f9a6"</p>
+<p>Else</p>
+<p>Value = TSB_ITDataFromOrg(\$UID_Person\$, \$UID_TSBAccountDef\$,
+Base.TableDef.Columns("UID_ADSContainer"))</p>
+<p>End If</p>
+<p>End Select</p>
+<p>'End If</p>
+<p><strong>52) При удалении пользователя - перенос его учетки AD в отдельное OU</strong></p>
+<p>В таблице ADSAccount у поля UID_ADSContainer Template</p>
+<p>If \$FK(UID_Person).IsInActive:Bool\$ Then 'перемещаем учетку в OU
+"уволенные сотрудники", если она заблокирована</p>
+<p><strong>Value = "d0c905f9-4b2d-4db0-a47a-396fd139f9a6"</strong></p>
+<p>Else</p>
+<p>Value = TSB_ITDataFromOrg(\$UID_Person\$, \$UID_TSBAccountDef\$,
+Base.TableDef.Columns("UID_ADSContainer"))</p>
+<p>End If</p>
+<hr />
+<p>В Account Definition поставить галки Retain</p>
+<p><img src="../media/5. Troubleshooting/media/image11.png"
+style="width:5in;height:3.84375in"
+alt="Account definition user acco unt table Ta rget system Req uired acco unt definition Manage level (initial) Service item Reso urce type Description General Custom defined ADSAccount Kopnopan•lsyag ceTb Full managed Auto matic assig nment to employees IT Shop Only use in IT Shop Retain acco unt definition if perma nentlydiszbled Retain account definition iftemporarilydiszbled Retain acco unt definitio n o n deferred deletion Retain account definition on security risk " /></p>
+<p><strong>53) ITShop. Убрать стандартные продукты - создание AD групп</strong></p>
+<p>Надо в менеджере зайти в ITShop – Service Catalog - выбрать Service Item
+и установить для нее Not Available</p>
+<p><strong>54) Отображение истории перемещения из отдела в Manager.</strong></p>
+<p><img src="../media/5. Troubleshooting/media/image12.png"
+style="width:3.90625in;height:3.46875in"
+alt="Attestation CalcuIateRiskIndex ComplianceCheck @ Eset ITShop AutoCIoseInactivePerson @ AutoDecision AutoRemovaIScope [38] ChallengeRoIeRemovaI @ DaysOfVaIidlty Department @ Primary ITShopOrg Locality Org ProfitCenter AllStepsNoJump QER-ITSHOPORG-ROLE " /></p>
+<p>Учетка переносится, если в Workflow CSV стоит DataImport. Но тогда не
+работало сохранение старой роли на n дней. Для решения надо зайти в
+Дизайнер - в таблицу Person - Table Script и в скрипте onSaved добавить
+Not перед CBool</p>
+<p><img src="../media/5. Troubleshooting/media/image13.png"
+style="width:6.51042in;height:1.20833in" alt="S 10 " /></p>
+<p><strong>54) ITShop. Не отправляются уведомления руководителю о необходимости
+рассмотреть запрос на продукт, который создал его подчиненный</strong></p>
+<p>Нужно, чтобы не стояла галка
+QER\ITShop\MailTemplateIdents\RequestApproverByCollection</p>
+<p>QER\Attestation\MailTemplateIdents\RequestApproverByCollection</p>
+<p><img src="../media/5. Troubleshooting/media/image14.png"
+style="width:4.48958in;height:2.03125in"
+alt="MailTempIateIdents AnswerTcApprover InformAddingPerson InformDeIegatingPerson InformRequestorAboutMass... InformRequestorAboutMass... ITShopApprovaI QueryFromApprover RequestApproverayCoIIection IT Shop request - answer IT Shop request - approval of adde... IT Shop request - approval of dele... Delegation - mass delegation error.. Delegation - mass delegation remo.. IT Shop - Approval by Mail IT Shop request - question IT Shop - pending requests for app.. " /></p>
+<p><strong>55) Сброс неудачных попыток входа пользователя</strong></p>
+<p>connect to back end of the database.</p>
+<p>step1. get the UID_dialoguser</p>
+<p>SELECT [UID_DialogUser]<br />
+,[UserName]<br />
+,[BadPasswordAttempts]<br />
+FROM [OneIMGDS].[dbo].[DialogUser]<br />
+where [UserName]='viadmin'</p>
+<p>step 2. use the [UID_DialogUser] from above to set the
+BadPasswordAttempts to 0</p>
+<p>UPDATE [dbo].[DialogUser]<br />
+SET [BadPasswordAttempts] = 0  </p>
+<p>WHERE [UID_DialogUser]='QBM-A60F9E5189134AFFB6711DFCBC3F260E'<br />
+GO</p>
+<p>try login... good luck</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/30063/user-account-is-locked---not-able-to-log-in/73579#73579">https://www.oneidentity.com/community/identity-manager/f/forum/30063/user-account-is-locked---not-able-to-log-in/73579#73579</a></p>
+<p><strong>56) Сброс пароля viadmin</strong></p>
+<ol>
+<li>
+<p>Access SQL Management Studio</p>
+</li>
+<li>
+<p>Remove system user password by using following querie</p>
+<ol>
+<li><strong>Update DialogUser set password=[REDACTED] where username='viadmin'</strong></li>
+</ol>
+</li>
+<li>
+<p>Run following command to make to 0 for default password policy i.e
+    ‘One Identity Manager password policy’</p>
+<ol>
+<li>From 8x onwards, all users passwords should comply with password
+    policy</li>
+</ol>
+<!-- -->
+<ol>
+<li><strong>Update QBMPwdPolicy set minlen=0 where
+    DisplayName='%Globals.QIM_ProductNameShort% password policy'</strong></li>
+</ol>
+<!-- -->
+<ol>
+<li>So above statement updates default password policy minimum
+    length 8 to 0</li>
+</ol>
+</li>
+<li>
+<p>Then open Launch Pad and login with viadmin/no password.</p>
+</li>
+<li>
+<p>After above steps and update Default Password Policy Minimum length
+    to 8.</p>
+</li>
+</ol>
+<p>Минимальная длина = 8 символам</p>
+<p><strong>57) App сервер</strong></p>
+<p>При установке сертификата https - не заходит по dns имени.</p>
+<p>Заходит по localhost</p>
+<p><strong>58) Процессы ITShop</strong></p>
+<p>На шаге процесса в Workflow где вычисляются согласующие - чтобы нужно
+было сделать решени всем - ставим Number of appreovers = +1</p>
+<ol>
+<li><strong>ITShop возможность заказывать продукты несколько раз</strong></li>
+</ol>
+<blockquote>
+<p>Надо Изменить тип ресурса на Multi-request resources</p>
+<p>В меню Entitlements</p>
+</blockquote>
+<ol>
+<li><strong>Ошибка при задании поля у сотрудника</strong></li>
+</ol>
+<blockquote>
+<p>Write permission denied for value IsTemporaryDeactivated</p>
+<p>Скорее всего - юзер задизаблен и надо проверять на это</p>
+</blockquote>
+<ol>
+<li><strong>Скрипт не вносит изменения при работе из Дизайнера</strong></li>
+</ol>
+<blockquote>
+<p>До конца не понятно, но проблема решается запуском скрипта, через
+задание, на JOB сервере.</p>
+</blockquote>
+<ol>
+<li>Чтобы отправлялось одно письмо по согласованиям, а не несколько</li>
+</ol>
+<blockquote>
+<p>QER\ITShop\MailTemplateIdents\RequestApproverByCollection</p>
+</blockquote>
+<ol>
+<li>Создание PWO (PersonWantsOrg) из процесса</li>
+</ol>
+<blockquote>
+<p>Лучше сначала его создать с портала и подсмотреть, какие параметры он
+прописывает</p>
+<p><img src="../media/5. Troubleshooting/media/image15.png"
+style="width:10.5in;height:5.42708in"
+alt="Navigation Process Orchestration AttestationCase Enableapproved Employeecategory8 CCCDepartmentsAP CCCPersonneIActionsAPIFuI Department DialogScheduIe EXOMai130x person g] CCC_Create Attestation for external employee g] CCC Create PINO for external employee when Changed E) g] CCC Fill SecurityCIeararrce fields for new employee PersonHasTS&amp;AccountDef PersonInOrg Provision data to Energy PersonWa ntsOrg g] PersonWantsOrg Check 8PMTicket Status g] PersonWantsOrg Create Ticket 8PM g] PersonWantsOrg CreateMuItiTicket g] PersonWantsOrg Enable Employee in separate process g] PersonWantsOrg Enable Temporary Disabled Employee g] PersonWantsOrg Insert CCC&amp;aIarKelJnitInPVVO g] PersonWantsOrg Move CCCPointONle-wIrAccProd_T g] PersonWantsOrg Positive Decision g] PersonWantsOrg Reset Central user Password g] PersonWantsOrg Save Extended Internet Access O G etting Started Schema Editor Process - CCC_Create PWO for ext... Process - Provisic CCC Create PWO for external employee when Changed ExitDate Cræte o bjEt Param eters Parameter name Authenticationstring Connectionprovider ConnectionString Objectwpe val_ObjectKeyOrdered val UlD.org val LIID Personlnserted val JID PersonOrdered Parameter value Value = Connectionlnfo.AuthString Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo.ConnectionString Value = •personWantsOrg• Value = &lt; • &lt;/Key Value = •49842C99-03C74A67-A3E1-56C18CD35F5Y SUID_PersonS Value = SUID_PersonS Value = " /></p>
+<p><img src="../media/5. Troubleshooting/media/image16.png"
+style="width:3.94792in;height:8.6875in"
+alt="Setup Select the modules you want to add to One Identity Manager 8.1.22 8.1.22 8.1.22 8.1.22 Module Cloud Systems Management Cloud HR Systems Starling Connect Connector Z] Database System Integration Data Governance Data Governance Target Systems Active Directory Z] Microsoft Exchange Exchange hybrid SharePoint Azure Active Directory Exchange Online SharePoint Online G suite 18M Notes/Domino LDAP directories Mainframe Oracle E-ausiness Suite Privileged Account Governance SAP SAP R,/3 Structural Profiles Add-on SAP R,/3 Analysis Authorization Add-on SAP R,&#39;3 GRC Add-on ur„x IT Service Management Application Management Help Desk IT Chargeback ServiceNow Base Technology Configuration Module Governance Base Module Identity Management Base Module Target System Base Module Target System Synchronization Version 81.2.14 .2.2 8.1.2 14 8.1.214 8.1.2 14 81.2.14 .2.14 8.1.214 8.1.2 14 81.2.14 .2.14 8.1.214 8.1.2 14 81.2.14 .2.14 8.1.214 8.1.2 14 81.2.14 .2.14 8.1.2 14 8.1.2 14 81.2.14 .2.14 8.1.2 14 81.2.14 .2.14 8.1.214 8.1.2 14 " /></p>
+</blockquote>
+<ol>
+<li><strong>Зависла очередь dbqueue</strong></li>
+</ol>
+<blockquote>
+<p>Ппц, ничего не помогало, висели процессы Assignment</p>
+<p>В итоге, после нескольких дней раздумий, почистил все записшие
+процессы - после этого очередь запустилась!</p>
+<p>На всякий случай оставлю это здесь</p>
+</blockquote>
+<ul>
+<li>
+<p>Title<br />
+  DBQueue Processor does not process tasks</p>
+</li>
+<li>
+<p>Description<br />
+  DBQueue Processor does not process tasks.  No new tasks appear and/or
+  existing tasks are not processing.  </p>
+</li>
+</ul>
+<p>What troubleshooting steps exist to resolve this issue?</p>
+<ul>
+<li>Resolution<br />
+  Execute the following steps in the database using a suitable query
+  tool, e.g. SQL Management Studio.  </li>
+</ul>
+<p>Stop all DBQueue Processor components.  </p>
+<p>exec QBM_PWatchDogPrepare 1  </p>
+<p>go  </p>
+<p>exec QBM_PDBQueuePrepare 1  </p>
+<p>go  </p>
+<p>Check whether other database sessions are active.  </p>
+<p>select *  </p>
+<p>from sys.sysprocesses p  </p>
+<p>where dbid = DB_ID()  </p>
+<p>and spid \&lt;&gt; @@SPID  </p>
+<p>If there are still sessions active, they must be closed first.  </p>
+<p>Create a new ServiceBroker ID and enable message delivery.  </p>
+<p>alter database \&lt;database name&gt; set NEW_BROKER  </p>
+<p>go  </p>
+<p>alter database \&lt;database name&gt; set enable_broker  </p>
+<p>go  </p>
+<p>Initializing the DBQueue Processor.  </p>
+<p>exec QBM_PDBQueuePrepare 0,1  </p>
+<p>go  </p>
+<p>exec QBM_PWatchDogPrepare  </p>
+<p>go</p>
+<blockquote></blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/identity-manager/kb/239099/dbqueue-processor-does-not-process-tasks">https://support.oneidentity.com/identity-manager/kb/239099/dbqueue-processor-does-not-process-tasks</a>&gt;</em></p>
+<blockquote>
+<hr />
+<p>И ещё - было очень много записей в статистике, таблица
+<strong>DialogDashBoardContent</strong></p>
+</blockquote>
+<p><strong>Отключил расписание Calculate Statistics!</strong></p>
+<p><strong>Отключил расписание Calculate weekly Statistics!</strong></p>
+<p><strong>Перезапустил службу</strong></p>
+<blockquote></blockquote>
+<ol>
+<li><strong>Логи ошибок выполнения на SQL Server</strong></li>
+</ol>
+<blockquote>
+<p>Хранятся в таблице DialogJornal</p>
+</blockquote>
+<ol>
+<li><strong>Не перезаписываются поля таблиц</strong></li>
+</ol>
+<blockquote>
+<p>Надо проверить, что у Account Definition у Manage Level стоит IT
+operating data overwrites = Always</p>
+</blockquote>
+<ol>
+<li><strong>Значение values("SystemType") для AdHoc процессов</strong></li>
+</ol>
+<blockquote>
+<p>Можно найти в таблице DPRSchema</p>
+</blockquote>
+<ol>
+<li>SQLAgent</li>
+</ol>
+<blockquote>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/125598/sql-server-minimal-permissions-guide">https://support.oneidentity.com/identity-manager/kb/125598/sql-server-minimal-permissions-guide</a></p>
+</blockquote>
+<ol>
+<li>Ошибка: Database error 41313: The C compiler encountered a failure.
+    The exit code was 2.</li>
+</ol>
+<blockquote>
+<p>Закончилось место для БД</p>
+</blockquote>
+<h1 id="makedecision">Не отрабатывает метод MakeDecision</h1>
+<p><img src="../media/5. Troubleshooting/media/image17.png"
+style="width:10.38542in;height:5.53125in"
+alt="Parameters Parameter name Authenticationstring Connectionprovider Connectionstring MethodName ObjectType WhereClause paraml Param2 Param3 Param4 Param5 ConnectionVariables Parameter value Value Connectionlnfo.AuthString Value = Connectionlnfo,ConnectionProvider Value Connectionlnfo,ConnectionString Value •MakeDecision• Value • •PersonWantsOrg• Value Connection.SqlForrnatterUidComparisonCUlD_PersonWa... Value True Value •Approved• Value • Nothing Value •O&#39; Value = True value •varllvarævary H idden Encrypted Partial en... Type IN IN IN IN IN " /></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/27166/getting-error-this-employee-is-not-authorized-to-make-approvals-in-makedecision-method">Getting error "This employee is not authorized to make approvals"in
+"MakeDecision" method. - Forum - Identity Manager Community - One
+Identity
+Community</a></p>
+<hr />
+<h1 id="html">В письме (шаблон) не корректно отображается HTML, который был сформирован, через скрипт</h1>
+<p>Then please take a look at the documentation here. 
+<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.3/operational-guide/13#TOPIC-1481201">https://support.oneidentity.com/technical-documents/identity-manager/8.1.3/operational-guide/13#TOPIC-1481201</a></p>
+<p>You need to create a script that created your HTML code and returns this
+as a string parameter. To avoid the escaping of the script result, you
+need to tag the script call in your mal template with <strong>\$SCRIPT(\&lt;Your
+script name&gt;):HTML\$</strong></p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/32756/insert-html-in-mail-templates">https://www.oneidentity.com/community/identity-manager/f/forum/32756/insert-html-in-mail-templates</a>&gt;</em></p>
+<hr />
+<h1 id="_1">Параметры скриптов внутри почтовых уведомлений</h1>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.3/operational-guide/13#TOPIC-1481199">https://support.oneidentity.com/technical-documents/identity-manager/8.1.3/operational-guide/13#TOPIC-1481199</a></p>
+<hr />
+<h1 id="ad">Для уз AD не проходит проверку пароль или он не генерируется корректно</h1>
+<p>Для AD должна быть корректно настроена политика паролей.</p>
+<p>Designer-&gt; BaseData-&gt; Security Settings -&gt; Password policies</p>
+<p>В вкладке Assignments должны быть назначения или на Account Definitions
+(<strong>TSBAccDef</strong>) или на весь домен (ADSDomain)</p>
+<p><img src="../media/5. Troubleshooting/media/image18.png"
+style="width:8.78125in;height:5.375in"
+alt="Navigation Bas e Data General Security settings Authentication modules Database server permissions PrOgrams Web server configurations &quot;E HTML applications Connection data OAuth 2.0,&#39;OpenID Connect c f&#39; Password policies Restricted passwords • Installation EE]G Localization Advarrced O Base Data Password policies Active Directory password p O Getting Started Azure Active Directory password policy GK 80 password policy GreenPIum password policy One Identity Manager password policy password policy for central password of employees SAP R,/3 password policy CepsncHEIeY3 Active Directory password policy Job Server Editor Description Predefined password POI.. Predefined password POI. Predefined password POI. Predefined password POI. Predefined password POI. Default policy o o o o o o Display name Description Erro r message Assignment Active Directory password policy Predefined password policy for Active Directory user passwords. Default policy Password Character classes Scripts Remove Test Assignments Apply to Passwo rd co um n ZOSÅccount - UserPassword " /></p>
+<p><img src="../media/5. Troubleshooting/media/image19.png"
+style="width:8.97917in;height:5.45833in"
+alt="Password policies Active Directory password policy Active Directory password policy (Admins) Azure Active Directory password policy GK 80 password policy One Identity Manager password policy password policy for central password of employees SAP password policy CepsncHEIe Y3 Active Directory password policy Description Predefined password policy for Active Directory user passwords. Predefined password policy for Azure Active Directory user passwords. Predefined password policy for system user passwords to authenticate on O. Predefined password policy for the central password of employees for authe... Predefined password policy for SAP user passwords. o o o o o o o Display name Description Erro r message Assignment Active Directory password policy Predefined password policy for Active Directory user passwords. Cl Default policy Password Character classes Scripts Remove Test Assignments Ap p to Outsourcing ygeTHag yarulcb OCH08Hag yqeTHag 3anncb Act... Passwo rd co umn ADSAccount - UserPassword ADSAccount - UserPassword " /></p>
+<p>Если политика не будет назначена, то будет использоваться для генерации
+пароля политика с флагом - Default Policy и это может привести к ошибкам
+при сохранении в AD уз!!!</p>
+<p>Чтобы пароль генерировался для уз должен быть установлен
+конфигурационный параметр</p>
+<p>TargetSystem\ADS\Accounts\InitialRandomPassword</p>
+<hr />
+<h1 id="custom-target-system-manager">Не отображается меню Custom Target System в Manager</h1>
+<p>In the Designer, set the TargetSystem | UNS |
+<strong>CreateNewRoot</strong> configuration parameter and compile the database.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/34048/how-can-i-enable-the-menu-custom-target-system/82977">https://www.oneidentity.com/community/identity-manager/f/forum/34048/how-can-i-enable-the-menu-custom-target-system/82977</a>&gt;</em></p>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>12. Logs - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-" class="nav-link">----</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#oneidentity" class="nav-link">Логи OneIdentity</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#appserver" class="nav-link">APPServer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#enable-tracing-first-and-try-a-new-test" class="nav-link">. Enable Tracing first and try a new test</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#jobsever" class="nav-link">Указать путь для хранения логов JobSever</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#log-severity-level" class="nav-link">Log Severity level</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#displaying-messages-in-the-database-journal" class="nav-link">Displaying Messages in the Database Journal</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-_1" class="nav-link">-----</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#nlog" class="nav-link">NLOG</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#how-to-enable-and-collect-it-shop-logs" class="nav-link">How to Enable and Collect IT Shop Logs (Логи портала)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#frozendetect" class="nav-link">Уведомления о FrozenDetect</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link">Уведомления о ошибках синхронизации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#vid_jobqueue_notify_frozen" class="nav-link">VID_Jobqueue_Notify_Frozen</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>12. Logs</p>
+<p>28 февраля 2020 г.</p>
+<p>11:03</p>
+<p>Хранятся в %LocalAppData%\One Identity\One Identity Manager\</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/configuration-guide/132">https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/configuration-guide/132</a></p>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/261074/how-to-enable-trace-logging">How to Enable TRACE Logging (261074)
+(oneidentity.com)</a></p>
+<hr />
+<p>QBM_Pjournal пишет в DialogJournal</p>
+<h1 id="-">----</h1>
+<p>1) Можно включить логирование для Job Server (Insert)</p>
+<p>На Job Server</p>
+<p><img src="../media/12. Logs/media/image1.png"
+style="width:5in;height:1.9375in"
+alt="Job Service Configuration - Files\One Identity\One Identity Manager\JobService.cfg File Templates ? Module list Job destination Configuration Lo v.&#39;ltter eventloglogwfiter filalogwfitar Insert eventloglogwfiter filalogwfit ar Re m,ove " /></p>
+<p>SQLProvider перенастроить, так как сбивается</p>
+<p>Перезапустить службу.</p>
+<hr />
+<h1 id="oneidentity">Логи OneIdentity</h1>
+<p><strong>Логи процессора Powershell (в папке пользователя от которого запущен
+jobserver)</strong></p>
+<p><img src="../media/12. Logs/media/image2.png"
+style="width:7.20833in;height:3.07292in"
+alt="File Home StdioProcessor Share Users administrator.lAMDEMO App Data Local One Identity Date modified 12/02/2020 22:20 11/02/2020 23:16 07/02/20201815 06/02/2020 2042 05/02/2020 23:43 05/02/2020 0640 04/02/2020 13/02/20200•13 One Identity Manager Stdioprocessor Quick access Desktop Downloads Documents Pictures Backup This pc Desktop 8 Documents Name StdioProcessor.0.log StdioProcessor.1.log Stdi0Processor.2.log StdioProcessor,3.log StdioProcessorA.log StdioProcessor.5.log Stdi0Processor.6.log StdioProcessor,log Type Text Document Text Document Text Document Text Document Text Document Text Document Text Document Text Document Size 30 KB " /></p>
+<p>Конфиг логов можно найти в</p>
+<p><img src="../media/12. Logs/media/image3.png"
+style="width:5in;height:1.90625in" /></p>
+<p>И там путь к логам указан</p>
+<hr />
+<h1 id="appserver">APPServer</h1>
+<p>C:\inetpub\wwwroot\AppServer\App_Data\Logs</p>
+<hr />
+<h1 id="enable-tracing-first-and-try-a-new-test">. Enable Tracing first and try a new test</h1>
+<p>- in globallog.config (This is found in the installation folder),
+change this line(s)</p>
+<p>below, from</p>
+<p>\&lt;logger name="*" minlevel="Info" writeTo="viewer"/&gt;</p>
+<p>to</p>
+<p>\&lt;logger name="*" minlevel="Trace" writeTo="viewer"/&gt;</p>
+<p>You need also to uncomment the \&lt;-- ... --&gt; that are under these line.</p>
+<p>2. Enable the sync logs</p>
+<p>See also</p>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/267514/how-to-enable-synchronization-logging-and-retrieve-the-synchronization-summary-267514-">https://support.oneidentity.com/identity-manager/kb/267514/how-to-enable-synchronization-logging-and-retrieve-the-synchronization-summary-267514-</a></p>
+<p>3. Send these logs aswell if you have them generated(they should be on
+the involved Jobserver):</p>
+<p>- %LOCALAPPDATA%\One Identity\One Identity
+Manager\StdioProcessor\StdioProcessor.log</p>
+<p>- %LOCALAPPDATA%\One Identity\One Identity
+Manager\SynchronizationEditor\SynchronizationEditor.log</p>
+<p>- %LOCALAPPDATA%\One Identity\One Identity
+Manager\Projector.Isolator\Projector.Isolator.log</p>
+<p>4. Export sync project as a .projshell file.</p>
+<p>see also:</p>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/187752/how-to-export-the-synchronization-project-shell-from-the-synchronization-editor">https://support.oneidentity.com/identity-manager/kb/187752/how-to-export-the-synchronization-project-shell-from-the-synchronization-editor</a></p>
+<p>5. Send Sync Report:</p>
+<p>from sync editor | Help | Generate synchronization analysis report</p>
+<p>The logs are located in this folder</p>
+<p>C:\Users\your-account\AppData\local\OneIdentity\OneIdentityManager</p>
+<p>or C:\windows\System32\config\systemprofile\AppData\Local\One
+Identity\One Identity Manager</p>
+<hr />
+<h1 id="jobsever">Указать путь для хранения логов JobSever</h1>
+<p><img src="../media/12. Logs/media/image4.png"
+style="width:7.60417in;height:4.76042in" /></p>
+<h1 id="_1"></h1>
+<h1 id="log-severity-level">Log Severity level</h1>
+<p><img src="../media/12. Logs/media/image5.png"
+style="width:7.73958in;height:1.98958in"
+alt="Table 359: Warning Levels for Logging Severity level Description Info Warning Serious All messages are written to the log file. The log file quickly becomes large and cumbersome. Only warnings and exception errors are written to the log file (default). Only exception errors are written to the log file. " /></p>
+<p><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwi6huGW3uH4AhWhVvEDHc0RDEIQFnoECAwQAw&amp;url=https%3A%2F%2Fsupport.oneidentity.com%2Ftechnical-documents%2Fidentity-manager%2F8.0%2Fconfiguration-guide%2F127&amp;usg=AOvVaw3_xddk1Ink2RFlKIv-00Dd">https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwi6huGW3uH4AhWhVvEDHc0RDEIQFnoECAwQAw&amp;url=https%3A%2F%2Fsupport.oneidentity.com%2Ftechnical-documents%2Fidentity-manager%2F8.0%2Fconfiguration-guide%2F127&amp;usg=AOvVaw3_xddk1Ink2RFlKIv-00Dd</a></p>
+<h1 id="_2"></h1>
+<h1 id="displaying-messages-in-the-database-journal">Displaying Messages in the Database Journal</h1>
+<p>The database journal is used to store information, warning and error
+messages from different components of One Identity Manager, for
+example, DBQueue Processor, Configuration Wizard or One Identity Manager
+Service. Actions in the program "Job Queue Info", such as re-enabling
+process steps, are also written to the database journal.</p>
+<p><strong><em>To display items from database journal</em></strong></p>
+<ul>
+<li>In the Job Queue Info, go to <strong>View | System log</strong>.</li>
+</ul>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/configuration-guide/124#TOPIC-910139">https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/configuration-guide/124#TOPIC-910139</a>&gt;</em></p>
+<hr />
+<p><strong>Extended Debugging in the One Identity Manager Service</strong></p>
+<p>There are two parameters available in the One Identity Manager
+Service configuration module that you can use to extend debugging
+functionality:</p>
+<ul>
+<li>
+<p>DebugMode</p>
+</li>
+<li>
+<p>Component debugging mode (ComponentDebugMode)</p>
+</li>
+</ul>
+<p>One Identity Manager Service writes more detailed data into the log file
+if the parameter "DebugMode" is set, for example, all parameters that
+are passed to a component as well as the processing results together
+with OUT parameters.</p>
+<p>Individual One Identity Manager Service process components can output
+additional process data to the One Identity Manager Service log file. To
+do this you set the parameter "ComponentDebugMode" in the configuration
+module. You should only use "ComponentDebugMode" for localizing errors
+because the effect on performance means that it is not recommended for
+normal use.</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.2/configuration-guide/128">https://support.oneidentity.com/technical-documents/identity-manager/8.0.2/configuration-guide/128</a>&gt;</em></p>
+<p><img src="../media/12. Logs/media/image6.png"
+style="width:6.42708in;height:3.5in" /></p>
+<h1 id="_3"></h1>
+<h1 id="-_1">-----</h1>
+<h1 id="nlog">NLOG</h1>
+<p>Скачиваем программу Log2Console</p>
+<p>Настраиваем ресивер</p>
+<p><img src="../media/12. Logs/media/image7.png"
+style="width:6in;height:1.625in"
+alt="Receivers Add... • Remove UDP (IP and •..,6) Configuration Multicast Group Address (Optional) Receive Buffer Size UDP Port Number use IPv6 Addresses 10000 " /></p>
+<p>На JobServer в файле "C:\Program Files\One Identity\One Identity
+Manager\globallog.config"</p>
+<p>Из комментов переносим строку с writeti='chainsaw'</p>
+<p>И в строке target type=Chainsaw указывает ip адрес машины с
+установленным Log2Console</p>
+<p><img src="../media/12. Logs/media/image8.png"
+style="width:8.47917in;height:5.90625in"
+alt="globallog.config Notepad File Edit Format View Help (target name=&quot;objectlogfile&quot; . log&quot; maxArchiveFi1 (target name=&quot;jobgenlogfile&quot; . log&quot; maxArchiveFi1 just for debug purposes via viewer xsi : type—&quot;EventLog&quot; (target (target (targets) (target &lt; logger &lt; logger clogger xsi : name=&quot;viewer&quot; xsi:type=&quot;Chainsaw&quot; name=&quot;chainsaw&quot; address= address= source= &quot;udp4://[REDACTED_IP]: 7071 name= name= &quot;eventLog&quot; minlevel=&quot;lnfo&quot; &quot;${companyName} ${productTit1e} just for debug purposes via &lt; logger min1eve1=&quot;Trace&quot; &lt; logger min1eve1=&quot;Trace&quot; viewer writeTo=&quot; chainsaw&quot; / &gt; &lt; ! Debug logger definitions for trace log &lt; logger min1eve1=&quot;Trace&quot; writeTo=&quot;debug&quot;/&gt; &lt; logger name=&quot;Sq1Log&quot; min1eve1=&quot;Trace&quot; writeTo=&quot;sq110gfi1e&quot;/&gt; &lt; logger name=&quot;ObjectLog&quot; min1eve1=&quot;Trace&quot; " /></p>
+<hr />
+<h1 id="how-to-enable-and-collect-it-shop-logs">How to Enable and Collect IT Shop Logs (Логи портала)</h1>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/identity-manager/kb/230911/how-to-enable-and-collect-it-shop-logs">https://support.oneidentity.com/identity-manager/kb/230911/how-to-enable-and-collect-it-shop-logs</a>&gt;</em></p>
+<p>1. On the server where the Identity Manager web portal is installed,
+navigate to <strong>C:\inetpub\wwwroot\IdentityManager\bin</strong> and
+open <strong>WebDesigner.ConfigFileEditor.exe</strong> to edit the web.config file
+located under <strong>C:\inetpub\wwwroot\IdentityManager:</strong></p>
+<p><img src="../media/12. Logs/media/image9.png"
+style="width:5in;height:3.28125in" /></p>
+<p>2. Connect to the database:</p>
+<p><img src="../media/12. Logs/media/image10.png"
+style="width:5in;height:2.29167in"
+alt="Login to the database LAB-V71\OnelM802. Enter new connection Authentication method O System user viadmin " /></p>
+<p>3. Click to expand the "Log" section.  Enable the logging level as
+specified by Support.  "Trace" is used to gather verbose logging. 
+Support will normally request both the "Application log" and the
+"Database log":</p>
+<p><img src="../media/12. Logs/media/image11.png"
+style="width:5in;height:5.13542in" /></p>
+<p>Save the config file once logging has been enabled.  This will trigger a
+restart of the application pool.</p>
+<p>4. After reproducing the issue, gather the required application and
+database logs from
+the <strong>C:\inetpub\wwwroot\IdentityManager\App_Data\Logs</strong> directory. 
+E.g.:</p>
+<p><img src="../media/12. Logs/media/image12.png"
+style="width:5in;height:3in" /></p>
+<hr />
+<h1 id="frozendetect">Уведомления о FrozenDetect</h1>
+<p>Отвечает процесс VID_Jobqueue_Notify_Frozen</p>
+<p>Письмо plaintext без шаблонов каких-либо</p>
+<hr />
+<h1 id="_4">Уведомления о ошибках синхронизации</h1>
+<p>Процесс DPR_DPRProjectionStartInfo_Run_Synchronization</p>
+<p><img src="../media/12. Logs/media/image13.png"
+style="width:5in;height:4.13542in"
+alt="Process step properties General Generation Error handling Extended Notification on error Name Process task Description Process information Prioritj Run Synchronization ProjectorComponent - FullProjection None Notification (error} Process history D&amp;Queue does not wait Disabled by preprocessor " /></p>
+<p><strong>Notifications about process step handling</strong></p>
+<p>You have the possibility to send a message when a process step has
+succeeded or when it has failed. Prerequisite for using the notification
+system is an SMTP host, set up for sending mail and activation of the
+configuration parameter for mail notification. Use the various
+configuration parameters for mail notifications for setting up
+notifications. For detailed information about configuring the email
+notification, see the <em>One Identity Manager Installation Guide</em>.</p>
+<p><strong><em>To configure mail notification for a process step</em></strong></p>
+<ol>
+<li>
+<p>In the Designer, select the process in the <strong>Process
+    Orchestration</strong> category.</p>
+</li>
+<li>
+<p>Start the Process Editor with the <strong>Edit process</strong> task.</p>
+</li>
+<li>
+<p>Click on the element for the process step in the process document.</p>
+</li>
+<li>
+<p>Select the <strong>Process step properties</strong> view.</p>
+</li>
+<li>
+<p>On the <strong>General </strong>tab, enable the <strong>Notification
+    (success)</strong> and <strong>Notification (error)</strong> options.</p>
+</li>
+<li>
+<p>Enter the data for sending notifications on the <strong>Notification on
+    success</strong> and <strong>Notification on error</strong> tabs.<br />
+<strong>NOTE:</strong> You must enter all data in VB.NET syntax. Use #LD
+    notation for language-dependent formatting of the information.</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><strong>Property</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sender email address</td>
+<td>Email address of the notification sender.</td>
+</tr>
+<tr>
+<td>Recipient email address</td>
+<td>Email address of the notification recipient.</td>
+</tr>
+<tr>
+<td>Subject</td>
+<td>Subject line.</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>The message to be sent.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Table 116: Properties for notifications</p>
+<p><strong>NOTE:</strong> Email notifications are only sent during processing if all
+the data is entered for a case (failure or success).</p>
+</blockquote>
+<p><strong>Example for configuring an email message</strong></p>
+<table>
+<thead>
+<tr>
+<th>Sender email address</th>
+<th>Value = Connection.GetConfigParm("Common\MailNotification\DefaultSender")</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recipient email address</td>
+<td>Value = Connection.GetConfigParm("Common\MailNotification\DefaultAddress")</td>
+</tr>
+<tr>
+<td>Subject</td>
+<td>Value = #LD("Error updating the Active Directory user account {0}.", \$CanonicalName\$)#</td>
+</tr>
+<tr>
+<td>Message</td>
+<td>Value = #LD("The user account {0} could not be updated.)#</td>
+</tr>
+</tbody>
+</table>
+<p>The process VID_SendMail (DialogDatabase table) is used to send email
+notifications from the process handling. This process uses the
+parameters of the vid_InsertForSendMail database procedure. To customize
+this process, create a copy of the process and edit it.</p>
+<p><strong>TIP:</strong></p>
+<p>To send the error messages logged by the One Identity Manager Service in
+case of an error by email notification,
+the vid_InsertForSendMail database procedure supplies
+the pcAdditionalMessage parameter.</p>
+<p>To access this functionality, use the
+variable [AdditionalMessage] when you set up your failure notification
+message.</p>
+<p>Example of a message:</p>
+<p>Value = "Process failed." &amp; vbcrlf _</p>
+<p>&amp; vbcrlf _</p>
+<p>&amp;
+"------------------------------------------------------------------------"
+&amp; vbcrlf _</p>
+<p>&amp; "[AdditionalMessage]"</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.5/configuration-guide/60#TOPIC-1651083">https://support.oneidentity.com/technical-documents/identity-manager/8.1.5/configuration-guide/60#TOPIC-1651083</a>&gt;</em></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/33315/notify-on-sync-failure/81210">Notify on sync failure - Forum - Identity Manager Community - One
+Identity
+Community</a></p>
+<hr />
+<h1 id="vid_jobqueue_notify_frozen"><span class="mark">VID_Jobqueue_Notify_Frozen</span></h1>
+<hr />
+<p><img src="../media/12. Logs/media/image14.png"
+style="width:10.25in;height:5.45833in" /></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

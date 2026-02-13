@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>24. One Identity API - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#5" class="nav-link">Рабочий вариант (надо указывать все 5 параметров было!)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Вызов метода из скрипта</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#api" class="nav-link">Не запускается скрипт, через api</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>24. One Identity API</p>
+<p>22 января 2020 г.</p>
+<p>10:41</p>
+<blockquote>
+<p><strong>Api Designer</strong></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/api-designer-user-and-development-guide">https://support.oneidentity.com/technical-documents/identity-manager/8.1/api-designer-user-and-development-guide</a></p>
+<p><strong><em>Примеры</em></strong></p>
+<p>QBM\dvd\AddOn\ApiSamples</p>
+<p><strong>Включить Debug App server</strong></p>
+<p>В web.config</p>
+<p><strong>\&lt;add key="debugmode" value="true"/&gt;</strong></p>
+<p>#Run script</p>
+<p>\$Param1 = "465e6cb3-7a7d-41ec-9690-21963867a256"</p>
+<p>\$Param2 = "d6d14a3a-c8fd-46fe-9daf-9a61a8d4180d"</p>
+<p>\$Param3 = "True"</p>
+<p>\$Param4 = "OK"</p>
+<p><strong>\$body1 = @{parameters = @("465e6cb3-7a7d-41ec-9690-21963867a256",
+"d6d14a3a-c8fd-46fe-9daf-9a61a8d4180d", "True", "OK") } |
+ConvertTo-Json</strong></p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/script/CCC_MakeDecision">https://t-oneim-4.sgp.ru/AppServer/api/script/CCC_MakeDecision</a>"
+-WebSession \$wsession -Method Put -Body \$body1 -ContentType
+"application/json; charset=utf-8").uri</p>
+<hr />
+</blockquote>
+<h1 id="5">Рабочий вариант (надо указывать все 5 параметров было!)</h1>
+<blockquote>
+<p>\$authdata = @{AuthString = "Module=DialogUser;User=[REDACTED_USER];Password=" }</p>
+<p>\$authJson = ConvertTo-Json \$authdata -Depth 2</p>
+<p># Login (important, pass the NAME for your session variable in
+-SessionVariable)</p>
+<p>Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/auth/apphost">https://t-oneim-4.sgp.ru/AppServer/auth/apphost</a>" -Body
+\$authJson.ToString() -Method Post -UseDefaultCredentials -Headers
+@{Accept = "application/json" } -SessionVariable wsession</p>
+<p>\$body1 = @{parameters = @("d6d14a3a-c8fd-46fe-9daf-9a61a8d4180d",
+"True", "OK",<strong>"",""</strong>) } | ConvertTo-Json</p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/PersonWantsOrg/465e6cb3-7a7d-41ec-9690-21963867a256/method/MakeDecision">https://t-oneim-4.sgp.ru/AppServer/api/entity/PersonWantsOrg/465e6cb3-7a7d-41ec-9690-21963867a256/method/MakeDecision</a>"
+-WebSession \$wsession -Method Put -Body \$body1 -ContentType
+"application/json; charset=utf-8").uri</p>
+<p><img src="../media/24. One Identity API/media/image1.png"
+style="width:5in;height:3.14583in"
+alt="So the JSON body needs to look like this: &quot;parameters&quot; Object properties General Methods Permissions Change labels Export - Method MakeDecision(String uidPerson, Boolean decision, String v — Parameters uidPerson (System. String) decision (System. Boolean) reason (System. String) (uidJustification (System.String)l (sublevel (System. Int32)l Execute " /></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/30736/personwantsorg-method-makedecision-was-not-found">https://www.oneidentity.com/community/identity-manager/f/forum/30736/personwantsorg-method-makedecision-was-not-found</a></p>
+<hr />
+</blockquote>
+<h1 id="_1">Вызов метода из скрипта</h1>
+<blockquote>
+<p><img src="../media/24. One Identity API/media/image2.png"
+style="width:9.96875in;height:5.89583in" /></p>
+<hr />
+<p>Postman</p>
+<p><a href="https://academy.terrasoft.ru/documents/technic-sdk/7-15/vyzov-servisa-s-pomoshchyu-postman">https://academy.terrasoft.ru/documents/technic-sdk/7-15/vyzov-servisa-s-pomoshchyu-postman</a></p>
+<hr />
+</blockquote>
+<h1 id="api">Не запускается скрипт, через api</h1>
+<ol>
+<li>
+<p>Create a new program function ‘Enable script execution’ in Designer.</p>
+</li>
+<li>
+<p>Assign the script to the program function.</p>
+</li>
+<li>
+<p>Create a new permission group and assign the group to the newly
+    created program function.</p>
+</li>
+<li>
+<p>Assign user to the new permission group.</p>
+</li>
+<li>
+<p>Compile the database.</p>
+</li>
+<li>
+<p>Execute the script via Identity Manager REST API.</p>
+</li>
+</ol>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/identity-manager/kb/226961/error-you-are-not-allowed-to-run-this-method-when-executing-script-over-identity-manager-rest-api">https://support.oneidentity.com/identity-manager/kb/226961/error-you-are-not-allowed-to-run-this-method-when-executing-script-over-identity-manager-rest-api</a>&gt;</em></p>
+<p><img src="../media/24. One Identity API/media/image3.png"
+style="width:4.53125in;height:5.98958in"
+alt="Navigation Permissions System user Permissions groups Disabled permissionsgroups 3} tables u&quot;pgram Getting Started One Identity Manager Schema Permissions Process Orchestration Script Library user Interface Mail Templates Documentation Base Data Favorites Designer - viadmin@NL-SD-IDMD801 AO.NLMQOneIM (Main Database) Qatabase Object filter Yiew Help Next • Search Common_StaftScripts a Commit to database CCC Test DefMail ail O Program functions Common_SqIWizardWeb I E script - Common StartCustomizerMethods Common_StartScripts Common TimeTrace Common_TriggerEvents Datalmport_CreateScript Designer_SQLEditor JobQueue_DeIete JobQueue_LogMode JobQueue_Monitor JobQueue_Prionty JobQueue_ShowHiddenParameters JobQueue_StartAt Objectarowser_SQLEditor QER_cancelPwo Soapservice_updatelmmediately SynchronizationEditor_Object8rowser SynchronizationEditor_StartDataStoreMai. SynchronizationEditor_SyncSimuIation SynchronizationEditor_SyncStart Transport_Export Transport_lmport Transport _ Snapshot Transport _ SQL Enable script execution Description Allow use of SQL wizard i.. Allow stating of arbitrar.. Allow the starting of arbi. Option to show the Time... Allow to trigger any even.. Import scripts can be add. Option to call the SQL ed. Option to selectively dele... Option to selectively set t. Option to monitor the Jo.. Option to selectively incr. Option to see the values Option to selectively mo. Option to call the SQL ed. Permission to abort any a.. Allow immediate update Option to use the build i.. Option for manually start.. Option for manually start.. Option for manually start.. Allows transport packag.. Allows transport packag.. Enables Snapshot transp.. Enables integration of S... Description Script Script CCC Test CCC Test CCC Test CCC Test CCC Test Convert _ Delete_DbObject Get JID from Name _ Insert_DbObject mail address CCC TEST SAP o CCC Test UD ADscontainer Properties Permissions group Object event I e Task Scril " /></p>
+<hr />
+<p>You are right that, at least for version 7.0.x, your authenticated
+user (depending on the authenticator) needs to have the mentioned
+program function assigned. (Short Name Common_StartScript).</p>
+<p>What's new in 7.1 in regards to the scripts, ist that the REST API
+will block the execution of script if you script does not have a
+program function assigned, for security reasons. The authenticated
+user must be entitled to use the same program function.</p>
+<p>This is an addition to the requirements, that the authenticated user
+must be entitled to use the program function "Allow the starting of
+arbitrary scripts from the frontend" in order to execute a script in
+general.</p>
+<p>Note: To keep things simple, this program function is allowed to be
+the Common_StartScript program function.</p>
+<p>As a reminder and for completeness, two links around the program
+functions.</p>
+<p>How to check which program functions are available to the current
+user?</p>
+<p><a href="http://documents.software.dell.com/identity-manager/7.1.1/user-guide-for-the-user-interface-and-default-functions/error-search/which-program-functions-are-available-to-the-current-user">http://documents.software.dell.com/identity-manager/7.1.1/user-guide-for-the-user-interface-and-default-functions/error-search/which-program-functions-are-available-to-the-current-user</a></p>
+<p>How to assign the program functions?</p>
+<p><a href="http://documents.software.dell.com/identity-manager/7.1.1/configuration-guide/granting-one-identity-manager-schema-permissions/availability-of-certain-functionality">http://documents.software.dell.com/identity-manager/7.1.1/configuration-guide/granting-one-identity-manager-schema-permissions/availability-of-certain-functionality</a></p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/21567/calling-scripts-via-application-server-restful-api-using-common_startscripts-permission-not-working">https://www.oneidentity.com/community/identity-manager/f/forum/21567/calling-scripts-via-application-server-restful-api-using-common_startscripts-permission-not-working</a>&gt;</em></p>
+<hr />
+<p>!!!!!</p>
+<p><a href="https://coderoad.ru/911859/WCF-REST-%D0%BF%D0%BE%D1%81%D1%82-XML-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80-%D0%B2%D0%BE%D0%B7%D0%B2%D1%80%D0%B0%D1%82%D0%B8%D0%BB-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83-400-%D0%BD%D0%B5%D0%B4%D0%BE%D0%BF%D1%83%D1%81%D1%82%D0%B8%D0%BC%D1%8B%D0%B9-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81">https://coderoad.ru/911859/WCF-REST-%D0%BF%D0%BE%D1%81%D1%82-XML-%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80-%D0%B2%D0%BE%D0%B7%D0%B2%D1%80%D0%B0%D1%82%D0%B8%D0%BB-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83-400-%D0%BD%D0%B5%D0%B4%D0%BE%D0%BF%D1%83%D1%81%D1%82%D0%B8%D0%BC%D1%8B%D0%B9-%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81</a></p>
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
