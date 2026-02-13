@@ -1145,7 +1145,7 @@ SingleDbObjectSnapshot) As String</p>
 Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
 <p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
-<p>Dim email As String = login + "&lt;@surgut.gazprom.ru&gt;"</p>
+<p>Dim email As String = login + "&lt;@surgut.[redacted-domain]&gt;"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
 <p>Dim cmd As New OracleCommand With {</p>
@@ -1191,7 +1191,7 @@ SingleDbObjectSnapshot) As String</p>
 Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
 <p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
-<p>Dim email As String = login + "&lt;@surgut.gazprom.ru&gt;"</p>
+<p>Dim email As String = login + "&lt;@surgut.[redacted-domain]&gt;"</p>
 <p>Dim adlogin As String = login + "&lt;@sgp.ru&gt;"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
