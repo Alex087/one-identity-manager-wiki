@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>6.8 Проверка корзины - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>6.8 Проверка корзины</p>
+<p>17 декабря 2024 г.</p>
+<p>14:30</p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References NLog.Dll</p>
+<p>#End If</p>
+<p>''' \&lt;summary&gt;</p>
+<p>''' _CCC_ShoppingCartOrder_Check</p>
+<p>''' \&lt;/summary&gt;</p>
+<p>''' \&lt;param name="UID_ShoppingCartOrder"&gt;\&lt;/param&gt;</p>
+<p>''' \&lt;param name="configJson"&gt;\&lt;/param&gt;</p>
+<p>''' \&lt;returns&gt;\&lt;/returns&gt;</p>
+<p>Public Function _CCC_ShoppingCartOrder_Check(ByVal
+UID_ShoppingCartOrder As String, ByVal configJson As String) As String</p>
+<blockquote>
+<p>' Variablen</p>
+<p>Dim counterror As Integer = 0</p>
+<p>Dim countwarning As Integer = 0</p>
+<p>Dim culLang As System.Globalization.CultureInfo = New
+System.Globalization.CultureInfo("de-DE")</p>
+<p>VI.Base.LanguageManager.SetSystemCulture(culLang)</p>
+<p>Dim log As NLog.LogSession = New
+NLog.LogSession(NameOf(_CCC_ShoppingCartOrder_Check),"")</p>
+<p>' Erste Variante mit Submit</p>
+<p>Dim check = New
+QER.CompositionApi.ITShop.ShoppingCartSubmit(UID_ShoppingCartOrder)</p>
+<p>Dim ConfigJsonParm As String = check.GetConfigJson</p>
+<p>check.Check.Config.CheckMode =
+QER.CompositionApi.ITShop.CheckMode.CheckOnly</p>
+<p>Dim tCartItemCheckResult As
+QER.CompositionApi.ITShop.CartItemCheckResult</p>
+<p>log.Info("Shopping Cart: " &amp; UID_ShoppingCartOrder &amp; " will be
+checked...")</p>
+<p>Dim checkResult = check.CheckAsync(Session).Result</p>
+<p>log.Info("Check Config: ")</p>
+<p>log.Info(ConfigJsonParm )</p>
+<p>' Für alle Bestellpositionen</p>
+<p>Dim items = checkResult.Items()</p>
+<p>For Each tCartItemCheckResult In items</p>
+<p>' Bestellpositionen Prüfungen durchführen</p>
+<p>log.Info(" &gt; Cart Item " &amp; tCartItemCheckResult.ToString &amp; " check
+result...")</p>
+<p>Dim itemsChecks = tCartItemCheckResult.checks()</p>
+<p>' Für alle gefundenen Prüfungsresultate</p>
+<p>For Each checks In itemsChecks</p>
+<p>' Resulatat ausgeben</p>
+<p>log.Info(" &gt; ID : " + checks.id + ", Status :" +
+checks.Status.toString + ", Title :" + checks.title)</p>
+<p>Select Case checks.Status.toString</p>
+<p>Case "Warning"</p>
+<p>countwarning += 1</p>
+<p>Case "Error"</p>
+<p>counterror += 1</p>
+<p>Case Else</p>
+<p>End Select</p>
+<p>Next</p>
+<p>Next</p>
+<p>Return " In " &amp; CStr(items.count) &amp; " Cart Items, there are " &amp;
+CStr(countwarning) &amp; " warnings and " &amp; CStr(counterror) &amp; " errors."</p>
+</blockquote>
+<p>End Function</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/37852/shoppingcartorder-check-customization/89728">ShoppingCartOrder Check Customization - Forum - Identity Manager
+Community - One Identity
+Community</a></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

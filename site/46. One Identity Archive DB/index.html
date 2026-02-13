@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>46. One Identity Archive DB - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>46. One Identity Archive DB</p>
+<p>13 февраля 2026 г.</p>
+<p>12:07</p>
+<p>Есть 3 способа переноса данных в арихивную БД</p>
+<ul>
+<li>
+<p>Напрямую из основной БД (если базы в одной сети) и нормальные задержки
+  по сети</p>
+</li>
+<li>
+<p>Через экспорт и импорт xml файлов</p>
+</li>
+<li>
+<p>Данные могут удаляться из основной БД, через определенное время без
+  архивирования</p>
+</li>
+</ul>
+<p><img src="../media/46. One Identity Archive DB/media/image1.png"
+style="width:5in;height:3.9375in"
+alt="One Identity Manager Database One Identity Manager Service HistoryDB Service Direct Import Current History Database , HistoryDB Service XML File Depository One Identity Manager Database Current History Data b " /></p>
+<p>Если не указать retention period - данные будут удаляться ежедневно по
+стандартному расписанию</p>
+<p>Чтобы подтянуть данные в архивную БД - надо из дизайнера запустить
+задачу планировщика</p>
+<p>"Import process information directly"</p>
+<p>Изменения сохраняются в таблице DialogWatchProperty</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/5885/history-data-viewing">https://www.oneidentity.com/community/identity-manager/f/forum/5885/history-data-viewing</a></p>
+<p>ID базы данных в таблице DialogDatabase</p>
+<p>Почему убрали HistoryDB Service</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/29448/history-service">https://www.oneidentity.com/community/identity-manager/f/forum/29448/history-service</a></p>
+<hr />
+<p>Получилось заставить JoBServer History DB обрабатывать задания</p>
+<p>1) Установить утилиты His DB на отдельный сервер</p>
+<p>2) Сконфигурировать новую базу данных на SQL сервере, через
+конфигуратор нового отдельного сервера</p>
+<p>3) Запустить дизайнер на новом сервере и добавить Job Server (указать
+Executing Server!!!)</p>
+<p><img src="../media/46. One Identity Archive DB/media/image2.png"
+style="width:6.57292in;height:3.21875in"
+alt="Navigation Getting Started Create system user Edit configuration parameters Add job Edit schedules O Getting Started Job servers T-0NElM-D8-4 List Editor Job Server Editor \T-0NElM-D8-4 _HlS_4 x Executing server t-oneim-db4sgp.ru Full server name T-0NElM-Da4.sgp.ru t-oneim-his4sgp.ru Job server It-oneim -his-4 Properties Extended Full server name Executirrg server Parent Job server t-oneim-his4 t-oneim-his4 sgp.ru t-oneim-db4 sgp.ru \T-0NElM-HlS4 No automatic software update Stop One Identity Manager Service Server is cluster One Identity Manager Service installed No direct data base co nnection " /></p>
+<p><img src="../media/46. One Identity Archive DB/media/image3.png"
+style="width:6.46875in;height:2.6875in"
+alt="Sewer function Server function One Identity Manager Service installed SQL processing server CSV script server Default report server SMTP host Update server " /></p>
+<p><img src="../media/46. One Identity Archive DB/media/image4.png"
+style="width:1.90625in;height:3.03125in"
+alt="Machine role role X Oocumentatvon .0 HTML Development E SeNer Job Server " /></p>
+<p>4) Зайти в папку на новом сервере с установленным 1IM и
+сконфигурировать JobServer (JobServiceConfigurator) на базу History DB</p>
+<p>Соотнесение таблиц</p>
+<p>DialogWatchProperty (Main) ==&gt; WatchProperty (HDB)</p>
+<p>DialogWatchOperation (Main) ==&gt; WatchOperation (HDB)</p>
+<p>JobHistory (Main) ==&gt; HistoryJob (HDB)</p>
+<hr />
+<p>Если не заполняется архивная БД - на основной выполнить Daily
+Maintenance job и затем Direct Import на архивной. Учесть то, что данные
+переносятся по сроку давности, который указан в дизайнере.</p>
+<p>Пример настроек</p>
+<p>Common\ProcessState\Delete=1<br />
+Common\ProcessState\ExportPolicy=HDB<br />
+Common\ProcessState\JobHistory=ALL<br />
+Common\ProcessState\JobHistory\Delete=1<br />
+Common\ProcessState\JobHistory\isToExport=1<br />
+Common\ProcessState\JobHistory\lifetime=2<br />
+Common\ProcessState\PackageSizeHDB=10000000<br />
+Common\ProcessState\ProgressView=0<br />
+Common\ProcessState\Propertylog=1<br />
+Common\ProcessState\PropertyLog\AllDefaultPropertiesForModel=1 (?)<br />
+Common\ProcessState\PropertyLog\IsToExport=1<br />
+Common\ProcessState\PropertyLog\LifeTime=1</p>
+<p>Так же в BaseData указать базу для TimeTrace</p>
+<hr />
+<p><img src="../media/46. One Identity Archive DB/media/image5.png"
+style="width:5in;height:2.21875in"
+alt="Job queue Job queue Job qu Check SQL Column ScriptEx Execution status TRUE Executing server IT-ONEIM-D84 prüft, 0b nach laufende gleichnamige Ketten in der Jobqueue vorhanden Sind (Import daff nur einmal laufen) Exec Execute SQL el Execute SQL el Execute SQL ScriptExec FALSE FALSE FALSE TRUE IT-ONEIM-D84 IT-ONEIM-D84 IT-ONEIM-D84 IT-ONEIM-D84 " /></p>
+<hr />
+<p><strong>Установка 2х служб на один сервер</strong></p>
+<p>Ставим службу архивной БД в отдельную папку с отличающимся именем.</p>
+<p>В конфиге службы ставим отличающийся HTTP порт от основной БД</p>
+<p>Меняем в конфиге службы путь до логов, чтобы они не сливались в одну
+папку.</p>
+<p><img src="../media/46. One Identity Archive DB/media/image6.png"
+style="width:5in;height:2.65625in" /></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

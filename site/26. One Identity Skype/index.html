@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>26. One Identity Skype - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>26. One Identity Skype</p>
+<p>21 февраля 2020 г.</p>
+<p>15:02</p>
+<p>Public Function Z_Connector_Skype_Add_Account(account As
+SingleDbObjectSnapshot) As String</p>
+<p>Dim scriptText As String = Z_Get_Email_Template_Body("Z_Skype_Create")</p>
+<p>Dim output As New List(Of String)</p>
+<p>'output.Add("userDataJSON")</p>
+<p>Dim scriptParams As New Dictionary(Of String, Object)</p>
+<p>scriptParams.Add("guid", account.GetValue("ObjectGUID").String)</p>
+<p>scriptParams.Add("pool", account.GetValue("CCC_RegistrarPool").String)</p>
+<p>scriptParams.Add("sip", account.GetValue("CCC_SipAddress").String)</p>
+<p>Dim results As IDictionary(Of String, Object) =
+Z_Run_PowerShell(scriptText, scriptParams, output)</p>
+<p>'Dim outputLines = CType(results.Item("__OUTPUT__"), List(Of
+String))</p>
+<p>'logger.Trace("outputLines = " &amp; String.Join(vbCrLf, outputLines))</p>
+<p>Try</p>
+<p>Z_Send_Mail_New_Account_To_ISA(account.GetValue("XObjectKey").String)</p>
+<p>Catch ex As Exception</p>
+<p>logger.Error(ex, "error while sending mail to ISA")</p>
+<p>End Try</p>
+<p>Z_Assign_Add_Group(account.GetValue("UID_Person").String,
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\Skype\DefaultGroupCN"))</p>
+<p>Return account.GetValue("ObjectGUID").String</p>
+<p>End Function</p>
+<p>Public Function Z_Connector_Skype_Recon() As String</p>
+<p>Dim scriptText As String = Z_Get_Email_Template_Body("Z_Skype_Recon")</p>
+<p>Dim output As New List(Of String)</p>
+<p>output.Add("userDataJSON")</p>
+<p>Dim scriptParams As New Dictionary(Of String, Object)</p>
+<p>Dim results As IDictionary(Of String, Object) =
+Z_Run_PowerShell(scriptText, scriptParams, output)</p>
+<p>Dim obj = results.Item("userDataJSON")</p>
+<p>logger.Trace("data from skype = " &amp;
+results.Item("userDataJSON").ToString())</p>
+<p>Dim skypeUsers As List(Of Dictionary(Of String, String)) =
+JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String,
+String)))(results.Item("userDataJSON").ToString())</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim skypeSystemId As String = Z_Get_UNS_System_Id("Skype")</p>
+<p>Connection.Variables.Put("FULLSYNC", True)</p>
+<p>Try</p>
+<p>For Each nextAccnt As Dictionary(Of String, String) In skypeUsers</p>
+<p>Dim login As String = nextAccnt.Item("samaccountname")</p>
+<p>Dim currentAccntId As String =
+Connection.GetSingleProperty("UNSAccountB", "UID_UNSAccountB",
+f.UidComparison("UID_UNSRootB", skypeSystemId) &amp; " and " &amp;
+f.Comparison("ObjectGUID", nextAccnt.Item("objectguid"),
+ValType.String))</p>
+<p>Dim account As ISingleDbObject = If
+(String.IsNullOrEmpty(currentAccntId),
+Connection.CreateSingle("UNSAccountB"),
+Connection.CreateSingle("UNSAccountB", currentAccntId))</p>
+<p>If String.IsNullOrEmpty(currentAccntId) Then</p>
+<p>VID_PutValueSafe(account, "UID_UNSRootB", skypeSystemId)</p>
+<p>VID_PutValueSafe(account, "IsGroupAccount", 0)</p>
+<p>VID_PutValueSafe(account, "ObjectGUID", nextAccnt.Item("objectguid"))</p>
+<p>VID_PutValueSafe(account, "UID_TSBBehavior", "TSB-FullManaged")</p>
+<p>VID_PutValueSafe(account, "cn", login)</p>
+<p>VID_PutValueSafe(account, "AccountName", login)</p>
+<p>'VID_PutValueSafe(account, "UID_Person", personId)</p>
+<p>account.Save()</p>
+<p>account = Connection.CreateSingle("UNSAccountB",
+account.GetValue("UID_UNSAccountB").String)</p>
+<p>End If</p>
+<p>'logger.Trace("pool 3 from db = " &amp;
+account.GetValue("CCC_RegistrarPool").String)</p>
+<p>VID_PutValueSafe(account, "CCC_RegistrarPool", nextAccnt.Item("pool"))</p>
+<p>'logger.Trace("pool from sys = " &amp; nextAccnt.Item("pool"))</p>
+<p>VID_PutValueSafe(account, "CCC_SipAddress",
+nextAccnt.Item("sipaddress"))</p>
+<p>'logger.Trace("pool from db = " &amp;
+account.GetValue("CCC_RegistrarPool").String)</p>
+<p>'logger.Trace("sipaddress = " &amp; nextAccnt.Item("sipaddress"))</p>
+<p>'logger.Trace("pool 3a from db = " &amp;
+account.GetValue("CCC_RegistrarPool").String)</p>
+<p>'logger.Trace("sip 3a from db = " &amp;
+account.GetValue("CCC_SipAddress").String)</p>
+<p>account.Save()</p>
+<p>Next</p>
+<p>Finally</p>
+<p>Connection.Variables.Remove("FULLSYNC")</p>
+<p>End Try</p>
+<p>Return "success" &amp; skypeUsers.Count</p>
+<p>End Function</p>
+<p>Public Function Z_Connector_Skype_Recon_Incremental() As String</p>
+<p>logger.trace("ENTER")</p>
+<p>Dim scriptText As String = Z_Get_Email_Template_Body("Z_Skype_Recon")</p>
+<p>Dim skypeSystemId As String = Z_Get_UNS_System_Id("Skype")</p>
+<p>Dim output As New List(Of String)</p>
+<p>output.Add("userDataJSON")</p>
+<p>Dim scriptParams As New Dictionary(Of String, Object)</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim results As IDictionary(Of String, Object) =
+Z_Run_PowerShell(scriptText, scriptParams, output)</p>
+<p>Dim obj = results.Item("userDataJSON")</p>
+<p>logger.Trace("data from skype = " &amp;
+results.Item("userDataJSON").ToString())</p>
+<p>Dim skypeUsers As List(Of Dictionary(Of String, String)) =
+JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String,
+String)))(results.Item("userDataJSON").ToString())</p>
+<p>logger.Trace("skype users amount: " &amp; skypeUsers.count)</p>
+<p>'list of skype accounts that are currently present in idm</p>
+<p>Dim idmSkypeAccountGUIDs As New List(Of String)</p>
+<p>Dim existingObjects As IColDbObject =
+Connection.CreateCol("UNSAccountB")</p>
+<p>Z_Add_All_Columns_To_Output_Result("UNSAccountB", existingObjects)</p>
+<p>existingObjects.Prototype.WhereClause = f.UidComparison( "UID_UNSRootB",
+skypeSystemId)</p>
+<p>existingObjects.Load()</p>
+<p>For Each nextRow As IColElem In existingObjects</p>
+<p>idmSkypeAccountGUIDs.Add( nextRow.getValue("ObjectGUID").string)</p>
+<p>Next</p>
+<p>logger.Trace("idm skype users amount: " &amp; idmSkypeAccountGUIDs.count)</p>
+<p>Dim newUsersCount As Integer = 0</p>
+<p>Connection.Variables.Put("FULLSYNC", True)</p>
+<p>Try</p>
+<p>For Each nextAccnt As Dictionary(Of String, String) In skypeUsers</p>
+<p>Try</p>
+<p>Dim adguid As String = nextAccnt.Item("objectguid")</p>
+<p>If String.IsNullOrEmpty(adguid) OrElse
+idmSkypeAccountGUIDs.contains(adguid) Then</p>
+<p>'account is already loaded in idm</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>'account is not loaded - create it in idm</p>
+<p>Dim login As String = nextAccnt.Item("samaccountname")</p>
+<p>If String.IsNullOrEmpty(login) Then</p>
+<p>'weird account - dont load it</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>Dim account As ISingleDbObject = Connection.CreateSingle("UNSAccountB")</p>
+<p>VID_PutValueSafe(account, "UID_UNSRootB", skypeSystemId)</p>
+<p>VID_PutValueSafe(account, "IsGroupAccount", 0)</p>
+<p>VID_PutValueSafe(account, "ObjectGUID", nextAccnt.Item("objectguid"))</p>
+<p>VID_PutValueSafe(account, "UID_TSBBehavior", "TSB-FullManaged")</p>
+<p>VID_PutValueSafe(account, "cn", login)</p>
+<p>VID_PutValueSafe(account, "AccountName", login)</p>
+<p>VID_PutValueSafe(account, "CCC_RegistrarPool", nextAccnt.Item("pool"))</p>
+<p>VID_PutValueSafe(account, "CCC_SipAddress",
+nextAccnt.Item("sipaddress"))</p>
+<p>logger.Trace("pool from db = " &amp;
+account.GetValue("CCC_RegistrarPool").String)</p>
+<p>logger.Trace("sipaddress from db = " &amp;
+account.GetValue("CCC_SipAddress").String)</p>
+<p>account.Save()</p>
+<p>account = Connection.CreateSingle("UNSAccountB",
+account.GetValue("UID_UNSAccountB").String)</p>
+<p>VID_PutValueSafe(account, "CCC_RegistrarPool", nextAccnt.Item("pool"))</p>
+<p>VID_PutValueSafe(account, "CCC_SipAddress",
+nextAccnt.Item("sipaddress"))</p>
+<p>account.Save()</p>
+<p>newUsersCount = newUsersCount + 1</p>
+<p>'Exit For</p>
+<p>Catch ex As Exception</p>
+<p>logger.Error(ex, "error linking skype")</p>
+<p>End Try</p>
+<p>Next</p>
+<p>Finally</p>
+<p>Connection.Variables.Remove("FULLSYNC")</p>
+<p>End Try</p>
+<p>logger.trace("EXIT")</p>
+<p>Return newUsersCount.ToString()</p>
+<p>End Function</p>
+<p>Public Function Z_Connector_Skype_Link_By_GUID() As String</p>
+<p>logger.Trace("ENTER")</p>
+<p>Dim skypeSystemId As String = Z_Get_UNS_System_Id("Skype")</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim accountsToLink As IColDbObject = Connection.CreateCol("UNSAccountB")</p>
+<p>Z_Add_All_Columns_To_Output_Result("UNSAccountB", accountsToLink)</p>
+<p>'accountsToLink.Prototype.WhereClause = f.UidComparison( "UID_UNSRootB",
+skypeSystemId) &amp; " and uid_person is null and objectguid is not null and
+objectguid in (select objectguid from adsaccount where objectguid is not
+null and uid_person is not null and (samaccountname like 'artyuhin_ia'
+or samaccountname like 'kurmesov_nm'))"</p>
+<p>'accountsToLink.Prototype.WhereClause = f.UidComparison( "UID_UNSRootB",
+skypeSystemId) &amp; " and uid_person is null and objectguid is not null and
+objectguid in (select top 25 objectguid from adsaccount where objectguid
+is not null and uid_person is not null )"</p>
+<p>accountsToLink.Prototype.WhereClause = f.UidComparison( "UID_UNSRootB",
+skypeSystemId) &amp; " and uid_person is null and objectguid is not null and
+objectguid in (select objectguid from adsaccount where objectguid is not
+null and uid_person is not null )"</p>
+<p>accountsToLink.Load()</p>
+<p>For Each nextRow As IColElem In accountsToLink</p>
+<p>Dim guid As String = nextRow.getValue("ObjectGUID").string</p>
+<p>Dim persId As String =
+Connection.GetSingleProperty("ADSAccount","UID_Person",
+f.Comparison("objectguid", guid, ValType.String))</p>
+<p>logger.Trace("linking account with objectguid " &amp; guid &amp; " to person " &amp;
+persId)</p>
+<p>Z_Link_Account("AccountDefinition_Skype",
+nextRow.GetValue("UID_UNSAccountB").String, persId, "UNSAccountB")</p>
+<p>'Exit For</p>
+<p>Next</p>
+<p>logger.Trace("EXIT")</p>
+<p>Return "ok"</p>
+<p>End Function</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

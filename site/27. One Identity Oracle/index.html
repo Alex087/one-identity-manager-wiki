@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>27. One Identity Oracle - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>27. One Identity Oracle</p>
+<p>21 февраля 2020 г.</p>
+<p>15:32</p>
+<blockquote>
+<p><strong>Connect Oracle Database</strong></p>
+<p>Ключевые поля таблиц</p>
+<p>Employee – TAB_NUM</p>
+<p>Accounts – LOGIN</p>
+<p>Organizations – ID</p>
+<p>Phone_Types – CDL_COD_OID</p>
+<p>Roles – ID</p>
+<p>Status – LOGIN</p>
+<p>USER_ROLE – LOGIN</p>
+<hr />
+<p><strong><em>To configure synchronization with the native database connector</em></strong></p>
+</blockquote>
+<ol>
+<li>
+<p>Create a new synchronization project.</p>
+</li>
+<li>
+<p>Add mappings. Define property mapping rules and object matching
+    rules.</p>
+</li>
+<li>
+<p>Create synchronization workflows.</p>
+</li>
+<li>
+<p>Create a start up configuration.</p>
+</li>
+<li>
+<p>Define the synchronization scope.</p>
+</li>
+<li>
+<p>Specify the base object of the synchronization.</p>
+</li>
+<li>
+<p>Specify the extent of the synchronization log.</p>
+</li>
+<li>
+<p>Run a consistency check.</p>
+</li>
+<li>
+<p>Activate the synchronization project.</p>
+</li>
+<li>
+<p>Save the new synchronization project in the database.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>------</strong></p>
+<p><strong>!!! Перед тем, как подцепить Базу данных, надо создать Target System
+Type (Manager - Custom Target System).</strong></p>
+<p><strong>После - надо создать Target System и указать в поле Target System
+Type только что созданный (Надо перезапустить Manager перед этим,
+чтобы он подтянул из БД все корректно).</strong></p>
+<p><strong>И у нее указать Synchronized by -&gt; Scripted synchronization</strong></p>
+<p><strong>Потом можно соединять БД.</strong></p>
+<p><strong>После - надо делать Mapping, Workflow, Startup Configuration.</strong></p>
+<p><strong>При маппинге, ему надо указать UID_UNSRootB</strong></p>
+<p><strong>Заходим в Configuration (Sync Editor) - Variables создать</strong></p>
+<p><strong>IdentUNSRoot (Name и DisplayName), Value = (имя созданнной Target
+system в Manager)</strong></p>
+<p><strong>Затем, в mapping</strong></p>
+<p><strong>Справа создать свойство vrtIdentUNSRoot как fixed value – string -
+значение \$IdentUNSRoot\$</strong></p>
+<p><img src="../media/27. One Identity Oracle/media/image1.png"
+style="width:5in;height:2.89583in"
+alt="Edit propety... Change the schema property of type &quot;Fixed value&quot; Name Display name Data type Description Co nsta nt type Value •Atld±ntLlNSRDDt Target System String Multi-value Defined value SidentUNSRootS " /></p>
+<p><strong>Смапить его с левой VRT_UID_UNSRootB</strong></p>
+<p><img src="../media/27. One Identity Oracle/media/image2.png"
+style="width:6.35417in;height:1.41667in"
+alt="assword PWDLastSet Riskl ndexCaIcuIated TAB NUM UID Person LID TS8AccountDef LID TS88ehavior LID UNSAccount8 UID UNSContainer8 UD UNSRoot8 LilD UNSAccount8 VRT UIO UNSRcct8 LOGIN vtIdentLlNSRcct " /></p>
+<p><img src="../media/27. One Identity Oracle/media/image3.png"
+style="width:5in;height:2.0625in"
+alt="Name Display name aase propertj Description Sea rch p ropertj Ulc UNSRDDts Value resolution for Target system UD UNSRoot3 Target system identifier. Ident_UNSRoot Ignore case Z] Save unresolvablekeys O Ha rd le failure to resolve as error Read-ony Report unresolvablekeys " /></p>
+<p>Зайти в One Identity Manager connection – Edit Scope - UNSRootB</p>
+<p>Ident_UNSRoot='\$IdentUNSRoot\$'</p>
+<p><a href="https://www.quest.com/community/one-identity/identity-manager/f/identity-manager-forum/21709/mapping-to-unsaccountb-error">https://www.quest.com/community/one-identity/identity-manager/f/identity-manager-forum/21709/mapping-to-unsaccountb-error</a></p>
+<hr />
+<p><strong>USER</strong></p>
+<p><img src="../media/27. One Identity Oracle/media/image4.png"
+style="width:6.3125in;height:1.89583in"
+alt="Schema property in One Identity Manager AccountName Description FirstName Last Name UD UNSAccount8 VRT LID UNSRoot8 Information Schema propeO&#39; in the target system LOGIN LOGIN TAB NUM FIRSTNAME LASTNAME LOGIN dentUNSRoot " /></p>
+<p><strong>GROUP</strong></p>
+<p><img src="../media/27. One Identity Oracle/media/image5.png"
+style="width:6.22917in;height:1.20833in"
+alt="Schema property in One Identity Manager Description VRT LID UNSGroup8AsInteger VRT LID UNSRoot8 Information Schema propeO&#39; in the target system NAME NAME vrtIdentUNSRoot " /></p>
+<p><strong>USER_ROLE</strong></p>
+<p><img src="../media/27. One Identity Oracle/media/image6.png"
+style="width:6.25in;height:0.9375in"
+alt="Schema property in One Identity Manager VRT LID UNSAccount8 VRT UD UNSGroup8AsInteger Information Schema propen LOGIN ROLE " /></p>
+<p><strong>LOGIN = AccountName</strong></p>
+<hr />
+<p>Создание записи в Oracle</p>
+<p><a href="https://www.quest.com/community/one-identity/identity-manager/f/identity-manager-forum/20777/sample-of-insert-update-delete-to-an-oracle-database">https://www.quest.com/community/one-identity/identity-manager/f/identity-manager-forum/20777/sample-of-insert-update-delete-to-an-oracle-database</a></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-native-databases-through-database-systems-integration-module/7">https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-native-databases-through-database-systems-integration-module/7</a></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/administration-guide-for-connecting-to-custom-target-systems#TOPIC-852086">https://support.oneidentity.com/technical-documents/identity-manager/8.0/administration-guide-for-connecting-to-custom-target-systems#TOPIC-852086</a></p>
+<p>Есть в Oracle DB процедуры по созданию пользователя (USSC_CREATE_USER)</p>
+<p>Запуск процедуры из VB скрипта</p>
+<p><a href="https://stackoverflow.com/questions/44262036/vbscript-for-executing-oracle-procedure">https://stackoverflow.com/questions/44262036/vbscript-for-executing-oracle-procedure</a></p>
+<p><a href="https://stackoverflow.com/questions/5997896/simple-task-connect-to-database-execute-a-stored-procedure-disconnect">https://stackoverflow.com/questions/5997896/simple-task-connect-to-database-execute-a-stored-procedure-disconnect</a></p>
+<hr />
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References Devart.Data.Oracle.dll</p>
+<p>Imports Devart.Data.Oracle</p>
+<p>#End If</p>
+<p>Public Function GetOracleConnectionString() As String</p>
+<p>Dim cs As New Devart.Data.Oracle.OracleConnectionStringBuilder()</p>
+<p>cs.ConnectMode = Devart.Data.Oracle.OracleConnectMode.Default</p>
+<p>cs.Sid = ""</p>
+<p>cs.ServiceName ="OIM_SD"</p>
+<p>cs.UserId = "OIM_SD"</p>
+<p>cs.Password = "Password123"</p>
+<p>cs.Server = "192.168.31.15"</p>
+<p>cs.Direct = True</p>
+<p>Return cs.ConnectionString</p>
+<p>End Function</p>
+<p>Public Sub OracleExecute(ByVal strSQL As String)</p>
+<p>Dim dbFac As IDbFactory =
+DbApp.GetFactoryByName("VI.DB.Oracle.ViOracleFactory,VI.DB.Oracle")</p>
+<p>Using sf =
+DbApp.ConnectTo(GetOracleConnectionString()).Using(dbFac).BuildSessionFactory()</p>
+<p>Using dbSession = sf.OpenDbSession()</p>
+<p>dbSession.SqlExecuteNonQuery(strSQL)</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>End Sub</p>
+<hr />
+<p><strong><span class="mark">Рабочий запуск обновления строки</span></strong></p>
+<p>Public Sub OracleExecute()</p>
+<p>Dim dbFac As IDbFactory =
+DbApp.GetFactoryByName("VI.DB.Oracle.ViOracleFactory,VI.DB.Oracle")</p>
+<p>Dim strSQL As String</p>
+<p>Dim tabnum As String</p>
+<p>'strSQL = "ussc_enable_employee(10024)"</p>
+<p><strong>strSQL = "UPDATE ADMIN.ITSM_PERSONS SET PER_JOBTitle = 'Старший
+инспектор канцелярии' WHERE PER_OID = 281478295650441"</strong></p>
+<p>Using sf =
+DbApp.ConnectTo(GetOracleConnectionString()).Using(dbFac).BuildSessionFactory()</p>
+<p>Using dbSession = sf.OpenDbSession()</p>
+<p>'dbSession.SqlExecuteStoredProcedure(strSQL)</p>
+<p>dbSession.SqlExecuteNonQuery(strSQL)</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>End Sub</p>
+<p><strong>-----</strong></p>
+<p><a href="https://www.devart.com/dotconnect/oracle/docs/Devart.Data.Oracle~Devart.Data.Oracle.OracleCommand~Parameters.html">https://www.devart.com/dotconnect/oracle/docs/Devart.Data.Oracle~Devart.Data.Oracle.OracleCommand~Parameters.html</a></p>
+<p><a href="https://stackoverflow.com/questions/43771252/how-to-resolve-this-pls-00306-wrong-number-or-types-of-arguments-in-call">https://stackoverflow.com/questions/43771252/how-to-resolve-this-pls-00306-wrong-number-or-types-of-arguments-in-call</a></p>
+<p><strong>Запуск процедуры</strong></p>
+<p>EXEC ussc_enable_user('AndriyanovGY');</p>
+<hr />
+<p><strong>~~При создании UNSRootB - не надо указывать NamespaceManagedBy =
+Generic!~~</strong></p>
+<p>Иначе обработкой процессов INSERT, UPDATE, DELETE будет заниматься
+процесс VI_UnsAccountB_Generic (Call Script
+VI_UnsAccount_\&lt;Ident_UNSRoot&gt;_\&lt;Event&gt;)</p>
+<p>Все норм, этот процесс и должен заниматься обработкой событий, мы
+пишем только корректно названные скрипты, которые на вход получают
+снимок объекта пользователя в UNSAccountB и из этого снимка можно
+получать нужные атрибуты.</p>
+<p>Шаблоны скриптов находятся в скрипте</p>
+<p>TSB_Uns_Generic_Templates</p>
+<hr />
+<p>В таблице UNSAccountB у поля AccountName поменял с</p>
+<p>Value = \$cn\$</p>
+<p>На</p>
+<p>If Not CBool(Variables("FULLSYNC")) Then</p>
+<p>Value = \$FK(UID_Person).CentralAccount\$</p>
+<p>Else</p>
+<p>Value = \$cn\$</p>
+<p>End if</p>
+<hr />
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.Data.Common</p>
+<p>#End If</p>
+<p>Public Function Z_Connector_Oracle_Add_Account(systemName As String,
+account As SingleDbObjectSnapshot) As String</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(systemName)</p>
+<p>Try</p>
+<p>Dim sql As String = "insert into Z_dell_user_1(cn,department)
+values(:cn, :department)"</p>
+<p>Dim cmd As DbCommand = Z_Get_Db_Command(conn, sql)</p>
+<p>Z_Add_String_Sql_Param(cmd, "cn", account.GetValue("cn").String)</p>
+<p>Z_Add_String_Sql_Param(cmd, "department",
+account.GetValue("CCC_DepartmentName").String)</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>Return Nothing</p>
+<p>End Function</p>
+<p>Public Function Z_Connector_Oracle_Add_Account_1(systemName As String,
+account As SingleDbObjectSnapshot) As String</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(systemName)</p>
+<p>Try</p>
+<p>Dim sql As String = "create user """ &amp; account.GetValue("cn").String &amp;
+""" identified by ""1qaz2WSX"""</p>
+<p>Dim cmd As DbCommand = Z_Get_Db_Command(conn, sql)</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>sql = "grant create session to """ &amp; account.GetValue("cn").String &amp;
+""""</p>
+<p>cmd = Z_Get_Db_Command(conn, sql)</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>Return Nothing</p>
+<p>End Function</p>
+<p>Public Sub Z_Connector_Oracle_Update_Account(systemName As String,
+account As SingleDbObjectSnapshot)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\update.txt",
+"update", False)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\update2.txt",
+"cn=" &amp; account.GetValue("cn").String &amp; "; dep anme= " &amp;
+account.GetValue("CCC_DepartmentName").String, False)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\update3.txt",
+"update 3", False)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\update " &amp;
+account.GetValue("cn").String &amp; ".txt", "update ", False)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\update " &amp;
+account.GetValue("cn").String &amp; ".txt", "update " &amp;
+account.ToXmlString(True), False)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\systemName.txt",
+"systemName=" &amp; systemName, False)</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(systemName)</p>
+<p>Try</p>
+<p>Dim sql As String = "update Z_dell_user_1 set department = :department
+where cn = :cn"</p>
+<p>Dim cmd As DbCommand = Z_Get_Db_Command(conn, sql)</p>
+<p>Z_Add_String_Sql_Param(cmd, "department",
+account.GetValue("CCC_DepartmentName").String)</p>
+<p>Z_Add_String_Sql_Param(cmd, "cn", account.GetValue("cn").String)</p>
+<p>Dim rowNum As Integer = cmd.ExecuteNonQuery()</p>
+<p>'
+My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\update4.txt",
+"updated rows = " &amp; rowNum, False)</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>End Sub</p>
+<p>Public Sub Z_Connector_Oracle_Remove_Account_From_Group(systemName As
+String, account As SingleDbObjectSnapshot, groupObj As
+SingleDbObjectSnapshot)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\delete
+membeship.txt","create ", False)</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(systemName)</p>
+<p>Try</p>
+<p>Dim sql As String = "delete from z_dell_user_group_1 where
+account_cn=:v_account_cn and group_cn=:v_group_cn"</p>
+<p>Dim cmd As DbCommand = Z_Get_Db_Command(conn, sql)</p>
+<p>Z_Add_String_Sql_Param(cmd, "v_account_cn",
+account.GetValue("cn").String)</p>
+<p>Z_Add_String_Sql_Param(cmd, "v_group_cn",
+groupObj.GetValue("cn").String)</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>End Sub</p>
+<p>Public Sub Z_Connector_Oracle_Add_Account_To_Group(systemName As
+String, account As SingleDbObjectSnapshot, groupObj As
+SingleDbObjectSnapshot)</p>
+<p>'My.Computer.FileSystem.WriteAllText("C:\temp\TargetSystem1\create
+membeship nw.txt","create ", False)</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(systemName)</p>
+<p>Try</p>
+<p>Dim sql As String = "insert into z_dell_user_group_1 (account_cn,
+group_cn) values(:v_account_cn, :v_group_cn)"</p>
+<p>Dim cmd As DbCommand = Z_Get_Db_Command(conn, sql)</p>
+<p>Z_Add_String_Sql_Param(cmd, "v_account_cn",
+account.GetValue("cn").String)</p>
+<p>Z_Add_String_Sql_Param(cmd, "v_group_cn",
+groupObj.GetValue("cn").String)</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>End Sub</p>
+<p>Public Sub Z_Connector_Oracle_Provision_Current_Roles(systemName As
+String, account As SingleDbObjectSnapshot)</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim user As String = account.GetValue("cn").String</p>
+<p>Dim UID_UNSAccountB As String =
+account.GetValue("UID_UNSAccountB").String</p>
+<p>Dim roleList As New List(Of String)</p>
+<p>Dim currentRolesRows As IColDbObject = Nothing</p>
+<p>currentRolesRows = Connection.CreateCol("UNSAccountBInUNSGroupB")</p>
+<p>currentRolesRows.Prototype.WhereClause =
+f.UidComparison("UID_UNSAccountB", UID_UNSAccountB)</p>
+<p>currentRolesRows.Prototype("UID_UNSGroupB").IsDisplayItem = True</p>
+<p>currentRolesRows.Load()</p>
+<p>For Each nextRole As IColElem In currentRolesRows</p>
+<p>roleList.Add(Connection.GetSingleProperty("UNSGroupB", "cn",
+f.UidComparison("UID_UNSGroupB",nextRole.GetValue("UID_UNSGroupB").String)))</p>
+<p>Next</p>
+<p>Dim roleListStr As String = String.Join(";", roleList)</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(systemName)</p>
+<p>Try</p>
+<p>Dim sql As String = "begin
+pkg_doc_rule.grants_modes(:user,:roles,:result); end;"</p>
+<p>Dim cmd As DbCommand = Z_Get_Db_Command(conn, sql)</p>
+<p>Z_Add_String_Sql_Param(cmd, "user", user)</p>
+<p>Z_Add_String_Sql_Param(cmd, "roles", roleListStr)</p>
+<p>Z_Add_String_Sql_Output_Param(cmd, "result")</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Dim result As String = cmd.Parameters("result").Value.ToString()</p>
+<p>'Return result</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>End Sub</p>
+<p>'don't analyze input systemId; we want to do it for all BPM systems</p>
+<p>Public Sub Z_Provision_To_BPM(systemId As String)</p>
+<p>Try</p>
+<p>Dim BPMCookieContainer As CookieContainer = Z_BPM_Authenticate()</p>
+<p>Dim pendingRequests As IColDbObject = Nothing</p>
+<p>pendingRequests = Connection.CreateCol("UNSRootB")</p>
+<p>pendingRequests.Prototype.WhereClause = "UID_UNSRootB in (select
+rb.UID_UNSRootB from PersonWantsOrg pwo inner join BaseTree bt on
+pwo.UID_Org=bt.UID_Org inner join QERReuseUS qr on
+qr.UID_AccProduct=bt.UID_AccProduct inner join QERResourceType qrt on
+qrt.UID_QERResourceType=qr.UID_QERResourceType inner join UNSRootB rb
+on rb.UID_UNSRootB=qr.ccc_UID_UNSRootB inner join DPRNameSpace ns on
+ns.UID_DPRNameSpace=rb.UID_DPRNameSpace where
+qrt.Ident_QERResourceType='OracleRole' and
+ns.Ident_DPRNameSpace='OracleSystemWithSubRoles' and
+(pwo.ccc_provisioningstatus='New' or
+pwo.ccc_provisioningstatus='Pending'))"</p>
+<p>pendingRequests.Prototype("UID_UNSRootB").IsDisplayItem = True</p>
+<p>pendingRequests.Load()</p>
+<p>For Each nextRequest As IColElem In pendingRequests</p>
+<p>logger.Trace("next oracle system to handle : " &amp;
+nextRequest.GetValue("UID_UNSRootB").String)</p>
+<p>Z_Provision_To_BPM_For_System(nextRequest.GetValue("UID_UNSRootB").String,
+BPMCookieContainer)</p>
+<p>Next</p>
+<p>Catch ex As Exception</p>
+<p>Z_Send_Email_To_Error_Auditor("Idm. BPM integration error.", "Error in
+BPM integration." &amp; VbCrLf &amp; "Operation will be retried during next
+task run.", ex)</p>
+<p>End Try</p>
+<p>End Sub</p>
+<p>Public Sub Z_Provision_To_BPM_For_System(systemId As String,
+BPMCookieContainer As CookieContainer )</p>
+<p>Z_BPM_Check_Request_Status(systemId, BPMCookieContainer)</p>
+<p>Z_BPM_Send_Requests(systemId, BPMCookieContainer)</p>
+<p>End Sub</p>
+<p>'check status of tickets that were sent to BPM</p>
+<p>'if it is approved then mark assignedment as assigned (if assignment
+for the same role exists then abort it)</p>
+<p>Public Sub Z_BPM_Check_Request_Status(systemId As String,
+ext_BPMCookieContainer As CookieContainer)</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>'pending tickets</p>
+<p>Dim pendingRequests As IColDbObject = Nothing</p>
+<p>pendingRequests = Connection.CreateCol("CCCBPMProvisioningRequest")</p>
+<p>pendingRequests.Prototype.WhereClause = "ccc_status='Pending' and " &amp;
+f.UidComparison("CCC_UID_UNSRootB", systemId)</p>
+<p>pendingRequests.Prototype("UID_CCCBPMProvisioningRequest").IsDisplayItem
+= True</p>
+<p>pendingRequests.Prototype("CCC_externalId").IsDisplayItem = True</p>
+<p>pendingRequests.Prototype("CCC_UID_Person").IsDisplayItem = True</p>
+<p>pendingRequests.Prototype("CCC_type").IsDisplayItem = True</p>
+<p>pendingRequests.Load()</p>
+<p>For Each nextRequest As IColElem In pendingRequests</p>
+<p>Dim externalId As String =
+nextRequest.GetValue("CCC_externalId").String</p>
+<p>Dim res As String = Nothing</p>
+<p>Dim resMessage As String = Nothing</p>
+<p>'check ticket status in BPM</p>
+<p>Try</p>
+<p>Dim result As Dictionary(Of String, String) =
+Z_BPM_Get_Ticket_Status(externalId, ext_BPMCookieContainer)</p>
+<p>Dim ticketStatus = result.Item("status")</p>
+<p>resMessage = result.Item("solutionText")</p>
+<p>If ticketStatus.Contains("approved") Then</p>
+<p>res = "approved"</p>
+<p>End If</p>
+<p>If ticketStatus.Contains("rejected") Then</p>
+<p>res = "rejected"</p>
+<p>End If</p>
+<p>Catch ex As Exception</p>
+<p>logger.Error(ex, "error while getting tikcet status for ticket " &amp;
+externalId)</p>
+<p>Z_Send_Email_To_Error_Auditor("Idm. BPM ticket status error.", "Error
+while checking ticket status for ticket with id = " &amp; externalId &amp; "."
+&amp; VbCrLf &amp; "Operation will be retried during next task run.", ex)</p>
+<p>End Try</p>
+<p>If Not res Is Nothing Then</p>
+<p>Dim ticket As ISingleDbObject =
+Connection.CreateSingle("CCCBPMProvisioningRequest",
+nextRequest.GetValue("UID_CCCBPMProvisioningRequest").String)</p>
+<p>VID_PutValueSafe(ticket, "CCC_status", If (res = "approved",
+"Approved", "Rejected")) '</p>
+<p>ticket.Save()</p>
+<p>Dim ticketItems As IColDbObject = Nothing</p>
+<p>ticketItems = Connection.CreateCol("CCCBPMRequestHasPWO")</p>
+<p>ticketItems.Prototype.WhereClause =
+f.UidComparison("UID_CCCBPMProvisioningRequest",
+nextRequest.GetValue("UID_CCCBPMProvisioningRequest").String)</p>
+<p>ticketItems.Prototype("XObjectKey").IsDisplayItem = True</p>
+<p>ticketItems.Prototype("UID_PersonWantsOrg").IsDisplayItem = True</p>
+<p>ticketItems.Load()</p>
+<p>For Each nextTicketItem As IColElem In ticketItems</p>
+<p>Dim ticketItemObj As ISingleDbObject = Connection.CreateSingle(New
+DbObjectKey (nextTicketItem.GetValue("XObjectKey").String))</p>
+<p>VID_PutValueSafe(ticketItemObj, "CCC_status", If (res = "approved",
+"Approved", "Rejected")) '</p>
+<p>ticketItemObj.Save()</p>
+<p>Dim pwo As ISingleDbObject = Connection.CreateSingle("PersonWantsOrg",
+ticketItemObj.GetValue("UID_PersonWantsOrg").String)</p>
+<p>logger.Trace("setting CCC_ProvisioningStatus to null")</p>
+<p>VID_PutValueSafe(pwo, "CCC_ProvisioningStatus", Nothing)</p>
+<p>pwo.Save()</p>
+<p>pwo = Connection.CreateSingle("PersonWantsOrg",
+ticketItemObj.GetValue("UID_PersonWantsOrg").String)</p>
+<p>Dim os As String = pwo.GetValue("OrderState").String</p>
+<p>logger.Trace("current pwo state = " &amp; os)</p>
+<p>If os \&lt;&gt; "Aborted" Then</p>
+<p>pwo.Custom.CallMethod("MakeDecision", "sa", If (res = "approved",
+True, False), resMessage)</p>
+<p>pwo.Save()</p>
+<p>End If</p>
+<p>If ticketItemObj.GetValue("CCC_type") = "ChangeSubRoles" Then</p>
+<p>'we have to abort previous request for the same resource</p>
+<p>Dim PreviousPWOs As IColDbObject =
+Connection.CreateCol("PersonWantsOrg")</p>
+<p>PreviousPWOs.Prototype("UID_PersonWantsOrg").IsDisplayItem = True</p>
+<p>PreviousPWOs.Prototype.WhereClause = "not " &amp;
+f.UidComparison("UID_PersonWantsOrg",
+pwo.GetValue("UID_PersonWantsOrg").String) &amp; " and " &amp;
+f.UidComparison("UID_PersonOrdered",
+pwo.GetValue("UID_PersonOrdered").String) &amp; " and " &amp;
+f.UidComparison("UID_Org", pwo.GetValue("UID_Org").String) &amp; " and
+OrderState in ('Assigned', 'OrderProduct') "</p>
+<p>PreviousPWOs.Load()</p>
+<p>For Each nextPendingPwo As IColElem In PreviousPWOs</p>
+<p>Dim pwoToCancel As ISingleDbObject =
+Connection.CreateSingle("PersonWantsOrg",
+nextPendingPwo.GetValue("UID_PersonWantsOrg").String)</p>
+<p>Dim cancelResult As Object = pwoToCancel.Custom.CallMethod("Abort",
+"Согласована заявка на предоставление той же роли", Nothing, Nothing)</p>
+<p>pwoToCancel.Save()</p>
+<p>Next</p>
+<p>End If</p>
+<p>Next</p>
+<p>End If</p>
+<p>Next</p>
+<p>End Sub</p>
+<p>' provision new requests</p>
+<p>Public Sub Z_BPM_Send_Requests(systemId As String, BPMCookieContainer
+As CookieContainer)</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim newRequests As IColDbObject = Nothing</p>
+<p>newRequests = Connection.CreateCol("PersonWantsOrg")</p>
+<p>newRequests.Prototype.WhereClause = "UID_PersonWantsOrg in (select
+pwo.UID_PersonWantsOrg from PersonWantsOrg pwo inner join BaseTree bt
+on pwo.UID_Org=bt.UID_Org inner join QERReuseUS qr on
+qr.UID_AccProduct=bt.UID_AccProduct inner join QERResourceType qrt on
+qrt.UID_QERResourceType=qr.UID_QERResourceType inner join UNSRootB rb
+on rb.UID_UNSRootB=qr.ccc_UID_UNSRootB inner join DPRNameSpace ns on
+ns.UID_DPRNameSpace=rb.UID_DPRNameSpace where
+qrt.Ident_QERResourceType='OracleRole' and
+ns.Ident_DPRNameSpace='OracleSystemWithSubRoles' and
+(pwo.ccc_provisioningstatus='New') and " &amp;
+f.UidComparison("rb.UID_UNSRootB", systemId) &amp; " )"</p>
+<p>newRequests.Prototype("UID_PersonWantsOrg").IsDisplayItem = True</p>
+<p>newRequests.Prototype("UID_PersonOrdered").IsDisplayItem = True</p>
+<p>newRequests.Load()</p>
+<p>Dim allBenfs As New HashSet(Of String)</p>
+<p>For Each nextRequest As IColElem In newRequests</p>
+<p>Dim pwo As ISingleDbObject = Connection.CreateSingle("PersonWantsOrg",
+nextRequest.GetValue("UID_PersonWantsOrg").String)</p>
+<p>Dim benfId = nextRequest.GetValue("UID_PersonOrdered").String</p>
+<p>allBenfs.Add(benfId)</p>
+<p>Next</p>
+<p>For Each nextBenfId As String In allBenfs</p>
+<p>'check if active BPM ticket exists for this user - if so then postpone
+provisioning</p>
+<p>If Connection.Exists("CCCBPMProvisioningRequest",
+"ccc_status='Pending' and " &amp; f.UidComparison("CCC_UID_UNSRootB",
+systemId) &amp; " and " &amp; f.UidComparison("CCC_UID_Person", nextBenfId))
+Then</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>'check if other requests have not reached provisioning phase</p>
+<p>Dim otherRequests As IColDbObject = Nothing</p>
+<p>otherRequests = Connection.CreateCol("PersonWantsOrg")</p>
+<p>otherRequests.Prototype.WhereClause = "UID_PersonWantsOrg in (select
+pwo.UID_PersonWantsOrg from PersonWantsOrg pwo inner join BaseTree bt
+on pwo.UID_Org=bt.UID_Org inner join QERReuseUS qr on
+qr.UID_AccProduct=bt.UID_AccProduct inner join QERResourceType qrt on
+qrt.UID_QERResourceType=qr.UID_QERResourceType inner join UNSRootB rb
+on rb.UID_UNSRootB=qr.ccc_UID_UNSRootB inner join DPRNameSpace ns on
+ns.UID_DPRNameSpace=rb.UID_DPRNameSpace where
+qrt.Ident_QERResourceType='OracleRole' and
+ns.Ident_DPRNameSpace='OracleSystemWithSubRoles' and
+(pwo.ccc_provisioningstatus is null and pwo.OrderState in
+('OrderProduct', 'OrderUnsubscribe')) and " &amp;
+f.UidComparison("rb.UID_UNSRootB", systemId) &amp; " and " &amp;
+f.UidComparison("pwo.UID_PersonOrdered", nextBenfId) &amp; " )"</p>
+<p>otherRequests.Prototype("UID_PersonWantsOrg").IsDisplayItem = True</p>
+<p>otherRequests.Prototype("UID_PersonOrdered").IsDisplayItem = True</p>
+<p>otherRequests.Load()</p>
+<p>If otherRequests.Count \&lt;&gt; 0 Then</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>Dim userRequests As New List (Of ISingleDbObject)</p>
+<p>For Each nextRequest As IColElem In newRequests</p>
+<p>Dim pwo As ISingleDbObject = Connection.CreateSingle("PersonWantsOrg",
+nextRequest.GetValue("UID_PersonWantsOrg").String)</p>
+<p>Dim benfId = nextRequest.GetValue("UID_PersonOrdered").String</p>
+<p>If nextBenfId = benfId Then</p>
+<p>userRequests.Add(pwo)</p>
+<p>End If</p>
+<p>Next</p>
+<p>Dim unsAccountId = Connection.GetSingleProperty("UNSAccountB",
+"UID_UNSAccountB", f.UidComparison("UID_Person", nextBenfId) &amp; " and "
+&amp; f.UidComparison("UID_UNSRootB", systemId)).String</p>
+<p>Dim systemName As String = Connection.GetSingleProperty("UNSRootB",
+"Ident_UNSRoot", f.UidComparison("UID_UNSRootB", systemId) )</p>
+<p>If String.IsNullOrEmpty(unsAccountId) Then</p>
+<p>Dim tp As String = "TargetSystem\UNS\ITResource\ &amp; systemName &amp;
+"\Prefix"</p>
+<p>Dim tstPref As String = Connection.GetConfigParm(tp)</p>
+<p>logger.Trace("tstPref = " &amp; tstPref &amp; " for " &amp; tp)</p>
+<p>tstPref = If (String.IsNullOrEmpty(tstPref), "", tstPref.ToUpper())</p>
+<p>Dim accntLogin = tstPref &amp; Connection.GetSingleProperty("Person",
+"CentralAccount", f.UidComparison("UID_Person", nextBenfId)).String</p>
+<p>accntLogin = accntLogin.ToUpper()</p>
+<p>'mail template that has a body with SQL script used to crate user</p>
+<p>Dim createScriptTemplateName As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\ &amp; systemName &amp;
+"\CreateUserScriptTemplateName")</p>
+<p>If String.IsNullOrEmpty(createScriptTemplateName) Then</p>
+<p>'using default template</p>
+<p>createScriptTemplateName = "Z_Oracle_Create_Script_AD_Auth_2"</p>
+<p>End If</p>
+<p>Dim generatedPwd As String = Nothing</p>
+<p>Dim useInternalPwd As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\ &amp; systemName &amp;
+"\UseInternalPassword")</p>
+<p>If useInternalPwd = "1" Then</p>
+<p>generatedPwd = "1234567yY"</p>
+<p>End If</p>
+<p>Dim scriptBodyTemplate As String =
+Z_Get_Email_Template_Body(createScriptTemplateName)</p>
+<p>Dim scriptParams As New Dictionary(Of String, Object)</p>
+<p>scriptParams.Add("accountLogin", accntLogin)</p>
+<p>scriptParams.Add("accountPassword", generatedPwd)</p>
+<p>Dim scriptBody As String =
+Z_Velocity_Apply_Template(scriptBodyTemplate, scriptParams)</p>
+<p>logger.Trace("executing script: " &amp; scriptBody)</p>
+<p>Dim accountAlreadyExists As Boolean = False</p>
+<p>'execute create user script line by line; create user instruction
+can't be inside begin-end pl sql block</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(systemId)</p>
+<p>Try</p>
+<p>Using cmd As DbCommand = Z_Get_Db_Command(conn, "select username from
+all_users where upper(username)='" &amp; accntLogin &amp; "'")</p>
+<p>Dim dr As IDataReader = cmd.ExecuteReader()</p>
+<p>If dr.Read() Then</p>
+<p>logger.trace("user " &amp; accntLogin &amp; " already exists in database;
+linking it")</p>
+<p>accountAlreadyExists = True</p>
+<p>End If</p>
+<p>End Using</p>
+<p>If Not accountAlreadyExists Then</p>
+<p>For Each nextCmdLine As String In
+scriptBody.Split(ControlChars.CrLf.ToCharArray)</p>
+<p>logger.Trace("nextCmdLine = " &amp; nextCmdLine)</p>
+<p>If String.IsNullOrWhiteSpace(nextCmdLine)</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>nextCmdLine = nextCmdLine.Trim()</p>
+<p>If nextCmdLine.EndsWith(";") Then</p>
+<p>'to remove trailing ";" symbol</p>
+<p>nextCmdLine = nextCmdLine.Substring(0, nextCmdLine.Length-1)</p>
+<p>End If</p>
+<p>logger.Trace("command to execute = " &amp; nextCmdLine)</p>
+<p>Using cmd As DbCommand = Z_Get_Db_Command(conn, nextCmdLine)</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>End Using</p>
+<p>Next</p>
+<p>End If</p>
+<p>'Dim sql As String = "create user """ &amp; accntLogin &amp; """ identified by
+""1qaz2WSX"""</p>
+<p>'Dim cmd As DbCommand = Z_Get_Db_Command(conn, sql)</p>
+<p>'cmd.ExecuteNonQuery()</p>
+<p>'sql = "grant create session to """ &amp; accntLogin &amp; """"</p>
+<p>'cmd = Z_Get_Db_Command(conn, sql)</p>
+<p>'cmd.ExecuteNonQuery()</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>Connection.Variables.Put("FULLSYNC", True)</p>
+<p>Try</p>
+<p>Dim account As ISingleDbObject =
+Connection.CreateSingle("UNSAccountB")</p>
+<p>VID_PutValueSafe(account, "UID_UNSRootB", systemId)</p>
+<p>VID_PutValueSafe(account, "cn", accntLogin)</p>
+<p>VID_PutValueSafe(account, "AccountName", accntLogin)</p>
+<p>VID_PutValueSafe(account, "IsGroupAccount", 1)</p>
+<p>VID_PutValueSafe(account, "UID_TSBBehavior", "TSB-FullManaged")</p>
+<p>VID_PutValueSafe(account, "UID_Person", nextBenfId)</p>
+<p>account.Save()</p>
+<p>unsAccountId = account.GetValue("UID_UNSAccountB").String</p>
+<p>Finally</p>
+<p>Connection.Variables.Remove("FULLSYNC")</p>
+<p>End Try</p>
+<p>If useInternalPwd = "1" AndAlso Not accountAlreadyExists Then</p>
+<p>Dim pwdEmailParams As New Dictionary(Of String, Object)</p>
+<p>pwdEmailParams.Add("accountId", unsAccountId)</p>
+<p>pwdEmailParams.Add("systemId", systemId)</p>
+<p>pwdEmailParams.Add("targetUserId", nextBenfId)</p>
+<p>pwdEmailParams.Add("newPassword", generatedPwd)</p>
+<p>Dim benfEmail As String = Connection.CreateSingle("Person",
+nextBenfId).GetValue("DefaultEmailAddress").String</p>
+<p>Z_Send_Html_Mail_With_Template(benfEmail,
+"Z_New_Account_Oracle_With_Password", pwdEmailParams)</p>
+<p>End If</p>
+<p>End If</p>
+<p>Dim currentlyAssignedRoles As IColDbObject = Nothing</p>
+<p>currentlyAssignedRoles = Connection.CreateCol("PersonWantsOrg")</p>
+<p>currentlyAssignedRoles.Prototype.WhereClause = "UID_PersonWantsOrg in
+(select pwo.UID_PersonWantsOrg from PersonWantsOrg pwo inner join
+BaseTree bt on pwo.UID_Org=bt.UID_Org inner join QERReuseUS qr on
+qr.UID_AccProduct=bt.UID_AccProduct inner join QERResourceType qrt on
+qrt.UID_QERResourceType=qr.UID_QERResourceType inner join UNSRootB rb
+on rb.UID_UNSRootB=qr.ccc_UID_UNSRootB inner join DPRNameSpace ns on
+ns.UID_DPRNameSpace=rb.UID_DPRNameSpace where
+qrt.Ident_QERResourceType='OracleRole' and
+ns.Ident_DPRNameSpace='OracleSystemWithSubRoles' and (pwo.OrderState
+not in ('Aborted', 'Dismissed', 'Unsubscribed', 'OrderProduct') or
+(pwo.OrderState = 'Aborted' and pwo.CCC_ProvisioningStatus='New')) and
+" &amp; f.UidComparison("rb.UID_UNSRootB", systemId) &amp; " and " &amp;
+f.UidComparison("pwo.UID_PersonOrdered", nextBenfId) &amp; " )"</p>
+<p>currentlyAssignedRoles.Prototype("UID_PersonWantsOrg").IsDisplayItem =
+True</p>
+<p>currentlyAssignedRoles.Prototype("UID_PersonOrdered").IsDisplayItem =
+True</p>
+<p>currentlyAssignedRoles.Prototype("AdditionalData").IsDisplayItem =
+True</p>
+<p>currentlyAssignedRoles.Prototype("CCC_UID_Department").IsDisplayItem =
+True</p>
+<p>currentlyAssignedRoles.Prototype("UID_Department").IsDisplayItem =
+True</p>
+<p>currentlyAssignedRoles.Prototype("UID_Org").IsDisplayItem = True</p>
+<p>currentlyAssignedRoles.Load()</p>
+<p>Dim currentlyAssignedRolesInfo As New List(Of Dictionary(Of String,
+String))</p>
+<p>For Each nextCurrentRole As IColElem In currentlyAssignedRoles</p>
+<p>Dim resourceId As String =
+Z_Get_MultiRequestableUnsubscribableProductTypeId_From_PWO(nextCurrentRole.GetValue("UID_PersonWantsOrg").String)</p>
+<p>Dim resourceName As String =
+Connection.GetSingleProperty("QERReuseUS", "CCC_ExternalRef",
+f.UidComparison("UID_QERReuseUS", resourceId ))</p>
+<p>Dim nextInfo As New Dictionary(Of String, String) From {{"name",
+resourceName}, {"UID_Department",
+nextCurrentRole.GetValue("UID_Department").String},
+{"CCC_UID_Department",
+nextCurrentRole.GetValue("CCC_UID_Department").String}}</p>
+<p>currentlyAssignedRolesInfo.Add(nextInfo)</p>
+<p>Next</p>
+<p>Dim addedRolesInfo As New List(Of Dictionary(Of String, String))</p>
+<p>Dim removedRolesInfo As New List(Of Dictionary(Of String, String))</p>
+<p>Dim changedRolesInfo As New List(Of Dictionary(Of String, String))</p>
+<p>For Each pwo As ISingleDbObject In userRequests</p>
+<p>Dim orderState As String = pwo.GetValue("OrderState").String</p>
+<p>Dim operation As String = Nothing</p>
+<p>'a new product is requested to change sub roles of already assigned
+role</p>
+<p>If orderState = "OrderProduct" Then</p>
+<p>'For Each nextCurrentRole As IColElem In currentlyAssignedRoles</p>
+<p>' If nextCurrentRole.GetValue("UID_Org").String =
+pwo.GetValue("UID_Org").String</p>
+<p>' operation = "ChangeSubRoles"</p>
+<p>' Exit For</p>
+<p>' End If</p>
+<p>'Next</p>
+<p>If operation Is Nothing Then</p>
+<p>operation = "Add"</p>
+<p>End If</p>
+<p>Else</p>
+<p>operation = "Remove"</p>
+<p>End If</p>
+<p>Dim resourceId As String =
+Z_Get_MultiRequestableUnsubscribableProductTypeId_From_PWO(pwo.GetValue("UID_PersonWantsOrg").String)</p>
+<p>Dim resourceName As String =
+Connection.GetSingleProperty("QERReuseUS", "CCC_ExternalRef",
+f.UidComparison("UID_QERReuseUS", resourceId))</p>
+<p>Dim nextInfo As New Dictionary(Of String, String) From {{"name",
+resourceName}, {"UID_Department",
+pwo.GetValue("UID_Department").String}, {"CCC_UID_Department",
+pwo.GetValue("CCC_UID_Department").String}}</p>
+<p>If operation = "Add" Then</p>
+<p>addedRolesInfo.Add(nextInfo)</p>
+<p>ElseIf operation = "ChangeSubRoles"</p>
+<p>changedRolesInfo.Add(nextInfo)</p>
+<p>Else</p>
+<p>removedRolesInfo.Add(nextInfo)</p>
+<p>End If</p>
+<p>Next</p>
+<p>Dim ticketInternalName As String =
+Z_Get_Dialog_Next_Id("BPMTicketNumber", 10)</p>
+<p>Dim dictionary As New Dictionary(Of String, Object)</p>
+<p>dictionary.Add("sequenceTicketNumber", ticketInternalName)</p>
+<p>dictionary.Add("accountId", unsAccountId)</p>
+<p>dictionary.Add("systemId", systemId)</p>
+<p>dictionary.Add("targetUserId", nextBenfId)</p>
+<p>dictionary.Add("addedRolesInfo", addedRolesInfo)</p>
+<p>dictionary.Add("changedRolesInfo", changedRolesInfo)</p>
+<p>dictionary.Add("removedRolesInfo", removedRolesInfo)</p>
+<p>dictionary.Add("currentlyAssignedRolesInfo",
+currentlyAssignedRolesInfo)</p>
+<p>'Dim templateName As String = "Z_BPM_Ticket_HTML"</p>
+<p>Dim templateName As String = "Z_BPM_Ticket_Plain_Text"</p>
+<p>Dim bodyTemplate As String = Z_Get_Email_Template_Body(templateName)</p>
+<p>Dim subjectTemplate As String =
+Z_Get_Email_Template_Subject(templateName)</p>
+<p>Dim body As String = Z_Velocity_Apply_Template(bodyTemplate,
+dictionary)</p>
+<p>Dim subject As String = Z_Velocity_Apply_Template(subjectTemplate,
+dictionary)</p>
+<p>logger.Trace("ticket subject = " &amp; subject)</p>
+<p>logger.Trace("ticket body = " &amp; body)</p>
+<p>'<a href="mailto:Z_Send_Html_Mail()&quot;,
+extTicketId, body">Z_Send_Html_Mail("[redacted-email]</a></p>
+<p>'<a href="mailto:Z_Send_Plain_Text_Mail()&quot;,
+subject, body">Z_Send_Plain_Text_Mail("[redacted-email]</a></p>
+<p>If BPMCookieContainer Is Nothing Then</p>
+<p>BPMCookieContainer = Z_BPM_Authenticate()</p>
+<p>End If</p>
+<p>Dim extTicketId As String = Nothing</p>
+<p>Dim extTicketNumber As String = Nothing</p>
+<p>Dim opStatus As String = "Pending"</p>
+<p>Try</p>
+<p>Dim caseDate As New Dictionary(Of String, String)</p>
+<p>Dim person As ISingleDbObject = Connection.CreateSingle("Person",
+nextBenfId)</p>
+<p>Dim contactId As String = Nothing</p>
+<p>If Not
+String.IsNullOrEmpty(person.GetValue("CCC_AdditionalEmail").String)
+Then</p>
+<p>contactId = Z_BPM_Find_Contact(person.GetValue("InternalName").String,
+person.GetValue("CCC_AdditionalEmail").String, BPMCookieContainer)</p>
+<p>End If</p>
+<p>If String.IsNullOrEmpty(contactId) Then</p>
+<p>contactId = Z_BPM_Find_Contact(person.GetValue("InternalName").String,
+person.GetValue("DefaultEmailAddress").String, BPMCookieContainer)</p>
+<p>End If</p>
+<p>Dim servicePactId As String =
+Z_BPM_Find_Service_Pact_By_Contact(contactId, BPMCookieContainer)</p>
+<p>'use default contact and service pact</p>
+<p>If String.IsNullOrEmpty(servicePactId) Then</p>
+<p>For Each paramName As String In {"ContactId", "ServicePactId",
+"ServiceItemId", "CategoryId", "GroupId"}</p>
+<p>Dim ParVal2 =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\DefaultTicketParameters\
+&amp; paramName)</p>
+<p>Dim ParVal1 = Connection.GetConfigParm("TargetSystem\UNS\ITResource\
+&amp; systemName &amp; "\DefaultTicketParameters\ &amp; paramName)</p>
+<p>Dim ParVal = If (String.IsNullOrEmpty(ParVal1), ParVal2, ParVal1 )</p>
+<p>caseDate.Add(paramName, ParVal)</p>
+<p>Next</p>
+<p>Else</p>
+<p>'use specific contact and service pact</p>
+<p>caseDate.Add("ContactId", contactId)</p>
+<p>caseDate.Add("ServicePactId", servicePactId)</p>
+<p>For Each paramName As String In { "ServiceItemId", "CategoryId",
+"GroupId"}</p>
+<p>Dim ParVal2 =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\BPM\DefaultTicketParameters\
+&amp; paramName)</p>
+<p>Dim ParVal1 = Connection.GetConfigParm("TargetSystem\UNS\ITResource\
+&amp; systemName &amp; "\DefaultTicketParameters\ &amp; paramName)</p>
+<p>Dim ParVal = If (String.IsNullOrEmpty(ParVal1), ParVal2, ParVal1 )</p>
+<p>caseDate.Add(paramName, ParVal)</p>
+<p>Next</p>
+<p>End If</p>
+<p>Dim createdTicketData As Dictionary(Of String, String) =
+Z_BPM_Create_Ticket(subject, body, caseDate, BPMCookieContainer)</p>
+<p>extTicketId = createdTicketData.Item("id")</p>
+<p>extTicketNumber = createdTicketData.Item("number")</p>
+<p>Catch ex As Exception</p>
+<p>logger.Error(ex, "error while creating ticket for " &amp; nextBenfId)</p>
+<p>opStatus = "Failed"</p>
+<p>Z_Send_Email_To_Error_Auditor("Idm. BPM ticket creation error.",
+"Error while creating ticket for user with id = " &amp; nextBenfId &amp; "." &amp;
+VbCrLf &amp; "Ticket is marked as failed in CCCBPMProvisioningRequest
+table. Ticket will not be send again until you change
+CCC_ProvisioningStatus column in PersonWantsOrg table to 'New'.", ex)</p>
+<p>End Try</p>
+<p>Dim ticket As ISingleDbObject =
+Connection.CreateSingle("CCCBPMProvisioningRequest")</p>
+<p>VID_PutValueSafe(ticket, "CCC_status", opStatus)</p>
+<p>VID_PutValueSafe(ticket, "CCC_type", "ChangesInRoles")</p>
+<p>VID_PutValueSafe(ticket, "CCC_UID_UNSRootB", systemId)</p>
+<p>VID_PutValueSafe(ticket, "CCC_UID_Person", nextBenfId)</p>
+<p>VID_PutValueSafe(ticket, "CCC_externalId", extTicketId)</p>
+<p>VID_PutValueSafe(ticket, "CCC_externalName", extTicketNumber)</p>
+<p>VID_PutValueSafe(ticket, "CCC_internalName", ticketInternalName)</p>
+<p>ticket.Save()</p>
+<p>Dim ticketId As String =
+ticket.GetValue("UID_CCCBPMProvisioningRequest").String</p>
+<p>For Each pwo As ISingleDbObject In userRequests</p>
+<p>Dim ticketTpPWO As ISingleDbObject =
+Connection.CreateSingle("CCCBPMRequestHasPWO")</p>
+<p>Dim orderState As String = pwo.GetValue("OrderState").String</p>
+<p>Dim operation As String = Nothing</p>
+<p>'a new product is requested to change sub roles of already assigned
+role</p>
+<p>If orderState = "OrderProduct" Then</p>
+<p>'For Each nextCurrentRole As IColElem In currentlyAssignedRoles</p>
+<p>' If nextCurrentRole.GetValue("UID_Org").String =
+pwo.GetValue("UID_Org").String</p>
+<p>' operation = "ChangeSubRoles"</p>
+<p>' Exit For</p>
+<p>' End If</p>
+<p>'Next</p>
+<p>If operation Is Nothing Then</p>
+<p>operation = "Add"</p>
+<p>End If</p>
+<p>Else</p>
+<p>operation = "Remove"</p>
+<p>End If</p>
+<p>VID_PutValueSafe(ticketTpPWO, "UID_CCCBPMProvisioningRequest",
+ticketId)</p>
+<p>VID_PutValueSafe(ticketTpPWO, "UID_PersonWantsOrg",
+pwo.GetValue("UID_PersonWantsOrg").String)</p>
+<p>VID_PutValueSafe(ticketTpPWO, "CCC_status", opStatus)</p>
+<p>VID_PutValueSafe(ticketTpPWO, "CCC_type", operation)</p>
+<p>ticketTpPWO.Save()</p>
+<p>logger.Trace("setting CCC_ProvisioningStatus to " &amp; opStatus)</p>
+<p>VID_PutValueSafe(pwo, "CCC_ProvisioningStatus", opStatus) '</p>
+<p>pwo.Save()</p>
+<p>Next</p>
+<p>Next</p>
+<p>End Sub</p>
+<p>Public Function Z_Get_SubRole_Type_Name(depId As String) As String</p>
+<p>If String.IsNullOrEmpty(depId) Then</p>
+<p>Return Nothing</p>
+<p>End If</p>
+<p>Dim typ As String = Connection.CreateSingle("Department",
+depId).GetValue("CustomProperty03").String</p>
+<p>If typ = "BE" Then</p>
+<p>Return "Балансовая единица"</p>
+<p>ElseIf typ = "VP" Then</p>
+<p>Return "Точка зрения"</p>
+<p>ElseIf typ = "Lang" Then</p>
+<p>Return "Вид языка"</p>
+<p>ElseIf typ = "Audit" Then</p>
+<p>Return "Вид аудита"</p>
+<p>ElseIf typ = "Analysis" Then</p>
+<p>Return "Вид анализа"</p>
+<p>ElseIf typ = "Workshop" Then</p>
+<p>Return "Цех/предприятие"</p>
+<p>ElseIf typ = "DepartmentOrg" Then</p>
+<p>Return "Подразделение (Организация)"</p>
+<p>ElseIf typ = "WorkshopOnly" Then</p>
+<p>Return "Цех"</p>
+<p>ElseIf typ = "Company" Then</p>
+<p>Return "Предприятие"</p>
+<p>ElseIf typ = "Department" Then</p>
+<p>Return "Подразделение"</p>
+<p>End If</p>
+<p>Return Nothing</p>
+<p>End Function</p>
+<p>Public Function Z_Connector_Oracle_Recon_And_Link(sysName As String)
+As String</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim sysId = Z_Get_UNS_System_Id(sysName)</p>
+<p>Connection.Variables.Put("FULLSYNC", True)</p>
+<p>Try</p>
+<p>Dim conn As DbConnection = Z_Get_Db_Connection(sysId)</p>
+<p>Try</p>
+<p>Using cmd As DbCommand = Z_Get_Db_Command(conn, "select username from
+all_users order by 1")</p>
+<p>Dim dr As IDataReader = cmd.ExecuteReader()</p>
+<p>While dr.Read()</p>
+<p>Dim login As String = dr("username").tostring()</p>
+<p>logger.trace("handling " &amp; login)</p>
+<p>Dim currentaccntId As String =
+Connection.GetSingleProperty("UNSAccountB",
+"UID_UNSAccountB",f.UidComparison("UID_UNSRootB", sysId) &amp; " and " &amp;
+f.Comparison("AccountName", login, ValType.String))</p>
+<p>If Not String.IsNullOrEmpty(currentaccntId) Then</p>
+<p>logger.trace("already reconciled")</p>
+<p>Continue While</p>
+<p>End If</p>
+<p>Dim persId As String = Connection.GetSingleProperty("Person",
+"UID_Person", f.Comparison("CentralAccount", login, ValType.string))</p>
+<p>If String.IsNullOrEmpty(persId) Then</p>
+<p>logger.trace("persId not found")</p>
+<p>Continue While</p>
+<p>End If</p>
+<p>Dim account As ISingleDbObject =
+Connection.CreateSingle("UNSAccountB")</p>
+<p>VID_PutValueSafe(account, "UID_UNSRootB", sysId)</p>
+<p>VID_PutValueSafe(account, "cn", login)</p>
+<p>VID_PutValueSafe(account, "AccountName", login)</p>
+<p>VID_PutValueSafe(account, "IsGroupAccount", 1)</p>
+<p>VID_PutValueSafe(account, "UID_TSBBehavior", "TSB-FullManaged")</p>
+<p>VID_PutValueSafe(account, "UID_Person", persId)</p>
+<p>account.Save()</p>
+<p>End While</p>
+<p>End Using</p>
+<p>Finally</p>
+<p>conn.Dispose()</p>
+<p>End Try</p>
+<p>Finally</p>
+<p>Connection.Variables.Remove("FULLSYNC")</p>
+<p>End Try</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+</blockquote></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

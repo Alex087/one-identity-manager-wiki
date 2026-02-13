@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>3. Scripts - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#sql" class="nav-link">SQL запрос</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#join-orderby" class="nav-link">С использованием Join и OrderBy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#insert" class="nav-link">Не создается запись в БД Insert через тестирование скрипта</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#insert_1" class="nav-link">Создание записи в БД Insert</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Удаление записи из БД</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link">Обновление записи в БД</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#where" class="nav-link">Сложный Where</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ad-account-definition" class="nav-link">Для получения информации по наличии AD Account Definition у сотрудника для почтового шаблона оповещения согласующего при назначении режима доступа</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link">Работа с объектом</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#update" class="nav-link">Update таблицы</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#sql_1" class="nav-link">SQL запрос</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link">Добавление в массив уникальных значений из другого массива</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-" class="nav-link">Вычисление кол-ва согласующих по точкам зрения</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_5" class="nav-link">Вывод в шаблоне построчно из массива</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#objectwalker" class="nav-link">ObjectWalker</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_6" class="nav-link">Глобальные и локальные переменные</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#allocating-parameter-values" class="nav-link">Allocating Parameter Values</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_7" class="nav-link">Логирование</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#ccc_vid_write2log" class="nav-link">CCC_VID_Write2Log</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_8" class="nav-link">Строки</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#where_1" class="nav-link">WHERE</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#export-to-csv" class="nav-link">EXPORT TO CSV</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#csvexportsingle" class="nav-link">CSVExportSingle</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_9" class="nav-link">Формат даты</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#objectwalker_1" class="nav-link">ObjectWalker</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#greenplum-postgress" class="nav-link">Взаимодействие с GreenPlum (Postgress)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_10" class="nav-link">Кавычки в скриптах</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#unsaccountb" class="nav-link">Стандартные процессы для UNSAccountB</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_11" class="nav-link">Увеличение производительности работы скриптов</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#target-system-type-custom-target-system-uid_person" class="nav-link">Вычисление Target System type (Custom Target System) по UID_Person</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#random" class="nav-link">Random число</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_12" class="nav-link">Расшифровка зашифрованного значения из параметров</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_13" class="nav-link">Вставка переменной в строку</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_14" class="nav-link">Извлечь текст из строки до и после символа (.)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#csv-samaccountname-person" class="nav-link">Чтение из файла csv имен пользователей (SamAccountName) и запись в файл дополнительной информации по связанным Person</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#jobserver" class="nav-link">Логирование в вывод JobServer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#adhoc-data" class="nav-link">ADHoc data в текст</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_15" class="nav-link">Получение параметров из проекта синхронизации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_16" class="nav-link">Вызов события с параметрами</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#sql-join" class="nav-link">Сложные SQL запросы (JOIN)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#deferred-operation" class="nav-link">Отложенное действие (Deferred operation)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#convert-to-int" class="nav-link">Из строки в число (Convert to Int)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#base64" class="nav-link">Перекодировка из Base64</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#procid" class="nav-link">Сохранение объекта с указанием ProcID для поиска в истории.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#delay" class="nav-link">Пауза в работе скрипта (Delay)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_17" class="nav-link">Выборка данных по имени учетной записи из файла</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#1-ad" class="nav-link">Получение данных о сотруднике, если у него > 1 AD уз привязанной</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>3. Scripts</p>
+<p>27 февраля 2020 г.</p>
+<p>14:48</p>
+<table>
+<thead>
+<tr>
+<th><strong>Script</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Script (OnDiscarded)</td>
+<td>The script is run after the object is discarded.</td>
+</tr>
+<tr>
+<td>Script (OnDiscarding)</td>
+<td>The script is run before the object is discarded.</td>
+</tr>
+<tr>
+<td>Script (OnLoaded)</td>
+<td>The script is run after the object is loaded.</td>
+</tr>
+<tr>
+<td>Script (OnSaved)</td>
+<td>The script is run after the object is saved.</td>
+</tr>
+<tr>
+<td>Script (OnSaving)</td>
+<td>The script is run before the object is saved.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/29">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/29</a>&gt;</em></p>
+<p><strong>Оповещение о пользователях, которые будут скоро уволены</strong></p>
+<p>Public Function Z_Notify_Upcoming_User_Termination() As String</p>
+<p>Dim timeSqlParts As New List(Of String)</p>
+<p>For Each nextTimeDiff As String In {"0", "5", "10"}</p>
+<p>timeSqlParts.Add("DATEADD(DD," &amp; nextTimeDiff &amp; ",CAST(getdate() AS
+Date))=cast(ExitDate as date)")</p>
+<p>Next</p>
+<p>Dim items As IColDbObject = Nothing</p>
+<p>items = Connection.CreateCol("Person")</p>
+<p>items.Prototype("UID_Person").IsDisplayItem = True</p>
+<p>items.Prototype("UID_PersonHead").IsDisplayItem = True</p>
+<p>items.Prototype.WhereClause = "ExitDate is not null and IsInActive=0
+and IsExternal=1 and (" &amp; String.Join(" or ", timeSqlParts) &amp; ")"</p>
+<p>items.Prototype.OrderBy = "internalname"</p>
+<p>items.Load()</p>
+<p>logger.Trace("pending termination count: " &amp; items.Count)</p>
+<p>Dim managersToUsers As New Dictionary(Of String, List(Of String))</p>
+<p>For Each nextOp As IColElem In items</p>
+<p>Dim managerId = nextOp.GetValue("UID_PersonHead").String</p>
+<p>Dim persId = nextOp.GetValue("UID_Person").String</p>
+<p>If Not String.IsNullOrEmpty(managerId) Then</p>
+<p>Z_Dictionary_Put_If_Absent(managersToUsers, managerId, New List(Of
+String))</p>
+<p>managersToUsers.Item(managerId).Add(persId)</p>
+<p>End If</p>
+<p>Next</p>
+<p>For Each nextManager As String In managersToUsers.Keys</p>
+<p>Try</p>
+<p>Dim userIds As List(Of String) = managersToUsers.Item(nextManager)</p>
+<p>logger.Trace("sending upcoming termination mail with " &amp; userIds.Count
+&amp; " users (" &amp; String.Join(", ", userIds) &amp; ") to " &amp; nextManager)</p>
+<p>Dim toEmail As String = Connection.CreateSingle("Person",
+nextManager).GetValue("DefaultEmailAddress").String</p>
+<p>Dim emailParams As New Dictionary(Of String, Object)</p>
+<p>emailParams.Add("userIds", userIds)</p>
+<p>emailParams.Add("Receiver", nextManager)</p>
+<p>Z_Send_Html_Mail_With_Template(toEmail, "Z_Upcoming_Termination",
+emailParams)</p>
+<p>Catch ex As Exception</p>
+<p>logger.Error(ex, "error hile sending mail to " &amp; nextManager)</p>
+<p>End Try</p>
+<p>Next</p>
+<p>Return "ok"</p>
+<p>End Function</p>
+<hr />
+<p><strong>Параметр в переменную (скрипт отправки почты)</strong></p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports System.Net.Mail</p>
+<p>#End If</p>
+<p>toAddress =
+Connection.GetConfigParm("Common\MailNotification\RedirectAllMailsTo")</p>
+<p>/////////////////////////////////////////////////////////////////////////////////////////////////////</p>
+<p>Sub Z_Send_Mail(ByVal toAddress As String, ByVal subject As String,
+ByVal body As String, isHTML As Boolean, Optional dontCatchError As
+Boolean = False)</p>
+<p>If Not
+String.IsNullOrWhiteSpace(Connection.GetConfigParm("Common\MailNotification\RedirectAllMailsTo"))
+Then</p>
+<p>toAddress =
+Connection.GetConfigParm("Common\MailNotification\RedirectAllMailsTo")</p>
+<p>logger.trace("system configured to redirect all mails to " &amp;
+toAddress)</p>
+<p>End If</p>
+<p>If String.IsNullOrEmpty(toAddress) Then</p>
+<p>logger.Warn("toAddress is empty for message with subject = " &amp; subject
+&amp; "; body = " &amp; body)</p>
+<p>Return</p>
+<p>End If</p>
+<p>If
+String.IsNullOrEmpty(Connection.GetConfigParm("Common\MailNotification\DefaultSender"))
+OrElse
+String.IsNullOrEmpty(Connection.GetConfigParm("Common\MailNotification\SMTPRelay"))
+Then</p>
+<p>logger.Warn("SMTP server is not configured for message with subject =
+" &amp; subject &amp; "; body = " &amp; body)</p>
+<p>Return</p>
+<p>End If</p>
+<p>Try</p>
+<p><strong>Dim Smtp_Server As New SmtpClient</strong></p>
+<p><strong>Dim e_mail As New MailMessage()</strong></p>
+<p><strong>' Smtp_Server.UseDefaultCredentials = False</strong></p>
+<p><strong>' Smtp_Server.Credentials = New Net.NetworkCredential(
+Connection.GetConfigParm("Common\MailNotification\SMTPDomain") &amp; "\ &amp;
+Connection.GetConfigParm("Common\MailNotification\SMTPAccount"),
+Connection.GetConfigParm("Common\MailNotification\SMTPPassword"))</strong></p>
+<p><strong>Smtp_Server.Port =
+Convert.toInt32(Connection.GetConfigParm("Common\MailNotification\SMTPPort"))</strong></p>
+<p><strong>Smtp_Server.EnableSsl = False</strong></p>
+<p><strong>Smtp_Server.Host =
+Connection.GetConfigParm("Common\MailNotification\SMTPRelay")</strong></p>
+<p><strong>e_mail = New MailMessage()</strong></p>
+<p><strong>e_mail.From = New
+MailAddress(Connection.GetConfigParm("Common\MailNotification\DefaultSender"))</strong></p>
+<p><strong>For Each addr As String In toAddress.Split(","c)</strong></p>
+<p><strong>e_mail.To.Add(addr.trim())</strong></p>
+<p><strong>Next</strong></p>
+<p><strong>e_mail.Subject = subject</strong></p>
+<p><strong>e_mail.IsBodyHtml = isHTML</strong></p>
+<p><strong>e_mail.Body = body</strong></p>
+<p><strong>Smtp_Server.Send(e_mail)</strong></p>
+<p>Catch ex As Exception</p>
+<p>logger.error(ex, "error while sending mesage with subject = " &amp;
+subject &amp; "; body = " &amp; body &amp; " to " &amp; toAddress)</p>
+<p>If dontCatchError Then</p>
+<p>Throw ex</p>
+<p>End If</p>
+<p>End Try</p>
+<p>End Sub</p>
+<hr />
+<p><strong>Создание учетки SfB</strong></p>
+<p>Public Function Z_Connector_Skype_Add_Account(account As
+SingleDbObjectSnapshot) As String</p>
+<p>Dim scriptText As String = Z_Get_Email_Template_Body("Z_Skype_Create")</p>
+<p>Dim output As New List(Of String)</p>
+<p>'output.Add("userDataJSON")</p>
+<p>Dim scriptParams As New Dictionary(Of String, Object)</p>
+<p>scriptParams.Add("guid", account.GetValue("ObjectGUID").String)</p>
+<p>scriptParams.Add("pool", account.GetValue("CCC_RegistrarPool").String)</p>
+<p>scriptParams.Add("sip", account.GetValue("CCC_SipAddress").String)</p>
+<p>Dim results As IDictionary(Of String, Object) =
+Z_Run_PowerShell(scriptText, scriptParams, output)</p>
+<p>'Dim outputLines = CType(results.Item("__OUTPUT__"), List(Of
+String))</p>
+<p>'logger.Trace("outputLines = " &amp; String.Join(vbCrLf, outputLines))</p>
+<p>Try</p>
+<p>Z_Send_Mail_New_Account_To_ISA(account.GetValue("XObjectKey").String)</p>
+<p>Catch ex As Exception</p>
+<p>logger.Error(ex, "error while sending mail to ISA")</p>
+<p>End Try</p>
+<p>Z_Assign_Add_Group(account.GetValue("UID_Person").String,
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\Skype\DefaultGroupCN"))</p>
+<p>Return account.GetValue("ObjectGUID").String</p>
+<p>End Function</p>
+<p>/////////</p>
+<p><em>Z_Skype_Create</em></p>
+<p>param(\$guid, \$pool, \$sip)</p>
+<p>\$ErrorActionPreference = "Stop"</p>
+<p>import-module SkypeForBusiness</p>
+<p>\$trgUser = Get-CsAdUser –Identity \$guid</p>
+<p>If(\$trgUser.Enabled -eq \$null){</p>
+<p>Write-output "lync account not found; trying to create"</p>
+<p>try {</p>
+<p>Enable-CSUser \$guid -RegistrarPool \$pool -SipAddress \$sip</p>
+<p>} catch {</p>
+<p>\$ErrorMessage = \$_.Exception.</p>
+<p>Write-output \$ErrorMessage</p>
+<p>if (\$ErrorMessage -eq "The EXECUTE permission was denied on the
+object 'XdsPublishItems', database 'xds', schema 'dbo'." ) {</p>
+<p>Write-output "expected error; should not affect lync account"</p>
+<p>} else {</p>
+<p>throw</p>
+<p>}</p>
+<p>}</p>
+<p>} elseif(\$trgUser.Enabled -eq \$false) {</p>
+<p>Write-output "account was disabled; enable it"</p>
+<p>Set-CsUser –Identity \$guid –Enabled \$True</p>
+<p>} else {</p>
+<p>Write-output "lync account already enabled"</p>
+<p>}</p>
+<hr />
+<p><strong>Создание учетки SfB 2 (в скприте процесса)</strong></p>
+<p>'Value="get-alias | Where-Object {\$_.name -like 'tee*'}"</p>
+<p>Dim theScript As New StringBuilder()</p>
+<p>' load modules</p>
+<p>' theScript.AppendLine("import-module activedirectory" )</p>
+<p>' theScript.AppendLine("\$myname=""tee""")</p>
+<p>' theScript.AppendLine("get-alias -Name \$myName")</p>
+<p>Dim SAMAccountName As String = \$cn\$</p>
+<p>Dim Username As String =
+Connection.GetConfigParm("Custom\SFB\Username")</p>
+<p>Dim Password As String =
+Connection.GetConfigParm("Custom\SFB\Password")</p>
+<p>Dim RegistrarPool As String =
+Connection.GetConfigParm("Custom\SFB\RegistrarPool")</p>
+<p>Dim SipAddressType As String =
+Connection.GetConfigParm("Custom\SFB\SipAddressType")</p>
+<p>Dim SipDomain As String =
+Connection.GetConfigParm("Custom\SFB\SipDomain")</p>
+<p>Dim URL As String =
+Connection.GetConfigParm("Custom\SFB\URL_oscPowerShell")</p>
+<p>theScript.AppendLine("\$creds = New-Object
+System.Management.Automation.PSCredential ('"+Username+"',
+(ConvertTo-SecureString '"+Password+"' -AsPlainText -Force))")</p>
+<p>theScript.AppendLine("\$s = New-PSSession -Name SfB -ConnectionUri
+'"+URL+"' -Credential \$creds")</p>
+<p>theScript.AppendLine("\$session = Import-PSSession -Session \$s")</p>
+<p>theScript.AppendLine("Enable-CsUser -Identity
+'nlmk\+SAMAccountName+"' -RegistrarPool '"+RegistrarPool+"'
+-SipAddressType '"+SipAddressType+"' -SipDomain '"+SipDomain +"'")</p>
+<p>theScript.AppendLine("Remove-PSSession -Session \$s")</p>
+<p>Value = theScript.ToString()</p>
+<hr />
+<p><strong>Поддержка SQL в сприптах</strong></p>
+<p>' Get the SQL formatter for our connection</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<hr />
+</blockquote>
+<h1 id="sql">SQL запрос</h1>
+<blockquote>
+<p>Public Function CCC_GetSingleValueWithOrderBy(UID_PersonWantsOrg As
+String) As String</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim WhereClause As String = f.AndRelation(</p>
+<p>f.Comparison("DecisionType", "Unsubscribe", ValType.String),</p>
+<p>f.Comparison("UID_PersonWantsOrg", UID_PersonWantsOrg,
+ValType.String))</p>
+<p>Return Session.Source.GetSingleValue(Of String)(Query.</p>
+<p>From("PWODecisionHistory").</p>
+<p>Where(WhereClause).</p>
+<p>OrderBy("DateHead DESC").</p>
+<p>Select("ReasonHead"))</p>
+<p>End Function</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/21728/orderby-quering-the-database-with-script">https://www.oneidentity.com/community/identity-manager/f/forum/21728/orderby-quering-the-database-with-script</a></p>
+<p><span class="mark">Dim qApprover = Query.From(Table.PWOHelperPWO,
+"php").Join(Table.PersonWantsOrg,
+"pwo").On(<strong>Table.PWOHelperPWO.UID_PersonWantsOrg</strong>).</span></p>
+<p><span class="mark">Select(Table.PersonWantsOrg.DecisionLevel).</span></p>
+<p><span class="mark">Where("php.UID_PersonHead =
+'e94fd1f7-ecf2-4d5f-9955-f2311a110c39' AND php.LevelNumber =
+pwo.DecisionLevel")</span></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/27601/expression-clauses-in-a-query">Expression Clauses in a query - Forum - Identity Manager Community -
+One Identity
+Community</a></p>
+</blockquote>
+<h2 id="join-orderby">С использованием Join и OrderBy</h2>
+<blockquote>
+<p>При использовании OrderBy меняется тип query на Iselect. Чтобы это
+исправить, меняет тив при получении коллекции.</p>
+<p>Dim qContentShort = Query.From("DialogWatchProperty",
+"watchprop").Join(Table.DialogWatchOperation,
+"watchop").On(Table.DialogWatchOperation.UID_DialogWatchOperation).SelectAll().Where(strWhere).OrderBy("DialogWatchOperation.OperationDate")</p>
+<p>colRecords = Session.Source.GetCollection(CType(qContentShort, Query))</p>
+<hr />
+<p><strong>Получение значения из БД</strong></p>
+<p>Dim xValue As String  </p>
+<p>If (Session.Source().TryGetSingleValue(Of String)("\&lt;tablename&gt;",
+"\&lt;columnname&gt;", "\&lt;whereclause&gt;", xValue)) Then<br />
+'work with xValue<br />
+'Else 'make something different<br />
+End If</p>
+<p><a href="https://support.oneidentity.com/identity-manager/kb/204144/changed-behaviour-in-the-new-object-layer-api">https://support.oneidentity.com/identity-manager/kb/204144/changed-behaviour-in-the-new-object-layer-api</a></p>
+<hr />
+<p><strong>Получение значения из БД 2</strong></p>
+<p>Dim xValue As String<br />
+Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim WhereClause As String = f.Comparison("UID_PersonWantsOrg",
+UID_PersonWantsOrg, ValType.String,CompareOperator.Equal,
+FormatterOptions.None)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Table","ColumnName",WhereClause,xValue)</p>
+<p><strong>ИЛИ</strong></p>
+<p>XValue = Connection.GetSingleProperty("AccProductGroup",
+"UID_AccProductGroup", WhereClause)</p>
+<hr />
+<p><strong>Вычисление родительского подразделения</strong></p>
+<p>Dim CompanyCode As String</p>
+<p>Dim ObjectID as String = Right(\$ObjectID\$,8)</p>
+<p>Dim GroupName As String</p>
+<p>Dim ShortName as String = \$ShortName\$</p>
+<p>Dim dbDepartment as IEntity 'объявляем переменную, как объект</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter 'для поддержки sql
+запросов и синтаксиса</p>
+<p>Dim strUID_ParentDepartment As String</p>
+<p>Dim strWhere As String</p>
+<p>dbDepartment = session.Source.Get("Department", \$UID_Department\$)
+'помещаем объект подразделения по его UID</p>
+<p>CompanyCode = dbDepartment.GetValue("CustomProperty02").ToString()
+'помещаем в переменную код компании подразделения</p>
+<p>strUID_ParentDepartment =
+dbDepartment.GetValue("UID_ParentDepartment") 'помещаем в переменную
+родительский департамент</p>
+<p>strWhere = f.UidComparison("UID_Department", strUID_ParentDepartment)
+'условия сравнения UID подразделения и родительского подразделения</p>
+<p>While string.IsNullOrWhiteSpace(CompanyCode) AND
+Session.Source.Exists("Department",strWhere) 'до тех пор, пока Код
+компании = Null и существует родительский департамент</p>
+<p>dbDepartment= session.Source.Get("Department",strUID_ParentDepartment)</p>
+<p>CompanyCode = dbDepartment.GetValue("CustomProperty02").ToString()</p>
+<p>strUID_ParentDepartment =
+dbDepartment.GetValue("UID_ParentDepartment")</p>
+<p>strWhere = f.UidComparison("UID_Department", strUID_ParentDepartment)</p>
+<p>End While</p>
+<p>If (not string.IsNullOrWhiteSpace(CompanyCode)) Then</p>
+<p>values("CompanyCode") = CompanyCode</p>
+<p>End if</p>
+<p>GroupName = "hab-" + CompanyCode + "-" + ObjectID</p>
+<p>values("ObjectID") = ObjectID</p>
+<p>values("ShortName") = ShortName</p>
+<p>values("GroupName") = GroupName</p>
+<p>values("Alias") = GroupName</p>
+<p>values("CanonicalName") = "ao.nlmk/HAB/" + GroupName</p>
+<p>values("DistinguishedName") = "CN=" + GroupName +
+",OU=HAB,DC=ao,DC=nlmk"</p>
+<hr />
+<p><strong>Получение DistinguishedName по UID</strong></p>
+<p>Public Function CCC_Test_UID_ADSContainer(ByVal strUID_ADSContainer As
+String) As String</p>
+<p>' Get the SQL formatter for our connection</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>'Dim a As String</p>
+<p>' Build the WHERE clause for our request</p>
+<p>Dim where As String = f.Comparison("UID_ADSContainer",
+strUID_ADSContainer, ValType.String)</p>
+<p>' Get Ident_Domain of the ADSContainer</p>
+<p>'a = Session.Source.GetSingleValue(Of String)("ADSContainer",
+"DistinguishedName", where)</p>
+<p>Dim xValue As String = "1"</p>
+<p>If (Session.Source().TryGetSingleValue(Of String)("ADSContainer",
+"DistinguishedName", where, xValue)) Then</p>
+<p>'work with xValue</p>
+<p>'Else 'make something different</p>
+<p>End If</p>
+<p>Return xValue</p>
+<p>End Function</p>
+<hr />
+<p><strong>Получение UID по имени домена</strong></p>
+<p>Public Function CCC_Test_Get_UID_from_Name(ByVal Name As String) As
+String</p>
+<p>' Get the SQL formatter for our connection</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>' Build the WHERE clause for our request</p>
+<p>Dim where As String = f.Comparison("ADSDomainName", Name,
+ValType.String)</p>
+<p>' Get Ident_Domain of the ADSContainer</p>
+<p>'a = Session.Source.GetSingleValue(Of String)("ADSContainer",
+"DistinguishedName", where)</p>
+<p>Dim xValue As String = "1"</p>
+<p>'If (Session.Source().TryGetSingleValue(Of String)("ADSContainer",
+"DistinguishedName", where, xValue)) Then</p>
+<p>'work with xValue</p>
+<p>'Else 'make something different</p>
+<p>'End If</p>
+<p>xValue = Connection.GetSingleProperty("ADSDomain", "UID_ADSDomain",
+where)</p>
+<p>Return xValue</p>
+<p>End Function</p>
+<hr />
+<p><strong>Получаем значение из конфиг параметра</strong></p>
+<p>Dim URL As String =
+Connection.GetConfigParm("Custom\Exchange\URL_ExchPowerShell")</p>
+<hr />
+<p><strong>Where в процессе</strong></p>
+<p>Процесс SQLComponent - Existsvalues("GroupOUName").ToString вычисляем
+в Pre-Script первого блока процесса</p>
+<p><strong>Dim f As ISqlFormatter = Connection.SqlFormatter</strong></p>
+<p><strong>Value = f.Comparison("cn", values("GroupOUName"), ValType.String,
+CompareOperator.Equal)</strong></p>
+<p>values("GroupOUName") = GroupOUName</p>
+<p><img src="../media/3. Scripts/media/image1.png"
+style="width:8.5625in;height:1.51042in"
+alt="Param eters Parameter name Connectionprovider ConnectionString TableName Parameter value Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo.ConnectionString Value = •ADSContainer• Dim f ISqIFormatter = = f.Comparison(&#39; cn&#39; " /></p>
+<p><img src="../media/3. Scripts/media/image2.png"
+style="width:3.34375in;height:1.08333in"
+alt="Process step properties General Generation Error handling Extended Name Process task Check Exist OU SQLComponent - Exists " /></p>
+<hr />
+<p><strong>SQL выражение</strong></p>
+<p>Для SQLComponent - Execute SQL</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Value = "delete ADSAccount where " &amp; f.UIDComparison("UID_ADSAccount",
+\$UID_ADSAccount\$)</p>
+<hr />
+<p><strong>Работа с коллекциями из объектов БД</strong></p>
+<p>Public Function CCC_Test_Unique_CompanyCode(ByVal CompanyCode As
+Integer) As String</p>
+<p>Dim colPersons As IEntityCollection</p>
+<p>Dim strSubType As String</p>
+<p>Dim dbPerson As IEntity</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim Res As String</p>
+<p><strong>' create the query object</strong></p>
+<p>Dim qPerson = Query.From("CCCOrgUnitMapping").SelectAll()</p>
+<p><strong>' Load a collection of Person objects</strong></p>
+<p>colPersons = Session.Source.GetCollection(qPerson)</p>
+<p>' Run through the list</p>
+<p>For Each colElement As IEntity In colPersons</p>
+<p>dbPerson = colElement.Create(Session, EntityLoadType.Interactive)</p>
+<p>strSubType = dbPerson.GetValue("CCC_CompanyCode").String</p>
+<p>Dim qPerson1 = Query.From("CCCOrgUnitMapping").Where(Function(c)
+c.Column("CCC_CompanyCode") = strSubType).SelectCount()</p>
+<p>Dim iCount = Session.Source.GetCount(qPerson1)</p>
+<p>If iCount = CompanyCode Then</p>
+<p>Return strSubType</p>
+<p>End If</p>
+<p>Next</p>
+<p>Return CompanyCode.ToString()</p>
+<p>End Function</p>
+<hr />
+<p><strong>Шаблон параметра деактивации департамента</strong></p>
+<p>Dim oDate As DateTime = Convert.ToDateTime(\$CustomProperty08\$)</p>
+<p>If oDate \&lt; Date.UtcNow then</p>
+<p>Value = True</p>
+<p>Else</p>
+<p>Value = False</p>
+<p>End If</p>
+<hr />
+<p><strong>Вывести ошибку в Manager при сохранении (Для таблицы - OnSaving)</strong></p>
+<p>Dim IPAddress As String = Convert.ToString(Value)</p>
+<p>If Not Regex.IsMatch(IPAddress,
+"^\d{1,3}\\d{1,3}\\d{1,3}\\d{1,3}\$",
+RegexOptions.CultureInvariant) Then</p>
+<p>Throw New <strong>VIException</strong>("IP Address submitted is not valid.",
+ExceptionRelevance.EndUser)</p>
+<p>End If</p>
+<hr />
+</blockquote>
+<h1 id="insert">Не создается запись в БД Insert через тестирование скрипта</h1>
+<blockquote>
+<p>Надо при тестировании скрипта отключить Use Transaction</p>
+<p><img src="../media/3. Scripts/media/image3.png"
+style="width:11.22917in;height:1.14583in"
+alt="Test script String UID_Person, String String UID.Org . • String Parameters _ Person (System.String) ccc (System.String) .Org (System. String) 4b9bebcf-204e4369-acf2-28ea26dd9af9 021 afe9f-c57c4e5e-8334-73045d1 b5780 Run Options • use master connection use transaction Record SQL log " /></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/30974/create-db-objects">https://www.oneidentity.com/community/identity-manager/f/forum/30974/create-db-objects</a></p>
+<hr />
+</blockquote>
+<h1 id="insert_1">Создание записи в БД Insert</h1>
+<blockquote>
+<p>Public Function CCC_Test_Insert_DbObject(ByVal UID_Person As String,
+ByVal CCC_UID_Point_of_View As String, ByVal UID_Org As String) As
+String</p>
+<p>Dim dbCCCPointOfViewInAccProd As IEntity</p>
+<p>dbCCCPointOfViewInAccProd =
+Session.Source.CreateNew("CCCPointOfViewInAccProd")</p>
+<p>Using t As New Transaction(Session)</p>
+<p>dbCCCPointOfViewInAccProd.PutValue("CCC_UID_Person", UID_Person)</p>
+<p>dbCCCPointOfViewInAccProd.PutValue("CCC_UID_Point_of_View",
+CCC_UID_Point_of_View)</p>
+<p><strong>Using uow As IUnitOfWork = Session.StartUnitOfWork()</strong></p>
+<p><strong>uow.Put(dbCCCPointOfViewInAccProd)</strong></p>
+<p><strong>uow.Commit()</strong></p>
+<p><strong>End Using</strong></p>
+<p><strong>t.Commit()</strong></p>
+<p>End Using</p>
+<p>Return UID_Person</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="_1">Удаление записи из БД</h1>
+<blockquote>
+<p>Public Function CCC_Test_Delete_DbObject(ByVal UID_Person As String,
+ByVal UID_ShoppingCartOrder As String, ByVal UID_PWO As String) As
+String</p>
+<p>Dim CCC_UID_Point_of_View As String</p>
+<p>Dim dbPointOfView As IEntity</p>
+<p>Dim dbPointOfView_new As IEntity</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim Res As String</p>
+<p>' create the query object</p>
+<p>Dim qPointOfView =
+Query.From("CCCPointOfViewInAccProd_T").Where(Function(c)
+c.Column("CCC_UID_ShoppingCartOrder") =
+UID_ShoppingCartOrder).SelectAll()</p>
+<p>' Load a collection of Person objects</p>
+<p>Dim colPointsOfView =
+Session.Source.GetCollection(qPointOfView,EntityCollectionLoadType.Bulk)</p>
+<p>Using uow = Session.StartUnitOfWork()</p>
+<p>' Walk through the list of all persons</p>
+<p>For Each colElement As IEntity In colPointsOfView</p>
+<p>' Mark for deletion</p>
+<p>colElement.MarkForDeletion()</p>
+<p>' put the object in the unit of work</p>
+<p>uow.Put(colElement)</p>
+<p>Next</p>
+<p>' All person objects will be saved here!</p>
+<p>uow.Commit()</p>
+<p>End Using</p>
+<p>Return UID_Person</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="_2">Обновление записи в БД</h1>
+<blockquote>
+<p>dbcolCCCPersonnelActionsAPI = colElement.Create(Session,
+EntityLoadType.Interactive)</p>
+<p>dbcolCCCPersonnelActionsAPI.<strong>PutValue</strong>("CCC_InsertedDate",Date.UtcNow)</p>
+<p>Using t As New Transaction(Session)</p>
+<p>Using uow As IUnitOfWork = Session.StartUnitOfWork()</p>
+<p>uow.Put(dbcolCCCPersonnelActionsAPI)</p>
+<p>uow.Commit()</p>
+<p>End Using</p>
+<p>t.Commit()</p>
+<p>End Using</p>
+<hr />
+</blockquote>
+<h1 id="where">Сложный Where</h1>
+<blockquote>
+<p>WhereClause = f.AndRelation( _</p>
+<p>f.Comparison("CCC_CompanyCode", CompanyCode, ValType.String), _</p>
+<p>f.Comparison("CCC_City", City, ValType.String), _</p>
+<p>f.Comparison("CCC_CompanySubCode", CompanySubCode, ValType.String))</p>
+<p>End If</p>
+<hr />
+</blockquote>
+<h1 id="ad-account-definition">Для получения информации по наличии AD Account Definition у сотрудника для почтового шаблона оповещения согласующего при назначении режима доступа</h1>
+<blockquote>
+<p>Public Function CCC_PersonHasTSBAccountDef() As String</p>
+<p>'Таблица PWOHelperPWO</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim UID_PersonOrdered As String =
+\$FK(UID_PersonWantsOrg).UID_PersonOrdered\$</p>
+<p>Dim colPersonHasTSBAccountDef As IEntityCollection</p>
+<p>Dim colTSBAccountDef As IEntityCollection</p>
+<p>Dim dbTSBAccountDef As IEntity</p>
+<p>Dim UID_AccDef As String</p>
+<p>Dim Result As String</p>
+<p>Dim qTSBAccountDef = Query.From("TSBAccountDef").Where(Function(c)
+c.Column("UID_DialogTableAccountType") =
+"ADS-T-ADSAccount").SelectAll()</p>
+<p>colTSBAccountDef = Session.Source.GetCollection(qTSBAccountDef)</p>
+<p>For Each colElement As IEntity In colTSBAccountDef</p>
+<p>dbTSBAccountDef = colElement.Create(Session,
+EntityLoadType.Interactive)</p>
+<p>UID_AccDef = dbTSBAccountDef.GetValue("UID_TSBAccountDef").String</p>
+<p>Dim qPersonHasTSBAccountDef =
+Query.From("PersonHasTSBAccountDef").Where(Function(c)
+c.Column("UID_Person") = UID_PersonOrdered And
+c.Column("UID_TSBAccountDef") = UID_AccDef ).SelectCount()</p>
+<p>Dim iCount = Session.Source.GetCount(qPersonHasTSBAccountDef)</p>
+<p>If iCount &gt; 0 Then</p>
+<p>Return "Да"</p>
+<p>End If</p>
+<p>Next</p>
+<p>Return "Нет"</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="_3">Работа с объектом</h1>
+<blockquote>
+<p>Dim dbPWOHelperPWO As IEntity = Session.Source.Get("PWOHelperPWO",
+strUID_PWOHelperPWO)</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim strCCC_UID_ShoppingCartOrder As String =
+dbPWOHelperPWO.CreateWalker(Session).GetValue("FK(UID_PersonWantsOrg).UID_ShoppingCartOrder").String</p>
+<p>Dim res As String =
+dbPWOHelperPWO.CreateWalker(Session).GetValue("FK(UID_PersonWantsOrg).FK(ObjectKeyOrdered),QERAssign.FK(ObjectKeyAssignTarget),Org.Ident_Org").String</p>
+<p>Dim qCCCPointOfViewInAccProd_T =
+Query.From("CCCPointOfViewInAccProd_T") _</p>
+<p>.Where(f.AndRelation( f.UidComparison("CCC_UID_ShoppingCartOrder",
+strCCC_UID_ShoppingCartOrder),</p>
+<p>f.UidComparison("CCC_UID_Person",strUID_PersonOrdered))) _</p>
+<p>.Select("CCC_UID_Point_Of_View")</p>
+<p>colqCCCPointOfViewInAccProd_T =
+Session.Source.GetCollection(qCCCPointOfViewInAccProd_T)</p>
+<p>For Each colElement As IEntity In colqCCCPointOfViewInAccProd_T</p>
+<p>dbCCCPointOfView = Connection.CreateSingle("CCCPoint_Of_View",
+colElement.GetValue("CCC_UID_Point_Of_View").String)</p>
+<p>res= res + (dbCCCPointOfView.GetValue("CCC_Pov_Name").String) &amp; " "</p>
+<p>Next</p>
+<hr />
+</blockquote>
+<h1 id="update">Update таблицы</h1>
+<blockquote>
+<p>WhereClause</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Value = f.Comparison("UID_Department", values("UID_Dep"),
+ValType.String, CompareOperator.Equal)</p>
+<hr />
+</blockquote>
+<h1 id="sql_1">SQL запрос</h1>
+<blockquote>
+<p>Public Function CCC_GetSingleValueWithOrderBy(UID_PersonWantsOrg As
+String) As String</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim WhereClause As String = f.AndRelation(</p>
+<p>f.Comparison("DecisionType", "Unsubscribe", ValType.String),</p>
+<p>f.Comparison("UID_PersonWantsOrg", UID_PersonWantsOrg,
+ValType.String))</p>
+<p>Return Session.Source.GetSingleValue(Of String)(Query.</p>
+<p>From("PWODecisionHistory").</p>
+<p>Where(WhereClause).</p>
+<p>OrderBy("DateHead DESC").</p>
+<p>Select("ReasonHead"))</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="_4">Добавление в массив уникальных значений из другого массива</h1>
+<blockquote>
+<p>Dim arr1 As New ArrayList()</p>
+<p>Dim Col As New ArrayList()</p>
+<p>Arr1.add("123")</p>
+<p>Arr1.add("123")</p>
+<p>For Each I As String In arr1</p>
+<p>If Not Col.Contains(I) Then</p>
+<p>Col.Add(I)</p>
+<p>End If</p>
+<p>Next</p>
+<p>Return Col.Count.ToString()</p>
+<hr />
+<p>Сначала выгружаем все записи таблицы, а потом проходимся по каждой и
+добавляем в Лист. Потом в другой лист пишем только уникальные значения
+того листа.</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim colUsers As IEntityCollection</p>
+<p>Dim colUsers_unique As IEntityCollection</p>
+<p>Dim dbUser As IEntity</p>
+<p>Dim listUID_UNSAccountB As New List(Of String)</p>
+<p>Dim listUID_UNSAccountBAll As New List(Of String)</p>
+<p>Dim qUsers =
+Query.From("UNSAccountBInUNSGroupB").Select("UID_UNSAccountB")</p>
+<p>colUsers =
+Session.Source.GetCollection(qUsers,EntityCollectionLoadType.Slim)</p>
+<p>For Each colElement As IEntity In colUsers</p>
+<p>dbUser = colElement.Create(Session, EntityLoadType.Interactive)</p>
+<p>UID_UNSAccountB = dbUser.GetValue("UID_UNSAccountB").String</p>
+<p>listUID_UNSAccountB.Add(UID_UNSAccountB)</p>
+<p>Next</p>
+<p><strong>listUID_UNSAccountBAll = listUID_UNSAccountB.Distinct().ToList()</strong></p>
+<p>Return listUID_UNSAccountBAll.count().tostring</p>
+<hr />
+</blockquote>
+<h1 id="-">Вычисление кол-ва согласующих по точкам зрения</h1>
+<blockquote>
+<p>PreScript процесса для таблицы PersonWantsOrg</p>
+<p>Dim UID_ShoppingCartOrder as String = \$UID_ShoppingCartOrder\$</p>
+<p>Dim UID_PWO as String = \$UID_PersonWantsOrg\$</p>
+<p>Dim dbPoV As IEntity 'объявляем переменную, как объект</p>
+<p>Dim dbBalanceUnit As IEntity</p>
+<p>Dim dbDepartment As IEntity</p>
+<p>Dim dbPerson As IEntity</p>
+<p>Dim strCCC_UID_BalanceUnit As String</p>
+<p>Dim strCCC_UID_SanctionDepartment As String</p>
+<p>Dim strUID_PersonHeadDep As String</p>
+<p>Dim strMail_PersonHeadDep As String</p>
+<p>Dim strMail_PersonHeadDep_all As String</p>
+<p>Dim XObjectKey as String</p>
+<p>Dim arr As New ArrayList()</p>
+<p>Dim Col As New ArrayList()</p>
+<p>Dim colPointsOfView As IEntityCollection</p>
+<p>Dim colPWOHelperPWO As IEntityCollection</p>
+<p>Dim CCC_UID_Point_of_View As String</p>
+<p>Dim dbPointOfView As IEntity</p>
+<p>Dim dbPWOHelperPWO As IEntity</p>
+<p>Dim dbPointOfView_new As IEntity</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim Res As String</p>
+<p>' create the query object</p>
+<p>Dim qPointOfView =
+Query.From("CCCPointOfViewInAccProd_T").Where(Function(c)
+c.Column("CCC_UID_ShoppingCartOrder") =
+UID_ShoppingCartOrder).SelectAll()</p>
+<p>Dim qPointOfView_count =
+Query.From("CCCPointOfViewInAccProd_T").Where(Function(c)
+c.Column("CCC_UID_ShoppingCartOrder") =
+UID_ShoppingCartOrder).SelectCount()</p>
+<p>Dim CountApprover = Session.Source.GetCount(qPointOfView_count)</p>
+<p>' Load a collection of Person objects</p>
+<p>colPointsOfView = Session.Source.GetCollection(qPointOfView)</p>
+<p>' Run through the list</p>
+<p>For Each colElement As IEntity In colPointsOfView</p>
+<p>dbPointOfView = colElement.Create(Session, EntityLoadType.Interactive)</p>
+<p>CCC_UID_Point_of_View =
+dbPointOfView.GetValue("CCC_UID_Point_of_View").String</p>
+<p>dbPoV = session.Source.Get("CCCPoint_of_View", CCC_UID_Point_of_View)
+'помещаем объект Point of View по его UID</p>
+<p>strCCC_UID_BalanceUnit = dbPoV.GetValue("CCC_UID_BalanceUnit")</p>
+<p>dbBalanceUnit = session.Source.Get("CCCBalance_units",
+strCCC_UID_BalanceUnit) 'помещаем объект Balance_unit по его UID</p>
+<p>strCCC_UID_SanctionDepartment =
+dbBalanceUnit.GetValue("CCC_UID_SanctionDepartment")</p>
+<p>dbDepartment = session.Source.Get("Department",
+strCCC_UID_SanctionDepartment) 'помещаем объект Department по его UID</p>
+<p>strUID_PersonHeadDep = dbDepartment.GetValue("UID_PersonHead")</p>
+<p><strong>arr.Add(strUID_PersonHeadDep) ' Add to array uid person</strong></p>
+<p>dbPerson = session.Source.Get("Person", strUID_PersonHeadDep)
+'помещаем объект Person по его UID</p>
+<p>strMail_PersonHeadDep = dbPerson.GetValue("DefaultEmailAddress")
+'получаем значение DefaultEmailAddress у руководителя департамента</p>
+<p>If (not string.IsNullOrWhiteSpace(strMail_PersonHeadDep)) Then</p>
+<p>strMail_PersonHeadDep_all = strMail_PersonHeadDep + "; " +
+strMail_PersonHeadDep_all</p>
+<p>End If</p>
+<p>Next</p>
+<p>'Calculate XObject PWOHelperPWO for mail template</p>
+<p>Dim qPWOHelperPWO = Query.From("PWOHelperPWO").Where(Function(c)
+c.Column("UID_PersonWantsOrg") = UID_PWO and
+c.Column("UID_PWODecisionRule") =
+"QER-PWODecisionRule-EX").SelectAll()</p>
+<p>colPWOHelperPWO = Session.Source.GetCollection(qPWOHelperPWO)</p>
+<p>For Each colElement As IEntity In colPWOHelperPWO</p>
+<p>dbPWOHelperPWO = colElement.Create(Session,
+EntityLoadType.Interactive)</p>
+<p>XObjectKey = dbPWOHelperPWO.GetValue("XObjectKey").String</p>
+<p>Next</p>
+<p>'Create array from arr with unique values</p>
+<p>For Each I As String In arr</p>
+<p>If Not Col.Contains(I) Then</p>
+<p>Col.Add(I)</p>
+<p>End If</p>
+<p>Next</p>
+<p>values("Addresses") = strMail_PersonHeadDep_all</p>
+<p>values("XObjectKey") = XObjectKey</p>
+<p>values("CountApprover") = Col.Count.ToString()</p>
+<p><img src="../media/3. Scripts/media/image4.png"
+style="width:9.9375in;height:5.90625in"
+alt="O PersonWantsOrg Calculate CountAp.„ Person Wan tsOrg Calcu late Coun tApprover for Decision Step Update CountApprover for Decisio n Step Make positive decision for requ Process - PersonWantsOrg Calcula... O Perso nWa ntsOrg create PWOHe1perPW0 I O ShoppingCartOrder Send mail Schema Editor Param eters Parameter name V SuthenticationString Connectionprovider ConnectionString ObjectType WhereCIause val_CountApprover ConnectionVariabIes Parameter value value = Connectionlnfo.ÅuthString Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo.ConnectionString Value = •PVVODecisionStep• Dim f As ISqIFormatter = Connection.SqIFormatter Value = f.ComparisonCUID_PVVODecisionStep , • •ccc-23FA8465854A064181A8113F9F8DIC84•, Val Value = valuesCCountApprover•) Value = •VarllVar21VarY " /></p>
+<hr />
+</blockquote>
+<h1 id="_5">Вывод в шаблоне построчно из массива</h1>
+<blockquote>
+<p>Dim DetailStrg As New StringBuilder</p>
+<p>DetailStrg.AppendLine(FIO_Attestor)</p>
+<p>Return DetailStrg.ToString()</p>
+<hr />
+</blockquote>
+<h1 id="objectwalker">ObjectWalker</h1>
+<blockquote>
+<p>dbPWOHelperPWO_1 = colElement.Create(Session,
+EntityLoadType.Interactive)</p>
+<p>FIO_Attestor =
+dbPWOHelperPWO_1.CreateWalker(Session).GetValue("FK(UID_PersonHead).InternalName").String</p>
+<p>Dim Pers as ISingleDbObject = Connection.CreateSingle("Person",
+\$UID_PersonHead\$)</p>
+<p>Dim culture as String = Pers.Custom.CallMethod("GetCulture").ToString</p>
+<p><strong>Pers.ObjectWalker.GetValue("FK(UID_DialogCultureFormat).Ident_DialogCulture").String</strong></p>
+<hr />
+</blockquote>
+<h1 id="_6">Глобальные и локальные переменные</h1>
+<ul>
+<li>
+<p>Global variables owned by the set up program<br />
+  Syntax:<br />
+  Value = Variables("\&lt;variable name&gt;")<br />
+  Example:<br />
+  Value = Variables("GENPROCID")<br />
+  Value = Variables("FULLSYNC")</p>
+</li>
+<li>
+<p>Process or process step variables created locally by a pre-script<br />
+  Syntax:<br />
+  Value = values("Name")<br />
+  Example:<br />
+  Value = Values("FirstHomeServer")</p>
+</li>
+</ul>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73</a>&gt;</em></p>
+</blockquote>
+<h1 id="allocating-parameter-values">Allocating Parameter Values</h1>
+<blockquote>
+<p>Define value templates in VB.Net syntax. The following statements can
+be used for allocating values:</p>
+<p>None</p>
+<p>Object columns or columns of a related object</p>
+<p>Syntax:</p>
+<p>Value = \$\&lt;column name&gt;:\&lt;data type&gt;\$</p>
+<p>Value = \${FK(\&lt;foreign key column&gt;).}\&lt;column name&gt;:\&lt;data type&gt;\$</p>
+<p>Example:</p>
+<p>Value = \$Lastname\$</p>
+<p>Value = \$PasswordNeverExpires:bool\$</p>
+<p>Value = \$FK(Ident_Domain).Description\$</p>
+<p>Parameter from the optional parameter collection</p>
+<p>Syntax:</p>
+<p>Value = \$PC(\&lt;parameter name&gt;)\$</p>
+<p>Example:</p>
+<p>Value = \$PC(SRCUID_Application)\$</p>
+<p>Out parameter</p>
+<p>Parameters of type "OUT" or "INOUT" are parameters that can be used by
+process components to output a value. This value is then available to
+subsequent process steps in the process and can be used as a value for
+IN parameters.</p>
+<p>When you use OUT parameters you need to take care that these contain
+data at runtime. Alternatively, when the text is processed
+"&amp;OUT(\&lt;parameter name&gt;)&amp;" is entered, which means that the variable
+will not be replaced.</p>
+<p>Syntax:</p>
+<p>Value = "&amp;OUT(\&lt;Parameter name&gt;)&amp;"</p>
+<p>Example:</p>
+<p>Value = "&amp;Out(FileSize)&amp;"</p>
+<p>Global variables owned by the set up program</p>
+<p>Syntax:</p>
+<p>Value = Variables("\&lt;variable name&gt;")</p>
+<p>Example:</p>
+<p>Value = Variables("GENPROCID")</p>
+<p>Value = Variables("FULLSYNC")</p>
+<p>Process or process step variables created locally by a pre-script</p>
+<p>Syntax:</p>
+<p>Value = values("Name")</p>
+<p>Example:</p>
+<p>Value = Values("FirstHomeServer")</p>
+<p>Querying Configuration Parameters</p>
+<p>The full path for the configuration parameter always has to be
+entered.</p>
+<p>Syntax:</p>
+<p>Value = Session.Config().GetConfigParm("\&lt;full path&gt;")</p>
+<p>Example:</p>
+<p>Value = Session.Config().GetConfigParm("TargetSystem\ADS\RestoreMode")</p>
+<p>VB.net</p>
+<p>Enter any VB.Net statement.</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73">Identity Manager 8.0 - Configuration Guide
+(oneidentity.com)</a></p>
+<hr />
+</blockquote>
+<h1 id="_7">Логирование</h1>
+<blockquote>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References VI.DataImport.dll</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports System.IO</p>
+<p>Imports System.Globalization</p>
+<p>Imports VI.DataImport</p>
+<p>#End If</p>
+<p>Dim SCLOG As String = Session.Config.GetConfigParm("Custom\LogPath") +
+"CCC_Department_ImportFromAPI_" +
+DateTime.Now.ToString("yyyy-MM-dd") + ".txt"</p>
+<p>Try</p>
+<p>colCCCDepartmentsAPI =
+Session.Source.GetCollection(qCCCDepartmentsAPI)</p>
+<p>Catch ex As Exception</p>
+<p>If Not ex.InnerException Is Nothing AndAlso Not
+ex.InnerException.InnerException Is Nothing Then</p>
+<p>CCC_VID_Write2Log(SCLOG, Environment.NewLine +
+Date.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + "ERROR @ " +
+ex.Message + " " + ex.InnerException.Message + " " +
+ex.InnerException.InnerException.Message + " " + ex.StackTrace)</p>
+<p>ElseIf Not ex.InnerException Is Nothing Then</p>
+<p>CCC_VID_Write2Log(SCLOG, Environment.NewLine +
+Date.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + "ERROR @ " +
+ex.Message + " " + ex.InnerException.Message + " " + ex.StackTrace)</p>
+<p>Else</p>
+<p>CCC_VID_Write2Log(SCLOG, Environment.NewLine +
+Date.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + "ERROR @ " +
+ex.Message + " " + ex.StackTrace)</p>
+<p>End If</p>
+<p>End Try</p>
+<hr />
+</blockquote>
+<h2 id="ccc_vid_write2log">CCC_VID_Write2Log</h2>
+<blockquote>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References VI.Samba.Tools.dll</p>
+<p>#End If</p>
+<p>Public Sub CCC_VID_Write2Log(ByVal LogFile As String, ByVal Line As
+String)</p>
+<p>Dim logFilePath As System.String</p>
+<p>If Not AppData.Instance.RuntimeEnvironment.IsMono Then</p>
+<p>logFilePath = PathHelper.ConvertSeparators(LogFile)</p>
+<p>Else</p>
+<p>Dim sambaUncPath As New VI.Samba.Tools.SambaUncPath(LogFile)</p>
+<p>If Not sambaUncPath.IsLocal Then</p>
+<p>Throw New System.Exception(#LD("UNC-path ""{0}"" does not reference a
+local path.", LogFile)#)</p>
+<p>Else</p>
+<p>logFilePath = sambaUncPath.LocalPath</p>
+<p>End If</p>
+<p>End If</p>
+<p>Dim f As System.IO.StreamWriter = Nothing</p>
+<p>Try</p>
+<p>f = New System.IO.StreamWriter(logFilePath, True,
+System.Text.Encoding.UTF8)</p>
+<p>f.NewLine() = Chr(13) &amp; Chr(10)</p>
+<p>f.WriteLine(Line)</p>
+<p>Catch exc As System.Exception</p>
+<p>Throw New System.Exception(#LD("The path is '{0}'.", logFilePath)#,
+exc)</p>
+<p>Finally</p>
+<p>If Not f Is Nothing Then</p>
+<p>f.Flush()</p>
+<p>f.Close()</p>
+<p>End If</p>
+<p>End Try</p>
+<p>End Sub</p>
+<hr />
+</blockquote>
+<h2 id="_8">Строки</h2>
+<blockquote>
+<p>Несколько строк</p>
+<p>Dim DetailStrg As New StringBuilder</p>
+<p>DetailStrg.AppendLine("qq")</p>
+<p>Return DetailStrg.ToString()</p>
+<hr />
+</blockquote>
+<h1 id="where_1">WHERE</h1>
+<blockquote>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter()</p>
+<p>Value = f.UidComparison("UID_ADSAccount", \$UID_ADSAccount\$)</p>
+<hr />
+</blockquote>
+<h1 id="export-to-csv">EXPORT TO CSV</h1>
+<h1 id="csvexportsingle">CSVExportSingle</h1>
+<blockquote>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/30780/export-selectet-data-from-a-new-created-user-into-a-csv-file">https://www.oneidentity.com/community/identity-manager/f/forum/30780/export-selectet-data-from-a-new-created-user-into-a-csv-file</a></p>
+</blockquote>
+<h2 id="_9">Формат даты</h2>
+<blockquote>
+<p>Dim asd As String = expenddt.ToString("dd/MM/yyyy")</p>
+<p><em>From
+\&lt;<a href="https://coderoad.ru/8644398/%D0%A4%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D0%B4%D0%B0%D1%82%D1%8B-%D0%B2-vb-net">https://coderoad.ru/8644398/%D0%A4%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D0%B4%D0%B0%D1%82%D1%8B-%D0%B2-vb-net</a>&gt;</em></p>
+</blockquote>
+<h2 id="objectwalker_1">ObjectWalker</h2>
+<blockquote>
+<p>Public Function CCC_Test_ObjectWalker (ByVal UID_PWO As String) As
+String</p>
+<p>Dim dbPWO As IEntity</p>
+<p>Dim strDisplayOrg As String</p>
+<p>Dim strDisplayOrgParent As String</p>
+<p>Dim strCCC_BPMServiceID As String</p>
+<p>dbPWO = Session.Source.Get("PersonWantsOrg", UID_PWO)</p>
+<p>strDisplayOrg =
+dbPWO.CreateWalker(Session).GetValue("DisplayOrg").String</p>
+<p>strDisplayOrgParent =
+dbPWO.CreateWalker(Session).GetValue("DisplayOrgParent").String</p>
+<p>'strCCC_BPMServiceID =
+dbPWO.CreateWalker(Session).GetValue("FK(UID_OrgParentOfParent).FK(UID_AccProduct).FK(UID_AccProductGroup).CCC_BPMServiceID").String</p>
+<p>strCCC_BPMServiceID =
+dbPWO.CreateWalker(Session).GetValue("FK(UID_Org).FK(UID_AccProduct).FK(UID_AccProductGroup).CCC_BPMServiceID").String</p>
+<p>Return strCCC_BPMServiceID</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="greenplum-postgress">Взаимодействие с GreenPlum (Postgress)</h1>
+<blockquote>
+<p>Надо установить odbc драйвер</p>
+<p><a href="https://www.postgresql.org/ftp/odbc/versions/msi/">https://www.postgresql.org/ftp/odbc/versions/msi/</a></p>
+<p>После этого можно юзать подключение, через ADO .NET (<a href="read://https_metanit.com/?url=https%3A%2F%2Fmetanit.com%2Fsharp%2Fadonet%2F1.1.php">Введение в
+ADO.NET
+(https_metanit.com)</a>)</p>
+<p>Public Sub CCC_Test_GreenPlum_TestConnection()</p>
+<p>Dim MyCon As New Odbc.OdbcConnection</p>
+<p>MyCon.ConnectionString = "<strong>Driver={PostgreSQL
+ANSI</strong>};database=test001;server=mdw.open.ru;port=5432;uid=test001;sslmode=disable;readonly=0;protocol=7.4;User
+ID=test001;password=[REDACTED];"</p>
+<p>MyCon.Open()</p>
+<p>If MyCon.State = ConnectionState.Open Then</p>
+<p>MsgBox("Connected To PostGres", MsgBoxStyle.MsgBoxSetForeground)</p>
+<p>End If</p>
+<p>End Sub</p>
+<hr />
+</blockquote>
+<h6 id="idbcommand-interface"><em>IDbCommand Interface</em></h6>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://docs.microsoft.com/en-us/dotnet/api/system.data.idbcommand?view=net-5.0">https://docs.microsoft.com/en-us/dotnet/api/system.data.idbcommand?view=net-5.0</a>&gt;</em></p>
+<p>Обновляем данные в таблице постгресс</p>
+<p>Public Sub CCC_Test_GreenPlum_UpdateValue()</p>
+<p>Dim MyCon As New Odbc.OdbcConnection</p>
+<p>Dim DB = Connection.GetConfigParm("Custom\GreenPlum\GreenplumDB")</p>
+<p>Dim ConnPort =
+Connection.GetConfigParm("Custom\GreenPlum\ConnectionPort")</p>
+<p>Dim Srv = Connection.GetConfigParm("Custom\GreenPlum\GreenplumMaster")</p>
+<p>Dim ConnUser =
+Connection.GetConfigParm("Custom\GreenPlum\ConnectionUser")</p>
+<p>Dim ConnUserPass =
+Connection.GetConfigParm("Custom\GreenPlum\ConnectionUserPassword")</p>
+<p>Dim strSQL As String = "UPDATE AccessRights SET dimensionvalue =
+'TestValue003' WHERE username = 'Alex';"</p>
+<p>Dim strUserName As String</p>
+<p>MyCon.ConnectionString = "Driver={PostgreSQL ANSI};Database=" + DB +
+";Server=" + Srv + ";Port=" + ConnPort + ";Uid=" + ConnUser +
+";Pwd=" + ConnUserPass +";"</p>
+<p>MyCon.Open()</p>
+<p>' Create a database command object</p>
+<p>Using dbCommand As IDbCommand = MyCon.CreateCommand()</p>
+<p>' Set the SQL statement to execute</p>
+<p>dbCommand.CommandText = strSQL</p>
+<p>dbCommand.ExecuteNonQuery()</p>
+<p>End Using</p>
+<p>MyCon.Close()</p>
+<p>End Sub</p>
+<hr />
+</blockquote>
+<h1 id="_10">Кавычки в скриптах</h1>
+<blockquote>
+<p>Для postgress, чтобы создать роль с точкой в имени, надо заключить имя
+в кавычки</p>
+<p>Чтобы сделать это в Vb.Net надо написать</p>
+<p><span class="mark">"""" (4 кавычки!!!)</span></p>
+<p>Одна кавычки - это ""</p>
+<p>Dim MyVar as string = "some text ""hello"" " = some text "hello"</p>
+<p><em>From
+\&lt;<a href="https://stackoverflow.com/questions/7767037/how-to-put-data-containing-double-quotes-in-string-variable">https://stackoverflow.com/questions/7767037/how-to-put-data-containing-double-quotes-in-string-variable</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="unsaccountb">Стандартные процессы для UNSAccountB</h1>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/administration-guide-for-connecting-to-custom-target-systems#TOPIC-852085">Identity Manager 8.0 - Administration Guide for Connecting to Custom
+Target Systems
+(oneidentity.com)</a></p>
+<hr />
+</blockquote>
+<h1 id="_11">Увеличение производительности работы скриптов</h1>
+<blockquote>
+<p>Если не проводишь операции на объектами БД (Person, ..) такие, как
+удаление, изменение и т.п., то лучше не использовать SingleDBObject -
+это когда пробегаешься по коллекции и делаешь</p>
+<p>For Each <strong>colUser_unique</strong> As IEntity In colUsers_unique</p>
+<p><strong>~~dbUser_unique = colUser_unique.Create(Session,
+EntityLoadType.Interactive)~~</strong></p>
+<p>можно получать значение записи так:</p>
+<p>strGroupUID = <strong>colUser_unique</strong>.GetValue("UID_UNSGroupB").String</p>
+<p>Причем, запрос формируем так:</p>
+<p>Dim qUser = Query.From("UNSAccountBInUNSGroupB").Where(Function(c)
+c.Column("UID_UNSAccountB") =
+UID_UNSAccountB).<strong>Select("UID_UNSGroupB","UID_UNSAccountB")</strong></p>
+<p><a href="onenote:#One%20Identity%20скрипты&amp;section-id={FD4FD596-28D1-4816-BAC5-31DB69F28B0F}&amp;page-id={B1BB34D5-ED7C-420D-B712-BA20F8CD0501}&amp;object-id={EDE3F8C0-038F-4B76-97AB-78DD59C85494}&amp;97&amp;base-path=https://d.docs.live.net/0e9fab58bc219e3c/Документы2/Записная%20книжка%20пользователя[redacted-email]/УЦСБ.one">Для
+FK</a></p>
+<p>dbDepartment = dbPerson.GetFk(Session, "UID_Department").GetParent()</p>
+<hr />
+</blockquote>
+<h1 id="target-system-type-custom-target-system-uid_person">Вычисление Target System type (Custom Target System) по UID_Person</h1>
+<blockquote>
+<p>Public Function CCC_Test_ChildRelation_UNSAccountB (ByVal UID_Person
+As String) As String</p>
+<p>Dim dbPerson As ISingleDbObject</p>
+<p>Dim dbUNSRootB As IEntity</p>
+<p>Dim crUNSAccountB As IChildRelation</p>
+<p>'Dim crDPRNameSpace As IChildRelation</p>
+<p>Dim dbUNSAccountB As ISingleDbObject = Nothing</p>
+<p>Dim dbDPRNameSpace As ISingleDbObject = Nothing</p>
+<p>Dim UID_UNSRootB As String</p>
+<p>Dim strIdent_DPRNameSpace As String</p>
+<p>dbPerson = Connection.CreateSingle("Person", UID_Person)</p>
+<p>crUNSAccountB = dbPerson.GetCR("UNSAccountB", "UID_Person")</p>
+<p>If crUNSAccountB.Children.Count = 1 Then</p>
+<p>For Each colElement As IColElem In crUNSAccountB.Children</p>
+<p>dbUNSAccountB = colElement.Create()</p>
+<p>Next</p>
+<p>UID_UNSRootB = dbUNSAccountB.GetValue("UID_UNSRootB")</p>
+<p>dbUNSRootB = Session.Source.Get("UNSRootB", UID_UNSRootB)</p>
+<p>strIdent_DPRNameSpace =
+dbUNSRootB.CreateWalker(Session).GetValue("FK(UID_DPRNameSpace).Ident_DPRNameSpace").String</p>
+<p>Return strIdent_DPRNameSpace</p>
+<p>End If</p>
+<p>return "1"</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="random">Random число</h1>
+<blockquote>
+<p>Public Function CCC_Test_Random() As String</p>
+<p>Dim value As Integer = CInt(Int((120 * Rnd())))</p>
+<p>Return value.ToString</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="_12">Расшифровка зашифрованного значения из параметров</h1>
+<blockquote>
+<p>Имеем Encrypt значение в параметрах</p>
+<p>В скрипте, чтобы его расшифровать надо:</p>
+<p>' Caution: This only work if the script is running in the Job Service.</p>
+<p><strong>DecryptVal = Session.Decrypt(EncryptedString)</strong></p>
+<p>Работать будет только при выполнении с JobServer - поэтому надо
+сделать расписание и процесс и запускать этот процесс, через Process
+Automation.</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/27672/onedb-encrypted-how-to-decrypt-an-encrypted-password-on-config-parameters">https://www.oneidentity.com/community/identity-manager/f/forum/27672/onedb-encrypted-how-to-decrypt-an-encrypted-password-on-config-parameters</a></p>
+<hr />
+</blockquote>
+<h1 id="_13">Вставка переменной в строку</h1>
+<blockquote>
+<p>Dim tmpVal As String =
+Connection.GetSingleProperty("Person","UID_PersonHead","UID_Person =
+<strong>'"+UID_Owner+"'")</strong></p>
+<p><strong>---</strong></p>
+</blockquote>
+<h1 id="_14">Извлечь текст из строки до и после символа (.)</h1>
+<blockquote>
+<p>Dim IndexDotInCustomTable As Integer = <strong>CustomTable</strong>.IndexOf(".")</p>
+<p>If (IndexDotInCustomTable &gt; -1) Then</p>
+<p>SchemaName = CustomTable.Substring(0,IndexDotInCustomTable)</p>
+<p>TableName = CustomTable.Substring(IndexDotInCustomTable + 1)</p>
+<p>Else</p>
+<p>SchemaName = "public"</p>
+<p>TableName = CustomTable</p>
+<p>End If</p>
+<p><em>Если CustomTable = qwe.ddd, то</em></p>
+<p><em>SchemaName = qwe</em></p>
+<p><em>TableName = ddd</em></p>
+<p><em>Если не найдет символ в строке, то</em> <strong>CustomTable</strong>.IndexOf(".") =
+<strong>-1</strong></p>
+<p><strong>---</strong></p>
+</blockquote>
+<h1 id="csv-samaccountname-person">Чтение из файла csv имен пользователей (SamAccountName) и запись в файл дополнительной информации по связанным Person</h1>
+<blockquote>
+<p>Public Sub CCC_Test_GetDepartmentFullPath(ByVal InputFile As String,
+ByVal ResultFile As String)Dim strQuery As String = ""</p>
+<p>Dim strQuery1 As String = ""</p>
+<p>Dim strQuery2 As String = ""</p>
+<p>Dim strQuery3 As String = ""</p>
+<p>Dim UID_Person As String = ""</p>
+<p>Dim UID_Department As String = ""</p>
+<p>Dim FullPath As String = ""</p>
+<p>Dim Title As String = ""</p>
+<p>Dim AccountName As String = ""</p>
+<p>'Dim tfp As New FileIO.TextFieldParser("C:\temp\users1.txt")</p>
+<p><strong>FileOpen(1, InputFile, OpenMode.Input)</strong></p>
+<p>While Not EOF(1)</p>
+<p>Input(1, AccountName)</p>
+<p>strQuery = String.Format("SAMAccountName = '{0}'", AccountName)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("ADSAccount","UID_Person",strQuery,UID_Person)</p>
+<p>strQuery1 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","UID_Department",strQuery1,UID_Department)</p>
+<p>strQuery2 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","Title",strQuery2,Title)</p>
+<p>strQuery3 = String.Format("UID_Department = '{0}'", UID_Department)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Department","FullPath",strQuery3,FullPath)</p>
+<p><strong>CCC_Write2Log(ResultFile,AccountName + ";" + FullPath)</strong></p>
+<p>End While</p>
+<p>End Sub</p>
+<p><strong>---</strong></p>
+</blockquote>
+<h1 id="jobserver">Логирование в вывод JobServer</h1>
+<blockquote>
+<p>При отработке скрипта на JobServer информация будет выводиться в его
+лог</p>
+<p>RaiseMessage("Table_count 002: "+Table_count.tostring()+ "
+RemoveExistsCustomTables 002: " + RemoveExistsCustomTables.ToString())</p>
+<p>RaiseMessage(<span class="mark">MsgSeverity.Serious</span>, "Email
+Address: "&amp; email)</p>
+<p><strong>AppData.Instance.RaiseMessage</strong></p>
+<p>This output is written immediately during processing; not taking into
+account the end of the process step.</p>
+<p>Syntax:</p>
+<p>AppData.Instance.RaiseMessage (MsgSeverity, "string")</p>
+<p>Example:</p>
+<p>AppData.Instance.RaiseMessage (MsgSeverity.Warning, "Example warning
+message")</p>
+<p>AppData.Instance.RaiseMessage (MsgSeverity.Info, "Example Info
+message")</p>
+<p><span class="mark">AppData.Instance.RaiseMessage (MsgSeverity.Serious,
+"Example error marked message")</span></p>
+<p>For more examples of One Identity Manager Service log file output, see
+the script example on the installation medium in the
+directory QBM\dvd\AddOn\SDK\ScriptSamples.</p>
+</blockquote>
+<p>| <img src="../media/3. Scripts/media/image5.png"
+style="width:0.16667in;height:0.16667in" /> | <strong>IMPORTANT:</strong> You should never use the VB.Net functions Msgbox and Inputbox on servers. Use the functions VID_Write2Log, RaiseMessage or AppData.Instance.RaiseMessage. |
+|----|----|</p>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.2/configuration-guide/128">https://support.oneidentity.com/technical-documents/identity-manager/8.0.2/configuration-guide/128</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="adhoc-data">ADHoc data в текст</h1>
+<blockquote>
+<p>For Each kv As KeyValuePair(Of String, String) In data</p>
+<p>VID_Write2Log("C:\temp\Ranger.txt", String.Format("{0}={1}", kv.Key,
+kv.Value))</p>
+<p>Next</p>
+<hr />
+</blockquote>
+<h1 id="_15">Получение параметров из проекта синхронизации</h1>
+<blockquote>
+<p>' ---- Getting Sync Project variables from DPRSystemVariable table</p>
+<p>Dim sysName as String =
+\$FK(UID_UNSGRoupB).FK(UID_UNSRootB).Ident_UNSRoot:String\$</p>
+<p>Dim uid_dprshell as String</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim colVars00 As IColDbObject = Connection.CreateCol("DPRShell")</p>
+<p>Dim count00 As Integer = 0</p>
+<p>colVars00.Prototype.WhereClause =
+String.Format(f.CleanWhereClause("DisplayName = '"+sysName+"'"))</p>
+<p>colVars00.Prototype.Columns("UID_DPRshell").IsDisplayItem = True</p>
+<p>colVars00.Load()</p>
+<p>for each colElem as IColElem in colVars00</p>
+<p>uid_dprshell=colElem.GetValue("UID_DPRShell").ToString()</p>
+<p>next</p>
+<p>' select * from DPRSystemVariable where UID_DPRSystemVariableSet in
+(select UID_DPRSystemVariableSet from DPRSystemVariableSet where
+uid_dprshell in (select uid_dprshell from dprshell where
+displayname='sysName'))</p>
+<p>Dim colVars01 As IColDbObject =
+Connection.CreateCol("DPRSystemVariable")</p>
+<p>Dim count01 As Integer = 0</p>
+<p>colVars01.Prototype.WhereClause =
+String.Format(f.CleanWhereClause("UID_DPRSystemVariableSet in (select
+UID_DPRSystemVariableSet from DPRSystemVariableSet where
+uid_dprshell='"+uid_dprshell+"')"))</p>
+<p>colVars01.Prototype.Columns("Name").IsDisplayItem = True</p>
+<p>colVars01.Prototype.Columns("Value").IsDisplayItem = True</p>
+<p>colVars01.Load()</p>
+<p>if colVars01.Count\&lt;&gt;0 then</p>
+<p>for each colElem As IColElem in colVars01</p>
+<p>values(colElem.GetValue("Name").ToString())=colElem.GetValue("Value").ToString()</p>
+<p>next</p>
+<p>end if</p>
+<p>'---- Sync project variables are in values now</p>
+<hr />
+</blockquote>
+<h1 id="_16">Вызов события с параметрами</h1>
+<blockquote>
+<p>I believe the notation you require is \$PC(\&lt;Parameter&gt;)\$</p>
+<p>In addition to Barry. You will find a script sample in SDK that
+demonstrates how to generate an event with additional parameters
+(Modules\QBM\dvd\AddOn\SDK\ScriptSamples\03 Using database objects\10
+Generate events.vb).</p>
+<p>The documentation gives you a sample for the usage of these optional
+parameters in a process step parameter
+<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73#TOPIC-862577">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73#TOPIC-862577</a>.</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/29680/how-to-access-event-s-parameters/72565">https://www.oneidentity.com/community/identity-manager/f/forum/29680/how-to-access-event-s-parameters/72565</a></p>
+<hr />
+</blockquote>
+<h1 id="sql-join">Сложные SQL запросы (JOIN)</h1>
+<blockquote>
+<p>Dim qApprover = Query.From(Table.PWOHelperPWO,
+"php").Join(Table.PersonWantsOrg,
+"pwo").On(Table.PWOHelperPWO.UID_PersonWantsOrg).</p>
+<p>Select(Table.PersonWantsOrg.DecisionLevel).</p>
+<p>Where("php.UID_PersonHead = 'e94fd1f7-ecf2-4d5f-9955-f2311a110c39' AND
+php.LevelNumber = pwo.DecisionLevel")</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/27601/expression-clauses-in-a-query">Expression Clauses in a query - Forum - Identity Manager Community -
+One Identity
+Community</a></p>
+<p>или так</p>
+<p>select * from ADSAccountInADSGroup, ADSGroupCollection
+<span class="mark">where ADSAccountInADSGroup.UID_ADSGroup =
+ADSGroupCollection.UID_ADSGroupChild</span> and (UID_ADSAccount =
+'43676eb4-370b-4c0a-aa03-ad1acea18959' and UID_ADSGroupParent =
+'d7f3fb72-86ad-4c1b-9987-1cd63c28fb0c')</p>
+<hr />
+</blockquote>
+<h1 id="deferred-operation">Отложенное действие (Deferred operation)</h1>
+<blockquote>
+<p>Samples</p>
+<p>The following two code samples demonstrate the use of the
+class <em>VI.DB.DeferredOperations.DeferredBlock</em> in version 7.</p>
+<p>Sample: Using a Deferred Block for IEntities</p>
+<p>' Create a new DeferredBlock for a point in time.</p>
+<p>Using New VI.DB.DeferredOperations.DeferredBlock(Session, DateTime.UtcNow.AddDays(45), "Optional description for operation")<br />
+    ' Operations done here are done deferred    </p>
+<p>Dim dbObj = Session.Source().CreateNew("PersonInOrg")<br />
+    dbObj.PutValue("UID_Person", "a76311be-c2cd-4be3-be5d-b8d85c3bb863")<br />
+    dbObj.PutValue("UID_Org", "b0b4be5a-bcc1-453d-aaf5-b5a7d8531224")  </p>
+<p>Using uow = Session.StartUnitOfWork()<br />
+        uow.Put(dbObj)<br />
+        uow.Commit()<br />
+    End Using</p>
+<p>End Using</p>
+<p>Sample: Using a deferred block for ISingleDBObjects</p>
+<p>' Create a new DeferredBlock for a point in time.</p>
+<p>Using New VI.DB.DeferredOperations.DeferredBlock(Connection, DateTime.UtcNow.AddDays(45), "Optional description for operation")<br />
+    ' Operations done here are done deferred    </p>
+<p>Dim dbObj = Connection.CreateSingle("PersonInOrg")<br />
+    dbObj.PutValue("UID_Person", "a76311be-c2cd-4be3-be5d-b8d85c3bb863")<br />
+    dbObj.PutValue("UID_Org", "b0b4be5a-bcc1-453d-aaf5-b5a7d8531224")<br />
+    dbObj.Save()</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/22747/create-a-deferred-event-generation-operation-from-a-script">https://www.oneidentity.com/community/identity-manager/f/forum/22747/create-a-deferred-event-generation-operation-from-a-script</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="convert-to-int">Из строки в число (Convert to Int)</h1>
+<blockquote>
+<p><strong>Dim a =
+Convert.toInt32(Connection.GetConfigParm("Common\MailNotification\SMTPPort"))</strong></p>
+<hr />
+</blockquote>
+<h1 id="base64">Перекодировка из Base64</h1>
+<blockquote>
+<p>Dim utf8Encoding As New System.Text.UTF8Encoding(True)</p>
+<p>Value =
+utf8Encoding.GetString(Convert.FromBase64String(\$CCC_PropertyValue:Text\$))</p>
+<p>Это FileComponent - CreateFile</p>
+<p><a href="https://stackoverflow.com/questions/6035380/vb-net-encode-string-to-utf-8">https://stackoverflow.com/questions/6035380/vb-net-encode-string-to-utf-8</a></p>
+<p>[18:07] Uskov Dmitry</p>
+<p>Там GetBytes используется, напрямую не работает, т.к. нужно
+преобразование типа, GetString напрямую преобразовывает.</p>
+<hr />
+</blockquote>
+<h1 id="procid">Сохранение объекта с указанием ProcID для поиска в истории.</h1>
+<blockquote>
+<p>В процессе передаем параметр в скрипт</p>
+<p><img src="../media/3. Scripts/media/image6.png"
+style="width:4.52083in;height:0.8125in" /></p>
+<p>Value = Variables("GENPROCID")</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.1/configuration-guide/71">https://support.oneidentity.com/technical-documents/identity-manager/8.1.1/configuration-guide/71</a>&gt;</em></p>
+<p>В скрипте</p>
+<p>Using t As New Transaction(dbPerson)</p>
+<p>Using uow = Session.StartUnitOfWork(<span class="mark">procId</span>)</p>
+<p>dbPerson.PutValue("Remarks", remarks)</p>
+<p>uow.Put(dbPerson)        </p>
+<p>uow.Commit()</p>
+<p>End Using</p>
+<p>t.Commit()</p>
+<p>End Using</p>
+<hr />
+</blockquote>
+<h1 id="delay">Пауза в работе скрипта (Delay)</h1>
+<blockquote>
+<p>Threading.Thread.Sleep(10000)</p>
+</blockquote>
+<h1 id="_17">Выборка данных по имени учетной записи из файла</h1>
+<p>Public Sub CCC_Test_GetDepartmentFullPath(ByVal InputFile As String,
+ByVal ResultFile As String)</p>
+<p>'На основе ADSAccount и связанного с ним Person</p>
+<p>Dim strQuery As String = ""</p>
+<p>Dim strQuery1 As String = ""</p>
+<p>Dim strQuery2 As String = ""</p>
+<p>Dim strQuery3 As String = ""</p>
+<p>Dim strQuery4 As String = ""</p>
+<p>Dim strQuery5 As String = ""</p>
+<p>Dim UID_Person As String = ""</p>
+<p>Dim UID_Department As String = ""</p>
+<p>Dim UID_Org As String = ""</p>
+<p>Dim FullPath As String = ""</p>
+<p>Dim Title As String = ""</p>
+<p>Dim OrgFullPath As String = ""</p>
+<p>Dim AccountName As String = ""</p>
+<p>'Dim tfp As New FileIO.TextFieldParser("C:\temp\users1.txt")</p>
+<p>FileOpen(1, InputFile, OpenMode.Input)</p>
+<p>While Not EOF(1)</p>
+<p>Input(1, AccountName)</p>
+<p>strQuery = String.Format("SAMAccountName = '{0}'",
+AccountName)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("ADSAccount","UID_Person",strQuery,UID_Person)</p>
+<p>strQuery1 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","UID_Department",strQuery1,UID_Department)</p>
+<p>strQuery2 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","UID_Org",strQuery2,UID_Org)</p>
+<p>strQuery3 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","PersonalTitle",strQuery3,Title)</p>
+<p>strQuery4 = String.Format("UID_Department = '{0}'",
+UID_Department)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Department","FullPath",strQuery4,FullPath)</p>
+<p>strQuery5 = String.Format("UID_Org = '{0}'", UID_Org)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Org","FullPath",strQuery5,OrgFullPath)</p>
+<p>CCC_VID_Write2Log(ResultFile,AccountName + ";" + Title +
+";" + FullPath + ";" + OrgFullPath)</p>
+<p>End While</p>
+<p>End Sub</p>
+<p>Public Sub CCC_Test_GetInfoForUsersList(ByVal InputFile As String, ByVal
+ResultFile As String)</p>
+<p>'На основе Person</p>
+<p>Dim strQuery As String = ""</p>
+<p>Dim strQuery1 As String = ""</p>
+<p>Dim strQuery2 As String = ""</p>
+<p>Dim strQuery3 As String = ""</p>
+<p>Dim strQuery4 As String = ""</p>
+<p>Dim strQuery5 As String = ""</p>
+<p>Dim strQuery6 As String = ""</p>
+<p>Dim UID_Person As String = ""</p>
+<p>Dim UID_Department As String = ""</p>
+<p>Dim UID_Org As String = ""</p>
+<p>Dim FullPath As String = ""</p>
+<p>Dim Title As String = ""</p>
+<p>Dim OrgFullPath As String = ""</p>
+<p>Dim AccountName As String = ""</p>
+<p>Dim IsInActive As String = ""</p>
+<p>'Dim tfp As New FileIO.TextFieldParser("C:\temp\users1.txt")</p>
+<p>FileOpen(1, InputFile, OpenMode.Input)</p>
+<p>While Not EOF(1)</p>
+<p>Input(1, AccountName)</p>
+<p>strQuery = String.Format("CentralAccount = '{0}'",
+AccountName)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","UID_Person",strQuery,UID_Person)</p>
+<p>strQuery1 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","UID_Department",strQuery1,UID_Department)</p>
+<p>strQuery2 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","UID_Org",strQuery2,UID_Org)</p>
+<p>strQuery3 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","PersonalTitle",strQuery3,Title)</p>
+<p>strQuery4 = String.Format("UID_Department = '{0}'",
+UID_Department)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Department","FullPath",strQuery4,FullPath)</p>
+<p>strQuery5 = String.Format("UID_Org = '{0}'", UID_Org)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Org","FullPath",strQuery5,OrgFullPath)</p>
+<p>strQuery6 = String.Format("UID_Person = '{0}'", UID_Person)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("Person","IsInActive",strQuery3,IsInActive)</p>
+<p>CCC_VID_Write2Log(ResultFile,AccountName + ";" + Title +
+";" + FullPath + ";" + OrgFullPath + ";" + IsInActive)</p>
+<p>End While</p>
+<p>End Sub</p>
+<p>Public Sub CCC_Test_GetInfoForADSAccountsList(ByVal InputFile As String,
+ByVal ResultFile As String)</p>
+<p>Dim strQuery As String = ""</p>
+<p>Dim strQuery1 As String = ""</p>
+<p>Dim strQuery2 As String = ""</p>
+<p>Dim strQuery3 As String = ""</p>
+<p>Dim strQuery4 As String = ""</p>
+<p>Dim strQuery5 As String = ""</p>
+<p>Dim UID_Person As String = ""</p>
+<p>Dim UID_Department As String = ""</p>
+<p>Dim UID_Org As String = ""</p>
+<p>Dim FullPath As String = ""</p>
+<p>Dim Title As String = ""</p>
+<p>Dim OrgFullPath As String = ""</p>
+<p>Dim AccountName As String = ""</p>
+<p>Dim strDepartment As String = ""</p>
+<p>Dim strAccountDisabled As String = ""</p>
+<p>FileOpen(1, InputFile, OpenMode.Input)</p>
+<p>While Not EOF(1)</p>
+<p>Input(1, AccountName)</p>
+<p>strQuery = String.Format("SamAccountName = '{0}'",
+AccountName)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("ADSAccount","Title",strQuery,Title)</p>
+<p>strQuery1 = String.Format("SamAccountName = '{0}'",
+AccountName)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("ADSAccount","ExtensionAttribute15",strQuery1,OrgFullPath)</p>
+<p>strQuery2 = String.Format("SamAccountName = '{0}'",
+AccountName)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("ADSAccount","Department",strQuery1,strDepartment)</p>
+<p>strQuery3 = String.Format("SamAccountName = '{0}'",
+AccountName)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("ADSAccount","AccountDisabled",strQuery1,strAccountDisabled)</p>
+<p>CCC_VID_Write2Log(ResultFile,AccountName + ";" + Title +
+";" + strDepartment + ";" + OrgFullPath + ";" + strAccountDisabled)</p>
+<p>End While</p>
+<p>End Sub</p>
+<h1 id="1-ad">Получение данных о сотруднике, если у него &gt; 1 AD уз привязанной</h1>
+<p>Public Function CCC_Test_GetChildADSAccounts() As string</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim colPersons As IEntityCollection</p>
+<p>Dim strUID_Person As String</p>
+<p>Dim dbPerson As ISingleDbObject</p>
+<p>Dim crADSAccount As IChildRelation</p>
+<p>Dim iCount As Integer = 0</p>
+<p>Dim qPerson = Query.From("Person").Where(Function (c)
+c.Column("IsInActive") = "False" And c.Column("IsExternal") = "False"
+And c.Column("XDateInserted") &gt; "09.01.2020" And
+c.Column("XDateInserted") \&lt; "01.01.2021").Select("UID_Person")</p>
+<p>colPersons = Session.Source.GetCollection(qPerson)</p>
+<p>'Dim countPersons = Session.Source.GetCount(qPerson)</p>
+<p>For Each colElement As IEntity In colPersons</p>
+<p>strUID_Person = colElement.GetValue("UID_Person")</p>
+<p>dbPerson = Connection.CreateSingle("Person", strUID_Person)</p>
+<p>crADSAccount = dbPerson.GetCR("ADSAccount", "UID_Person")</p>
+<p>If crADSAccount.Children.Count &gt; 1 Then</p>
+<p>iCount += 1</p>
+<p>End If</p>
+<p>Next</p>
+<p>Return iCount.ToString </p>
+<p>End Function</p>
+<p><img src="../media/3. Scripts/media/image7.png"
+style="width:13.45833in;height:2.57292in" alt="1" /></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

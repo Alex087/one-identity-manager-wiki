@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>4.3 Уменьшить кол во AttestationCases - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>4.3 Уменьшить кол-во AttestationCases</p>
+<p>19 октября 2022 г.</p>
+<p>16:03</p>
+<p>Deleting Attestation Cases</p>
+<table>
+<thead>
+<tr>
+<th><strong>Configuration parameter</strong></th>
+<th><strong>Effect</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Common\ProcessState\PropertyLog</td>
+<td>When this configuration parameter is set, changes to individual values are logged and shown in the process view.</td>
+</tr>
+</tbody>
+</table>
+<p>Table 47: Configuration Parameter for Logging Data Changes</p>
+<p>The table AttestationCase expands very quickly when attestation is
+performed regularly. To limit the number of attestation cases in the One
+Identity Manager, you can delete Obsolete, closed attestation cases from
+the database. The attestation case properties are logged and then the
+attestation cases are deleted. The same number of attestation cases
+remain in the database as are specified in the attestation policy. For
+more detailed information about logging data changes tags, see the One
+Identity Manager Configuration Guide.</p>
+<p>| <img src="../media/4.3 Уменьшить кол-во AttestationCases/media/image1.png"
+style="width:0.16667in;height:0.16667in" /> | <strong>NOTE:</strong> Ensure that the logged request procedures are archived for audit reasons. For more detailed information about the archiving process, see the One Identity Manager Data Archiving Administration Guide. |
+|----|----|</p>
+<p><strong><em>Prerequisites</em></strong></p>
+<ul>
+<li>
+<p>The configuration parameter "Common\ProcessState\PropertyLog" is set.</p>
+</li>
+<li>
+<p>The attestation policy is enabled.</p>
+</li>
+</ul>
+<p><strong><em>To delete attestation cases automatically</em></strong></p>
+<ol>
+<li>
+<p>Set the option <strong>Log changes when deleting</strong> on at least three
+    columns in the table AttestationCase.</p>
+<ol>
+<li>
+<p>Start the Designer<strong>.</strong></p>
+</li>
+<li>
+<p>Select the category <strong>Database Schema | Tables |
+    AttestationCase</strong>.</p>
+</li>
+<li>
+<p>Select <strong>Show table definition</strong> in the task view.<br />
+    Opens the Schema Editor.</p>
+</li>
+<li>
+<p>Select a column in the Schema Editor.</p>
+</li>
+<li>
+<p>Select the <strong>More</strong> tab in the Schema Editor edit view.</p>
+</li>
+<li>
+<p>Set the option <strong>Set Log changes when deleting</strong>.</p>
+</li>
+<li>
+<p>Repeat steps d) to F) for all columns to be recorded on
+    deletion. These must be at least three.</p>
+</li>
+<li>
+<p>Click <strong>Commit to database</strong> in the toolbar and save the
+    changes.<br />
+    These changes become effective the moment the DBQueue
+    Processor has processed the tasks.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Set the option <strong>Log changes when deleting</strong> on at least three
+    columns in the table AttestationHistory.</p>
+<ol>
+<li>
+<p>Start the Designer<strong>.</strong></p>
+</li>
+<li>
+<p>Select the category <strong>Database Schema | Tables |
+    AttestationHistory</strong>.</p>
+</li>
+<li>
+<p>Repeat steps 1c) to 1h) for the table AttestationHistory.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Enter the number of obsolete cases in the attestation policies.</p>
+<ol>
+<li>
+<p>Select the category <strong>Attestation | Attestation policies</strong> in
+    the Manager.</p>
+</li>
+<li>
+<p>Select the attestation policy in the result list whose
+    attestation cases should be deleted.</p>
+</li>
+<li>
+<p>Select <strong>Change master data</strong> in the task view.</p>
+</li>
+<li>
+<p>Enter a value larger than 0 in <strong>Obsolete tasks limit</strong>.</p>
+</li>
+<li>
+<p>Save the changes.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>| <img src="../media/4.3 Уменьшить кол-во AttestationCases/media/image1.png"
+style="width:0.16667in;height:0.16667in" /> | <strong>TIP:</strong> If you want to prevent attestation cases being deleted for certain attestation policies, enter the value 0 for the obsolete task limit for this attestation policy. |
+|----|----|</p>
+<p>Attestation cases are deleted once</p>
+<ul>
+<li>A new attestation is started for an attestation policy.  </li>
+<li>
+<p>OR -</p>
+</li>
+<li>
+<p>An attestation policy is disabled.</p>
+</li>
+</ul>
+<p>The One Identity Manager tests how many closed attestation cases exists
+in the database for each attestation object of this attestation policy.
+If the number is more than the number of obsolete attestation cases:</p>
+<ul>
+<li>
+<p>The attestation case properties and their approval sequence are
+  recorded<br />
+  All columns are recorded, which are marked for logging on deletion.</p>
+</li>
+<li>
+<p>The attestation cases are deleted.<br />
+  The same number of attestation cases remain in the database as are
+  specified in the obsolete tasks limit.</p>
+</li>
+</ul>
+<p>| <img src="../media/4.3 Уменьшить кол-во AttestationCases/media/image1.png"
+style="width:0.16667in;height:0.16667in" /> | <strong>NOTE:</strong> Closed attestation cases are are also deleted in the case of disabled attestation policies if the configuration parameter "Common\ProcessState\PropertyLog" is not set. In this case, the deleted attestation cases are not logged. |
+|----|----|</p>
+<p><strong>Related Topics</strong></p>
+<ul>
+<li><a href="https://support.oneidentity.com/technical-documents/doc860416">General Master Data for Attestation
+  Policies</a></li>
+</ul>
+<p><strong>Notifications in Attestation</strong></p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/attestation-administration-guide/29">https://support.oneidentity.com/technical-documents/identity-manager/8.0/attestation-administration-guide/29</a>&gt;</em></p>
+<hr />
+<p>AttestationCase (UID_AttestationCase, Display name, PropertyInfo2,
+ReasonHead ) - ставим галку Log changes when deleting</p>
+<p>AttestationHistory (UID_AttestationCase, DecisionType, ReasonHead) -
+ставим галку Log changes when deleting</p>
+<hr />
+<p><span class="mark">Важно!</span></p>
+<p>При <strong>Obsolete tasks limit</strong>. = 1 остаются 2 AttestatioCases (текущий и
+один исторический)</p>
+<p>При создании нового AttestationCase - самый старый удаляется и остается
+снова 2</p>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

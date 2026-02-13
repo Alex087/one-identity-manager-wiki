@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>8. Csharp Snippets - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>8. Csharp Snippets</p>
+<p>21 марта 2023 г.</p>
+<p>16:10</p>
+<p>string csvFilePathTmp =
+_Connection.GetConfigParm("Custom\SED\CsvDirTemp") + "\" +
+_Connection.GetConfigParm("Custom\SED\CsvFileName");</p>
+<blockquote>
+<p>using(var reader = new System.IO.StreamReader(csvFilePathTmp))</p>
+</blockquote>
+<p>{</p>
+<blockquote>
+<p>System.Collections.Generic.List\&lt;string&gt; ModuleSED = new
+System.Collections.Generic.List\&lt;string&gt;();</p>
+</blockquote>
+<p>System.Collections.Generic.List\&lt;string&gt; ProductSED = new
+System.Collections.Generic.List\&lt;string&gt;();</p>
+<blockquote>
+<p>System.Collections.Generic.List\&lt;string&gt; GroupAD = new
+System.Collections.Generic.List\&lt;string&gt;();</p>
+<p>System.Collections.Generic.List\&lt;string&gt; dbKeySEDProduct = new
+System.Collections.Generic.List\&lt;string&gt;(); //Для хранения ключей
+продуктов из БД</p>
+<p>System.Collections.Generic.List\&lt;string&gt; csvKeySEDProduct = new
+System.Collections.Generic.List\&lt;string&gt;(); // Для хранения ключей
+продуктов из загруженного CSV</p>
+<p>System.Collections.Generic.List\&lt;string&gt; CsvDiffDb = new
+System.Collections.Generic.List\&lt;string&gt;();</p>
+<p>System.Collections.Generic.List\&lt;string&gt; CsvErrors = new
+System.Collections.Generic.List\&lt;string&gt;();</p>
+<p>// Для хранения значений колонок файла CSV</p>
+<p>string strCsvKeySEDProduct;</p>
+<p>string csvModuleSED;</p>
+<p>string csvCategorySED;</p>
+<p>string csvProductSED;</p>
+<p>string csvRoleSED;</p>
+<p>string csvAdditionalParam;</p>
+<p>string csvGroupAD;</p>
+<p>string csvApprovalPerson;</p>
+<p>//Объявим DataTable для хранения данных из CSV</p>
+<p>/*var dtCSV = new System.Data.DataTable();</p>
+<p>dtCSV.Columns.Add("Key",typeof(string));</p>
+<p>dtCSV.Columns.Add("ModuleSED",typeof(string));</p>
+<p>dtCSV.Columns.Add("CategorySED",typeof(string));</p>
+<p>dtCSV.Columns.Add("ProductSED",typeof(string));</p>
+<p>dtCSV.Columns.Add("RoleSED",typeof(string));</p>
+<p>dtCSV.Columns.Add("AdditionalParam",typeof(string));</p>
+<p>dtCSV.Columns.Add("GroupAD",typeof(string));</p>
+<p>dtCSV.Columns.Add("ApprovalPerson",typeof(string)); */</p>
+<p>//Объявим HashTables для хранения данных из CSV</p>
+<p>System.Collections.Hashtable htCSV_ModuleSED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htCSV_CategorySED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htCSV_ProductSED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htCSV_RoleSED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htCSV_AdditionalParam = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htCSV_GroupAD = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htCSV_ApprovalPerson = new
+System.Collections.Hashtable();</p>
+<p>//Объявим HashTables для хранения данных из DB</p>
+<p>System.Collections.Hashtable htDB_ModuleSED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htDB_CategorySED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htDB_ProductSED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htDB_RoleSED = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htDB_AdditionalParam = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htDB_GroupAD = new
+System.Collections.Hashtable();</p>
+<p>System.Collections.Hashtable htDB_ApprovalPerson = new
+System.Collections.Hashtable();</p>
+<p>//Получим лист из ключей продуктов записей в БД</p>
+<p>var CCC_KeySED = this.DataContext.CCCSEDProducts.GetColumn("CCC_Key");</p>
+<p>var CCC_ModuleSED =
+this.DataContext.CCCSEDProducts.GetColumn("CCC_ModuleSED");</p>
+<p>var CCC_CategorySED =
+this.DataContext.CCCSEDProducts.GetColumn("CCC_CategorySED");</p>
+<p>var CCC_ProductSED =
+this.DataContext.CCCSEDProducts.GetColumn("CCC_SEDProduct");</p>
+<p>var CCC_RoleSED =
+this.DataContext.CCCSEDProducts.GetColumn("CCC_SEDRole");</p>
+<p>var CCC_AdditionalParam =
+this.DataContext.CCCSEDProducts.GetColumn("CCC_AdditionalParam");</p>
+<p>var CCC_GroupAD =
+this.DataContext.CCCSEDProducts.GetColumn("CCC_AdGroupName");</p>
+<p>var CCC_ApprovalPerson =
+this.DataContext.CCCSEDProducts.GetColumn("CCC_ApprovalPerson");</p>
+<p>foreach (var row1 in this.DataContext.CCCSEDProducts) {</p>
+<p>dbKeySEDProduct.Add(CCC_KeySED.GetValue(row1).ToString());</p>
+<p>htDB_ModuleSED.Add(CCC_KeySED.GetValue(row1).ToString(),
+CCC_ModuleSED.GetValue(row1).ToString());</p>
+<p>htDB_CategorySED.Add(CCC_KeySED.GetValue(row1).ToString(),
+CCC_CategorySED.GetValue(row1).ToString());</p>
+<p>htDB_ProductSED.Add(CCC_KeySED.GetValue(row1).ToString(),
+CCC_ProductSED.GetValue(row1).ToString());</p>
+<p>htDB_RoleSED.Add(CCC_KeySED.GetValue(row1).ToString(),
+CCC_RoleSED.GetValue(row1).ToString());</p>
+<p>htDB_AdditionalParam.Add(CCC_KeySED.GetValue(row1).ToString(),
+CCC_AdditionalParam.GetValue(row1).ToString());</p>
+<p>htDB_GroupAD.Add(CCC_KeySED.GetValue(row1).ToString(),
+CCC_GroupAD.GetValue(row1).ToString());</p>
+<p>htDB_ApprovalPerson.Add(CCC_KeySED.GetValue(row1).ToString(),
+CCC_ApprovalPerson.GetValue(row1).ToString());</p>
+<p>}</p>
+<p>//Пройдемся по строкам файла CSV</p>
+<p>while (!reader.EndOfStream)</p>
+</blockquote>
+<p>{</p>
+<blockquote>
+<p>var line = reader.ReadLine();</p>
+<p>string sep = "\t";</p>
+</blockquote>
+<p>var values = line.Split(sep.ToCharArray());</p>
+<blockquote>
+<p>csvModuleSED = values[0];</p>
+<p>csvCategorySED = values[1];</p>
+<p>csvProductSED = values[2];</p>
+<p>csvRoleSED = values[3];</p>
+<p>csvAdditionalParam = values[4];</p>
+<p>csvGroupAD = values[7];</p>
+<p>csvApprovalPerson = values[9];</p>
+<p>//Пропустим Header CSV</p>
+<p>if (csvModuleSED == "ModuleSED" || csvModuleSED == "Модуль СЭД") {</p>
+<p>continue;</p>
+<p>}</p>
+</blockquote>
+<p>//Сформируем ключ продукта</p>
+<blockquote>
+<p>ModuleSED.Add(values[0]);</p>
+</blockquote>
+<p>ProductSED.Add(values[2]);</p>
+<blockquote>
+<p>if (csvAdditionalParam == "") {</p>
+<p>csvKeySEDProduct.Add(csvModuleSED + " - " + csvProductSED);</p>
+<p>strCsvKeySEDProduct = csvModuleSED + " - " + csvProductSED;</p>
+<p>}</p>
+<p>else {</p>
+<p>csvKeySEDProduct.Add(csvModuleSED + " - " + csvProductSED + " - " +
+csvAdditionalParam);</p>
+<p>strCsvKeySEDProduct = csvModuleSED + " - " + csvProductSED + " - " +
+csvAdditionalParam;</p>
+<p>}</p>
+<p>//Заполним DataTable CSV</p>
+<p>//dtCSV.Rows.Add(strCsvKeySEDProduct,csvModuleSED,csvCategorySED,csvProductSED,csvRoleSED,csvAdditionalParam,csvGroupAD,csvApprovalPerson);</p>
+<p>//Заполним HashTables CSV</p>
+<p>htCSV_ModuleSED.Add(strCsvKeySEDProduct, csvModuleSED);</p>
+<p>htCSV_CategorySED.Add(strCsvKeySEDProduct, csvCategorySED);</p>
+<p>htCSV_ProductSED.Add(strCsvKeySEDProduct, csvProductSED);</p>
+<p>htCSV_RoleSED.Add(strCsvKeySEDProduct, csvRoleSED);</p>
+<p>htCSV_AdditionalParam.Add(strCsvKeySEDProduct, csvAdditionalParam);</p>
+<p>htCSV_GroupAD.Add(strCsvKeySEDProduct, csvGroupAD);</p>
+<p>htCSV_ApprovalPerson.Add(strCsvKeySEDProduct, csvApprovalPerson);</p>
+</blockquote>
+<p>}</p>
+<blockquote>
+<p>//Проверка на пустные обязательные поля</p>
+<p>int i = 0;</p>
+<p>foreach (string ModuleSED_ in ModuleSED) {</p>
+<p>i += 1;</p>
+<p>if (ModuleSED_ == "") {</p>
+<p>string str_i;</p>
+<p>str_i = i.ToString();</p>
+<p>Call4.MessageType = "Error";</p>
+<p>Call4.MessageText = "Колонка Модуль СЭД пустая в " + str_i + "
+строке";</p>
+<p>Call4.TableStore = this.TableStore.GetChildTableStore(_Module,
+(this.TableStore.Name + "_Call4"));</p>
+<p>Call4.GetAction(ct);</p>
+<p>CsvErrors.Add("Error");</p>
+<p>}</p>
+<p>}</p>
+<p>i = 0;</p>
+<p>foreach (string ProductSED_ in ProductSED) {</p>
+<p>i += 1;</p>
+<p>if (ProductSED_ == "") {</p>
+<p>string str_i;</p>
+<p>str_i = i.ToString();</p>
+<p>Call4.MessageType = "Error";</p>
+<p>Call4.MessageText = "Колонка Продукт СЭД пустая в " + str_i + "
+строке";</p>
+<p>Call4.TableStore = this.TableStore.GetChildTableStore(_Module,
+(this.TableStore.Name + "_Call4"));</p>
+<p>Call4.GetAction(ct);</p>
+<p>CsvErrors.Add("Error");</p>
+<p>}</p>
+<p>}</p>
+<p>//Сформируем Lists отличающихся записей csv и DB</p>
+<p>var CsvExceptDb = csvKeySEDProduct.Except(dbKeySEDProduct).ToList();</p>
+<p>var DbExceptCsv = dbKeySEDProduct.Except(csvKeySEDProduct).ToList();</p>
+</blockquote>
+<p>//Заполним Коллекцию продуктов, которые будут импортированы в БД</p>
+<blockquote>
+<p>VI.WebRuntime.ColumnInsertValues _insertValues = new
+VI.WebRuntime.ColumnInsertValues();</p>
+</blockquote>
+<p>VI.WebRuntime.IDataColumn _ModuleSED =
+this.DataContext.CCCSEDProductsDiff.GetColumn("ModuleSED");</p>
+<blockquote>
+<p>VI.WebRuntime.IDataColumn _CategorySED =
+this.DataContext.CCCSEDProductsDiff.GetColumn("CategorySED");</p>
+<p>VI.WebRuntime.IDataColumn _ProductSED =
+this.DataContext.CCCSEDProductsDiff.GetColumn("ProductSED");</p>
+<p>VI.WebRuntime.IDataColumn _RoleSED =
+this.DataContext.CCCSEDProductsDiff.GetColumn("RoleSED");</p>
+<p>VI.WebRuntime.IDataColumn _AdditionalParam =
+this.DataContext.CCCSEDProductsDiff.GetColumn("AdditionalParam");</p>
+<p>VI.WebRuntime.IDataColumn _GroupAD =
+this.DataContext.CCCSEDProductsDiff.GetColumn("ADGroup");</p>
+<p>VI.WebRuntime.IDataColumn _ApprovalPerson =
+this.DataContext.CCCSEDProductsDiff.GetColumn("ApprovalPerson");</p>
+<p>foreach (string keySEDProduct in CsvExceptDb) {</p>
+<p>_insertValues.DynamicInsertValues[_ModuleSED] = _row =&gt;</p>
+<p>{</p>
+<p>return htCSV_ModuleSED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues.DynamicInsertValues[_CategorySED] = _row =&gt;</p>
+<p>{</p>
+<p>return htCSV_CategorySED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues.DynamicInsertValues[_ProductSED] = _row =&gt;</p>
+<p>{</p>
+<p>return htCSV_ProductSED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues.DynamicInsertValues[_RoleSED] = _row =&gt;</p>
+<p>{</p>
+<p>return htCSV_RoleSED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues.DynamicInsertValues[_AdditionalParam] = _row =&gt;</p>
+<p>{</p>
+<p>return htCSV_AdditionalParam[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues.DynamicInsertValues[_GroupAD] = _row =&gt;</p>
+<p>{</p>
+<p>return htCSV_GroupAD[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues.DynamicInsertValues[_ApprovalPerson] = _row =&gt;</p>
+<p>{</p>
+<p>return htCSV_ApprovalPerson[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>this.DataContext.CCCSEDProductsDiff.Insert(VI.WebRuntime.ResultSet.FromList(false,
+""), 2147483647, _insertValues);</p>
+<p>}</p>
+<p>//Заполним Коллекцию продуктов, которые будут удалены из БД</p>
+<p>VI.WebRuntime.ColumnInsertValues _insertValues1 = new
+VI.WebRuntime.ColumnInsertValues();</p>
+<p>VI.WebRuntime.IDataColumn _ModuleSED1 =
+this.DataContext.CSVProductsDiff.GetColumn("ModuleSED");</p>
+<p>VI.WebRuntime.IDataColumn _CategorySED1 =
+this.DataContext.CSVProductsDiff.GetColumn("CategorySED");</p>
+<p>VI.WebRuntime.IDataColumn _ProductSED1 =
+this.DataContext.CSVProductsDiff.GetColumn("ProductSED");</p>
+<p>VI.WebRuntime.IDataColumn _RoleSED1 =
+this.DataContext.CSVProductsDiff.GetColumn("RoleSED");</p>
+<p>VI.WebRuntime.IDataColumn _AdditionalParam1 =
+this.DataContext.CSVProductsDiff.GetColumn("AdditionalParam");</p>
+<p>VI.WebRuntime.IDataColumn _GroupAD1 =
+this.DataContext.CSVProductsDiff.GetColumn("ADGroup");</p>
+<p>VI.WebRuntime.IDataColumn _ApprovalPerson1 =
+this.DataContext.CSVProductsDiff.GetColumn("ApprovalPerson");</p>
+<p>foreach (string keySEDProduct in DbExceptCsv) {</p>
+<p>_insertValues1.DynamicInsertValues[_ModuleSED1] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_ModuleSED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues1.DynamicInsertValues[_CategorySED1] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_CategorySED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues1.DynamicInsertValues[_ProductSED1] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_ProductSED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues1.DynamicInsertValues[_RoleSED1] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_RoleSED[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues1.DynamicInsertValues[_AdditionalParam1] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_AdditionalParam[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues1.DynamicInsertValues[_GroupAD1] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_GroupAD[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>_insertValues1.DynamicInsertValues[_ApprovalPerson1] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_ApprovalPerson[keySEDProduct].ToString();</p>
+<p>};</p>
+<p>this.DataContext.CSVProductsDiff.Insert(VI.WebRuntime.ResultSet.FromList(false,
+""), 2147483647, _insertValues1);</p>
+<p>}</p>
+<p>//Сравним две Data Tables: dtCSV и CCCSEDProducts</p>
+<p>/*_Form.ShowMessage("Hello");</p>
+<p>_Form.ShowMessage(dtCSV.Rows.Count.ToString());        </p>
+<p>_Form.ShowMessage(dtCSV.Rows[5][7].ToString());        </p>
+<p>_Form.ShowMessage(this.DataContext.CCCSEDProducts.Rows[5][7].ToString());        </p>
+<p>*/</p>
+<p>//Заполним Коллекцию отличающихся продуктов между csv и БД</p>
+<p>VI.WebRuntime.ColumnInsertValues _insertValues3 = new
+VI.WebRuntime.ColumnInsertValues();</p>
+<p>VI.WebRuntime.IDataColumn _ModuleSED2 =
+this.DataContext.CCCSEDProductsDiff1.GetColumn("ModuleSED");</p>
+<p>VI.WebRuntime.IDataColumn _CategorySED2 =
+this.DataContext.CCCSEDProductsDiff1.GetColumn("CategorySED");</p>
+<p>VI.WebRuntime.IDataColumn _ProductSED2 =
+this.DataContext.CCCSEDProductsDiff1.GetColumn("ProductSED");</p>
+<p>VI.WebRuntime.IDataColumn _RoleSED2 =
+this.DataContext.CCCSEDProductsDiff1.GetColumn("RoleSED");</p>
+<p>VI.WebRuntime.IDataColumn _AdditionalParam2 =
+this.DataContext.CCCSEDProductsDiff1.GetColumn("AdditionalParam");</p>
+<p>VI.WebRuntime.IDataColumn _GroupAD2 =
+this.DataContext.CCCSEDProductsDiff1.GetColumn("ADGroup");</p>
+<p>VI.WebRuntime.IDataColumn _ApprovalPerson2 =
+this.DataContext.CCCSEDProductsDiff1.GetColumn("ApprovalPerson");</p>
+<p>foreach (string stri in dbKeySEDProduct) {</p>
+<p>try
+{string.Compare(htCSV_GroupAD[stri].ToString(),htDB_GroupAD[stri].ToString());}</p>
+<p>catch {continue;}</p>
+<p>if
+(string.Compare(htCSV_GroupAD[stri].ToString(),htDB_GroupAD[stri].ToString())
+!= 0 ||
+string.Compare(htCSV_ApprovalPerson[stri].ToString(),htDB_ApprovalPerson[stri].ToString())
+!= 0) {</p>
+<p>//_Form.ShowMessage("Ключ: " + stri + " Значение группы в файле: " +
+htCSV_GroupAD[stri].ToString() + " Значение группы в БД: " +
+htDB_GroupAD[stri].ToString() + " Значение согласующего в файле:" +
+htCSV_ApprovalPerson[stri].ToString() + " Значение согласующего в
+БД: " + htDB_ApprovalPerson[stri].ToString());</p>
+<p>_insertValues3.DynamicInsertValues[_ModuleSED2] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_ModuleSED[stri].ToString();</p>
+<p>};</p>
+<p>_insertValues3.DynamicInsertValues[_CategorySED2] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_CategorySED[stri].ToString();</p>
+<p>};</p>
+<p>_insertValues3.DynamicInsertValues[_ProductSED2] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_ProductSED[stri].ToString();</p>
+<p>};</p>
+<p>_insertValues3.DynamicInsertValues[_RoleSED2] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_RoleSED[stri].ToString();</p>
+<p>};</p>
+<p>_insertValues3.DynamicInsertValues[_AdditionalParam2] = _row =&gt;</p>
+<p>{</p>
+<p>return htDB_AdditionalParam[stri].ToString();</p>
+<p>};</p>
+<p>_insertValues3.DynamicInsertValues[_GroupAD2] = _row =&gt;</p>
+<p>{</p>
+<p>if
+(string.Compare(htCSV_GroupAD[stri].ToString(),htDB_GroupAD[stri].ToString())
+!= 0 ) {return htDB_GroupAD[stri].ToString() + " -&gt; " +
+htCSV_GroupAD[stri].ToString();}</p>
+<p>else {return htDB_GroupAD[stri].ToString();}</p>
+<p>};</p>
+<p>_insertValues3.DynamicInsertValues[_ApprovalPerson2] = _row =&gt;</p>
+<p>{</p>
+<p>if (
+string.Compare(htCSV_ApprovalPerson[stri].ToString(),htDB_ApprovalPerson[stri].ToString())
+!= 0) {return htDB_ApprovalPerson[stri].ToString() + " -&gt; " +
+htCSV_ApprovalPerson[stri].ToString();}</p>
+<p>else {return htDB_ApprovalPerson[stri].ToString();}</p>
+<p>};</p>
+<p>this.DataContext.CCCSEDProductsDiff1.Insert(VI.WebRuntime.ResultSet.FromList(false,
+""), 2147483647, _insertValues3);</p>
+<p>}</p>
+<p>}        </p>
+<p>//Заполним коллекцию CSVValidated для отображения формы с детальными
+данными, что валидация пройдена</p>
+<p>if (CsvErrors.Count == 0) {</p>
+<p>VI.WebRuntime.ColumnInsertValues _insertValues2 = new
+VI.WebRuntime.ColumnInsertValues();</p>
+<p>VI.WebRuntime.IDataColumn _Valid =
+this.DataContext.CSVValidated.GetColumn("Valid");</p>
+<p>_insertValues2.DynamicInsertValues[_Valid] = _row =&gt;</p>
+<p>{</p>
+<p>return "hh";</p>
+<p>};</p>
+<p>this.DataContext.CSVValidated.Insert(VI.WebRuntime.ResultSet.FromList(false,
+""), 2147483647, _insertValues2);</p>
+<p>}</p>
+<p>}</p>
+</blockquote>
+<p>//-------------------------------------------------</p>
+<p>//Удалим все файлы во временной директории СЭД</p>
+<p>System.IO.DirectoryInfo di = new
+System.IO.DirectoryInfo(_Connection.GetConfigParm("Custom\SED\CsvDirTemp"));</p>
+<p>foreach (System.IO.FileInfo file in di.GetFiles()) {</p>
+<blockquote>
+<p>file.Delete();</p>
+</blockquote>
+<p>}</p>
+<p>//-------------</p>
+<p>//Переместим файл csv из временной директрории в рабочую для
+синхронизации.</p>
+<p>string CsvDirTemp =
+_Connection.GetConfigParm("Custom\SED\CsvDirTemp");</p>
+<p>string CsvDir = _Connection.GetConfigParm("Custom\SED\CsvDir");</p>
+<p>string CsvFileName =
+_Connection.GetConfigParm("Custom\SED\CsvFileName");</p>
+<p>string CsvFilePath = CsvDir + "\" + CsvFileName;</p>
+<p>string CsvFilePathTemp = CsvDirTemp + "\" + CsvFileName;</p>
+<p>if (System.IO.File.Exists(CsvFilePath)) {</p>
+<blockquote>
+<p>System.IO.File.Delete(CsvFilePath);</p>
+</blockquote>
+<p>}</p>
+<p>System.IO.File.Move(CsvFilePathTemp, CsvFilePath);</p>
+<p>IVI_Common_UserMessageAdd SaveFileInform =
+_UserSession.ApplicationInfo.CreateComponent\&lt;IVI_Common_UserMessageAdd&gt;();</p>
+<p>SaveFileInform.MessageType = "Success";</p>
+<p>SaveFileInform.MessageText = "Файл сохранен в рабочей директории для
+синхронизации с АСУД";</p>
+<p>SaveFileInform.TableStore = this.TableStore.GetChildTableStore(_Module,
+(this.TableStore.Name + "_SaveFileInform"));</p>
+<p>SaveFileInform.GetAction(ct);</p>
+<p>//------</p>
+<p>//Удалим все файлы во временной директории СЭД</p>
+<p>System.IO.DirectoryInfo di = new
+System.IO.DirectoryInfo(_Connection.GetConfigParm("Custom\SED\CsvDirTemp"));</p>
+<p>foreach (System.IO.FileInfo file in di.GetFiles()) {</p>
+<blockquote>
+<p>file.Delete();</p>
+</blockquote>
+<p>}</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

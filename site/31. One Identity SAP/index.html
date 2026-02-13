@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>31. One Identity SAP - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>31. One Identity SAP</p>
+<p>21 февраля 2020 г.</p>
+<p>15:30</p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References VI.Projector.Dll</p>
+<p>References VI.Projector.Database.Dll</p>
+<p>References VI.Projector.SAP.JobComponent.Dll</p>
+<p>References VI.Projector.SAP.Dll</p>
+<p>References VI.Projector.SAP.Data.Dll</p>
+<p>References JobComponent.dll</p>
+<p>References VI.Projector.Connector.Base.dll</p>
+<p>References VI.Projector.JobComponent.dll</p>
+<p>'References VI.Projector.SAP.JobComponent.Dll</p>
+<p>Imports VI.Projector.Database</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports VI.Projector.SAP.JobComponent</p>
+<p>Imports VI.Projector.SAP.ProjectorSAPConnector</p>
+<p>Imports VI.Projector.Database.Serialization</p>
+<p>Imports VI.Projector.Connector.Base</p>
+<p>Imports VI.Projector.SAP</p>
+<p>Imports VI.Projector</p>
+<p>Imports System.Reflection</p>
+<p>Imports VI.Projector.Connection</p>
+<p>Imports VI.Projector.Projection</p>
+<p>Imports VI.Projector.JobComponent</p>
+<p>Imports System.Collections.Concurrent</p>
+<p>#End If</p>
+<p>Public Sub Z_SAP_Sync_Table_HRP1002()</p>
+<p>Dim sapTblName As String = "HRP1002"</p>
+<p>Dim wherecond As String = " MANDT = sy-mandt AND PLVAR = '01' AND (
+OTYPE = 'S' OR OTYPE = 'O' ) AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_HRT1002()</p>
+<p>Dim sapTblName As String = "HRT1002"</p>
+<p>Dim wherecond As String = " MANDT = sy-mandt "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_HRP1001()</p>
+<p>Dim sapTblName As String = "HRP1001"</p>
+<p>Dim wherecond As String = " MANDT = sy-mandt AND PLVAR = '01' AND ( ( (
+RELAT = '002' OR RELAT = '012' ) AND SCLAS IN ( 'O', 'S' ) AND OTYPE IN
+( 'O', 'S' ) ) OR SCLAS = 'Q' ) AND RSIGN = 'A' AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_HRP1000()</p>
+<p>Dim sapTblName As String = "HRP1000"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt AND PLVAR = '01' AND ( OTYPE
+= 'S' OR OTYPE = 'O' ) AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_HRPAD31()</p>
+<p>Dim sapTblName As String = "HRPAD31"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_PA0290()</p>
+<p>Dim sapTblName As String = "PA0290"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt AND SUBTY = '802' AND ENDDA
+&gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_T001()</p>
+<p>Dim sapTblName As String = "T001"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_T005U()</p>
+<p>Dim sapTblName As String = "T005U"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_T500P()</p>
+<p>Dim sapTblName As String = "T500P"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_T77TP()</p>
+<p>Dim sapTblName As String = "T77TP"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_T7RU9A()</p>
+<p>Dim sapTblName As String = "T7RU9A"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_PA0035()</p>
+<p>Dim sapTblName As String = "PA0035"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_PA0000()</p>
+<p>Dim sapTblName As String = "PA0000"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_PA0001()</p>
+<p>Dim sapTblName As String = "PA0001"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_PA0002()</p>
+<p>Dim sapTblName As String = "PA0002"</p>
+<p>Dim wherecond As String = "MANDT = sy-mandt AND ENDDA &gt;= sy-datum "</p>
+<p>Z_SAP_Sync_Table(sapTblName, wherecond)</p>
+<p>End Sub</p>
+<p>Public Sub Z_SAP_Sync_Table_ALL_TABLES()</p>
+<p>Z_SAP_Sync_Table_HRP1000()</p>
+<p>Z_SAP_Sync_Table_HRP1001()</p>
+<p>Z_SAP_Sync_Table_HRP1002()</p>
+<p>Z_SAP_Sync_Table_HRPAD31()</p>
+<p>Z_SAP_Sync_Table_HRT1002()</p>
+<p>Z_SAP_Sync_Table_PA0035()</p>
+<p>Z_SAP_Sync_Table_PA0290()</p>
+<p>Z_SAP_Sync_Table_T001()</p>
+<p>Z_SAP_Sync_Table_T005U()</p>
+<p>Z_SAP_Sync_Table_T005U()</p>
+<p>Z_SAP_Sync_Table_T500P()</p>
+<p>Z_SAP_Sync_Table_T77TP()</p>
+<p>'временно отключено</p>
+<p>' Z_SAP_Sync_Table_T7RU9A()</p>
+<p>Z_SAP_Sync_Table_PA0000()</p>
+<p>Z_SAP_Sync_Table_PA0001()</p>
+<p>Z_SAP_Sync_Table_PA0002()</p>
+<p>End Sub</p>
+<p>Public Function Z_SAP_Sync_Table(sapTblName As String, wherecond As
+String) As String</p>
+<p>logger.trace(sapTblName &amp; ": ENTER")</p>
+<p>Dim batchLogSize As Integer = 2500</p>
+<p>Dim syncName As String =
+Connection.GetConfigParm("TargetSystem\UNS\ITResource\SAPHR\DPRShellName")</p>
+<p>Dim parPref As String =
+"TargetSystem\UNS\ITResource\SAPHR\InfotypeHandling\</p>
+<p>Dim maxReadAttemptNumStr As String =
+Z_Get_One_Of_Conf_Param_Value(parPref &amp; sapTblName &amp; "\ReReadAttempts",
+parPref &amp; "Default\ReReadAttempts", "2" )</p>
+<p>Dim maxReadAttemptNum As Integer = CInt(maxReadAttemptNumStr) + 1</p>
+<p>Dim maxCreationNum As Integer =
+CInt(Z_Get_One_Of_Conf_Param_Value(parPref &amp; sapTblName &amp; "\MaxCreated",
+parPref &amp; "Default\MaxCreated", "-1" ))</p>
+<p>Dim maxDeletionNum As Integer =
+CInt(Z_Get_One_Of_Conf_Param_Value(parPref &amp; sapTblName &amp; "\MaxRemoved",
+parPref &amp; "Default\MaxRemoved", "-1" ))</p>
+<p>Dim treatMaxNumbersAsPercentage As Boolean = "1" =
+Z_Get_One_Of_Conf_Param_Value(parPref &amp; sapTblName &amp;
+"\TreatMaxNumbersAsPercentage", parPref &amp;
+"Default\TreatMaxNumbersAsPercentage", "0" )</p>
+<p>Dim readAttemptNum As Integer = 0</p>
+<p>While readAttemptNum \&lt; maxReadAttemptNum</p>
+<p>logger.trace(sapTblName &amp; ": starting read iteration #" &amp;
+readAttemptNum)</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>Dim idmTableName As String = "CCC" &amp; sapTblName</p>
+<p>Dim allSapAttrsList As New List(Of String)</p>
+<p>Dim dateSapAttrsList As New List(Of String)</p>
+<p>Dim columnDefs As IColDbObject = Connection.CreateCol("DialogColumn")</p>
+<p>columnDefs.Prototype("ColumnName").IsDisplayItem = True</p>
+<p>columnDefs.Prototype("DataType").IsDisplayItem = True</p>
+<p>columnDefs.Prototype.WhereClause = "uid_dialogtable in (select
+uid_dialogtable from dialogtable where " &amp; f.Comparison("TableName",
+idmTableName, ValType.String) &amp; ") and columnname like 'CCC%' "</p>
+<p>columnDefs.Load()</p>
+<p>For Each nextColumn As IColElem In columnDefs</p>
+<p>Dim colName As String = nextColumn.GetValue("ColumnName").String</p>
+<p>Dim sapColName = colName.Replace("CCC_", "")</p>
+<p>If colName = "CCC_IsDeleted" Then</p>
+<p>Continue For</p>
+<p>End If</p>
+<p>If nextColumn.GetValue("DataType").String = CStr(ValType.Date) Then</p>
+<p>dateSapAttrsList.Add(sapColName)</p>
+<p>End If</p>
+<p>allSapAttrsList.Add(sapColName)</p>
+<p>Next</p>
+<p>Dim UID_DPRShell As String = Connection.GetSingleProperty("DPRShell",
+"UID_DPRShell", f.Comparison("DisplayName", syncName, ValType.String))</p>
+<p>Dim expr_AB As New DatabaseReader(Session, "DPRShell",
+f.UidComparison("UID_DPRShell", UID_DPRShell))</p>
+<p>expr_AB.SkipInactiveSchemaTypes = True</p>
+<p>Using projectorShell = CType(expr_AB.Read(Nothing), IProjectorShell)</p>
+<p>Dim projectorSAPConnector As New
+VI.Projector.SAP.ProjectorSAPConnector()</p>
+<p>Dim ov As New OverwriteVariables("")</p>
+<p>Dim projectionOption As New
+ProjectionOption(ProjectionDirection.ToTheLeft)</p>
+<p>projectionOption.VariableSet = projectorShell.DefaultVariableSet</p>
+<p>Dim Fu As Func(Of String, String) = Function(s As String ) As String</p>
+<p>Return ov.GetVariableValue(s)</p>
+<p>End Function</p>
+<p>projectionOption.VariableOverruler = Fu</p>
+<p>Dim systemConnection As VI.Projector.Connection.ISystemConnection =
+Nothing</p>
+<p>'logger.trace("found connections: " &amp; projectorShell.Connections.Count)</p>
+<p>For Each sc As VI.Projector.Connection.ISystemConnection In
+projectorShell.Connections</p>
+<p>'If Not sc.Schema.System.IsMainSystem Then</p>
+<p>'If True Then</p>
+<p>' logger.trace("sc.Schema.System.Identity.Id:")</p>
+<p>' logger.trace(sc.Schema.System.Identity.Id)</p>
+<p>If Not sc.Schema.System.Identity.Id.StartsWith("FTP#",
+StringComparison.OrdinalIgnoreCase) Then</p>
+<p>systemConnection = sc</p>
+<p>Exit For</p>
+<p>End If</p>
+<p>Next</p>
+<p>If systemConnection Is Nothing Then</p>
+<p>Throw New exception(sapTblName &amp; ": cant find main connnection")</p>
+<p>End If</p>
+<p>projectorSAPConnector.Connect(systemConnection.ConnectionParameter.Replace(projectionOption.VariableSetEffective,
+False))</p>
+<p>If Not projectorSAPConnector.IsConnected Then</p>
+<p>logger.warn(sapTblName &amp; ": not connected :(")</p>
+<p>Throw New Exception("cant connect to SAP system")</p>
+<p>End If</p>
+<p>logger.trace(sapTblName &amp; ": connected!!!")</p>
+<p>Dim m_SAPConnection As SAPConnection =
+CType(projectorSAPConnector.GetType().GetField("m_SAPConnection",
+BindingFlags.NonPublic Or
+BindingFlags.Instance).GetValue(projectorSAPConnector) ,SAPConnection )</p>
+<p>Dim tbl As New SAPTable(m_SAPConnection)</p>
+<p>logger.trace(sapTblName &amp; ": processing sql: " &amp; wherecond)</p>
+<p>Dim whereconds As String() = { wherecond }</p>
+<p>Dim dynMethod As MethodInfo</p>
+<p>For Each dm As MethodInfo In
+tbl.GetType().GetMethods(System.Reflection.BindingFlags.NonPublic Or
+System.Reflection.BindingFlags.Instance)</p>
+<p>If dm.Name = "SAPQuery" AndAlso dm.GetParameters.Count = 3 Then</p>
+<p>dynMethod = dm</p>
+<p>Exit For</p>
+<p>End If</p>
+<p>Next</p>
+<p>Dim ans As BigDataTable = CType(dynMethod.Invoke(tbl, { sapTblName,
+whereconds, Nothing }), BigDataTable)</p>
+<p>logger.trace(sapTblName &amp; ": obtained rows from " &amp; sapTblName &amp; ": " &amp;
+ans.Rows.Count)</p>
+<p>Dim cycleNum As Integer = 0</p>
+<p>Dim handledIds As New List(Of String)</p>
+<p>logger.Trace(sapTblName &amp; ": fill map with sap data")</p>
+<p>Dim hashToSapData As New Dictionary(Of String, BigDataRow)</p>
+<p>For Each nextRow As BigDataRow In ans.Rows</p>
+<p>Dim hash As String = ""</p>
+<p>For Each attrName As String In allSapAttrsList</p>
+<p>If dateSapAttrsList.Contains(attrName) Then</p>
+<p>'Dim strval As String = nextRow(attrName).tostring</p>
+<p>'hash = hash &amp; If ( strval="0000-00-00", "00000000",
+CType(nextRow(attrName), Date).tostring("yyyyMMdd") ) &amp; "_"</p>
+<p>hash = hash &amp; Z_SAP_Get_Date_Sap_Attr_For_Hash(nextRow, attrName) &amp; "_"</p>
+<p>Else</p>
+<p>hash = hash &amp; CStr(nextRow(attrName)) &amp; "_"</p>
+<p>End If</p>
+<p>Next</p>
+<p>If hashToSapData.ContainsKey(hash) Then</p>
+<p>logger.warn(sapTblName &amp; ": sap has duplicate data: " &amp; hash)</p>
+<p>Else</p>
+<p>hashToSapData.Add(hash, nextRow)</p>
+<p>End If</p>
+<p>Next</p>
+<p>logger.Trace(sapTblName &amp; ": end fill map with sap data")</p>
+<p>logger.Trace(sapTblName &amp; ": fill map with idm data")</p>
+<p>Dim hashToIdmData As New Dictionary(Of String, String)</p>
+<p>Dim existingObjects As IColDbObject = Nothing</p>
+<p>existingObjects = Connection.CreateCol("CCC" &amp; sapTblName)</p>
+<p>Z_Add_All_Columns_To_Output_Result("CCC" &amp; sapTblName, existingObjects)</p>
+<p>existingObjects.Prototype.WhereClause = "CCC_IsDeleted = 0"</p>
+<p>existingObjects.Load()</p>
+<p>logger.trace(sapTblName &amp; ": not deleted records from idm: " &amp;
+existingObjects.Count)</p>
+<p>For Each nextRow As IColElem In existingObjects</p>
+<p>Dim hash As String = ""</p>
+<p>For Each attrName As String In allSapAttrsList</p>
+<p>If dateSapAttrsList.Contains(attrName) Then</p>
+<p>Dim dv As Date = nextRow.getValue("CCC_" &amp; attrName).Date</p>
+<p>hash = hash &amp; If (dv = Nothing OrElse dv.CompareTo(FIRST_VALID_DATE)\&lt;0,
+"00000000", dv.tostring("yyyyMMdd")) &amp; "_"</p>
+<p>Else</p>
+<p>hash = hash &amp; nextRow.getValue("CCC_" &amp; attrName).String &amp; "_"</p>
+<p>End If</p>
+<p>Next</p>
+<p>If hashToIdmData.ContainsKey(hash) Then</p>
+<p>logger.warn(sapTblName &amp; ": IDM has duplicate data: " &amp; hash)</p>
+<p>Else</p>
+<p>hashToIdmData.Add(hash, nextRow.GetValue("UID_" &amp; idmTableName).String)</p>
+<p>End If</p>
+<p>Next</p>
+<p>logger.Trace(sapTblName &amp; ": end fill map with idm data")</p>
+<p>Dim newHashesToCreate =
+hashToSapData.Keys.Except(hashToIdmData.Keys).ToList</p>
+<p>logger.trace(sapTblName &amp; ": new objects (planned): " &amp;
+newHashesToCreate.Count)</p>
+<p>Dim toRemoveObjectHashes = hashToIdmData.Keys.Except(hashToSapData.Keys
+).ToList</p>
+<p>logger.trace(sapTblName &amp; ": objects to remove: " &amp;
+toRemoveObjectHashes.Count)</p>
+<p>Dim creationexceeded As Boolean = False</p>
+<p>If maxCreationNum &gt; -1 Then</p>
+<p>If treatMaxNumbersAsPercentage Then</p>
+<p>Dim lim As Double = (existingObjects.Count * maxCreationNum) / 100</p>
+<p>logger.Trace(sapTblName &amp; ": maxCreationNum = " &amp; lim)</p>
+<p>creationexceeded = newHashesToCreate.Count &gt; lim</p>
+<p>Else</p>
+<p>creationexceeded = newHashesToCreate.Count &gt; maxCreationNum</p>
+<p>End If</p>
+<p>End If</p>
+<p>Dim deletionexceeded As Boolean = False</p>
+<p>If maxDeletionNum &gt; -1 Then</p>
+<p>If treatMaxNumbersAsPercentage Then</p>
+<p>deletionexceeded = toRemoveObjectHashes.Count &gt; (existingObjects.Count
+* maxDeletionNum) / 100</p>
+<p>Else</p>
+<p>deletionexceeded = toRemoveObjectHashes.Count &gt; maxDeletionNum</p>
+<p>End If</p>
+<p>End If</p>
+<p>If creationexceeded OrElse deletionexceeded Then</p>
+<p>readAttemptNum = readAttemptNum + 1</p>
+<p>If readAttemptNum &gt;= maxReadAttemptNum Then</p>
+<p>logger.warn(sapTblName &amp; ": last read iteration; throwing exception...")</p>
+<p>Z_Send_Plain_Text_Mail(Connection.GetConfigParm("Common\MailNotification\ErrorAuditor"),
+"Idm. HR sync error - Threshold exceeded for " &amp; sapTblName, "Threshold
+exceeded for " &amp; sapTblName &amp; ": objects to create: " &amp;
+newHashesToCreate.Count.ToString &amp; "; objects to remove: " &amp;
+toRemoveObjectHashes.Count.ToString,False)</p>
+<p>Throw New Exception("Problem with obtaining data from " &amp; sapTblName &amp;
+"; objects to create: " &amp; newHashesToCreate.Count.ToString &amp; "; objects
+to remove: " &amp; toRemoveObjectHashes.Count.ToString)</p>
+<p>Else</p>
+<p>Z_Send_Plain_Text_Mail(Connection.GetConfigParm("Common\MailNotification\ErrorAuditor"),
+"Idm. HR sync warning - Threshold exceeded for " &amp; sapTblName,
+"Threshold exceeded for " &amp; sapTblName &amp; ": objects to create: " &amp;
+newHashesToCreate.Count.ToString &amp; "; objects to remove: " &amp;
+toRemoveObjectHashes.Count.ToString,False)</p>
+<p>logger.warn(sapTblName &amp; ": going to next read iteration!!!!")</p>
+<p>End If</p>
+<p>Continue While</p>
+<p>End If</p>
+<p>Dim createdObjectCount As Integer = 0</p>
+<p>Connection.BeginTransaction</p>
+<p>Try</p>
+<p>Dim doLog As Boolean = False</p>
+<p>Dim ccn As Integer = 0</p>
+<p>For Each hash As String In hashToSapData.Keys</p>
+<p>doLog = cycleNum Mod batchLogSize = 0</p>
+<p>If doLog Then</p>
+<p>logger.trace(sapTblName &amp; ":cyclNum start #" &amp; cycleNum.ToString)</p>
+<p>End If</p>
+<p>ccn = cycleNum</p>
+<p>cycleNum = cycleNum + 1</p>
+<p>If Not hashToIdmData.ContainsKey(hash) Then</p>
+<p>logger.trace(sapTblName &amp; ":next hash to create: " &amp; hash)</p>
+<p>Dim dbrow As ISingleDbObject = Connection.CreateSingle(idmTableName)</p>
+<p>createdObjectCount = createdObjectCount + 1</p>
+<p>Dim nextRow As BigDataRow = hashToSapData(hash)</p>
+<p>For Each attrName As String In allSapAttrsList</p>
+<p>If dateSapAttrsList.Contains(attrName) Then</p>
+<p>VID_PutValueSafe(dbrow, "CCC_" &amp; attrName,
+Z_SAP_Get_Date_Sap_Attr(nextRow, attrName))</p>
+<p>Else</p>
+<p>VID_PutValueSafe(dbrow, "CCC_" &amp; attrName, nextRow(attrName))</p>
+<p>End If</p>
+<p>Next</p>
+<p>If doLog Then</p>
+<p>logger.trace(sapTblName &amp; ": cycle #" &amp; ccn.tostring() &amp; " before
+save")</p>
+<p>End If</p>
+<p>dbrow.Save()</p>
+<p>If doLog Then</p>
+<p>logger.trace(sapTblName &amp; ": cycle #" &amp; ccn.tostring() &amp; " after save")</p>
+<p>End If</p>
+<p>End If</p>
+<p>If doLog Then</p>
+<p>logger.trace(sapTblName &amp; ": cyclNum finish #" &amp; ccn.ToString)</p>
+<p>End If</p>
+<p>Next</p>
+<p>logger.trace(sapTblName &amp; ": new objects (fact): " &amp; createdObjectCount)</p>
+<p>For Each hash As String In toRemoveObjectHashes</p>
+<p>logger.trace(sapTblName &amp; ": next hash to remove: " &amp; hash)</p>
+<p>Dim dbrow As ISingleDbObject = Connection.CreateSingle("CCC" &amp;
+sapTblName, hashToIdmData(hash))</p>
+<p>'dbrow.Delete()</p>
+<p>VID_PutValueSafe(dbrow, "CCC_IsDeleted", 1)</p>
+<p>dbrow.Save()</p>
+<p>Next</p>
+<p>Connection.CommitTransaction</p>
+<p>Catch ex As Exception</p>
+<p>Connection.RollbackTransaction()</p>
+<p>Throw ex</p>
+<p>End Try</p>
+<p>logger.Trace(sapTblName &amp; ": finish update")</p>
+<p>Return "ok"</p>
+<p>End Using</p>
+<p>End While</p>
+<p>Throw New Exception("Problem with obtaining data from " &amp; sapTblName)</p>
+<p>End Function</p>
+<p>Dim FIRST_VALID_DATE As Date = Date.ParseExact("01/01/1900",
+"dd/MM/yyyy",System.Globalization.DateTimeFormatInfo.InvariantInfo)</p>
+<p>Private Function Z_SAP_Get_Date_Sap_Attr_For_Hash(nextRow As BigDataRow,
+attrName As String) As String</p>
+<p>If Convert.ToString(nextRow(attrName))\&lt;&gt;"0000-00-00" AndAlso Not
+String.IsNullOrEmpty(Convert.ToString(nextRow(attrName))) Then</p>
+<p>Dim tmpDate As Date = CType(nextRow(attrName), Date)</p>
+<p>If Not (tmpDate = Nothing) AndAlso tmpDate.CompareTo(FIRST_VALID_DATE)
+&gt;= 0 Then</p>
+<p>Return tmpDate.tostring("yyyyMMdd")</p>
+<p>End If</p>
+<p>End If</p>
+<p>If attrName = "BEGDA" Then</p>
+<p>Return "19000101"</p>
+<p>Else</p>
+<p>Return "00000000"</p>
+<p>End If</p>
+<p>End Function</p>
+<p>Private Function Z_SAP_Get_Date_Sap_Attr(nextRow As BigDataRow, attrName
+As String) As Date</p>
+<p>If Convert.ToString(nextRow(attrName))\&lt;&gt;"0000-00-00" AndAlso Not
+String.IsNullOrEmpty(Convert.ToString(nextRow(attrName))) Then</p>
+<p>Dim tmpDate As Date = CType(nextRow(attrName), Date)</p>
+<p>If Not (tmpDate = Nothing) AndAlso tmpDate.CompareTo(FIRST_VALID_DATE)
+&gt;= 0 Then</p>
+<p>Return tmpDate</p>
+<p>End If</p>
+<p>End If</p>
+<p>If attrName = "BEGDA" Then</p>
+<p>Return FIRST_VALID_DATE</p>
+<p>Else</p>
+<p>Return Nothing</p>
+<p>End If</p>
+<p>End Function</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

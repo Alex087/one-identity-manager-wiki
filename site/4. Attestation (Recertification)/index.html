@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>4. Attestation (Recertification) - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#riskindex" class="nav-link">Включение вычисления RiskIndex</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link">Структура аттестации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#recertifying-existing-users" class="nav-link">Recertifying existing users</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-" class="nav-link">Не отрабатывает автоудаление сотрудника из бизнес-ролей и групп при отклонении аттестации (ресертификации)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#personinorg-" class="nav-link">Условие отбора объектов для аттестации PersonInOrg с учетом членства сотрудника в определенной Бизнес-роли и его индекса риска</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#qerattestationautoremovalscoperolemembershipremovedynamicrole" class="nav-link">Не удаляется пользователь из динамических Бизнес ролей при включенном параметре QER\Attestation\AutoRemovalScope\RoleMembership\RemoveDynamicRole</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#5" class="nav-link">Процесс ресертификации для Х5 (перевод сотрудника в другое подразделение)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#5_1" class="nav-link">Процесс ресертификации для Х5 (изменение руководителя сотрудника)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#attestation-by-mail" class="nav-link">Attestation by mail</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link">Информирование о необходимости аттестовать</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#attestation-cases" class="nav-link">Условие отбора Attestation cases по дате устройства сотрудника</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_5" class="nav-link">Рабочая версия?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#riskindex_1" class="nav-link">Убрать колонку RiskIndex на портале при согласовании аттестации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#product" class="nav-link">Добавить колонку Product для отображения в кейсах аттестации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_6" class="nav-link">Изменения в модулях аттестации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_7" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_8" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_9" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_10" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_11" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#workflow-ad" class="nav-link">Workflow согласования - учет контейнера AD и предыдущего менеджера</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_12" class="nav-link">Вид на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#approval-policy-attestation-policy" class="nav-link">Не удается указать кастомную Approval Policy для Attestation Policy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-approval-procedure" class="nav-link">Расчет согласования предыдущего руководителя - Approval procedure</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#attestationcase" class="nav-link">Не вызываются события на таблице AttestationCase</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_13" class="nav-link">Форма на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#attestationcases" class="nav-link">Запуск AttestationCases</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#createattestations" class="nav-link">Вызов метода CreateAttestations из скрипта</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_14" class="nav-link">При отказе от доступа обычным пользователем при ресертификации выходит ошибка на портале</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#approveall-denyall" class="nav-link">Не корректно отображаются кнопки Утвердить все, Отказать все (ApproveAll, DenyAll)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#-_1" class="nav-link">Адрес на портале - список аттестаций</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_15" class="nav-link">Отправка письма о завершении ресертификации</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#timeout" class="nav-link">Не отзываются права при достижении Timeout</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#timetrace" class="nav-link">Проверка изменения значения колонки на основе исторических данных (TimeTrace)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_16" class="nav-link">Проблемки при переводе сотрудника и ресертификации его доступов:</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>4. Attestation (Recertification)</p>
+<p>21 декабря 2021 г.</p>
+<p>14:06</p>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/attestation-administration-guide/8">Identity Manager 8.1.2 - Attestation Administration Guide
+(oneidentity.com)</a></p>
+<p><img src="../media/4. Attestation (Recertification)/media/image1.png"
+style="width:7.77083in;height:2.07292in"
+alt="Напомню как выглядит на текущий момент таблица пороговых значений (таблица из набора матрицы критичности): риска критичносги пользователя 0-0,19 Описание приемлемыи внимание уведомление критичныи Действия, полняемы СУ предоставление доступе предоставление доступе уведомление ДИБ ресертификация и уведомление ДИБ Дополнительные Нет действий Нет действий Установке на контроль Ресертифи кация " /></p>
+</blockquote>
+<h1 id="_1"></h1>
+<h1 id="riskindex">Включение вычисления RiskIndex</h1>
+<blockquote>
+<p>QER\CalculateRiskIndex</p>
+</blockquote>
+<h1 id="_2">Структура аттестации</h1>
+<blockquote>
+<p><strong>Attestation type</strong>s включают в себя Attestation procedures. Просто
+группируя их.</p>
+<p><strong>Attestation procedures</strong> определяют базовый объект для аттестации,
+например - членство в Business role (объект PersonInOrg). В них
+задается отображение записи аттестации на портале - можно указать
+отображаемые свойства и колонки для группировки.</p>
+<p>Значение Related object указывает на свяхь с другой таблицей, через
+указание XObjectKey (\$FK(UID_ADSAccount).XObjectKey\$), поля которого
+мы указываем в Grouping column 1 и т.п.</p>
+<p><strong>Compliance frameworks</strong> для классификации attestation policies,
+compliance rules, and company policies в соответствии с требованиями.</p>
+<p><strong>Attestation policies</strong> указывают конкретные условия для аттестации.
+В них указывается <strong>Attestation procedure</strong>, расписание.</p>
+<p>Указывается условие Where для ограничения объектов для аттестации,
+которые указаны в <strong>Attestation procedure.</strong> Если мы на портале задаем
+условие для отбора объектов аттестации - то это условие сохраняется в
+Where <strong>Attestation policy!</strong></p>
+<p>В <strong>Attestation policy</strong> задается <strong>Apprval Policy</strong>, которая включает
+в себя Approval Workflow с шагами для прохождения аттестации.</p>
+</blockquote>
+<table style="width:92%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr>
+<th>Additional approver possible</th>
+<th><p>Specifies whether a current attestor is allowed to instruct
+another employee as an attestor. This additional attestor has parallel
+authorization to make approvals for the current attestation case. The
+attestation case is not passed on to the next approval level until both
+attestors have made a decision.</p>
+<p>This option can only be set for approval levels with a single, manual
+approval step.</p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Approval can be delegated</td>
+<td><p>Specifies whether a current attestor can delegate the attestation
+to another person. This employee is added to the current approval step
+as the attestor. This employee then makes the approval decision instead
+of the attestor who made the delegation.</p>
+<p>This option can only be set for approval levels with a single, manual
+approval step.</p></td>
+</tr>
+<tr>
+<td>Approval by affected employee</td>
+<td><p>Specifies whether the employee who is affected by the approval
+decision can also approve it. If this option is set, employees to be
+attested can attest themselves.</p>
+<p>If this option is not set, use the <strong>QER | Attestation |
+PersonToAttestNoDecide</strong> configuration parameter to define
+whether the employees to be attested can attest themselves.</p></td>
+</tr>
+<tr>
+<td>Do not show in approval history</td>
+<td>Specifies whether or not the approval step should be displayed in
+the attestation history. For example, this behavior can be applied to
+approval steps with the <strong>CD - calculated
+approval</strong> procedure, which are used only for branching in the
+approval workflow. It It makes it easier to follow the attestation
+history.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/attestation-administration-guide/18">https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/attestation-administration-guide/18</a>&gt;</em></p>
+<p>Для того, чтобы сотрудник мог сам себя аттестовать, надо поставить
+галку <strong>Approval by affected employee.</strong></p>
+</blockquote>
+<hr />
+<h1 id="recertifying-existing-users">Recertifying existing users</h1>
+<blockquote>
+<p><strong>IMPORTANT:</strong> Access to connected target systems may possibly be
+denied to One Identity Manager users as a result of recertification.
+You can configure this behavior to meet your company’s requirements.
+Read the following section thoroughly before you use the
+recertification function.</p>
+<p>One Identity Manager provides an attestation policy for performing
+cyclical attestation of existing users allowing companies to regularly
+test and authorize employee master data stored in the One Identity
+Manager database. Cyclical attestation is triggered through a
+scheduled task. This resets the certification status for all employees
+stored in the database. One Identity Manager uses the same procedure
+for this as for attesting new users. The case is referred to as
+recertification.</p>
+<p><strong>Result of recertification</strong></p>
+</blockquote>
+<ul>
+<li>Certified, activated employees who can access all entitlements
+  assigned to them in One Identity Manager and the connected target
+  systems.<br />
+  Company resources are inherited. Account definitions are assigned to
+  internal employees.  </li>
+<li>
+<p>OR -</p>
+</li>
+<li>
+<p>Denied and permanently deactivated employees.<br />
+  Disable employees cannot log in to One Identity Manager tools. Company
+  resources are not inherited. Account definitions are not automatically
+  assigned. User accounts associated with the employee are also locked
+  or deleted. You can customize the behavior to meet your requirements.</p>
+</li>
+</ul>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/attestation-administration-guide/38#TOPIC-1363650">https://support.oneidentity.com/technical-documents/identity-manager/8.1.2/attestation-administration-guide/38#TOPIC-1363650</a>&gt;</em></p>
+<hr />
+<p>Для того, чтобы выявлять определенных сотрудников по условиям
+(сотрудники с определенным индексом риска, например) надо править
+условие в Attestation policy!</p>
+<hr />
+</blockquote>
+<h1 id="-">Не отрабатывает автоудаление сотрудника из бизнес-ролей и групп при отклонении аттестации (ресертификации)</h1>
+<ul>
+<li>
+<p>В QER\Attestation\AutoRemovalScope указать области, откуда будет
+  удаляться сотрудник</p>
+</li>
+<li>
+<p>В Workflow политики надо добавить дополнительный шаг EX с событием
+  AUTOREMOVE</p>
+</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image2.png"
+style="width:11.41667in;height:4.95833in"
+alt="Toolbox Workflow Align layout Approval levels 17 Delete Approval steps Assignments Remove positive Remove negative Remove reroute Remove escalation CCC Member of Business role Person (ZI Approval level - Person) Single step Approual procedure Fallback apprcnrr Description Approual reason Rejectreason General Mail templates Remoue memberships EX- Approuals to be made eRernaIIy AUTOREMOVE Approual by affected employee Do not showin approual history Approval level Manager OF person (CM - Recipient&#39;s manager) Approval level Remove memberships (EX - Approvals to be mad " /></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/attestation-administration-guide/33#TOPIC-1129100">Identity Manager 8.1 - Attestation Administration Guide
+(oneidentity.com)</a></p>
+<hr />
+</blockquote>
+<h1 id="_3"></h1>
+<h1 id="personinorg-">Условие отбора объектов для аттестации PersonInOrg с учетом членства сотрудника в определенной Бизнес-роли и его индекса риска</h1>
+<blockquote>
+<p>(EXISTS (select top 1 1 FROM (SELECT UID_Org FROM Org WHERE UID_Org IN
+('<strong>8f42bafa-2350-4dac-81ac-c7aa117b269f','8e98371f-4d04-4f02-8266-00e1a4ae023f','19590942-9839-480f-8760-18a9aefc5c2b'</strong>))
+x WHERE x.UID_Org = PersonInOrg.UID_Org))AND(EXISTS (select top 1 1
+FROM (SELECT UID_Person FROM Person WHERE <strong>RiskIndexCalculated &gt;= 0
+and RiskIndexCalculated \&lt;= 0.1</strong>) p WHERE p.UID_Person =
+PersonInOrg.UID_Person))</p>
+<hr />
+</blockquote>
+<h1 id="qerattestationautoremovalscoperolemembershipremovedynamicrole">Не удаляется пользователь из динамических Бизнес ролей при включенном параметре QER\Attestation\AutoRemovalScope\RoleMembership\RemoveDynamicRole</h1>
+<blockquote>
+<p>В версии 8.2 должно будет работать, так как там появится возможность
+делать исключения для динамических бизнес ролей.</p>
+<hr />
+</blockquote>
+<h1 id="5">Процесс ресертификации для Х5 (перевод сотрудника в другое подразделение)</h1>
+<blockquote>
+<p>Есть 2 расписания ресертификации - ежедневно (для проверки перевода
+сотрудника с высоким индексом риска в другое подразделение и плановое
+(3 года) для ресертификации сотрудников с высоким индексом риска)</p>
+<p>При изменении подразделения сотрудника в его CustomProperty08
+записывается строка NeedRecert (условие сработки процесса - индекс
+риска &gt; значения определенного и отличие текущего департамента от
+прошлого).</p>
+<p>При создании AttestationCase проверяется CustomProperty08 на значение
+NeedRecert и если оно там записано - создается AttestationCase.</p>
+<p>В PropertyInfo3 AttestationCase записывается UID_Person, чтобы
+определить в его в шаге зачистки кастомных параметров</p>
+<p>В Workflow на последнем шаге затирается CustomProperty08 сотрудника,
+чтобы аттестация не возникала снова на следующий день.</p>
+<hr />
+</blockquote>
+<h1 id="5_1">Процесс ресертификации для Х5 (изменение руководителя сотрудника)</h1>
+<blockquote>
+<p>Так как при изменении руководителя сотрудника с высоким индексом риска
+нужно проводить согласование с предыдущим руководителем, то при
+изменении руководителя UID прошлого руководителя записывается в
+CustomProperty09.</p>
+<p>При создании AttestationCase проверяется CustomProperty09 на не пустое
+значение и если оно там записано - создается AttestationCase.</p>
+<p>В AttestationCase CustomProperty09 сохраняется в Property4 template
+для того, чтобы в Workflow в шаге выяснения был ли предыдущий
+руководитель делать проверку на заполненность поля (NOT
+isnull(PropertyInfo4, N'') = N'') и после этого отправлять на
+согласование предыдущему руководителю.</p>
+<p>В PropertyInfo3 AttestationCase записывается UID_Person, чтобы
+определить в его в шаге зачистки кастомных параметров</p>
+<p>В Workflow на последнем шаге затирается CustomProperty09 сотрудника,
+чтобы аттестация не возникала снова на следующий день.</p>
+<p><span class="mark">Событие Autoremove для AttestationCase - чтобы
+удалить членство в Бизнес ролях!</span></p>
+<hr />
+</blockquote>
+<h1 id="attestation-by-mail">Attestation by mail</h1>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1.1/attestation-administration-guide/34#TOPIC-1245537">https://support.oneidentity.com/technical-documents/identity-manager/8.1.1/attestation-administration-guide/34#TOPIC-1245537</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="_4">Информирование о необходимости аттестовать</h1>
+<blockquote>
+<p>Настройки в QER\Attestation\MailApproval</p>
+<p>Надо включить
+QER\Attestation\MailTemplateIdents\RequestApproverByCollection для
+того, чтобы приходило одно письмо, а не несколько</p>
+<p>Запуск расписания Inform approver about pending attestations для
+отправки писем</p>
+<hr />
+</blockquote>
+<h1 id="attestation-cases">Условие отбора Attestation cases по дате устройства сотрудника</h1>
+<blockquote>
+<p>Выводятся PersonInOrg (членства в бизнес ролях), которые работают
+3,6,9 … лет для ресертификации</p>
+<p>select centralaccount, EntryDate, DateDiff(yy, EntryDate,
+GetUTCDate()) as DateDif from Person where DateDiff(dd, EntryDate,
+GetUTCDate()) % 1095 = 0 and DateDiff(yyyy, EntryDate, GetUTCDate())
+\&lt;&gt; 0</p>
+<p><em>Условие WHERE для Attestation Policy</em></p>
+<p>(EXISTS (select top 1 1 FROM (SELECT UID_Person FROM Person WHERE
+RiskIndexCalculated &gt;= 0.5 and RiskIndexCalculated \&lt;= 1 and
+DateDiff(dd, EntryDate, GetUTCDate()) % 1095 = 0 and DateDiff(yyyy,
+EntryDate, GetUTCDate()) \&lt;&gt; 0 and isInActive = '0') p WHERE
+p.UID_Person = PersonInOrg.UID_Person))</p>
+<p>По расписанию - запускать каждый день.</p>
+<p>Вывод членства UNSAccount в UNSGroup (ADSAcoountInADSGroup,
+UNSAccountBInUNSGroupB …)</p>
+<p><em>Условие WHERE для Attestation Policy</em></p>
+<p>(</p>
+<p>UID_UNSAccount IN (</p>
+<p>SELECT</p>
+<p>UID_UNSAccount</p>
+<p>FROM</p>
+<p>UNSAccount</p>
+<p>WHERE</p>
+<p>UID_Person IN (</p>
+<p>SELECT</p>
+<p>UID_Person</p>
+<p>FROM</p>
+<p>Person</p>
+<p>WHERE</p>
+<p>RiskIndexCalculated &gt;= 0.5</p>
+<p>AND RiskIndexCalculated \&lt;= 1</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<p><em>Доп (с учетом тех, кто устроился 3,6,9 … лет от текущей даты)</em></p>
+<p>(</p>
+<p>UID_UNSAccount IN (</p>
+<p>SELECT</p>
+<p>UID_UNSAccount</p>
+<p>FROM</p>
+<p>UNSAccount</p>
+<p>WHERE</p>
+<p>UID_Person IN (</p>
+<p>SELECT</p>
+<p>UID_Person</p>
+<p>FROM</p>
+<p>Person</p>
+<p>WHERE</p>
+<p>RiskIndexCalculated &gt;= 0.5</p>
+<p>AND RiskIndexCalculated \&lt;= 1</p>
+<p>AND DateDiff(dd, EntryDate, GetUTCDate()) % 1097 = 0</p>
+<p>AND DateDiff(yyyy, EntryDate, GetUTCDate()) \&lt;&gt; 0</p>
+<p>AND isInActive = '0'</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<hr />
+<p>С учетом исключений</p>
+<p>(</p>
+<p>UID_UNSAccount IN (</p>
+<p>SELECT</p>
+<p>UID_UNSAccount</p>
+<p>FROM</p>
+<p>UNSAccount</p>
+<p>WHERE</p>
+<p>UID_Person IN (</p>
+<p>SELECT</p>
+<p>UID_Person</p>
+<p>FROM</p>
+<p>Person</p>
+<p>WHERE</p>
+<p>(</p>
+<p>RiskIndexCalculated &gt;= 0.2</p>
+<p>AND RiskIndexCalculated \&lt;= 0.69</p>
+<p>AND DateDiff(dd, EntryDate, GetUTCDate()) % 1097 = 0</p>
+<p>AND DateDiff(yyyy, EntryDate, GetUTCDate()) \&lt;&gt; 0</p>
+<p>AND isInActive = '0'</p>
+<p>)</p>
+<p>OR (</p>
+<p>RiskIndexCalculated &gt;= 0.7</p>
+<p>AND isInActive = '0'</p>
+<p>)</p>
+<p>)</p>
+<p>AND UID_UNSAccount NOT IN (</p>
+<p>SELECT</p>
+<p>UID_ADSAccount</p>
+<p>FROM</p>
+<p>ADSAccount</p>
+<p>WHERE</p>
+<p>CCC_msExchExtAttr27 = 'CEO -1'</p>
+<p>OR CCC_msExchExtAttr27 = 'CEO -2'</p>
+<p>OR SAMAccountName = 'User040-3'</p>
+<p>OR Department LIKE N'Наблюдательный совет'</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<hr />
+<p>С учетом новых случаев и кол-во дней (100) от ресертификации</p>
+<p>(</p>
+<p>UID_UNSAccount IN (</p>
+<p>SELECT</p>
+<p>UID_UNSAccount</p>
+<p>FROM</p>
+<p>UNSAccount</p>
+<p>WHERE</p>
+<p>UID_Person IN (</p>
+<p>SELECT</p>
+<p>UID_Person</p>
+<p>FROM</p>
+<p>Person</p>
+<p>WHERE</p>
+<p>(</p>
+<p>--DefaultEmailAddress is not null</p>
+<p>isInActive = '0'</p>
+<p>)</p>
+<p>OR (</p>
+<p>RiskIndexCalculated &gt;= 0.7</p>
+<p>AND isInActive = '0'</p>
+<p>)</p>
+<p>)</p>
+<p>AND UID_UNSAccount NOT IN (</p>
+<p>SELECT</p>
+<p>UID_ADSAccount</p>
+<p>FROM</p>
+<p>ADSAccount</p>
+<p>WHERE</p>
+<p>CCC_msExchExtAttr27 = 'CEO -1'</p>
+<p>OR CCC_msExchExtAttr27 = 'CEO -2'</p>
+<p>OR SAMAccountName = 'User040-3'</p>
+<p>OR Department LIKE N'Наблюдательный совет'</p>
+<p>OR Mail is null</p>
+<p>)</p>
+<p>AND UID_UNSAccount IN (</p>
+<p>SELECT</p>
+<p>UID_ADSAccount</p>
+<p>FROM</p>
+<p>ADSAccount</p>
+<p>WHERE</p>
+<p>UID_DPRNameSpace = 'ADS-DPRNameSpace-ADS'</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<p>AND(</p>
+<p>not EXISTS (</p>
+<p>SELECT</p>
+<p>top 1 1</p>
+<p>FROM</p>
+<p>AttestationCase</p>
+<p>WHERE</p>
+<p>ObjectKeyBase = UNSAccountInUNSGroup.XObjectKey</p>
+<p>AND UID_AttestationRun IN (</p>
+<p>SELECT</p>
+<p>UID_AttestationRun</p>
+<p>FROM</p>
+<p>AttestationRun</p>
+<p>WHERE</p>
+<p>UID_AttestationPolicy = '\$UID_AttestationPolicy\$'</p>
+<p>AND DateDiff(dd, PolicyProcessed, GetUTCDate()) \&lt; 100</p>
+<p>--AND DateDiff(dd, PolicyProcessed, GetUTCDate()) % 1097 = 0</p>
+<p>-- AND DateDiff(dd, PolicyProcessed, GetUTCDate()) \&lt;&gt; 0</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<hr />
+<p>С учетом новых случаев, старше определенного года</p>
+<p>(</p>
+<p>UID_UNSAccount IN (</p>
+<p>SELECT</p>
+<p>UID_UNSAccount</p>
+<p>FROM</p>
+<p>UNSAccount</p>
+<p>WHERE</p>
+<p>UID_Person IN (</p>
+<p>SELECT</p>
+<p>UID_Person</p>
+<p>FROM</p>
+<p>Person</p>
+<p>WHERE</p>
+<p>(</p>
+<p>--DefaultEmailAddress is not null</p>
+<p>isInActive = '0'</p>
+<p>)</p>
+<p>OR (</p>
+<p>RiskIndexCalculated &gt;= 0.7</p>
+<p>AND isInActive = '0'</p>
+<p>)</p>
+<p>)</p>
+<p>AND UID_UNSAccount NOT IN (</p>
+<p>SELECT</p>
+<p>UID_ADSAccount</p>
+<p>FROM</p>
+<p>ADSAccount</p>
+<p>WHERE</p>
+<p>CCC_msExchExtAttr27 = 'CEO -1'</p>
+<p>OR CCC_msExchExtAttr27 = 'CEO -2'</p>
+<p>OR SAMAccountName = 'User040-3'</p>
+<p>OR Department LIKE N'Наблюдательный совет'</p>
+<p>OR Mail is null</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<p>AND(</p>
+<p>Not EXISTS (</p>
+<p>SELECT</p>
+<p>top 1 1</p>
+<p>FROM</p>
+<p>AttestationCase</p>
+<p>WHERE</p>
+<p>ObjectKeyBase = UNSAccountInUNSGroup.XObjectKey</p>
+<p>AND UID_AttestationRun IN (</p>
+<p>SELECT</p>
+<p>UID_AttestationRun</p>
+<p>FROM</p>
+<p>AttestationRun</p>
+<p>WHERE</p>
+<p>UID_AttestationPolicy = '\$UID_AttestationPolicy\$'</p>
+<p><span class="mark">AND DateDiff(dd, PolicyProcessed, GetUTCDate()) \&lt;=
+1097</span></p>
+<p>--AND DateDiff(dd, PolicyProcessed, GetUTCDate()) % 1097 = 0</p>
+<p>-- AND DateDiff(dd, PolicyProcessed, GetUTCDate()) \&lt;&gt; 0</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<p>AND(</p>
+<p><span class="mark">DateDiff(yy, XDateInserted, GetUTCDate()) &gt;
+1</span></p>
+<p>)</p>
+<hr />
+</blockquote>
+<h1 id="_5">Рабочая версия?</h1>
+<blockquote>
+<p>(</p>
+<p>UID_UNSAccount IN (</p>
+<p>SELECT</p>
+<p>UID_UNSAccount</p>
+<p>FROM</p>
+<p>UNSAccount</p>
+<p>WHERE</p>
+<p>UID_Person IN (</p>
+<p>SELECT</p>
+<p>UID_Person</p>
+<p>FROM</p>
+<p>Person p</p>
+<p>WHERE</p>
+<p>UID_Department NOT IN (</p>
+<p>SELECT</p>
+<p>UID_Department</p>
+<p>FROM</p>
+<p>Department</p>
+<p>WHERE</p>
+<p>DepartmentName = N'Supply Chain' -- Наблюдательный совет</p>
+<p>)</p>
+<p>AND (</p>
+<p>--DefaultEmailAddress is not null</p>
+<p>isInActive = '0'</p>
+<p>AND p.CentralAccount = 'User040'</p>
+<p>)</p>
+<p>OR (</p>
+<p>RiskIndexCalculated &gt;= 0.7</p>
+<p>AND isInActive = '0'</p>
+<p>)</p>
+<p>)</p>
+<p>AND UID_UNSAccount NOT IN (</p>
+<p>SELECT</p>
+<p>UID_ADSAccount</p>
+<p>FROM</p>
+<p>ADSAccount</p>
+<p>WHERE</p>
+<p>CCC_msExchExtAttr27 = 'CEO -1'</p>
+<p>OR CCC_msExchExtAttr27 = 'CEO -2'</p>
+<p>OR SAMAccountName = 'User040-3'</p>
+<p>OR Department LIKE N'Наблюдательный совет'</p>
+<p>-- OR Mail IS NULL</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<p>AND(</p>
+<p>NOT EXISTS (</p>
+<p>SELECT</p>
+<p>top 1 1</p>
+<p>FROM</p>
+<p>AttestationCase</p>
+<p>WHERE</p>
+<p>ObjectKeyBase = UNSAccountInUNSGroup.XObjectKey</p>
+<p>AND UID_AttestationRun IN (</p>
+<p>SELECT</p>
+<p>UID_AttestationRun</p>
+<p>FROM</p>
+<p>AttestationRun</p>
+<p>WHERE</p>
+<p>UID_AttestationPolicy = '\$UID_AttestationPolicy\$'</p>
+<p>AND DateDiff(dd, PolicyProcessed, GetUTCDate()) \&lt;= 2 --AND
+DateDiff(dd, PolicyProcessed, GetUTCDate()) % 1097 = 0</p>
+<p>-- AND DateDiff(dd, PolicyProcessed, GetUTCDate()) \&lt;&gt; 0</p>
+<p>)</p>
+<p>)</p>
+<p>)</p>
+<p>--AND(DateDiff(yy, XDateInserted, GetUTCDate()) &gt; 1)</p>
+<hr />
+<hr />
+</blockquote>
+<h1 id="riskindex_1">Убрать колонку RiskIndex на портале при согласовании аттестации</h1>
+<ul>
+<li>
+<p>Конфигурационный параметр Display columns of table "Attestation case"</p>
+</li>
+<li>
+<p>В компоненте VI_Attestation_EditCases_Default убрать RiskIndex</p>
+</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image3.png"
+style="width:3.79167in;height:5.27083in"
+alt="Attestation EditC Configuration Compilationsettingsl Attestation VI Attestation AllowSeIect411 Elfi Container Grid band: AttestationCase ERended properties Database access options Row definitions DisplayName StructureDispIayIHeIper StructureDispIay2HeIper StructureDispIay3HeIper AttestationStateDispIay IsNot4pproued8eforeProxy TosolueTill VI Common DecisionControI " /></p>
+<hr />
+<p>В модуле VI_Attestation удалить как расширение RiskIndex колонку</p>
+<p><img src="../media/4. Attestation (Recertification)/media/image4.png"
+style="width:3.88542in;height:6.78125in"
+alt="Attestatio Configuration Collections Local components Functions Euents Select8aseObjectForm SelectPoIicyForm ApprouaIs_DetaiI Elfi Containers Elfi Container6 Head Container27 All AttestationCase_PreuiewAutoRemoue Grid band: AttestationCase ERended properties Row definitions Column41 DisplayName LlID_AttestationPoIicy TosolueTill Risklnde " /></p>
+<p>В компоненте VI_Attestation_AttestationCase_ViewMultiplyPolicy</p>
+<p><img src="../media/4. Attestation (Recertification)/media/image5.png"
+style="width:3.54167in;height:5.09375in"
+alt="Vl_Attestation_AttestationCase_ViewMuItipIePoIicy Configuration Definition Initializer Control list Gridl Grid band: AttestationCase Extended properties Database access options List view GridFiItersI RN/ definitions DisplayName UID_AttestationPoIicy AttestationStateDispIay IsNotApproved8eforeProxy TOSOlveTill • Risklndex Tablesl Controlsl Functions I DataEventHandIersI B—• Componentlnteffacel " /></p>
+<hr />
+</blockquote>
+<h1 id="product">Добавить колонку Product для отображения в кейсах аттестации</h1>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image6.png"
+style="width:14.9375in;height:4.52083in"
+alt="" /></p>
+</blockquote>
+<ul>
+<li>В Manager зайти в Attestation, Attestation Procedures и в нужной
+  процедуре Grouping Column (template)
+  =\$FK(UID_UNSGroup).FK(UID_AccProduct).Ident_AccProduct\$</li>
+</ul>
+<blockquote>
+<p>Grouping Column = Product</p>
+</blockquote>
+<ul>
+<li>В WebDesigner сделать копию компонента
+  VI_Attestation_AttestationCase_ViewMultiplyPolicy и добавить колонку
+  дополнительную</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image7.png"
+style="width:5.71875in;height:5.52083in"
+alt="CCC_Attestation_AttestationCase_ViewMuItipIePoIicy Configuration Definition Initializer Control list Gridl Grid band: AttestationCase Extended properties Database access options List view ControlList2 Title Actions Content GridFiItersI Row definitions DisplayName StructureOispIa}I [E]uu Header cell A Product Ce112 A from AttestationCase select current DisplayVaIue(StructureDispIayI) UID_AttestationPoIicy AttestationStateDispIay IsNotApproved8eforeProxy " /></p>
+</blockquote>
+<h1 id="_6">Изменения в модулях аттестации</h1>
+<p>VI_Attestation</p>
+<ul>
+<li>Удаление в кастомной конфигурации Column22 - RiskIndex</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image8.png"
+style="width:3.32292in;height:6.78125in"
+alt="Title8ar ControlListIO TextO - following a Select8aseObjectForm SelectPoIicyForm Approvals_DetaiI Initializer Title Main Containers Container6 - Head Container27 Grid2 Grid band: AttestationCase Extended properties List view ControlList2 Actions Content GridFilters2 Row definitions Column41 DisplayName UID_AttestationPoIicy TOSOlveTill Column46 " /></p>
+</blockquote>
+<ul>
+<li>Удаление ContainerColumnTemplate2</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image9.png"
+style="width:4.53125in;height:6.5in"
+alt="Select8aseObjectForm SelectPoIicyForm Approvals_DetaiI Initializer Title Main Containers Container6 - Head Container27 Grid2 Grid band: AttestationCase Extended properties List view ControlList2 Actions Content Control list LayoutPaneII ContainerCoIumnTempIatQ ColumnList5 ExpressionCoIumnListI Risklndex Container36 - Title column for norn Container35 - Value column for nol ContainerCoIumnTempIateI " /></p>
+</blockquote>
+<ul>
+<li>Добавлен редирект на Form2 - вместо того, чтобы сначала отображать
+  типы объектов ресертификации</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image10.png"
+style="width:4.0625in;height:7.42708in"
+alt="Forms Form Initializer Load collection: Attestationpolicy Action15 Actions - Load by or UID_At Action20 - only one attestationpolicy given? ActionlO - Load by additional where clause Action21 Title Main Container I - No decisions made Container2 - No decisions made Container3 Activator I Action Load collection: DialogTabIeCandidate Database access options cccædirectl Added in: VI Attestation Node editor CCCRedirectI (Redirection) Redirection target Sorting z; Grouping Go to a form in this module Form2 Cancel action here Do not link back to this form No link to the menu Item linked with th " /></p>
+</blockquote>
+<h1 id="_7"></h1>
+<p>CCC_Attestation_AttestationCaseViewMultiplePolicy</p>
+<ul>
+<li>
+<p>Удалена колонка RiskIndex (Column1)</p>
+</li>
+<li>
+<p>Добавлена виртуальная функция DenySelectAllValue() в
+  ComponentInterface1</p>
+</li>
+<li>
+<p>В VI_Common_DecisionControl - DenySelectAll() = DenySelectAllValue()
+  (значение которого передается из компонента
+  CCC_Attestation_AttestationCase)</p>
+</li>
+</ul>
+<blockquote></blockquote>
+<p>CCC_Attestation_AttestationCase</p>
+<ul>
+<li>Удален Case1, Case2</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image11.png"
+style="width:4.17708in;height:2.3125in"
+alt="Switch I -q Casel -All cases in a single grid OptionalAttestationCaseFiIterO - sqland( AttestationCa: IsReadonlyo - IsReadonlyo NoltemsText0 - NoltemsText0 Case3 -No items found Case4 - One grid per product " /></p>
+</blockquote>
+<ul>
+<li>
+<p>Case2 скопирован в Case4</p>
+</li>
+<li>
+<p>В Case4 удален Tab Page (Iteration) - AttestationPolicy</p>
+</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image12.png"
+style="width:3.3125in;height:1.1875in"
+alt="Case4 - One grid per product ControlList2 Tab page (iterationl: Attestationpolicy Tab page (iteration): ProductCategory " /></p>
+</blockquote>
+<h1 id="_8"></h1>
+<ul>
+<li>Добавлен Tab Page (Iteration) - ProductCategory</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image13.png"
+style="width:13.21875in;height:2.66667in"
+alt="ControlList2 page era 10 es Ion o Icy Tab page (iterationl: ProductCategory Tab page A from ProductCategory select current FullPath Content Container (iteration): AttestationObject OptionalAttestationCaseFiIterO - sqland( AttestationCaseDbWhereCIauseO, formattuid_attestationpolicy in (select uid_attestationpolicy from attestationpolicy where {ODE, isnuIIorempty(AttestationPoIicyD... IsReadonlyo - IsReadonlyo DenySeIectAIIVaIueO - if (select countd from AttestationCase where Propertylnfol = (select current UID_AccProductGroup from ProductCategoryJJ &gt; 2 then true else false " /></p>
+</blockquote>
+<h1 id="_9"></h1>
+<ul>
+<li>
+<p>Добавлена таблица ProductCategory (на основе AccProductGroup)</p>
+</li>
+<li>
+<p>Загрузка категорий происходит</p>
+</li>
+</ul>
+<blockquote>
+<p><img src="../media/4. Attestation (Recertification)/media/image14.png"
+style="width:9.91667in;height:8.07292in"
+alt="CCC_Attestation_AttestationCase Configuration [30 Definition Initializer Container Activator I Action Load collection: Attestationpolicy Load collection: ProductCategor} Switch I Node editor Load collection: ProductCategory (Load collection) Show extension values Gene ral settings Type • Collection Database table WHERE clause Sorting Maximum number of objects to load Advanced Settings Control ID Sorting z; Grouping Load database objects ProductCategory U s ing database table defined on the &quot;U ID AzeProduetGroup in like &#39; ADS*&#39; ) &quot; ) I (No ass ) I (No ass ) LoadTabIeI Load new objects &#39;select AttestationCase &#39; Remove nonexistent objects from the collection Reload existing objects " /></p>
+</blockquote>
+<h1 id="_10"></h1>
+<h1 id="_11"></h1>
+<h1 id="workflow-ad">Workflow согласования - учет контейнера AD и предыдущего менеджера</h1>
+<ul>
+<li>В Manager зайти в Attestation, Attestation Procedures и в нужной
+  процедуре Property3 (template) =
+  \$FK(UID_UNSAccount).FK(UID_UNSContainer).cn\$</li>
+</ul>
+<blockquote>
+<p>Property3 = CN ADS_Container</p>
+<p>Property4 (template) =
+\$FK(UID_UNSAccount).FK(UID_Person).CustomProperty09\$</p>
+<p>Property4 = Previous Manager</p>
+</blockquote>
+<h1 id="_12">Вид на портале</h1>
+<blockquote>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/30926/pending-attestation-page-shows-two-options-how-to-get-rid-of-it">Pending attestation Page shows two options. How to get rid of it? -
+Forum - Identity Manager Community - One Identity
+Community</a></p>
+<hr />
+</blockquote>
+<h1 id="approval-policy-attestation-policy">Не удается указать кастомную Approval Policy для Attestation Policy</h1>
+<blockquote>
+<p>Нужно временно у Approval Policy указать Approval Workflow одной из
+Approval Policy, которую можно назначить</p>
+<p>Затем, в Attestation Procedures назначить (Assign Approval Policy)
+кастомную Approval Policy (которая должна отобразиться)</p>
+<p>Обратно вернуть кастомный Approval Workflow для кастомной Approval
+Policy.</p>
+<p><em>But you can create a custom approval procedure and copy the query
+from the approval procedure "OR" to your custom approval procedure and
+assign the necessary tables. Than use your custom approval procedure
+in your workflow.</em></p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/5040/unable-to-view-the-custom-approval-policy-created-for-attestation-at-attestation-procedure-level">https://www.oneidentity.com/community/identity-manager/f/forum/5040/unable-to-view-the-custom-approval-policy-created-for-attestation-at-attestation-procedure-level</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="-approval-procedure">Расчет согласования предыдущего руководителя - Approval procedure</h1>
+<blockquote>
+<p>select pers.CustomProperty09 as UID_Person
+,dbo.QER_FGIPWORulerOrigin(p.XObjectKey) as UID_PWORulerOrigin</p>
+<p>from AttestationCase ac join ADSAccountInADSGroup p on
+ac.ObjectKeyBase = p.XObjectKey join ADSAccount adsa on
+p.UID_ADSAccount = adsa.UID_ADSAccount join Person pers on
+adsa.UID_Person = pers.UID_Person</p>
+<p>where ac.UID_AttestationCase = @UID_AttestationCase</p>
+<hr />
+<p><strong>!На основе истории TimeTrace</strong></p>
+<p>SELECT</p>
+<p>top 1 wprop.ContentShort AS UID_Person,</p>
+<p>dbo.QER_FGIPWORulerOrigin(p.XObjectKey) AS UID_PWORulerOrigin</p>
+<p>FROM</p>
+<p>attestationCase ac</p>
+<p>JOIN UNSAccountInUNSGroup p ON ac.ObjectKeyBase = p.XObjectKey</p>
+<p>JOIN Person pers ON pers.UID_Person = ac.PropertyInfo2</p>
+<p>JOIN DialogWatchOperation wop ON SUBSTRING(wop.ObjectKeyOfRow, 22, 36)
+= pers.UID_Person</p>
+<p>JOIN DialogWatchProperty wprop ON wprop.UID_DialogWatchOperation =
+wop.UID_DialogWatchOperation</p>
+<p>WHERE</p>
+<p>ac.UID_AttestationCase = @UID_AttestationCase</p>
+<p>AND wprop.UID_DialogColumn = 'QER-76BFB981AA5F4D69BE4E9014D1605E56'</p>
+<p>AND wop.OperationType = 'U'</p>
+<p>ORDER BY</p>
+<p>wop.OperationDate DESC</p>
+<p>//</p>
+<p>.UID_DialogColumn = 'QER-76BFB981AA5F4D69BE4E9014D1605E56' - это по
+изменению колонки UID_PersonHead (руководитель)</p>
+<p>OperationType = 'U' - это Update</p>
+<p>SUBSTRING(wop.ObjectKeyOfRow, 22, 36) - откусить UID_Person</p>
+<p>wop.OperationDate DESC - сначала свежие записи - последний
+руководитель</p>
+<p><strong>----</strong></p>
+</blockquote>
+<h1 id="attestationcase">Не вызываются события на таблице AttestationCase</h1>
+<blockquote>
+<p>Причина в том, что не хватает прав на вызов событий.</p>
+<p>Можно из Workflow генерировать кастомное событие, которое будет
+подхватываться процессом на таблице AttestationCase, как вариант.</p>
+<hr />
+</blockquote>
+<h1 id="_13">Форма на портале</h1>
+<blockquote>
+<p><strong>CCC_Attestation</strong></p>
+<p>Form4 - для отображения категорий продуктов</p>
+<p>Form5 - для отфильтрованных по категориям продуктов AttestationCases</p>
+<hr />
+</blockquote>
+<h1 id="attestationcases">Запуск AttestationCases</h1>
+<blockquote>
+<p>I would create a script that creates the attestation cases for your
+attestation policy. The script can use a method available at
+enabled <em>AttestationPolicy </em>objects that allow you to specify the
+object keys you want to attest.</p>
+<p>You can check the available methods in the object properties windows,
+tab called <em>Methods. </em>The method for your case would
+be <em>CreateAttestations(String[] objectKeys) </em>which takes an string
+array of object keys you want to attest using the current attestation
+policy. It returns an array of <em>DBObjectKey</em> objects.</p>
+<p><img src="../media/4. Attestation (Recertification)/media/image15.png"
+style="width:3.54167in;height:5in" /></p>
+<p>So you just need to call the script using the SOAP / REST API.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/26271/trigger-attestation-for-selected-objects-using-soap-service-call">https://www.oneidentity.com/community/identity-manager/f/forum/26271/trigger-attestation-for-selected-objects-using-soap-service-call</a>&gt;</em></p>
+<hr />
+<p>Или из скрипта</p>
+<p>Public Function CCC_AttestationPolicy_CreateForSingleObject(ByVal uidAttestationPolicy As String, ByVal objectkey As String) As String</p>
+<p>Try</p>
+<p>Dim policy As ISingleDbObject =
+Connection.CreateSingle("AttestationPolicy", uidAttestationPolicy)</p>
+<p>Dim objectKeyAttestationCase As String =
+policy.Custom.CallMethod("CreateAttestation", objectkey).ToString</p>
+<p>Return objectKeyAttestationCase</p>
+<p>Catch ex As Exception</p>
+<p>Return String.Empty</p>
+<p>End Try</p>
+<p>End Function</p>
+<p>Here uidAttestationPolicy is the policy you want to trigger and
+objectkey is pointing to the record you want policy to be triggered
+against.</p>
+<p>Hope it helps.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/26271/trigger-attestation-for-selected-objects-using-soap-service-call">https://www.oneidentity.com/community/identity-manager/f/forum/26271/trigger-attestation-for-selected-objects-using-soap-service-call</a>&gt;</em></p>
+<hr />
+</blockquote>
+<h1 id="createattestations">Вызов метода CreateAttestations из скрипта</h1>
+<blockquote>
+<p>Public Function CCC_AttestationPolicy_CreateForSingleObject(ByVal
+uidAttestationPolicy As String, ByVal objectkey As String) As String</p>
+<p>Dim dbAttestationPolicy As IEntity</p>
+<p>Dim arrObjectkey() As String = {objectkey}</p>
+<p>dbAttestationPolicy = Session.Source.Get("AttestationPolicy",
+uidAttestationPolicy)</p>
+<p>dbAttestationPolicy.CallMethod("CreateAttestations", arrObjectkey)</p>
+<p>dbAttestationPolicy.Save(Session)</p>
+<p>Return "OK"</p>
+<p>End Function</p>
+<hr />
+</blockquote>
+<h1 id="_14">При отказе от доступа обычным пользователем при ресертификации выходит ошибка на портале</h1>
+<blockquote>
+<p>Error executing script
+'VI_AttestationCase_GetRemoveMembershipActions'.</p>
+<p>Could not create single object for table ADSAccountInADSGroup.</p>
+<p>Object of type Учетные записи пользователей Active Directory:
+назначения групп does not exist in database or you do not have the
+relevant viewing permissions.</p>
+<p>(2022-06-17 16:34:08)</p>
+<p>Проблема связана с тем, что в процессе согласования (Workflow) есть
+шаг с вызовом события AUTOREMOVE.</p>
+<p>На портале при присутствии этого шага запускается скрипт проверки,
+чтобы высветить сообщение о возможном удалении из групп. Этот скрипт
+дает сбой. Это баг, есть лечение - <a href="https://support.oneidentity.com/identity-manager/kb/299351/error-executing-autoremove-actions-with-script-vi_attestationcase_getremovemembershipactions">Error executing AutoRemove Actions
+with script VI_AttestationCase_GetRemoveMembershipActions (299351)
+(oneidentity.com)</a></p>
+<p>Проблему можно обойти, если сделать вызов кастомного события и по нему
+запуск процесса с копией шага, который удаляет членство (для таблицы
+AttestationCase).</p>
+<hr />
+</blockquote>
+<h1 id="approveall-denyall">Не корректно отображаются кнопки Утвердить все, Отказать все (ApproveAll, DenyAll)</h1>
+<blockquote>
+<p>Причина в том, что не корректно передается параметр DenySelectAll()
+для компонента VI_Common_DecisionControl</p>
+<p>Я создал копию VI_Common_DecisionControl и в нем создал ещё один
+ComponentInterface DenySelectAllValue().</p>
+<p>Значения передавал в него.</p>
+<p>В условиях отображения кнопок учитывал значение DenySelectAllValue().</p>
+<p><img src="../media/4. Attestation (Recertification)/media/image16.png"
+style="width:3.96875in;height:5.08333in"
+alt="CCC_Common_DecisionControI Configuration [30 Definition Initializer Column group GridCoIumnI Extended properties Header cell Footer cell Containers c; Container2 - Approve Container3 - Deny all Node editor Container2 (Container) Gene ral settings Viewing condition Identfier (optional) Sorting z; Grouping Extended properties Approve all " /></p>
+<hr />
+</blockquote>
+<h1 id="-_1">Адрес на портале - список аттестаций</h1>
+<blockquote>
+<p><a href="https://rumskapp314.open.ru/IdentityMgr/page.axd?MenuID=ATT_Attestation_MyAttestations&amp;ContextID=ATT_Attestation_MyAttestations">https://rumskapp314.open.ru/IdentityMgr/page.axd?MenuID=ATT_Attestation_MyAttestations&amp;ContextID=ATT_Attestation_MyAttestations</a></p>
+<hr />
+</blockquote>
+<h1 id="_15">Отправка письма о завершении ресертификации</h1>
+<blockquote>
+<p>Проблема была в том, что нужно отправлять одно письмо по нескольким
+AttestationCases.</p>
+<p>Если делать просто в конце процесса согласования отправку письма, то
+будет отправлено столько писем, сколько случаев аттестаций.</p>
+<p>Решение:</p>
+<p>Сначала идет рандомная задержка в пределах 10 сек, через скрипт
+(элемент процесса выдает одинаковое значение задержки)</p>
+<p>Потом AttCase закрывается с позитивным результатом.</p>
+<p>Потом идет скрипт проверки -</p>
+<p>Если остались открытые AttCases для этого AttRun - то возвращается
+False и письмо не отправляется.</p>
+<p>Если открытых AttCases не осталось - идет проверка.</p>
+<p>Получаем дату и время самого старого AttCase и сравниваем эту дату с
+датой текущего AttCase, который обрабатывается.</p>
+<p>Если даты совпадают - значит AttCase самый старый и отправляем письмо.</p>
+<p><img src="../media/4. Attestation (Recertification)/media/image17.png"
+style="width:2.28125in;height:5.70833in"
+alt="CCC AttestationCase hform Delay process Script Make Positive Decision step the pr=ess - finalize change in the IOM dataE:eE Check exists opened Att Cases ma Send Mail adding person Email informing adding apprÜGl step approval " /></p>
+<p>Скрипт задержки (Delay process - Script)</p>
+<p>Public Sub CCC_Recertification_Delay</p>
+<p>Dim Random As Integer = CInt(Int((10000 * Rnd())))</p>
+<p>Threading.Thread.Sleep(Random)</p>
+<p>'MsgBox(Random)</p>
+<p>End Sub</p>
+<p>--</p>
+<p>Make Positive Decision - стандартный</p>
+<p>--</p>
+<p>Check exists opened Att Cases via Script</p>
+<p>Public Function CCC_RecertCheckLastAttCase (ByVal UidAttCase As
+String, ByVal UidRecertPerson As String, ByVal AttRun As String) As
+Boolean</p>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+<p>Dim ClosedAttestationCases As IEntityCollection</p>
+<p>Dim DateHead As String</p>
+<p>Dim DatesClosedAtt As New List(Of String)</p>
+<p>Dim dtHead As String = ""</p>
+<p>Dim LastDateHead As String</p>
+<p>Dim CountOpenAttCases As Integer = 0</p>
+<p>Dim Random As Integer = CInt(Int((10000 * Rnd())))</p>
+<p>Threading.Thread.Sleep(Random)</p>
+<p>Dim qCountOpenAttCases = Query.From("AttestationCase") _</p>
+<p>.Where(Function (c) c.Column("PropertyInfo2") = UidRecertPerson And
+c.Column("UID_AttestationRun") = AttRun And c.Column("IsClosed") =
+"False") _</p>
+<p>.SelectCount()</p>
+<p>CountOpenAttCases = Session.Source.GetCount(qCountOpenAttCases)</p>
+<p>If CountOpenAttCases &gt; 0 Then</p>
+<p>Return False</p>
+<p>End If</p>
+<p>Dim qClosedAttestationCases = Query.From("AttestationCase") _</p>
+<p>.Where(Function (c) c.Column("PropertyInfo2") = UidRecertPerson And
+c.Column("UID_AttestationRun") = AttRun And c.Column("IsClosed") =
+"True") _</p>
+<p>.OrderBy("DateHead") _</p>
+<p>.SelectAll()</p>
+<p>ClosedAttestationCases =
+Session.Source.GetCollection(qClosedAttestationCases)</p>
+<p>For Each colElement As IEntity In ClosedAttestationCases</p>
+<p>DateHead = colElement.GetValue("DateHead").ToString()</p>
+<p>DatesClosedAtt.Add(DateHead)</p>
+<p>Next</p>
+<p>Dim WhereClause As String = f.UidComparison("UID_AttestationCase",
+UidAttCase)</p>
+<p>Session.Source().TryGetSingleValue(Of
+String)("AttestationCase","DateHead",WhereClause,dtHead)</p>
+<p>LastDateHead = DatesClosedAtt(DatesClosedAtt.Count - 1).ToString()</p>
+<p>If LastDateHead = dtHead Then</p>
+<p>Return True</p>
+<p>Else</p>
+<p>Return False</p>
+<p>End If</p>
+<p>End Function</p>
+<hr />
+<p>Send mail - стандартный</p>
+<hr />
+<p>Для Delay process - Script, Make Positive decision, Check Exists
+установлен флаг DBQueue does not wait</p>
+<p><img src="../media/4. Attestation (Recertification)/media/image18.png"
+style="width:1.92708in;height:1.1875in"
+alt=": : an 一 030 一 一 1-40 一 -5 一 no 之 囗 “ ; 一 u0 ON 囗 " /></p>
+<hr />
+</blockquote>
+<h1 id="timeout">Не отзываются права при достижении Timeout</h1>
+<blockquote>
+<p>Должно быть включено расписание "Checks reminder interval and timeout
+of attestation cases"</p>
+<hr />
+</blockquote>
+<h1 id="timetrace">Проверка изменения значения колонки на основе исторических данных (TimeTrace)</h1>
+<blockquote>
+<p>SELECT</p>
+<p>COUNT(OperationDate)</p>
+<p>FROM</p>
+<p>DialogWatchProperty wprop</p>
+<p>JOIN DialogWatchOperation wop ON wprop.UID_DialogWatchOperation =
+wop.UID_DialogWatchOperation</p>
+<p>JOIN Person pers ON SUBSTRING(wop.ObjectKeyOfRow, 22, 36) =
+pers.UID_Person</p>
+<p>WHERE</p>
+<p>pers.UID_Person = '5544521f-27eb-4993-8679-b27b5428cfb4'</p>
+<p>AND wprop.UID_DialogColumn = (</p>
+<p>SELECT</p>
+<p>UID_DialogColumn</p>
+<p>FROM</p>
+<p>DialogColumn</p>
+<p>WHERE</p>
+<p>ColumnName = 'UID_Department'</p>
+<p>AND UID_DialogTable = 'QER-T-Person'</p>
+<p>)</p>
+<p>AND wop.OperationType = 'U'</p>
+<p>AND DateDiff(dd, wop.OperationDate, GetUTCDate()) \&lt; 1</p>
+<hr />
+</blockquote>
+<h1 id="_16">Проблемки при переводе сотрудника и ресертификации его доступов:</h1>
+<ol>
+<li>
+<p>При условии, что предыдущий руководитель \&lt;&gt; текущему может быть
+    ситуация, когда у сотрудника нет руководителя и он появляется -
+    условие удовлетворяется, но фактически перевод не состоится в другое
+    подразделение. То есть, триггер смены руководителя не всегда
+    означает смену подразделения.</p>
+</li>
+<li>
+<p>Перевод сотрудника, через увольнение</p>
+</li>
+<li>
+<p>Если уволился текущий руководитель сотрудника</p>
+</li>
+<li>
+<p>Если сотрудник уволен и потом принят в тот же департамент - считать
+    ли это переводом? У него перед прошлым был департамент 123, потом
+    департамент стал 0, потом департамент снова становится 123</p>
+</li>
+<li>
+<p>Надо учитывать дату мероприятия. Может быть случай, когда у
+    сотрудника поменялся новый департамент на null?</p>
+</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

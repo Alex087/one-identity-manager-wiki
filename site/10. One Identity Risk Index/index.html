@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>10. One Identity Risk Index - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#identity-manager-80-risk-assessment-administration-guide-oneidentitycom" class="nav-link">Identity Manager 8.0 - Risk Assessment Administration Guide (oneidentity.com)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#riskindex" class="nav-link">Включение вычисления RiskIndex</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link">Создание кастомных функций вычисления индекса риска</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>10. One Identity Risk Index</p>
+<p>12 апреля 2022 г.</p>
+<p>15:44</p>
+<h1 id="identity-manager-80-risk-assessment-administration-guide-oneidentitycom"><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/risk-assessment-administration-guide/3">Identity Manager 8.0 - Risk Assessment Administration Guide (oneidentity.com)</a></h1>
+<h1 id="_1"></h1>
+<h1 id="riskindex">Включение вычисления RiskIndex</h1>
+<p>QER\CalculateRiskIndex</p>
+<hr />
+<h1 id="_2">Создание кастомных функций вычисления индекса риска</h1>
+<p>В Manager идем в пункт Risk Index Functions</p>
+<p>Выбираем нужную таблицу (Person)</p>
+<p><strong>Assignments</strong> - для задания основного значения индекса риска (как
+правило - максимальное значение из нескольких выбирается)</p>
+<p><strong>Properties</strong> - для увеличения или уменьшения основного значения.</p>
+<p>Можно отключить все функции для того, чтобы не добавлялась путаница.</p>
+<p><img src="../media/10. One Identity Risk Index/media/image1.png"
+style="width:6.625in;height:1.36458in"
+alt="&quot;anou, &quot;an (NANO V) X 06LueAocrynHaq MHOopMaLVIA 06pa60TKa nepecegeHL•1 General Organizational Address Miscellaneous user defined Infor mation cateaorv Aocryn K Aocryn K rlAH Aocryn K 06LueAocrynHcü VlH$opMaLVIL•1 " /></p>
+<p>Таблица пересечений (CCCRiskIndex_Crossing )</p>
+<p><img src="../media/10. One Identity Risk Index/media/image2.png"
+style="width:7.40625in;height:2.04167in"
+alt="70b8me-6aa-401c-9134-eg730bta50b c350cdbe-6b33-4ebc-901&amp;45e21c1352bf Foreign Keys CCC smvaties ccc_KT ccc_PDN ccc_public ccc_RiskIndex *Touched npa8a 3ar1LdCb True False False " /></p>
+<p><em>Пример Assignments</em></p>
+<p><img src="../media/10. One Identity Risk Index/media/image3.png"
+style="width:5.83333in;height:2.32292in"
+alt="General ERended Name Description Calculation type Weighting / Change value Disabled Maximum (normalized) " /></p>
+<p>select p.XObjectKey as ObjectKeyTarget, risk.CCC_RiskIndex as
+SourceValue</p>
+<p>, risk.XObjectKey as ObjectKeySource from Person p join PersonInOrg on
+p.UID_Person = PersonInOrg.UID_Person Join</p>
+<p>CCCRiskIndex_Crossing risk on PersonInOrg.UID_Org =
+risk.CCC_BusinessRole where</p>
+<p>(p.CCC_KT = 'true' and risk.CCC_KT = 'true') or (p.CCC_PDN = 'true' and
+risk.CCC_PDN = 'true') or (p.CCC_PublicInformation = 'true' and
+risk.CCC_Public = 'true')</p>
+<hr />
+<p><em>Пример Properties</em></p>
+<p><img src="../media/10. One Identity Risk Index/media/image4.png"
+style="width:6.08333in;height:2.32292in"
+alt="General ERended Name Description Calculation type Weighting / Change value n K LISB Ha sanblcb Disabled Increment 0.02 " /></p>
+<p>select xObjectKey as ObjectKeyTarget, 1.0 as SourceValue</p>
+<blockquote>
+<p>from Person p where exists (select top 1 1</p>
+<p>from PersonInOrg</p>
+<p>where UID_Person = p.UID_Person</p>
+<p>and UID_Org = '1e550bc1-5ea4-4ade-9de5-ecca92465374'</p>
+<p>)</p>
+</blockquote>
+<hr />
+<p><img src="../media/10. One Identity Risk Index/media/image5.png"
+style="width:5.92708in;height:2.34375in"
+alt="General ERended Name Description Calculation type Weighting / Change value 06LueAocrynHaq MHOopMaL4L•1A Disabled Increment c.03 " /></p>
+<p>select xObjectKey as ObjectKeyTarget, 1.0 as SourceValue</p>
+<blockquote>
+<p>from Person p where CCC_PublicInformation = 'true'</p>
+</blockquote>
+<hr />
+<p>Запуск вычисления индекса риска, через задание планировщика - <em>Calculate
+risk indexes</em></p>
+<p><em>-----</em></p>
+<p><em>Пример SQL запроса для теста</em></p>
+<p>select CCC_RiskIndex, Person.CentralAccount from CCCRiskIndex_Crossing
+risk join Org org on risk.CCC_BusinessRole = org.UID_Org join
+PersonInOrg on org.UID_Org = PersonInOrg.UID_org join Person on
+PersonInOrg.UID_Person = Person.UID_Person where (Person.CCC_KT = 'true'
+and risk.CCC_KT = 'true') or (Person.CCC_PDN = 'true' and risk.CCC_PDN =
+'true') or (Person.CCC_PublicInformation = 'true' and risk.CCC_Public =
+'true')</p>
+<hr /></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

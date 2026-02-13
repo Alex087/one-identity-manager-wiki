@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>6.18 IT Shop - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p><strong>6.18 IT Shop</strong></p>
+<p>13 февраля 2026 г.</p>
+<p>11:49</p>
+<table>
+<thead>
+<tr>
+<th>Create Dynamic Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Нажать на значек БД и в поле Condition указать 1=1 - означает, что все
+пользователи будут иметь доступ к IT Shop</p>
+<p>IT Shop используется для административных целей.</p>
+<p>Чтобы сделать представление в виде стандартного веб портала, нужна
+структура каталогов.</p>
+<p>В структуре IT Shop создается структура.</p>
+<p>Shelf - уровень и на него можно назначить продукт - ресурс (Assigment
+resource, который прикрепляется к Бизнес роли) (что будет запрашивать
+пользователь), добавление в роль, например.</p>
+<p>Ресурс сначала надо создать (Create Assigment resource в Бизнес ролях)
+затем Add resources в IT Shop.</p>
+<p>Создается Approval policy, в которой делается Workflow по проверкам,
+которые должны пройти перед тем, как продукт назначится.</p>
+<p>На Shelf назначает созданная Approval policy по которой делаются
+проверки (запросы руководителю и тп.)</p>
+<p>Для IT Shop создается сервисная категория (IT Shop -&gt; Basic conf data
+-&gt; Service category), на нее назначается Service item (IT Shop -&gt;
+Service catalog -&gt; Custom defined), которой соответствует Бизнеc роль.</p>
+<p>Service item создается, через Business Roles -&gt; выбрать роль -&gt; Create
+assignment resource.</p>
+<p><img src="../media/6.18 IT Shop/media/image1.png"
+style="width:6.5625in;height:3.35417in"
+alt="For any Business Role On item click wizard Create assignment resource... Create and/or assign - Assignment Resource - Resource Type* - Service Item - Service Catalog* * Optional Create and configure new Service Catalog container if needed Assign according Assign Resource to Service Item to IT Shop shelf Service Catalog Create new IT Shop shelf and Approval procedure if needed. " /></p>
+<p>То есть, мы на бизнес роль назначаем ресурс, который потом закрепляем за
+Shelf. Затем закрепляем Service Item за Service Catalog</p>
+<p>-Чтобы назначить группу AD на IT Shelf</p>
+<p>Создать группу AD, в OneIM и поставить галку IT Shop!</p>
+<p>Обязательно выбрать Service Item для нее!</p>
+<p>После этого, назначить эту AD группу на Shelf.</p>
+<p>Нужно разместить Service item в Service catalog, чтобы он отображался на
+портале.</p>
+<p>Если на портале у сотрудника нет галки для запроса продукта - надо
+создать Approval policy и назначть на shelf ее.</p>
+<p><strong>Проблема была в том, что я при назначении группы в self создавал
+ресурс (Service item) с тем же именем, что и когда создавал ресурс
+(Service item) для бизнес роли.</strong></p>
+<p><strong>Так как Shelf связвается с группой или бизнес ролью, через Service
+item!</strong></p>
+<hr />
+<p>Пользователь alexb делает запрос.</p>
+<p>У него Manager - IARLOFS (он сначала должен аппрувить запрос его (CM))</p>
+<p>Alexb в дапартаменте Группа учета налога - у нее менеджер IARLOSS. Он
+тоже должен аппрувить запрос. После этого изначальный запрос будет
+аппрувлен и у alexb появятся запрошенные права.</p>
+<hr />
+<p><strong>Разграничение прав просмотра Service category для пользователей
+портала.</strong></p>
+<p>Можно реализовать, через несколько ITShops, с динамическим назначением
+пользователей на них.</p>
+<hr />
+<p>Напоминания настраиваются в шаге Workflow</p>
+<hr />
+<p>Выполнение скрипта в процессе работы.</p>
+<p>Смысл в том, что вызывается событие в процессе, а на это событие
+срабатывает запуск скрипта.</p>
+<p><img src="../media/6.18 IT Shop/media/image2.png"
+style="width:6.60417in;height:3.6875in"
+alt="Navigation ИТ -супермаркет Панель тедений [37- ИТ супермаркет Шаблон пкьмз: повышение п... х Процедуры утверждени... Recent[y used % Z Skype Exchange % Z Revoke Access Request % Z Manager % Z Grant Access Request Execution % Execution % Z Grant A«ess % Z Manager % Z Revoke Access Request % Z Skype Exchange Х Корпоративная сеть • Toolbox % Edit... Z Grant Access Request х [ЗАЗ) ддминктрвтивные действия (блокировкв\рс [ЗАЗ) ддминктрвтивные действия (сброс пароля) Жизненный цикл идент“фиквции доступа Шаблоны запроса Запросы Каталог руг [ДО базовые данные конфигурации Статус обработки Стандартные причины [Эф Процедуры утер&amp;дения Предопределено Собст&amp;енное определенпе Пол лики утер&amp;дения Предопределено Собст&amp;енное определенпе Процедуры утер&amp;дения Предопределено Собственное Шаблоны пюсем роле“ Типы ролей [ЗЭ Бизнес-пвртнер&amp;] Сувкцпонвльные области Категории услуг Теги запоосв Сот руд н Ики Организации бизнес- роли Полномочия ИТ-супермаркет Аттестация Аудит идентификационных данных Корпоративные политики Edit selected approval step properties here. ResuIt Iist Tasks Tasks Favorites Copywarkfow„ О Обзор процедуры утер:.дения Изменить исходные данные Один этап Про цедурв утер&amp;дения Статус обработки при успехе Статусобрвботки приошЉке Шаблон запрос Шаблон утер&amp;дено Шаблон пькьмв:отклонено Шаблон пюс±мв: нвг-юминвнле Шаблон пькьмв:отквзвно Шаблон делегиров-внле Роль Резер зное ющее л ицо По квзвтел ь соответствз юр“... Олька н &#39; «е Причина утер&amp;дения Отклонить причину ЕХ - принимаемые внешне Не имеет отношения ExecutionVlB3PMStart Не поквзьввть в х 6 6 6 6 Cancel Проверка, требуется ли (CD - Рассчитанное реше согл Согласование ИБ (Ой - execution not requi гед Jjred (CD - Рассчитанно е реш ение) выполнение заявки в врм .лнение заявки е ВРМ - утверждения, внешне) Каганский Андрей лгоревлч (0ia[og user: ссс-70ББ807212074714828 v•admin (0ialog user: v•admin, Х fields: vladmin] authenticated. " /></p>
+<p><img src="../media/6.18 IT Shop/media/image3.png"
+style="width:6.5625in;height:2.86458in"
+alt="Qatabase Process Process step Yiew Help a Commit to database Navigation Process Orchestration person g] Z_HR_Integration PersonWa ntsOrg g] Z_Perso nWa ted g] Z_PersonWantsOrg g] Z_Perso nWa uest_Ap p rove g] Z_PersonWa Designer - viadmin@NL-SP-I Misc Util Search Execution parameter Process - Script - PersonWan tsOrg_On _ Execution via BPM start Run script to perform requ- " /></p>
+<p><strong>----</strong></p>
+<p>Политики согласования создаем общие под процессы</p>
+<p>Не надо делать много политик согласования.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

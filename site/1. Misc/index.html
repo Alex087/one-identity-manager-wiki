@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>1. Misc - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">Почитать</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#1-password-policy" class="nav-link">1) Password Policy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#2-account-definition" class="nav-link">2) Account Definition нужен для того, чтобы управлять целевой</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#3-person-designer-table-person-central" class="nav-link">3) Создание Person в БД (Designer - Table – Person - Central</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#4" class="nav-link">4) Роли классов</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#5-compliance-rule" class="nav-link">5) Compliance rule</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#6-account-definitions-hp-service-desk" class="nav-link">6) По Account Definitions для HP Service Desk</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#7-system-debugger" class="nav-link">7) System Debugger</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#8" class="nav-link">8) Временное отключение пользователя</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#9-external-employee" class="nav-link">9) External Employee</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#10" class="nav-link">10) Отслеживание изменений в целевой системе</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#11-system-roles" class="nav-link">11) System roles</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#12-risk-index" class="nav-link">12) Risk Index</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#13-time-trace" class="nav-link">13) Time Trace</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#14-api" class="nav-link">14) API</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#15-sync-editor" class="nav-link">15) Формирование ФИО в Sync Editor в атрибутах</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#16-active-directory-" class="nav-link">16) Active Directory - как можно сцепить учетки и пользователей</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#17-isgroupaccount" class="nav-link">17) isGroupAccount</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#18" class="nav-link">18) Увольнение.</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#19" class="nav-link">19) Просмотр доступных событий для таблицы</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#20-defaulemailaddress" class="nav-link">20) Defaulemailaddress</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#21-servicedesk" class="nav-link">21) Создание заявки в ServiceDesk (файла)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#22-fullsync" class="nav-link">22) FULLSYNC</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link"></a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#it-shop-approval-policy" class="nav-link">IT SHOP: Approval policy</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#bulk-delete-outstanding-objects" class="nav-link">Bulk Delete Outstanding Objects</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>1. Misc</p>
+<p>16 августа 2019 г.</p>
+<p>18:34</p>
+<p><img src="../media/misc/media/image1.png"
+style="width:9.79167in;height:5.5in"
+alt="Skytap Cloud server: IAMSOI 2013 Based Training Environment Login — Information Password Every password 1.4Madmin Connect to Skytap Ensure you use a current browser version of Firefox Google Chrome Intemet Explorer Ensure newest Oracle Java runtime is installed Ensure Firewall is not blocking ports 443, 3389, 80 NAT server: IAMS02 server: IAMS03 IIS, , one1M Home- and dbectory, Server: IAMS04 Sharepoint. IIS server: IAMSIO and . LOA P Workstation: IAMWOI „ 11 Admn TOOK, Visual Studio, Browse. port 80, HTML Client ports &gt; 8000, RDP Active Directory Login (all machines) IAM\administrator Account: Service Accounts - &gt; Database (SQL account) Account: SVC 11M_SQL - &gt; Identity Manager Service IAM\SVC_ Account: MS Active Directory 11M 11M Service AD Connect to and control environment using a HTML5 Browser session Account: - &gt; MS Exchange Account: MS Sharepoint Account: IAM\SVC_ IAM\SVC_ Identity Manager Accounts System user Rolebased User Training alle existing Person.Centralaccount Further Naming Your Computer: Browser or RDP (you get a the Active Directory Domain Domain FQDN Domain DN Identity Manager Database Service name Software path Lab-Folder IAM.corp IAMDB OneIMService : Skytap 32 One Identitv - Technical Trainina -c 2018 Connect to port 80 covered or native RDP Session using dedicated ports ONE IDENTITY " /></p>
+<p><img src="../media/misc/media/image2.png"
+style="width:19.71875in;height:0.77083in"
+alt="FirstName FIRSTNAME MiddleName MIDDLENAME LastName LASTNAME PreferredName ZIPCode POSITIONCODE Title POSITIONTITLE PersonnelNumber UID_Department DEPARTMENTCODE PERSONNELNUMBER EntryDate STARTDATE 3citDate ENDO ATE " /></p>
+<p><img src="../media/misc/media/image3.png"
+style="width:8.78125in;height:1.13542in"
+alt="Department -Target columns and key ObjectlD DEPARTMEBITCODE DepartmentName DEPARTMEBITNAME ShortName DEPARTMEBITFULLNAME IJID_ParentDepartment PAREBITCODE FullPath ORGI_INIT " /></p>
+<p>Уникальность имени аккаунта</p>
+<p><img src="../media/misc/media/image4.png"
+style="width:5in;height:4.09375in"
+alt="Designer - alex@t oneim db-4.sgp.ru\OneIM (Main Database) Qatabase Configuration parameters Yiew Help a Commit to database •e Sack • Next • • Search Navigation Getting Started Create system user Edit configuration parameters Add job server Edit schedules Schema Editor Configuration parameters Common Custom OPR Hardware QER Attestation CalculateRiskIndex ComplianceCheck Eset ITShop Org Person I O Getting Sti Value CentralÅccountGIobaILlnique DefaultMaiIOomain Configuratic Defender " /></p>
+<p>Mapping</p>
+<p><img src="../media/misc/media/image5.png"
+style="width:12.57292in;height:5.60417in"
+alt="O T_OnelM-41 Manager - (Main Database) Qatabase Object Yiew Help -»Forward • Home Database search Z New R save Navigation Active Directory Info system Hierarchical view Forests Domains Sites Container user accounts Manage levels Linked but not configured No employee assignment &quot;E Disabled user accounts Privileged user accounts Identity Contacts Groups Computers Printer &quot;5 Account policies Active Directory SIDs Tarnet sun-hrnni7Rtlnn Employees Organizations • Business Roles Entitlements IT Shop Attestatio n x Active Directory domains (1) sgp• Remove Active Directory contacts AND „Ga CentralAccount cn Active Directory user accounts AND InternalName DisplayName É}a:-: AND Description &lt; Description @ADSDoman @ADSDoman @ADSDoman Add format • Format preview Active Directory user accounts Description (Description) Description (Description) The quick brown fox jumps over the lazy dog Result list Tasks Tasks Favorites Reload User account Suggested assignments (O) Assigned user accounts (O) Employee No emp loyee assignment (O) Selection Synchronize this object O Domain overview Change master data • Definesearchcriteria for employee assignmett Specitytrust relationships " /></p>
+<h1 id="_1">Почитать</h1>
+<blockquote>
+<p><a href="https://slourc.wordpress.com/2015/03/01/d1im-designer-deleguer-automatiquement-les-droits-de-responsable-sur-une-personne-a-un-assistant/">https://slourc.wordpress.com/2015/03/01/d1im-designer-deleguer-automatiquement-les-droits-de-responsable-sur-une-personne-a-un-assistant/</a></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73</a></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.1/target-system-synchronization-reference-guide/6">Identity Manager 8.0.1 - Target System Synchronization Reference
+Guide
+(oneidentity.com)</a></p>
+<p><a href="https://github.com/OneIdentity/IdentityManager.PoSh-Connector-Generator">OneIdentity/IdentityManager.PoSh-Connector-Generator
+(github.com)</a></p>
+<p><strong>SQL Server Collation</strong> SQL_Latin1_General_CP1_CI_AS</p>
+<p>Почта</p>
+<p>Postfix на WSL</p>
+<p>Порт 2526</p>
+<p><strong>Реконсиляция: </strong>Процесс приведения в соответствие данных,
+находящихся в системе IDM, с данными, представленными в целевых
+системах. В рамках согласования осуществляется корреляция данных,
+выявление существующих различий, а также инициируется внесение
+необходимых изменений.</p>
+<p><em>From
+\&lt;<a href="http://co-inform.ru/solutions/identity-and-access-management/glossary.php">http://co-inform.ru/solutions/identity-and-access-management/glossary.php</a>&gt;</em></p>
+<p>ВАЖНО! При создании скриптов - если будут использоваться доп функции -
+прописывать импорт модулей в каждом скрипте!</p>
+<p>Job Server должен быть SQL Processing Server</p>
+<p>Очередь меняем и в дизайнере и в конфиге сервиса на самом Job Server</p>
+<p>Чтобы JobServer появился в просмотре очереди - надо его
+сконфигурировать, через конфигуратор (можно выбрать Template из
+главного меню)</p>
+<p>~~Если БД, с которой работает JobServer находится на другом сервере -
+надо в настройках JobServer указать Execution Server на сервер с БД~~</p>
+<p>3) Для портала пользователя создаем в Manager и указываем System User
+Password!</p>
+<p>4) Чтобы узнать, в какую таблицу загружать данные - в Manager –
+открыть Employee - View – Show Field Definition</p>
+<p><strong>---------------------------------------------------------------</strong></p>
+<h1 id="1-password-policy"><strong>1) Password Policy</strong></h1>
+<p>Если Initial Password оставить пустым - система булдет генерить
+произвольный пароль!</p>
+<p><strong>Сцепление</strong></p>
+<p><strong>Manager – Domain – Define search criteria for employee assignment</strong></p>
+<p>PERSONNELNUMBER = EMPLOYEE UID (см скриншот справа)</p>
+<h1 id="2-account-definition"><strong>2) Account Definition</strong> нужен для того, чтобы управлять целевой</h1>
+<p>системой.</p>
+<p>Пока он не определен - управление работать не будет.</p>
+<p>Можно задать двумя способами</p>
+</blockquote>
+<ul>
+<li>
+<p>На домен</p>
+</li>
+<li>
+<p>На аккаунт</p>
+</li>
+</ul>
+<blockquote>
+<p>Manager – Employees – Active Directory - Basic Conf Data - Account
+Definitions</p>
+<p><strong>Full Managed</strong> means that all predefined attributes are affected and
+<strong>Unmanaged</strong> means that only mandatory predefined attributes are
+affected.</p>
+<p><strong>IT Operating Data -</strong> указывает связи между департаментом в базе и
+AD.</p>
+<p>Выбрать департамент - Tasks – Edit It operating Data</p>
+<p><strong>После создания пользователя в БД, чтобы он создался в AD надо правой
+кнопкой по нему - Tasks – Assign Account Definitions</strong></p>
+<p><strong>Связь департаментов в базе и OU в AD</strong></p>
+<p>Делаем выгрузку в csv на основании запроса.</p>
+<p>Затем делает Data Import этой csv в БД, чтобы корректно заполнить
+таблицу TSBITData.</p>
+<p>select newid() as uid_TSBITData, Department.UID_Department as
+UID_ORG,'\&lt;Key&gt;\&lt;T&gt;TSBAccountDef\&lt;/T&gt;\&lt;P&gt;8b826aeb-9a5f-4c84-a528-6af40976b6f7\&lt;/P&gt;\&lt;/Key&gt;'
+as ObjectKeyAppliesTo, 'ADS-D7251336DB99478B8616695F0DF66584' as
+UID_DialogColumnTarget, ADSContainer.UID_ADSContainer, 'TSBAccountDef:
+Std. user account Domain SGP - ADSAccount.UID_ADSContainer' as
+DisplayValue from Department INNER JOIN ADSContainer ON
+Department.Commentary=ADSContainer.DistinguishedName</p>
+<p><strong>После импорта csv надо проверить, что в базе Department и TSBITDATA
+одинаковое кол-во департаментов и связей! Иначе, надо вручную
+добавлять связи!</strong></p>
+<h1 id="3-person-designer-table-person-central">3) Создание Person в БД (Designer - Table – Person - Central</h1>
+<p>Account)**</p>
+<p>'\$CustomProperty01\$</p>
+<p>If CStr(\$ImportSource\$) \&lt;&gt; "ADS" And CStr(\$Lastname\$) \&lt;&gt; ""
+And CStr(\$Firstname\$) \&lt;&gt; "" And CStr(\$Middlename\$) \&lt;&gt; "" And
+_</p>
+<p>(Not CBool(Connection.Variables.Get("FULLSYNC")) Or
+CStr(\$ImportSource\$).StartsWith("EBS") Or
+CStr(\$ImportSource\$).StartsWith("SAP") ) Then</p>
+<p>If
+CStr(Connection.GetConfigParm("QER\Person\CentralAccountGlobalUnique"))="1"
+Then</p>
+<p>Value = CCC_AE_BuildCentralAccountGlobalUnique(
+GetValue("UID_Person").String, \$Lastname\$, \$Firstname\$,
+\$Middlename\$)</p>
+<p>Else</p>
+<p>Value = CCC_AE_BuildCentralAccount( GetValue("UID_Person").String,
+\$Lastname\$, \$Firstname\$, \$Middlename\$)</p>
+<p>End If</p>
+<p>End If</p>
+<p><strong>Чтобы при создании пользователя в AD корректно прописывался cn, Full
+name …</strong></p>
+<p>Надо для cn прописать</p>
+<p>If \$Givenname\$ \&lt;&gt; \$Givenname[o]\$ Or \$Surname\$ \&lt;&gt;
+\$Surname[o]\$ Or <strong>\$FK(UID_Person).Middlename\$</strong> \&lt;&gt;
+\$FK(UID_Person).Middlename[o]\$ Then</p>
+<p>If \$Givenname\$\&lt;&gt;"" AndAlso \$Surname\$\&lt;&gt;"" AndAlso
+\$FK(UID_Person).Middlename\$\&lt;&gt;"" Then</p>
+<p>CN = \$Surname\$ &amp; " " &amp; \$Givenname\$ &amp; " " &amp;
+<strong>\$FK(UID_Person).Middlename\$</strong></p>
+<h1 id="4"><strong>4) Роли классов</strong></h1>
+<p>Можно создавать много деревьев ролей.</p>
+<p>Каждому дереву ролей нужен корневой элемент, который называется ролью
+класса (role class).</p>
+<p>Эта роль класса используется для определения назначаемых ресурсов и
+наследование ресурсов в этом дереве.</p>
+<p>Если испортить наследование - это будет невозможно изменить. Чтобы
+пофиксить, надо удалить роль класса и пересоздать ее. Надо быть
+внимательным при создании роли класса.</p>
+<p>В порядке назначения объектов ролевой структуре, нужно настроить эту
+функцию для каждого класса объекта для управления.</p>
+<p>Роли позволяют создать связь Account Definitions и условие отбора
+пользователя в целевой системе.</p>
+<p>Например, мы можем применять политику по созданию учетной записи
+только для пользователей в определенном подразделении (через
+назначение Dynamic role).</p>
+<p>Создаем Account definition для AD, например -&gt; Класс роль -&gt; Бизнесс
+роль -&gt; Назначаем роли Dynamic role (если находится в определенном
+подразделении - создавать аккаунт в AD, например).</p>
+<p>На пользователя можно назначить Бизнесс роль вручную.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th><strong>Show Entitlement origin - позволяет показать, что привязано к сотруднику.</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>У роли можно отключить наследование - это важно делать, чтобы не было
+оч много задачь!</p>
+<hr />
+<h1 id="5-compliance-rule"><strong>5) Compliance rule</strong></h1>
+<p>Для того, чтобы предотвратить нахождение одного пользователя в двух
+ролях.</p>
+<p>Preventative Compliance check</p>
+<p>Identity Audit - &gt; Rules.</p>
+<p>Чтобы отредактировать правило - надо редактировать его рабочую копию.</p>
+<p>Также недостаточно нажать [Сохранить], чтобы активировать изменения.
+После</p>
+<p>сохраняя, нажмите Включить рабочую копию в списке задач, чтобы
+активировать ее.</p>
+<p>Preventative Compliance checks лучше, так как не позволяют саму
+возможность добавления пользователей в группы одновременно. <strong>Работают
+как часть approval policy. Без нее - не будет работать!</strong></p>
+<p><img src="../media/misc/media/image6.png"
+style="width:4.3125in;height:3.20833in"
+alt="АЦК “муниципальнмй заказ“ Менеджер Approve policy ApprovaI IeveI Се три апсе Approval leve&#39; дрргауе Мападег (СМ •Recipiev-,V&#39; " /></p>
+<p><strong>------</strong></p>
+<h1 id="6-account-definitions-hp-service-desk"><strong>6) По Account Definitions для HP Service Desk</strong></h1>
+<p>Пользователь прилетает из CSV</p>
+<p>На основании подразделения он помещается в нужную Бизнес роль
+автоматически (dynamic role).</p>
+<p>На эту бизнес роль назначен Account Definition из AD и из HP Service
+desk, который создает пользователя в AD и в HP и добавляет
+пользователя в нужные группы AD и роли Service desk.</p>
+<p>Acc Def HP Employee Account Def требует Std User Account Domain SGP
+(отключил, чтобы можно было оставить при временном отключении
+пользователя)</p>
+<p>HP Account Def требует Acc Def HP Employee Account Def</p>
+<h1 id="7-system-debugger"><strong>7) System Debugger</strong></h1>
+<p>Создаем скрипт в Designer, и открываем его в Visual Studio и правим.</p>
+<p>Надо открывать проект "C:\Program Files\One Identity\One Identity
+Manager\SystemLibrary\SystemLibrary.sln" через Visual Studio</p>
+<p>Потом запускаем его и открывается System Debugger!</p>
+<p>19) Риск</p>
+<p>Если пользователь имеет несколько аккаунтов в разных системах - у него
+будет выше риск</p>
+<p>20) Job Server - это ОС с Job Service</p>
+<p>In Win is One Identity Manager Job Service (short name:
+OneIMService)  </p>
+<h1 id="8"><strong>8) Временное отключение пользователя</strong></h1>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/target-system-base-module-administration-guide/5">https://support.oneidentity.com/technical-documents/identity-manager/8.0/target-system-base-module-administration-guide/5</a></p>
+<p>Срабатывает расписание (Designer - Base Data – Schedules)</p>
+<p>"Lock accounts of employees that have left the company"</p>
+<p>Для разблокировки расписание</p>
+<p>"Enable temporarily disabled accounts"</p>
+<p>Для внешних систем надо обрабатывать события Enabled и Disabled, как
+отдельные процессы с отдельными скриптами.</p>
+<h1 id="9-external-employee"><strong>9) External Employee</strong></h1>
+<p>Можно создать для них ITSHOP с условием - External и накинуть
+политику - утверждения / аттестации для них.</p>
+<p><em>Или сделать Бизнес роль с динамическим включением в нее и накинуть
+политику аттестации!!!</em></p>
+<p>Роль External user approvers – в нее нужно добавить пользователя для
+аттестации External users</p>
+<p>QER\WebPortal\PasswordResetURL - прописать адрес портала для сброса
+пароля.</p>
+<h1 id="10"><strong>10) Отслеживание изменений в целевой системе</strong></h1>
+<p>Отчет System entitlement drifts in all target systems</p>
+<p>Через Insert в таблицу сделать процесс свой</p>
+<p>Можно, через параметры передавать информацию прямо в скрипты</p>
+<p>Value = \$FK(UID_ADSAccount).UserPrincipalName\$</p>
+<p>Можно сделать процесс по отправке email</p>
+<p>Message:</p>
+<p>Value = "User " + \$FK(UID_ADSAccount).UserPrincipalName\$ + " add in
+group " + \$FK(UID_ADSGroup).cn\$ + " in " + Now().ToString()</p>
+<p>Subject</p>
+<p>Value = "Changes in group " + \$FK(UID_ADSGroup).cn\$</p>
+<p><img src="../media/misc/media/image7.png"
+style="width:6.61458in;height:1.36458in"
+alt="Parameter name Address Authenticationstring SenderAddress Message SmtpPort SmtpServer Subject Parameter value Value = •[redacted-email]• Value = Connectionlnfo.AuthString Value = •[redacted-email]• Value = •user * * • add in group Value = Connection. Value = Connection. GetCo in * NowO.ToStringO &#39;Chan ±sin rou SFKiU10 " /></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/73</a></p>
+<p><strong>Решение вопроса с отменой изменений членства групп в AD:</strong></p>
+<p>1) Делаем процесс на событие INSERT в таблицу ADSAccountInADSGroup</p>
+<p>2) Первый шаг - отправка email</p>
+<p>3) Скрипт, который будет удалять запись о членстве из таблицы
+ADSAccountInADSGroup (см справа)</p>
+<p>Этот скрипт будет работать для записей с пометкой Synchronization, для
+других - не удаляет</p>
+<h1 id="11-system-roles"><strong>11) System roles</strong></h1>
+<p>Предназначены для того, чтобы можно было навесить множество ролей на
+них.</p>
+<h1 id="12-risk-index"><strong>12) Risk Index</strong></h1>
+<p>Нужен для того, чтобы для добавления в определенную целевую систему
+потребовалась дополнительная аттестация, например.</p>
+<p><strong><em>To enable the schedule for calculating risk indexes</em></strong></p>
+</blockquote>
+<ul>
+<li>
+<p>Open the Designer.</p>
+</li>
+<li>
+<p>Select <strong>Base Data | General | Schedules</strong>.</p>
+</li>
+<li>
+<p>Select the schedule "Calculate risk indexes" in the List Editor.</p>
+</li>
+<li>
+<p>Check the box in the <strong>Enabled</strong> column.</p>
+</li>
+<li>
+<p>Save the changes.</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/risk-assessment-administration-guide/5#TOPIC-863144">https://support.oneidentity.com/technical-documents/identity-manager/8.0/risk-assessment-administration-guide/5#TOPIC-863144</a></p>
+<h1 id="13-time-trace"><strong>13) Time Trace</strong></h1>
+<p>Отображение изменений с учетной записью</p>
+<p>Надо в дизайнере - Config Parameters – Common – ProcessState –
+PropertyLog (x) – AllDefaultPropertiesForModel (x)</p>
+<p>Затем, в менеджере - View – Time Trace (и в окне TimeTrace нажать на
+часы)</p>
+<p>За исторические данные отвечают таблицы <strong>DialogWatchProperty</strong> и
+<strong>DialogWatchOperation</strong></p>
+<h1 id="14-api"><strong>14) API</strong></h1>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/rest-api-reference-guide/15">https://support.oneidentity.com/technical-documents/identity-manager/8.0/rest-api-reference-guide/15</a></p>
+<p><a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471">https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471</a></p>
+<h1 id="15-sync-editor"><strong>15) Формирование ФИО в Sync Editor в атрибутах</strong></h1>
+<p>Dim probel as String = " "</p>
+<p>Dim fio as String = \$LASTNAME\$ &amp; probel &amp; \$FIRSTNAME\$ &amp; probel &amp;
+\$MIDDLENAME\$</p>
+<p>return fio</p>
+<h1 id="16-active-directory-"><strong>16) Active Directory - как можно сцепить учетки и пользователей</strong></h1>
+<p>По ФИО</p>
+<p>При импорте из csv скриптом формируем ФИО в кастомный атрибут</p>
+<p>В Менеджере критерий для сцепления учеток пишем - кастомный атрибут -
+DisplayName (или Name, если лучше соответствует)</p>
+<h1 id="17-isgroupaccount"><strong>17) isGroupAccount</strong></h1>
+<p>Ставится, чтобы была возможность добавлять пользователя в группы</p>
+<p>Например, у пользователя несколько учеток (администратора, обычная).</p>
+<p>Когда ему дается доступ к интернету, обе учетки будут добавляться в
+группу, а админская не должна добавляться в группу</p>
+<h1 id="18"><strong>18) Увольнение.</strong></h1>
+<p>Leaving Date - блокирует учётку и удаляет ее в AD</p>
+<p>Last working day - ~~удаляет учетку (чтобы у него был доступ до
+опреденного времени в компании)~~</p>
+<p>~~Не влияет, для информации~~</p>
+<p>Учетки переносятся в IDM в InactiveEmployee</p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/6822/permanently-disabling-users">https://www.oneidentity.com/community/identity-manager/f/forum/6822/permanently-disabling-users</a></p>
+<p>38) Формат даты в строку</p>
+<p>Public Sub CCC_Test3()</p>
+<p>Dim date1 = "20/02/1987"</p>
+<p>Dim date2 As DateTime = CType(DateTime.ParseExact(date1, "dd/MM/yyyy",
+System.Globalization.CultureInfo.InvariantCulture), DateTime)</p>
+<p><strong>Dim date3 As String = date2.ToString("dd-MM-yyyy")</strong></p>
+<p>MsgBox(date3)</p>
+<p>End Sub</p>
+<h1 id="19"><strong>19) Просмотр доступных событий для таблицы</strong></h1>
+<p><img src="../media/misc/media/image8.png"
+style="width:6.52083in;height:3.34375in"
+alt="Object Browser - Administrator, AD @ dcC1 (Vain Database: Qbied gat ion 50 L X OrgHasCSMGrmp Org OrgHzsESet OrgHasLOAPGroup OrgHuQERRum OrgHasRFSRewt OrgHasSåPGroup orgHBss,LPRde OrgHÆSLA orgHBsspsGroup OrgHasSPSRL_Asgr OrgHasUNSGroup orgHesUNs.Grc.,v8 OrgHasUNXGrcup OrgRoot O TTY* PæOn PersonHasESet PersonHasOERResource R PSRepyt PersonHasTS8LccountDef PersonInBsseTree nDepartæt PersonInITShcoOrg PersonInNCHBsMCcntroI PersonlnOrg ProfitCenterCdIectim requests AD Admin AD econ -Aex&amp;+r.Junec-3.&#39;W2017 AD Admin - T - AD Admin J&#39; 10 . AD Admin SCCOu-t AD - W - 14/2017 DISMISSED ESCALATE GRANTED ORDERGRANTED ORDERREFUSED PREFILLCRCOP PRomJCTEXPlREssoor. REMOvEGRcuPMEM8ERSHlP spsGRoup_goo h AD COjectGyOrdered UIO_Oeoattrnent u10_l t&#39; •JID.Org JC.Org u I O _Chg P P&amp;-ert uvo_ UIO Vila—tog U10_Pmftcerter UlO_PWOSt8e •JID_ Q R Type Uto Sl-op p in g n Level OsplayOro C.lay@gParent I-By P DsoIayPerscn Ir,sstt ed Dsplay F emorGde-ed Céject Gy ent LIS ed Object Oyo Lkedln ai2 CO Re—on 00 State Val CFrom ValdLRil XTO AD AD accord AD Ann Cé3_n Sef a e-ttty LifE•æe C (JUN E ALEXANDER) C (JUNE ALEXANDER) 3/14/2017 AM 371.1,2017 AM 3/102017 AN 10-tity Am Lifeße One C a False 10.0508 Lhs ubscnbed a 23a7cce2f1&quot;45c8ff56cS322S01bEa " /></p>
+<p><img src="../media/misc/media/image9.png"
+style="width:4.96875in;height:3.3125in"
+alt="Base object: Event: Generate processes SO Admin account -Alexander June ORDERGRANTED Additional parameters Name Value Generate Simulate Cancel " /></p>
+<p><img src="../media/misc/media/image10.png"
+style="width:5in;height:2.09375in"
+alt="AD Admin account - Alexander, June C - 3/1 4/2017 AM (Request) Simulation rest* Processes Create Admin Sub Identtty Create new.&#39; Paun as subo„ e Add user to AD Admin a OCO Start at 3/16/2017723 " /></p>
+<p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/20846/how-to-trigger-a-process-on-the-approval-of-a-request">https://www.oneidentity.com/community/identity-manager/f/forum/20846/how-to-trigger-a-process-on-the-approval-of-a-request</a></p>
+<h1 id="20-defaulemailaddress"><strong>20) Defaulemailaddress</strong></h1>
+<p>Изменил дефолтный шаблон</p>
+<p>#If EX2K Or NOTES Then</p>
+<p>Dim defaultMailAddress As String</p>
+<p>If Len(\$CentralAccount\$) &gt; 0 AndAlso Len (\$UID_Person\$) &gt; 0 Then</p>
+<p>defaultMailAddress =
+VI_AE_CreatedefaultMailAddress(\$centralaccount\$,\$uid_person\$)</p>
+<p>' check if mail address is valid</p>
+<p>If VID_IsSMTPAddress(defaultMailAddress) Then</p>
+<p>Value = defaultMailAddress</p>
+<p>End If</p>
+<p>End If</p>
+<p>#End If</p>
+<p>на</p>
+<p>Dim defaultMailAddress As String</p>
+<p>Dim maildom As String = String.Empty</p>
+<p>maildom = Connection.GetConfigParm("QER\Person\DefaultMailDomain")</p>
+<p>If Len(\$CentralAccount\$) &gt; 0 Then</p>
+<p>defaultMailAddress = \$centralaccount\$ + "@" + maildom</p>
+<p>Value = defaultMailAddress</p>
+<p>End if</p>
+<hr />
+<p>The session variable FullSync=FALSE is set if the option <strong>Data
+import</strong> is enabled</p>
+<hr />
+<h1 id="21-servicedesk"><strong>21) Создание заявки в ServiceDesk (файла)</strong></h1>
+</blockquote>
+<ul>
+<li>
+<p>В ITShop создаем продукт и вешаем на него approval policy</p>
+</li>
+<li>
+<p>Создаем процесс CCC_Create_File для таблицы PersonWantsOrg и событие
+  Create_File</p>
+</li>
+<li></li>
+<li>
+<p><img src="../media/misc/media/image11.png"
+  style="width:4.05208in;height:3.875in"
+  alt="nbaJ uo!spap a,ue6au amen nbaJ uo!spap a,uusod amen ssa)OJd MaN " /></p>
+</li>
+</ul>
+<blockquote>
+<p>Для создания файла</p>
+<p><img src="../media/misc/media/image12.png"
+style="width:4.11458in;height:1.46875in"
+alt="Param eters Parameter name Authenticationstring Connectionprovider ConnectionString ScriptName ParameterVaIueO ConnectionVariabIes Parameter value Value = Connectionlnfo.AuthString Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo.ConnectionString Value = •CCC createFile• Value = qwe Value = IVar21VarY " /></p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.IO</p>
+<p>Imports System.Text</p>
+<p>#End If</p>
+<p>Public Function CCC_CreateFile(ByVal UID_PWO As String) As String</p>
+<p>Dim path As String = "c:\temp\MyTest.txt"</p>
+<p>' Create or overwrite the file.</p>
+<p>Dim fs As IO.FileStream = IO.File.Create(path)</p>
+<p>' Add text to the file.</p>
+<p>Dim info As Byte() = New UTF8Encoding(True).GetBytes("This is some
+text in the file.")</p>
+<p>fs.Write(info, 0, info.Length)</p>
+<p>fs.Close()</p>
+<p>Return path</p>
+<p>End Function</p>
+<p>Для Verify_file</p>
+<p><img src="../media/misc/media/image13.png"
+style="width:5in;height:1.65625in"
+alt="Param eters Parameter name Parameter value Authenticationstring Value = Connectionlnfo.AuthString Connectionprovider Value = Connectionlnfo.ConnectionProvider ConnectionString Value = Connectionlnfo.ConnectionString ScriptName Value = •CCC CheckFile• Use8001eanResuItAsComponentSuccessVaIue Value = True " /></p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.IO</p>
+<p>Imports System.Text</p>
+<p>#End If</p>
+<p>Public Function CCC_CheckFile() As Boolean</p>
+<p>Dim a As String = "123"</p>
+<p>Dim path As String = "c:\temp\MyTest.txt"</p>
+<p>Dim fs As Boolean = File.Exists(path)</p>
+<p>If fs = True Then</p>
+<p>CCC_CheckFile = True</p>
+<p>Else</p>
+<p>CCC_CheckFile = False</p>
+<p>End If</p>
+<p>End Function</p>
+</blockquote>
+<ul>
+<li>В workflow approval policy указываем тип EX - Approvals to be made
+  externally и условие - событие Create_File</li>
+</ul>
+<blockquote>
+<p><img src="../media/misc/media/image14.png"
+style="width:3.71875in;height:2.36458in"
+alt="New workflow Approval level Create file (SO Approvals to made externally) " /></p>
+<p>Шаги Make positive и negative взяты из процесса "VI_ESS_PersonWantsOrg
+create AD group" таблицы PersonWantsOrg</p>
+<p>Убираем положительное решение - оно будет создаваться, через REST API.</p>
+<p>Проверка из 1IM</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/29">https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/29</a></p>
+<p><em>CreateITShopOrder</em>
+<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/20#TOPIC-861390">https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/20#TOPIC-861390</a></p>
+<hr />
+<p>Hi Serge,</p>
+<p>that's because the methods provided by the customizer are not listed
+under "Actions".</p>
+<p>Go to the "Object" menu, "Properties", "Methods".</p>
+<p>The Abort method can only be called internally, so you may need a
+process to execute the method for you (HandleObjectComponent &gt;
+CallMethod).</p>
+<p>HTH,</p>
+<p>Oliver</p>
+<hr />
+<p>Вызвать метод можно из процесса</p>
+<p>HandleObjectComponent - CallMethod</p>
+<hr />
+<p><img src="../media/misc/media/image15.png"
+style="width:6.63542in;height:2.60417in"
+alt="1 ロ ロ ロ ロ ロ ロ ロ ロ ロ ロ 国 ロ 国 ー ま 3g0 を u 卩 u い 一 ) 新 ! p ー u し 0 ) ・ 新 国 、 0 い 4 ー 、 0 第 物 浦 を ー し し 0 ) ・ 新 、 0 し リ 004 ・ 川 騙 、 " /></p>
+<p>{</p>
+<p>"parameters": [</p>
+<p>[
+"sa",</p>
+<p>True,</p>
+<p>"Approved",</p>
+<p>Nothing,</p>
+<p>"0"
+]</p>
+<p>]</p>
+<p>}</p>
+<p><img src="../media/misc/media/image16.png"
+style="width:5in;height:2.86458in"
+alt="rarameters Parameter Value body &quot;parameters &quot; &quot;3c93f2b9-SS24-4b24 sce0dSS10e32&quot; Description Script name Parameter values Parameter Type path body Data Type string Model Model Schema _ 9477 Parameter content type: application/json v Hide Response Try it out! Request URL &quot;parameters&quot; : &quot;Parameter value&quot; &quot;base&quot;: &quot;value&quot;: &quot;Sample value&quot; Click to paGmeter Wue FinalizeServiceRequest Response Body &quot;result&quot; : true " /></p>
+<p>{</p>
+<p>"parameters": [</p>
+<p>"Parameter value"</p>
+<p>],</p>
+<p>"base":
+"\&lt;Key&gt;\&lt;T&gt;Person\&lt;/T&gt;\&lt;P&gt;00000000-0000-0000-0000-000000000000\&lt;/P&gt;\&lt;/Key",</p>
+<p>"value": "Sample value"</p>
+<p>}</p>
+<hr />
+<p><strong>{</strong></p>
+<p><strong>"parameters": {</strong></p>
+<p><strong>"StringValue": "string",</strong></p>
+<p><strong>"IntValue": 0,</strong></p>
+<p><strong>"DateValue": "2020-01-20T09:27:22.874Z",</strong></p>
+<p><strong>"DoubleValue": 3.14,</strong></p>
+<p><strong>"BoolValue": true</strong></p>
+<p><strong>}</strong></p>
+<p><strong>}</strong></p>
+<hr />
+<p>MethodName: Value = "MakeDecision"</p>
+<p>ObjectType: Value = "PersonWantsOrg"</p>
+<p>Param1: Value = "sa"</p>
+<p>Param2: Value = \&lt;approval&gt; ("true" = granted; "false" = denied)</p>
+<p>Param3: Value = \&lt;reason for approval decision&gt;</p>
+<p>Param4: Value = \&lt;standard reason&gt;</p>
+<p>Param5: Value = \&lt;number approval steps&gt;
+(PWODecisionStep.SubLevelNumber)</p>
+<p>WhereClause: Value = "UID_PersonWantsOrg ='"&amp; \$UID_PersonWantsOrg\$
+&amp;"'"</p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/29">https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/29</a></p>
+</blockquote>
+<h1 id="_2"></h1>
+<blockquote>
+<p><strong>Первый параметр надо указывать UID пользователя, который принимает
+запрос!!!</strong></p>
+<p><strong>По событию!</strong></p>
+<p><strong>Сначала, при поступлении события, - проверять, есть ли файл такой -
+если файла нет - создаем его, если файл есть - делаем approve.</strong></p>
+<p><strong>Потом, сервис деск дает команду на генерацию события и процесс
+запускается снова - так как файл есть - будет approve.</strong></p>
+<p><img src="../media/misc/media/image17.png"
+style="width:5in;height:3.84375in"
+alt="CCCCreate Filetemp Verib&#39;file " /></p>
+<h1 id="22-fullsync"><strong>22) FULLSYNC</strong></h1>
+<p>The session variable FullSync=FALSE is set if the option Data import
+is enabled. The session variable is set to FullSync=TRUE if the option
+is disabled. Different processes, scripts and templates are only
+executed in the One Identity Manager database if FullSync=FALSE. In
+this context it means they are only synchronized with a secondary
+system. Synchronizing with a primary system ignores processes, scripts
+and templates.</p>
+</blockquote>
+<ul>
+<li><strong>Загрузка Service Items</strong></li>
+</ul>
+<!-- -->
+
+<ul>
+<li>
+<p><strong>Подготовить источник - удалить переносы строк (Alt + 010)</strong></p>
+</li>
+<li>
+<p>Создать Shopping Center</p>
+</li>
+<li>
+<p>Создать ITShop (ITShopOrg)</p>
+</li>
+<li>
+<p>Загрузить Service Categories</p>
+</li>
+<li>
+<p>Загрузить Service Items (нужно для создания Custom Target Systems
+  Groups)</p>
+</li>
+<li>
+<p>Загрузить Custom Target Systems</p>
+</li>
+<li>
+<p>Загрузить Группы Custom Target System и смапить их с Service Items
+  (AccProduct)</p>
+</li>
+<li>
+<p>Создать Shops и Customer</p>
+</li>
+<li>
+<p>Смапить политику</p>
+</li>
+<li>
+<p>Account Definitions?</p>
+</li>
+</ul>
+<blockquote></blockquote>
+<ul>
+<li><strong>Пересчитывание динамических ролей сразу</strong></li>
+</ul>
+<blockquote>
+<p>QER\Structures\DynamicGroupCheck\CalculateImmediatelyPerson</p>
+</blockquote>
+<ul>
+<li>Скорость обработки очереди</li>
+</ul>
+<blockquote>
+<p>Process query interval (StartInterval)</p>
+<p>This property defines a time interval in which One Identity Manager
+Service can request new process steps. Click on this icon to discard
+the change. The default value is 90 seconds. Suggestions for
+configuring the time interval are calculated from Job server
+statistical data.</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.2/configuration-guide/64">https://support.oneidentity.com/technical-documents/identity-manager/8.0.2/configuration-guide/64</a>&gt;</em></p>
+</blockquote>
+<ul>
+<li>Понимание уровней управления (Manage Level)</li>
+</ul>
+<blockquote>
+<p><strong>Unmanaged</strong> - из основной учетки поля берутся для создания других
+учеток, при изменении основной учетки - изменения не переносятся</p>
+<p><strong>Full Managed</strong> - изменения основной учетки отражаются в учетках
+Custom Target Systems и др</p>
+<p>В шаблонах полей учитываются уровни управления!</p>
+<p>Можно создать свой уровень управления и учитывать его в шаблонах
+вычисления полей</p>
+<p>It is possible to specify the manage level for an Account Definition
+for handling Active Directory user accounts (ADSAccounts). The user
+account’s manage level determines the scope of the properties that a
+user account inherits from an Employee.  This means that an Employee
+can have several user accounts in an Active Directory domain, e.g.:</p>
+<p>- A Default user account that inherits all properties from the
+Employee</p>
+<p>- An Administrative user account that is associated to an Employee
+but should not inherit the properties from the Employee.</p>
+<p>- A Service account that contains the home directory and the profile
+directory of the Employee but cannot inherit further properties.</p>
+<p>Identity Manager supplies a configuration for manage levels:</p>
+<p>• <strong>Unmanaged</strong>: User accounts with a manage level of “Unmanaged” are
+associated with an Employee but do not inherit properties further
+properties.  When a new user account is created and assigned to an
+Employee, the Employee’s properties are initially transferred.  If the
+Employee’s properties are changed at a later date, the changes are not
+passed on to the user account.</p>
+<p>• <strong><u>Full managed:</u></strong> User accounts with a manage level of “Full
+managed” inherit specific properties from the assigned Employee.</p>
+<p>Note: The manage levels, “Unmanaged” and “Full managed”, are taken
+into account in column templates. Define manage levels depending on
+the requirements. Then extend templates to include the methods for the
+additional manage levels.</p>
+<p>Fore more information, please refer to the Target System Base Module
+Administration Guide: <a href="https://support.oneidentity.com/technical-documents/doc1372570">Account definitions and manage
+levels</a>.</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/identity-manager/kb/148806/understanding-manage-levels">https://support.oneidentity.com/identity-manager/kb/148806/understanding-manage-levels</a>&gt;</em></p>
+</blockquote>
+<ul>
+<li>Outstanding</li>
+</ul>
+<blockquote>
+<p>Могут быть помечены объекты целевой системы, которые были удалены из
+этой целевой системы, но остались в 1IM, после синхронизации
+(потерянные объекты)</p>
+<p>The xmarkedfordeletion value <strong>bit mask definitions</strong> are:</p>
+<p>0=Marked for Delete</p>
+<p>1=Not found in TargetSystem</p>
+<p>2=Contains locked properties</p>
+<p>So Value = 2 =&gt; Bit 1 set to True =&gt; Not found in TargetSystem.</p>
+<p>Normal, means no Bit set =&gt; Value = 0</p>
+<p>And, ootb there are no other processes setting this value.</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/29084/xmarkedfordeletion-2">https://www.oneidentity.com/community/identity-manager/f/forum/29084/xmarkedfordeletion-2</a>&gt;</em></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.2/one-identity-manager-connector-user-guide/3#TOPIC-1026315">Identity Manager 8.0.2 - One Identity Manager Connector User
+Guide</a></p>
+<p>Public Sub CCC_Util_MarkAsOutstanding(XObjectKey As String)</p>
+<p>Dim OKey As New DbObjectKey(XObjectKey)</p>
+<p>Dim e As IEntity</p>
+<p>e = Session.Source.Get(OKey)</p>
+<p>e.State = VI.DB.Entities.EntityState.OutStanding</p>
+<p>Using uow = Session.StartUnitOfWork()</p>
+<p>uow.Put(e)</p>
+<p>uow.Commit()</p>
+<p>End Using</p>
+<p>End Sub</p>
+<p><em>From
+\&lt;<a href="https://www.oneidentity.com/community/identity-manager/f/forum/20582/how-to-set-unsaccountb-as-outstanding-in-vb-script-in-v7-xmarkedfordeletion/57469#57469">https://www.oneidentity.com/community/identity-manager/f/forum/20582/how-to-set-unsaccountb-as-outstanding-in-vb-script-in-v7-xmarkedfordeletion/57469#57469</a>&gt;</em></p>
+<p>Чтобы управлять объектами Outstanding, надо сначала на Custom Target
+System Type назначить управляемые таблицы</p>
+<p><img src="../media/misc/media/image18.png"
+style="width:7.3125in;height:4.94792in"
+alt="Manager - (Main Database) Database Object Yiew Help e aack • *Forward • *Database search Z New R Save Home Navigation Custom Target Systems GreenPIum I (GreenPIumI) user accounts Groups Container structure Permissions controls GreenPIum 2 (GreenPIum2) Target system synchronization: G UNSAccount8 UNSAccount81nUNSGroup8 UNSGroup8 UNSGroup81nUNSGroup8 Trouble-shootirrg Synchronization logs &amp;asic configuration data Target system types password policies Target systems Account definitions Employees x Target system types (1) Recently used GreenPIum Remove assign men ts Table UNSAccount8 x Green GreenPIum Result list Tasks Tasks Favorites O Target system type overview Change master data AssiQn svnchronizationtables Configure tables for publishitv UNSAccount81nUNSGroupa UNSGroupa UNSGroup81nUNSGroupa Add assignments Table UNSAccount8 UNSAccount81nUNSGroupa UNSGroupa UNSGroup81nUNSGroupa AccountNames AccProduct " /></p>
+<p>Зайти в Target System Syncronization и там можно уже удалять объекты</p>
+<p><img src="../media/misc/media/image19.png"
+style="width:8.09375in;height:2.88542in"
+alt="Navigation Custom Target Systems GreenPIum I (GreenPIumI) user accounts Groups Container structure Permissions contro Is GreenPIum 2 (GreenPIum2) Target system synchronization: Greenplum UNSAccountB UNSAccount81nUNSGroup8 UNSGroup8 UNSGroup81nUNSGroup8 x Result list UNSAccount8 Delete Reset Publish Table &#39;Object user accounts (4) UNSGr x GreenPIum/user0025t (GreenPIum I) GreenPIum,&#39;User006 Test (GreenPIum I) GreenPIum/user008t (GreenPIum I) GreenPIum/user024t (GreenPIum I) " /></p>
+</blockquote>
+<h1 id="_3"></h1>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-custom-target-systems/3"><span class="mark">https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-custom-target-systems/3</span></a></p>
+<blockquote>
+<p>Чтобы иметь возможность вновь создавать удаленные объекты в целевой
+системе, можно установить флаг Can be published - это даст возможность
+обрабатывать событие HandleOutstanding и инзертить в целевую систему
+объект снова</p>
+<p><img src="../media/misc/media/image20.png"
+style="width:7.63542in;height:4.15625in"
+alt="Manager - (Main Database) Database Home Object Yiew Help e aack • Forward • Navigation Custom Target Systems Synchronization logs &amp;asic configuration data Target system types password policies Target systems Account definitions Target system managers Custom target systems Employees [a Organizations Database search Z New R Save x Target system types (1) Recently used UNSGroupa Target systemtvpes: assignedtables LINSAccountE UNSAccountE1nUNSGroupE UNSGroupE UNSGroupE1nUNSGroupB Green Plum X Can be published Merge mode Condition Green GreenPIum Result list Tasks Tasks Favorites O Target system type overview Change master data • Assignsyrffronizationtables Configure tables for publishirv " /></p>
+<p><strong><em>To publish outstanding objects</em></strong></p>
+</blockquote>
+<ul>
+<li>Create a process for each table with outstanding objects you want to
+  publish. The process is triggered by the event "HandleOutstanding" and
+  provisions the objects. Use the process function "AdHocProjection" of
+  the process component "ProjectorComponent". For more detailed
+  information about defining processes, see One Identity Manager
+  Configuration Guide.</li>
+</ul>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/administration-guide-for-connecting-to-custom-target-systems/3">https://support.oneidentity.com/technical-documents/identity-manager/8.0/administration-guide-for-connecting-to-custom-target-systems/3</a>&gt;</em></p>
+</blockquote>
+<ul>
+<li></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Meta value</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IsLoaded</td>
+<td>This value specifies whether the object is loaded from the database.</td>
+</tr>
+<tr>
+<td>IsChanged</td>
+<td>This value specifies whether the object is altered when it is loaded from the database.</td>
+</tr>
+<tr>
+<td>IsDifferent</td>
+<td>This value specifies whether the new value is different from the old value. You can access to the column through: Columnname[C].</td>
+</tr>
+<tr>
+<td>IsDeleted</td>
+<td>This value specifies whether the object is marked for deletion.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Table 267: Meta Values and their Meaning</p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/84">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/84</a>&gt;</em></p>
+</blockquote>
+<h1 id="_4"></h1>
+<ul>
+<li>Расширение схемы хранимыми процедурами</li>
+</ul>
+<blockquote>
+<p>You cannot create custom functions, triggers or database procedures
+with the program Schema Extension. If you require custom functions,
+triggers or database procedures, add them with a suitable query tool
+into the database. Keep to the following conventions for name database
+components.</p>
+</blockquote>
+<ul>
+<li>
+<p>Name begin with the string CCC_.</p>
+</li>
+<li>
+<p>All names are a maximum of 30 characters long.</p>
+</li>
+<li>
+<p>It is recommended to use UpperCamelCase for as notation for the names.</p>
+</li>
+</ul>
+<blockquote>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0.3/configuration-guide/101#TOPIC-1153571">https://support.oneidentity.com/technical-documents/identity-manager/8.0.3/configuration-guide/101#TOPIC-1153571</a>&gt;</em></p>
+</blockquote>
+<ul>
+<li><strong>Multi-request resources</strong></li>
+</ul>
+<blockquote>
+<p><img src="../media/misc/media/image21.png"
+style="width:10.85417in;height:5.09375in"
+alt="Type Resources Multi-request resources Multi- requestable/unsubscribable resources Description Resources that an employee (workstation, device) may own just once. The resources can be requested in the IT Shop just once. The resources are assigned to the employees after approval has been granted. They remain assigned until the request is canceled. You can request them again a later point. Examples: phones, company cars Resources that can be requested more than once in the IT Shop. Requests are automatically canceled once approved. The resources are not explicitly assigned to employees. Example: consumables, like pens, printer paper Resources which an employee can request more than once in the IT Shop but must return them explicitly once they are no longer needed. The resources are assigned to the employees after approval has been granted. They remain assigned until the request is canceled. Example: printer, monitor Table QERResource QERReuse QERReuseUS " /></p>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/2">Identity Manager 8.0 - IT Shop Administration Guide
+(oneidentity.com)</a></p>
+</blockquote>
+<p><img src="../media/misc/media/image22.png"
+style="width:8.86458in;height:3.26042in"
+alt="Departm ents (3) aAMHHHCTpa4L4A, (000 ra3npoM TpaHcra3 CypryT) Cnyx&quot;, np&#39;•l (000. (000 ra3npoM Tpaycra3 CypryT) 000 ra3npoM TpaHcra3 CypryT General x Remo ve IT operating data TSSAccountDef: Std. user account Domain SGP ADSAccount - LIID ADSContainer 0$&#39;•lc Value - ADSAccount.LlID ADSContainer Result list Favorites ObjectKeyAp p iesTo @TS81 TData @TS81TData " /></p>
+<h1 id="it-shop-approval-policy"><strong>IT SHOP: Approval policy</strong></h1>
+<p><img src="../media/misc/media/image23.png"
+style="width:8.88542in;height:4.34375in"
+alt="Navigation [T Shop Info system ITShop Identity &amp; Access Lifecycle Shop Customers (dynamic): SGP Employee Shelf SGP Line Manager Shelf SGP Line Manager / Department Manager SGP Project Controller Trainee Shelf SGP Line Manager with preventive compliarrce Request templates ] uests Service catalog &amp;asic configuration data Processirrg status Stardard reasons Approval procedures Approval policies Predefined &quot;E Custom defined Approval workflows Employees Organizations • Business Roles Entitlements IT Shop Attestation x Approval policies (14) Recently used SGP Line Manager Department Manager Approval SGP Line Manager Approval Approval of Active Directory group change requests Approval of Active Directory group create requests Approval of Active Directory group membership requests Approval of Active Directory group membership requests Il Approval of Active Directory group remove requests Approval of system entitlement removal requests Challenge loss of role membership Compliance checking simplified New manager assignment Recipient&#39;s manager Self service Result list Favorites Tasks Tasks Validitycheck O Approval policyoverview Change master data Add to IT Shop Approval poloj Role type Prioritj Approval wo Rene-wa wo Carellation Mail template Mail template Mail template Mail template Mail template Mail template Description Error log SGP Line Manager with preventive... • General Manager with preventive compliance Approval New workflow New workflow AlignIayoLt Approval levels Add Delete Approval steps Delete Assignm ene Remove posibve Remove negative Remove reroute Remove escalaton " /></p>
+<p>Оригинал скрипта по созданию CN у пользователя в AD</p>
+<p>If Not CBool(Variables("FULLSYNC")) Then</p>
+<p>Dim CN, CNfix, DNold, DNnew,Domain, wherePart As String</p>
+<p>Dim i As Integer</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>If \$Givenname\$ \&lt;&gt; \$Givenname[o]\$ Or \$Surname\$ \&lt;&gt;
+\$Surname[o]\$ Then</p>
+<p>If \$Givenname\$\&lt;&gt;"" AndAlso \$Surname\$\&lt;&gt;"" Then</p>
+<p>CN = \$Surname\$ &amp; " " &amp; \$Givenname\$</p>
+<p>ElseIf \$Givenname\$\&lt;&gt;"" Then</p>
+<p>CN = \$Givenname\$</p>
+<p>ElseIf \$Surname\$\&lt;&gt;"" Then</p>
+<p>CN = \$Surname\$</p>
+<p>Else</p>
+<p>CN = \$cn\$</p>
+<p>End If</p>
+<p>Else</p>
+<p>CN = \$cn\$</p>
+<p>End If</p>
+<p>Dim cnLen as Integer = Base.TableDef.Columns("CN").MaxLen</p>
+<p>CN = VID_Left(CN, cnLen)</p>
+<p>If \$cn[o]\$\&lt;&gt;CN Or
+\$UID_ADSContainer[o]\$\&lt;&gt;\$UID_ADSContainer\$ Then</p>
+<p>i=1</p>
+<p>CNFix = CN</p>
+<p>If \$UID_ADSContainer[o]\$ \&lt;&gt; "" Then</p>
+<p>DNold = \$FK(UID_ADSContainer[o]).DistinguishedName\$</p>
+<p>Else</p>
+<p>DNold = \$FK(UID_ADSDomain[o]).DistinguishedName\$</p>
+<p>End If</p>
+<p>If \$UID_ADSContainer\$ \&lt;&gt; "" Then</p>
+<p>DNnew = \$FK(UID_ADSContainer).DistinguishedName\$</p>
+<p>Else</p>
+<p>DNnew = \$FK(UID_ADSDomain).DistinguishedName\$</p>
+<p>End If</p>
+<p>Domain = \$UID_ADSDomain\$</p>
+<p>If DNold \&lt;&gt; "" And DNold \&lt;&gt; DNnew Then</p>
+<p>wherePart = f.OrRelation( _</p>
+<p>f.Comparison("DistinguishedName", ADS_CreateDN("cn", CN, DNnew),
+ValType.String), _</p>
+<p>f.Comparison("DistinguishedName", ADS_CreateDN("cn", CN, DNold),
+ValType.String) _</p>
+<p>)</p>
+<p>Else</p>
+<p>wherePart = f.Comparison("DistinguishedName", ADS_CreateDN("cn", CN,
+DNnew), ValType.String)</p>
+<p>End If</p>
+<p>Do While Connection.Exists( "ADSAccount", _</p>
+<p>f.AndRelation( _</p>
+<p>f.UidComparison("UID_ADSAccount", \$UID_ADSAccount\$,
+CompareOperator.NotEqual), _</p>
+<p>f.UidComparison("UID_ADSDomain", Domain), _</p>
+<p>wherePart _</p>
+<p>))</p>
+<p>CN = VID_Left(CNfix, cnLen - (1 + CStr(i).Length)) &amp; "_" &amp; i</p>
+<p>If DNold \&lt;&gt; "" And DNold \&lt;&gt; DNnew Then</p>
+<p>wherePart = f.OrRelation( _</p>
+<p>f.Comparison("DistinguishedName", ADS_CreateDN("cn", CN, DNnew),
+ValType.String), _</p>
+<p>f.Comparison("DistinguishedName", ADS_CreateDN("cn", CN, DNold),
+ValType.String) _</p>
+<p>)</p>
+<p>Else</p>
+<p>wherePart = f.Comparison("DistinguishedName", ADS_CreateDN("cn", CN,
+DNnew), ValType.String)</p>
+<p>End If</p>
+<p>i=i+1</p>
+<p>Loop</p>
+<p>End If</p>
+<p>Value = CN</p>
+<p>End If</p>
+<p><img src="../media/misc/media/image24.png"
+style="width:7.48958in;height:3.73958in"
+alt="Synchronization Project — Magic 7 Configuration Steps Create Target System Connection (includes the Base Object) Simulate and test the configured synchronization project Configure Target System Connection Create a Schedule to automate the synchronization Create Mapping Rules and Matching Rules. Define Filters if necessary. Store your synch. project in the db and run the new synchronization workflow(s) to configure the synchronization direction " /></p>
+<p><img src="../media/misc/media/image25.png"
+style="width:6.54167in;height:3.66667in" /></p>
+<p><img src="../media/misc/media/image26.png"
+style="width:6.25in;height:3.51042in" /></p>
+<p><strong>Oracle DB</strong></p>
+<p>'
+VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-FD31AB9E86D47A4EABE18EFBF3F642A9\&lt;/P&gt;\&lt;/Key&gt;,
+CCC_Test2)</p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>References Devart.Data.Oracle.dll</p>
+<p>Imports Devart.Data.Oracle</p>
+<p>#End If</p>
+<p>Public Function GetOracleConnectionString() As String</p>
+<p>Dim cs As New Devart.Data.Oracle.OracleConnectionStringBuilder()</p>
+<p>cs.ConnectMode = Devart.Data.Oracle.OracleConnectMode.Default</p>
+<p>cs.Sid = ""</p>
+<p>cs.ServiceName = "OIM_SD"</p>
+<p>cs.UserId = "OIM_SD"</p>
+<p>cs.Password = "Password123"</p>
+<p>cs.Server = "192.168.31.15"</p>
+<p>cs.Direct = True</p>
+<p>Return cs.ConnectionString</p>
+<p>End Function</p>
+<p>Public Sub OracleExecute()</p>
+<p>Dim dbFac As IDbFactory =
+DbApp.GetFactoryByName("VI.DB.Oracle.ViOracleFactory,VI.DB.Oracle")</p>
+<p>Dim strSQL As String</p>
+<p>Dim tabnum As String</p>
+<p>Dim myP1 As New Devart.Data.Oracle.OracleParameter</p>
+<p>myP1.ParameterName = "tabno"</p>
+<p>myP1.Value = 873</p>
+<p>strSQL = "ussc_enable_employee"</p>
+<p>'strSQL = "UPDATE ADMIN.ITSM_PERSONS SET PER_JOBTitle = 'Старший
+инспектор канцелярии' WHERE PER_OID = 281478295650441"</p>
+<p>Using sf =
+DbApp.ConnectTo(GetOracleConnectionString()).Using(dbFac).BuildSessionFactory()</p>
+<p>Using dbSession = sf.OpenDbSession()</p>
+<p><strong>Try</strong></p>
+<p>dbSession.SqlExecuteStoredProcedure(strSQL)</p>
+<p>'dbSession.SqlExecuteNonQuery(strSQL)</p>
+<p><strong>Catch ex As Exception</strong></p>
+<p>'MsgBox(ex)</p>
+<p><strong>Throw New Exception("Error", ex)</strong></p>
+<p>End Try</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>End Sub</p>
+<hr />
+<p>Выполнить select</p>
+<p>'
+VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-CB992DB7D1CA2E49A313987CCF7AAA82\&lt;/P&gt;\&lt;/Key&gt;,
+CCC_Test3)</p>
+<p>Public Sub CCC_Test3()</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "select * from employee where tab_num LIKE '873'",</p>
+<p>.CommandType = CommandType.Text</p>
+<p>}</p>
+<p>Dim dr As OracleDataReader = cmd.ExecuteReader()</p>
+<p>dr.Read()</p>
+<p>MsgBox(dr.Item("ENABLED"))</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>End Sub</p>
+<p><strong>--------------------</strong></p>
+<p><strong>Выполнит процедуру</strong></p>
+<p>'
+VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-CB992DB7D1CA2E49A313987CCF7AAA82\&lt;/P&gt;\&lt;/Key&gt;,
+CCC_Test3)</p>
+<p>Public Sub CCC_Test3()</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "<strong>ussc_disable_employee</strong>",</p>
+<p>.CommandType = <strong>CommandType.StoredProcedure</strong></p>
+<p>}</p>
+<p><strong>cmd.Parameters.Add</strong>(New OracleParameter("v_login",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = "873"</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>End Sub</p>
+<hr />
+<p><strong>Создание пользователя HP, через процедуру</strong></p>
+<p>'
+VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-CB992DB7D1CA2E49A313987CCF7AAA82\&lt;/P&gt;\&lt;/Key&gt;,
+CCC_Test3)</p>
+<p>Public Sub CCC_Test3()</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "ussc_create_user",</p>
+<p>.CommandType = CommandType.StoredProcedure</p>
+<p>}</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_login", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = "ivanovsa"</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_password",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = "qwe123"</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_firstname",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = "Semen"</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_middlename",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = "Andreevich"</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_lastname",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = "Ivanov"</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_email", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = "&lt;[redacted-email]&gt;"</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_tabnum", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = "111234"</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>End Sub</p>
+<hr />
+<p><strong>Создание пользователя с переданными параметрами HP</strong></p>
+<p>Public Function CCC_UNSAccountB_HP_Insert(ByVal dbsUnsAccount As
+SingleDbObjectSnapshot) As String</p>
+<p>'return value should be the UNSAccountB.ObjectGUID</p>
+<p>'ussc_create_user - Create user account in HP Service desk</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
+<p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
+<p>Dim email As String = login + "&lt;@surgut.gazprom.ru&gt;"</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "ussc_create_user",</p>
+<p>.CommandType = CommandType.StoredProcedure</p>
+<p>}</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_login", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = login</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_password",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = "qwe123"</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_firstname",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("FirstName").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_middlename",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("CCC_MiddleName").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_lastname",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("LastName").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_email", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = email</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_tabnum", OracleDbType.VarChar,
+ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("Description").String</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>Return dbsUnsAccount.GetValue("Description").String</p>
+<p>End Function</p>
+<hr />
+<p><strong>Скрипт создания Employee HP</strong></p>
+<p>Public Function CCC_UNSAccountB_HPusers_Insert(ByVal dbsUnsAccount As
+SingleDbObjectSnapshot) As String</p>
+<p>'return value should be the UNSAccountB.ObjectGUID</p>
+<p>'ussc_create_employee - Create employee in HP Service desk</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
+<p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
+<p>Dim email As String = login + "&lt;@surgut.gazprom.ru&gt;"</p>
+<p>Dim adlogin As String = login + "&lt;@sgp.ru&gt;"</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "ussc_create_employee",</p>
+<p>.CommandType = CommandType.StoredProcedure</p>
+<p>}</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_tabnum", OracleDbType.VarChar,
+ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("Description").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_firstname",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("FirstName").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_middlename",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("CCC_MiddleName").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_lastname",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("LastName").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_position",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("CCC_Position").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_email", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = email</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_organization",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = ""</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_adlogin",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = adlogin</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_location",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = ""</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_host", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = ""</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_socket", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = ""</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_room", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = ""</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_defaulphone",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = ""</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_street", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = ""</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_oid", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = ""</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>Return dbsUnsAccount.GetValue("Description").String</p>
+<p>End Function</p>
+<hr />
+<p><strong>Скрипт добавления пользователя в группу HP</strong></p>
+<p>Public Sub CCC_UnsAccountBInUnsGroupB_HP_Add(ByVal dbsUnsAccount As
+SingleDbObjectSnapshot, ByVal dbsUnsGroup As SingleDbObjectSnapshot)</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "add_usr_role",</p>
+<p>.CommandType = CommandType.StoredProcedure</p>
+<p>}</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_login", OracleDbType.VarChar,
+ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("Accountname").String</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_role", OracleDbType.VarChar,
+ParameterDirection.Input)).Value =
+dbsUnsGroup.GetValue("UID_UNSGroupB").String</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>End Sub</p>
+<p><strong>-----</strong></p>
+<p><strong>Скрипт обновления пользователя HP</strong></p>
+<p>Public Sub CCC_UNSAccountB_HPusers_Update(ByVal dbsUnsAccount As
+SingleDbObjectSnapshot)</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim strLOGFileName As String = "c:\data\HP\hp.log"</p>
+<p>Dim tabnum As String = dbsUnsAccount.GetValue("Description").String</p>
+<p>Dim tabnum_correct As String = tabnum.Substring(3)</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>If dbsUnsAccount.GetValue("LastName").String \&lt;&gt; "" Then</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "USSC_UPDATE_EMP_LASTNAME",</p>
+<p>.CommandType = CommandType.StoredProcedure</p>
+<p>}</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_tabnum", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = tabnum_correct</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_lastname",
+OracleDbType.VarChar, ParameterDirection.Input)).Value =
+dbsUnsAccount.GetValue("LastName").String</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>End If</p>
+<p>If dbsUnsAccount.GetValue("Accountname").String \&lt;&gt; "" Then</p>
+<p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
+<p>Dim adlogin As String = login + "&lt;@sgp.ru&gt;"</p>
+<p>Dim cmd1 As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "USSC_UPDATE_EMP_ADLOGIN",</p>
+<p>.CommandType = CommandType.StoredProcedure</p>
+<p>}</p>
+<p>cmd1.Parameters.Add(New OracleParameter("v_tabnum",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = tabnum_correct</p>
+<p>cmd1.Parameters.Add(New OracleParameter("v_adlogin",
+OracleDbType.VarChar, ParameterDirection.Input)).Value = adlogin</p>
+<p>Try</p>
+<p>'VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; TABNUM: {1},
+AD_LOGIN: {2}", Now.ToString(), tabnum, adlogin))</p>
+<p>cmd1.ExecuteNonQuery()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>End If</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>End Sub</p>
+<hr />
+<p><strong>Скрипт отключения пользователя HP</strong></p>
+<p>Public Function CCC_UNSAccountB_HPusers_Disabled(ByVal tabnum As String)
+As String</p>
+<p>Dim oradb As String = "Data Source=192.168.31.15;User
+Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim strLOGFileName As String = "c:\data\HP\hp.log"</p>
+<p>'Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
+<p>Using OracleConnection = New OracleConnection(oradb)</p>
+<p>OracleConnection.Open()</p>
+<p>Dim cmd As New OracleCommand With {</p>
+<p>.Connection = OracleConnection,</p>
+<p>.CommandText = "USSC_DISABLE_EMPLOYEE",</p>
+<p>.CommandType = CommandType.StoredProcedure</p>
+<p>}</p>
+<p>cmd.Parameters.Add(New OracleParameter("v_tabnum", OracleDbType.VarChar,
+ParameterDirection.Input)).Value = tabnum</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>OracleConnection.Dispose()</p>
+<p>End Using</p>
+<p>Return tabnum</p>
+<p>End Function</p>
+<hr />
+<p><strong>Directum создание пользователя (не робит, так как в процедуре
+создается учетка в SQL и доступ с Windows аутентификацией)</strong></p>
+<p>Public Function CCC_UNSAccountB_Directum_Insert(ByVal dbsUnsAccount As
+SingleDbObjectSnapshot) As String</p>
+<p>Dim connetionString As String = "Data Source=192.168.31.19\MSSQLSERVER;
+Initial Catalog=DIRECTUM;Integrated Security=false; User
+ID=Administrator;Password=;"</p>
+<p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
+<p>Using cmd As New System.Data.SqlClient.SqlCommand("INSERT INTO Employees
+(Name, Department, Salary) VALUES (@Name, @Department, @Salary)", conn)</p>
+<p>cmd.CommandType = CommandType.Text</p>
+<p>cmd.Parameters.AddWithValue("@Name", _name)</p>
+<p>cmd.Parameters.AddWithValue("@City", _departmenmt)</p>
+<p>cmd.Parameters.AddWithValue("@City", _salary)</p>
+<p>conn.Open()</p>
+<p>Dim i As Integer = cmd.ExecuteNonQuery()</p>
+<p>conn.Close()</p>
+<p>Return CType(i, String)</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>End Function</p>
+<p><strong>-------------------</strong></p>
+<p><strong>Directum обновление пользователя</strong></p>
+<p>Public Sub CCC_UNSAccountB_Directum_Update(ByVal dbsUnsAccount As
+SingleDbObjectSnapshot)</p>
+<p>Dim strLOGFileName As String = "c:\data\Directum\Directum.log"</p>
+<p>Dim connetionString As String = "Data Source=192.168.31.19; Initial
+Catalog=DIRECTUM;Integrated Security=false; User
+ID=Administrator;Password=[REDACTED];"</p>
+<p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
+<p>Using cmd As New System.Data.SqlClient.SqlCommand("OIM_UpdateUser",
+conn)</p>
+<p>cmd.CommandType = CommandType.StoredProcedure</p>
+<p>cmd.Parameters.AddWithValue("@LoginName",
+dbsUnsAccount.GetValue("Accountname").String)</p>
+<p>cmd.Parameters.AddWithValue("@NewName",
+dbsUnsAccount.GetValue("DisplayName").String)</p>
+<p>'cmd.Parameters.Add(New System.Data.SqlClient.SqlParameter("@LoginName",
+login))</p>
+<p>'cmd.Parameters.Add(New System.Data.SqlClient.SqlParameter("@NewName",
+newname))</p>
+<p>conn.Open()</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>conn.Close()</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>End Sub</p>
+<hr />
+<p><strong>Directum отключение пользователя</strong></p>
+<p>Public Function CCC_UNSAccountB_Directum_Disabled(ByVal login As String)
+As String</p>
+<p>Dim strLOGFileName As String = "c:\data\Directum\Directum.log"</p>
+<p>Dim connetionString As String = "Data Source=192.168.31.19; Initial
+Catalog=DIRECTUM;Integrated Security=false; User
+ID=Administrator;Password=[REDACTED];"</p>
+<p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
+<p>Using cmd As New System.Data.SqlClient.SqlCommand("OIM_DisableUser",
+conn)</p>
+<p>cmd.CommandType = CommandType.StoredProcedure</p>
+<p>cmd.Parameters.AddWithValue("@LoginName", login)</p>
+<p>conn.Open()</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; User: {1} is
+disabled", Now.ToString(), login))</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>conn.Close()</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>Return login</p>
+<p>End Function</p>
+<hr />
+<p><strong>Directum включение пользователя</strong></p>
+<p>Public Function CCC_UNSAccountB_Directum_Enabled(ByVal login As String)
+As String</p>
+<p>Dim strLOGFileName As String = "c:\data\Directum\Directum.log"</p>
+<p>Dim connetionString As String = "Data Source=192.168.31.19; Initial
+Catalog=DIRECTUM;Integrated Security=false; User
+ID=Administrator;Password=[REDACTED];"</p>
+<p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
+<p>Using cmd As New System.Data.SqlClient.SqlCommand("OIM_EnableUser",
+conn)</p>
+<p>cmd.CommandType = CommandType.StoredProcedure</p>
+<p>cmd.Parameters.AddWithValue("@LoginName", login)</p>
+<p>conn.Open()</p>
+<p>Try</p>
+<p>cmd.ExecuteNonQuery()</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; User: {1} is
+enabled", Now.ToString(), login))</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now.ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>conn.Close()</p>
+<p>End Using</p>
+<p>End Using</p>
+<p>Return login</p>
+<p>End Function</p>
+<hr />
+<p><strong>Скрипт удаления членства из группы AD</strong></p>
+<p>Public Sub ССС_ADSAccountInADSGroup_Del(ByVal UID_ADSGroup As String,
+ByVal UID_ADSAccount As String)</p>
+<p>Dim strLOGFileName = "c:\temp\logs\temp.txt"</p>
+<p>Dim ADSAccountInADSGroup_query = Query.From("ADSAccountInADSGroup") _</p>
+<p>.Where(Function(t) t.Column("UID_ADSGroup") = UID_ADSGroup And
+t.Column("UID_ADSAccount") = UID_ADSAccount) _</p>
+<p>.SelectAll()</p>
+<p>Dim ADSAccountInADSGroups =
+Session.Source.GetCollection(ADSAccountInADSGroup_query,
+EntityCollectionLoadType.Bulk)</p>
+<p>Using uow = Session.StartUnitOfWork()</p>
+<p>' Walk through the list of all persons</p>
+<p>For Each ADSAccountInADSGroup As IEntity In ADSAccountInADSGroups</p>
+<p>' Mark for deletion</p>
+<p>ADSAccountInADSGroup.MarkForDeletion()</p>
+<p>' put the object in the unit of work</p>
+<p>uow.Put(ADSAccountInADSGroup)</p>
+<p>Next</p>
+<p>' All person objects will be saved here!</p>
+<p>Try</p>
+<p>uow.Commit()</p>
+<p>Catch ex As Exception</p>
+<p>VID_Write2Log(strLOGFileName, String.Format("{0}, ==&gt; ERROR: {1}",
+Now().ToString(), ViException.ErrorString(ex)))</p>
+<p>End Try</p>
+<p>End Using</p>
+<p>End Sub</p>
+<p><strong>---------</strong></p>
+<h1 id="bulk-delete-outstanding-objects">Bulk Delete Outstanding Objects</h1>
+<p>Public Sub CCC_Entity_DeleteOutStandingFromDB(ObjectKeys As
+IEnumerable(Of String))</p>
+<p>Dim f = Connection.SqlFormatter</p>
+<p>' Set connection variable to hint about the management of OutStanding
+objects</p>
+<p>Session.Variables.Put("ManageOutstanding", True)</p>
+<p>Session.Variables.Put("NoCollisionTest", True)</p>
+<p>Session.Variables.Put("ManageOutstandingOperation", "DELETE")</p>
+<p>' Group the ObjectKeys by table</p>
+<p>Dim keysByTable = ObjectKeys _</p>
+<p>.Select(Function(k) New DbObjectKey(k)) _</p>
+<p>.GroupBy(Function(k) k.Tablename, StringComparer.OrdinalIgnoreCase)</p>
+<p>Try</p>
+<p>' Create a unit of work here to optimize execution</p>
+<p>Using uow = Session.StartUnitOfWork()</p>
+<p>' Iterate through the keys for each table</p>
+<p>For Each tableEntry In keysByTable</p>
+<p>' Partition the workload into junks defined by the limit of the IN
+clause.</p>
+<p>For Each part In tableEntry.Partition(f.InClauseLimit)</p>
+<p>' Define the query for the current partition</p>
+<p>Dim q = Query _</p>
+<p>.From(tableEntry.Key) _</p>
+<p>.Where(Function(t) t.Column("XObjectKey").In(part)) _</p>
+<p>.SelectNonLobs()</p>
+<p>' Fetch a partition of the data using Bulk collection</p>
+<p>Dim entities = Session.Source().GetCollection(q,
+EntityCollectionLoadType.Bulk)</p>
+<p>' For each entity of the collection</p>
+<p>For Each e In entities</p>
+<p>' Call the customizer method to delete the outstanding object</p>
+<p>e.CallMethod("DeleteOutstanding")</p>
+<p>' put the entity to save in the unit of work</p>
+<p>uow.Put(e)</p>
+<p>Next</p>
+<p>Next</p>
+<p>Next</p>
+<p>' Write the changes to the database</p>
+<p>uow.Commit()</p>
+<p>End Using</p>
+<p>Finally</p>
+<p>' Remove the connection variable that hints about the management of
+OutStanding objects</p>
+<p>Session.Variables.Remove("ManageOutstanding")</p>
+<p>Session.Variables.Remove("NoCollisionTest")</p>
+<p>Session.Variables.Remove("ManageOutstandingOperation")</p>
+<p>End Try</p>
+<p>End Sub</p>
+<p><strong>--------------</strong></p>
+<p><strong>API</strong></p>
+<p>\$authdata = @{AuthString =
+"Module=DialogUser;User=alex;Password=" }</p>
+<p>\$authJson = ConvertTo-Json \$authdata -Depth 2</p>
+<p># Login (important, pass the NAME for your session variable in
+-SessionVariable)</p>
+<p>Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/auth/apphost">https://t-oneim-4.sgp.ru/AppServer/auth/apphost</a>" -Body
+\$authJson.ToString() -Method Post -UseDefaultCredentials -Headers
+@{Accept = "application/json" } -SessionVariable wsession</p>
+<p>#"https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471"</p>
+<p>Invoke-WebRequest -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471">https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471</a>"
+-WebSession \$wsession</p>
+<p><strong>-------</strong></p>
+<p><strong>API</strong></p>
+<p>\$authdata = @{AuthString =
+"Module=DialogUser;User=alex;Password=[REDACTED]" }</p>
+<p>\$authJson = ConvertTo-Json \$authdata -Depth 2</p>
+<p># Login (important, pass the NAME for your session variable in
+-SessionVariable)</p>
+<p>Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/auth/apphost">https://t-oneim-4.sgp.ru/AppServer/auth/apphost</a>" -Body
+\$authJson.ToString() -Method Post -UseDefaultCredentials -Headers
+@{Accept = "application/json" } -SessionVariable wsession</p>
+<p>#"https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471"</p>
+<p>#Get Department</p>
+<p>Invoke-WebRequest -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471">https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471</a>"
+-WebSession \$wsession</p>
+<p>#Get list users with where</p>
+<p>\$a = Invoke-WebRequest -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entities/Person?lastname=Тестовый4&amp;limit=2">https://t-oneim-4.sgp.ru/AppServer/api/entities/Person?lastname=Тестовый4&amp;limit=2</a>"
+-WebSession \$wsession</p>
+<p>#Create a new object and return URI of new object</p>
+<p>\$FirstName = "Пользователь"</p>
+<p>\$LastName = "Тестовый4"</p>
+<p>\$MiddleName = "Иванович"</p>
+<p>\$UID_Department = "10013364"</p>
+<p>\$body = @{values = @{FirstName = \$FirstName; LastName = \$LastName;
+MiddleName = \$MiddleName; UID_Department = \$UID_Department; IsExternal
+= 0; BirthDate = "1993-05-14"; Gender = 1 } } | ConvertTo-Json</p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person</a>" -WebSession
+\$wsession -Method Post -Body \$body -ContentType "application/json;
+charset=utf-8").uri</p>
+<p>#Change Employee Description</p>
+<p>\$Description = "Мастер цеха"</p>
+<p>\$body = @{values = @{Description = \$Description } } | ConvertTo-Json</p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession \$wsession -Method Put -Body \$body -ContentType
+"application/json; charset=utf-8").uri</p>
+<p>#Change Employee Department</p>
+<p>\$Department = "10013365"</p>
+<p>\$body = @{values = @{UID_Department = \$Department } } |
+ConvertTo-Json</p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession \$wsession -Method Put -Body \$body -ContentType
+"application/json; charset=utf-8").uri</p>
+<p>#Deactivation</p>
+<p>\$Deactivation_start = [DateTime]::ParseExact('2019.11.24 18:55:00',
+'yyyy.MM.dd HH:mm:ss', \$null)</p>
+<p>\$Deactivation_start1 = \$Deactivation_start.ToString("yyyy-MM-dd
+HH:mm:ss.000")</p>
+<p>\$Deactivation_end = [DateTime]::ParseExact('2019.12.06 18:55:00',
+'yyyy.MM.dd HH:mm:ss', \$null)</p>
+<p>\$Deactivation_end1 = \$Deactivation_end.ToString("yyyy-MM-dd
+HH:mm:ss.000")</p>
+<p>\$body = @{values = @{DeactivationStart = \$Deactivation_start1;
+DeactivationEnd = \$Deactivation_end1 } } | ConvertTo-Json</p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession \$wsession -Method Put -Body \$body -ContentType
+"application/json; charset=utf-8").uri</p>
+<p>#Delete Employee</p>
+<p>\$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession \$wsession -Method Delete -Body \$body -ContentType
+"application/json; charset=utf-8").uri</p>
+<p>#logout</p>
+<p>Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.sgp.ru/AppServer/auth/logout">https://t-oneim-4.sgp.ru/AppServer/auth/logout</a>" -WebSession
+\$wsession -Method Post</p>
+<p><strong>------</strong></p>
+<p><strong>Central Account</strong></p>
+<p>'\$CustomProperty01\$</p>
+<p>If CStr(\$ImportSource\$) \&lt;&gt; "ADS" And CStr(\$Lastname\$) \&lt;&gt; "" And
+CStr(\$Firstname\$) \&lt;&gt; "" And CStr(\$Middlename\$) \&lt;&gt; "" And _</p>
+<p>(Not CBool(Connection.Variables.Get("FULLSYNC")) Or
+CStr(\$ImportSource\$).StartsWith("EBS") Or
+CStr(\$ImportSource\$).StartsWith("SAP") ) Then</p>
+<p>If
+CStr(Connection.GetConfigParm("QER\Person\CentralAccountGlobalUnique"))="1"
+Then</p>
+<p>Value = CCC_AE_BuildCentralAccountGlobalUnique(
+GetValue("UID_Person").String, \$Lastname\$, \$Firstname\$,
+\$Middlename\$)</p>
+<p>Else</p>
+<p>Value = CCC_AE_BuildCentralAccount( GetValue("UID_Person").String,
+\$Lastname\$, \$Firstname\$, \$Middlename\$)</p>
+<p>End If</p>
+<p>End If</p>
+<p>If CStr(\$ImportSource\$) \&lt;&gt; "ADS" And CStr(\$Lastname\$) \&lt;&gt; "" And
+CStr(\$Firstname\$) \&lt;&gt; "" And CStr(\$Middlename\$) = "" And _</p>
+<p>(Not CBool(Connection.Variables.Get("FULLSYNC1")) Or
+CStr(\$ImportSource\$).StartsWith("EBS") Or
+CStr(\$ImportSource\$).StartsWith("SAP") ) Then</p>
+<p>If
+CStr(Connection.GetConfigParm("QER\Person\CentralAccountGlobalUnique"))="1"
+Then</p>
+<p>Value = CCC_AE_BuildCentralAccountGlobalUnique(
+GetValue("UID_Person").String, \$Lastname\$, \$Firstname\$,
+\$Middlename\$)</p>
+<p>Else</p>
+<p>Value = CCC_AE_BuildCentralAccount( GetValue("UID_Person").String,
+\$Lastname\$, \$Firstname\$, \$Middlename\$)</p>
+<p>End If</p>
+<p>End If</p>
+<hr />
+<p><strong>Global Unique</strong></p>
+<p>'
+VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-65B50C3A86A10C45AB53FD0B36D6FD70\&lt;/P&gt;\&lt;/Key&gt;,
+CCC_AE_BuildCentralAccount)</p>
+<p>''' \&lt;summary&gt;</p>
+<p>''' Returns the central user account of a person (for use in templates).</p>
+<p>''' \&lt;/summary&gt;</p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports System.Data</p>
+<p>#End If</p>
+<p>Public Function CCC_AE_BuildCentralAccount( _</p>
+<p>ByVal uid_person As String, _</p>
+<p>ByVal Lastname As String, _</p>
+<p>ByVal Firstname As String, _</p>
+<p>ByVal Middlename As String) As String</p>
+<p>If String.IsNullOrEmpty(Lastname) AndAlso
+String.IsNullOrEmpty(Firstname) Then</p>
+<p>Return String.Empty</p>
+<p>End If</p>
+<p>Dim i As Int32</p>
+<p>Dim accnt As String = ""</p>
+<p>Dim accntPrefix As String = ""</p>
+<p>Dim personAccnt As String = ""</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>If Firstname.Length &gt; 0 And Lastname.Length &gt; 0 And Middlename.Length
+&gt; 0 Then</p>
+<p>accnt = Lastname &amp; Firstname.Substring(0,1) &amp; Middlename.Substring(0,1)</p>
+<p>ElseIf Firstname.Length &gt; 0 And Lastname.Length &gt; 0 Then</p>
+<p>accnt = Lastname &amp; Firstname.Substring(0,1)</p>
+<p>ElseIf Firstname.Length &gt; 0 Then</p>
+<p>accnt = Firstname</p>
+<p>Else</p>
+<p>accnt = Lastname</p>
+<p>End If</p>
+<p>accnt = VI_AE_FormatConvertUmlaut_Sonderzeichen(accnt)</p>
+<p>accnt = CCC_AE_FormatConvert_to_Latin(accnt)</p>
+<p>accntPrefix = accnt</p>
+<p>' load collection of all persons having the same account (prefix)</p>
+<p>Dim persons As IColDbObject = Connection.CreateCol("Person")</p>
+<p>persons.Prototype.WhereClause = f.AndRelation( _</p>
+<p>f.Comparison("CentralAccount",accntPrefix + "%",
+ValType.String,CompareOperator.Like,FormatterOptions.IgnoreCase), _</p>
+<p>f.UidComparison("UID_Person", uid_person, CompareOperator.NotEqual) _</p>
+<p>)</p>
+<p>persons.Prototype.Columns("CentralAccount").IsDisplayItem = True</p>
+<p>persons.Load()</p>
+<p>' put them in a list of centralaccounts</p>
+<p>Dim existing As New List(Of String)</p>
+<p>For Each person As IColElem In persons</p>
+<p>personAccnt = person.GetValue("CentralAccount").String</p>
+<p>If Not existing.Contains(personAccnt,
+StringComparer.InvariantCultureIgnoreCase) Then</p>
+<p>existing.Add(personAccnt)</p>
+<p>End If</p>
+<p>Next</p>
+<p>' check if centralaccount is already in use, if yes</p>
+<p>' start adding an index until we found a free centralaccount</p>
+<p>While True</p>
+<p>If Not existing.Contains(accnt,
+StringComparer.InvariantCultureIgnoreCase) Then</p>
+<p>'Return accnt.ToUpperInvariant()</p>
+<p>Return accnt</p>
+<p>End If</p>
+<p>i = i + 1</p>
+<p>accnt = accntPrefix &amp; CStr(i)</p>
+<p>End While</p>
+<p>Return String.Empty</p>
+<p>End Function</p>
+<p>'
+VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-00E4BBC650D89941A84A1105CEC6E021\&lt;/P&gt;\&lt;/Key&gt;,
+CCC_AE_BuildCentralAccountGlobalUnique)</p>
+<p>''' \&lt;summary&gt;</p>
+<p>''' Finds the central account that is already assigned to an employee or
+a user account in a target system.</p>
+<p>''' \&lt;/summary&gt;</p>
+<p>#If Not SCRIPTDEBUGGER Then</p>
+<p>Imports System.Collections.Generic</p>
+<p>Imports System.Data</p>
+<p>#End If</p>
+<p>Public Function CCC_AE_BuildCentralAccountGlobalUnique(ByVal uid_person
+As String, ByVal Lastname As String, ByVal Firstname As String, ByVal
+Middlename As String) As String</p>
+<p>Dim i As Int32</p>
+<p>Dim account As String</p>
+<p>Dim accountPrefix As String</p>
+<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
+<p>If String.IsNullOrEmpty(Lastname) AndAlso
+String.IsNullOrEmpty(Firstname) Then</p>
+<p>Return String.Empty</p>
+<p>End If</p>
+<p>CCC_AE_BuildCentralAccountGlobalUnique = String.Empty</p>
+<p>If Firstname.Length &gt; 0 And Lastname.Length &gt; 0 And Middlename.Length
+&gt; 0 Then</p>
+<p>account = Lastname &amp; Firstname.Substring(0,1) &amp;
+Middlename.Substring(0,1)</p>
+<p>ElseIf Firstname.Length &gt; 0 And Lastname.Length &gt; 0 Then</p>
+<p>account = Lastname &amp; Firstname.Substring(0,1)</p>
+<p>ElseIf Firstname.Length &gt; 0 Then</p>
+<p>account = Firstname</p>
+<p>Else</p>
+<p>account = Lastname</p>
+<p>End If</p>
+<p>account = VI_AE_FormatConvertUmlaut_Sonderzeichen(account)</p>
+<p>account = CCC_AE_FormatConvert_to_Latin(account)</p>
+<p>accountPrefix = account</p>
+<p>'fill existing addresses in a list</p>
+<p>Dim existing As New List(Of String)</p>
+<p>Dim dummy As New Object()</p>
+<p>Dim dummyPerson As ISingleDbObject</p>
+<p>dummyPerson = Connection.CreateSingle("Person")</p>
+<p>Dim pattern As String = accountPrefix &amp; "%"</p>
+<p>Dim myObjectKey As New DbObjectKey("Person", uid_person)</p>
+<p>Dim accountName As String</p>
+<p>Dim objectKeyString As String</p>
+<p>Dim objectKey As DbObjectKey</p>
+<p>Using rd As IDataReader =
+CType(dummyPerson.Custom.CallMethod("SearchCentralAccount", pattern),
+IDataReader)</p>
+<p>While rd.Read()</p>
+<p>accountName = rd.GetString(rd.GetOrdinal("AccountName"))</p>
+<p>objectKeyString = rd.GetString(rd.GetOrdinal("ObjectKeyPerson"))</p>
+<p>If Not String.IsNullOrEmpty(objectKeyString) Then</p>
+<p>objectKey = New DbObjectKey(objectKeyString)</p>
+<p>'only addresses which not belong to the actual employee will be
+considered</p>
+<p>If myObjectKey.Equals(objectKey) Then</p>
+<p>Continue While</p>
+<p>End If</p>
+<p>End If</p>
+<p>existing.Add(accountName)</p>
+<p>End While</p>
+<p>End Using</p>
+<p>While True</p>
+<p>Dim centralAccount As String = account</p>
+<p>' Does not exists?</p>
+<p>If Not existing.Contains(centralAccount,
+StringComparer.InvariantCultureIgnoreCase) Then</p>
+<p>'Return centralAccount.ToUpperInvariant()</p>
+<p>Return centralAccount</p>
+<p>End If</p>
+<p>' next trial</p>
+<p>i = i + 1</p>
+<p>account = accountPrefix &amp; CStr(i)</p>
+<p>End While</p>
+<p>End Function</p>
+<p><strong>------</strong></p>
+<p>--Сотрудники у которых &gt; 1 учетки в АД</p>
+<p>SELECT p.CentralAccount,LastName, FirstName, MiddleName,
+count(ad.UID_Person) AS CountADAcc FROM Person AS p</p>
+<p>LEFT JOIN ADSAccount AS ad ON p.UID_Person = ad.UID_Person</p>
+<p>GROUP BY p.CentralAccount,FirstName, LastName, MiddleName</p>
+<p>HAVING count(ad.UID_Person) &gt;1</p>
+<p>--Сотрудники у которых нет учетки в АД</p>
+<p>SELECT p.CentralAccount,LastName, FirstName, MiddleName,
+count(ad.UID_Person) AS CountADAcc FROM Person AS p</p>
+<p>LEFT JOIN ADSAccount AS ad ON p.UID_Person = ad.UID_Person</p>
+<p>GROUP BY p.CentralAccount,FirstName, LastName, MiddleName</p>
+<p>HAVING count(ad.UID_Person) =0</p>
+<p><strong>------</strong></p>
+<p>Скрипт создания учетки в HP</p>
+<p>CCC_UNSAccountB_HP_Insert</p>
+<hr />
+<p><strong>Таблица AdSAccount поле DisplayName</strong></p>
+<p>If Not CBool(Variables("FULLSYNC")) _</p>
+<p>AndAlso (\$GivenName[o]\$ \&lt;&gt; \$GivenName\$ _</p>
+<p>OrElse \$Surname[o]\$ \&lt;&gt; \$Surname\$ orElse
+\$FK(UID_Person).Middlename\$ \&lt;&gt; \$FK(UID_Person).Middlename[o]\$)
+Then</p>
+<p>If \$Givenname\$\&lt;&gt;"" AndAlso \$Surname\$\&lt;&gt;"" AndAlso
+\$FK(UID_Person).Middlename\$\&lt;&gt;"" Then</p>
+<p>Value = \$Surname\$ &amp; " " &amp; \$Givenname\$ &amp; " " &amp;
+\$FK(UID_Person).Middlename\$</p>
+<p>ElseIf \$FK(UID_Person).Middlename\$="" AndAlso \$Givenname\$\&lt;&gt;""
+AndAlso \$Surname\$\&lt;&gt;"" Then</p>
+<p>Value = \$Surname\$ &amp; " " &amp; \$Givenname\$</p>
+<p>ElseIf \$Givenname\$\&lt;&gt;"" Then</p>
+<p>Value = \$Givenname\$</p>
+<p>ElseIf \$Surname\$\&lt;&gt;"" Then</p>
+<p>Value = \$Surname\$</p>
+<p>End If</p>
+<p>End If</p>
+<hr />
+<p><strong>Таблица Person поле DefaultEmailAddress</strong></p>
+<p>#If EX2K Or NOTES Then</p>
+<p>Dim defaultMailAddress As String</p>
+<p>If Len(\$CentralAccount\$) &gt; 0 AndAlso Len (\$UID_Person\$) &gt; 0 Then</p>
+<p>defaultMailAddress =
+VI_AE_CreatedefaultMailAddress(\$centralaccount\$,\$uid_person\$)</p>
+<p>' check if mail address is valid</p>
+<p>If VID_IsSMTPAddress(defaultMailAddress) Then</p>
+<p>Value = defaultMailAddress</p>
+<p>End If</p>
+<p>End If</p>
+<p>#End If</p>
+<p><img src="../media/misc/media/image27.png"
+style="width:6.17708in;height:9.75in"
+alt="Ink Drawings Ink Drawings Ink Drawings Ink Drawings Ink Drawings Ink Drawings Ink Drawings " /></p>
+<p><img src="../media/misc/media/image28.png"
+style="width:5.60417in;height:0.60417in"
+alt="Ink Drawings Ink Drawings Ink Drawings " /></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

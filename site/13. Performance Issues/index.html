@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>13. Performance Issues - 1IM Wiki</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">1IM Wiki</a>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p><strong>13. Performance Issues</strong></p>
+<p>19 марта 2024 г.</p>
+<p>11:45</p>
+<p><strong>Troubleshooting Performance Issues (4342412)</strong></p>
+<p><a href="https://support.oneidentity.com/identity-manager-data-governance-edition/kb">Return</a></p>
+<p>Did this article solve an issue for you?</p>
+<p>[Select Rating]</p>
+<ul>
+<li>
+<p>Title<br />
+  Troubleshooting Performance Issues</p>
+</li>
+<li>
+<p>Description<br />
+  Some initial steps and information to gather to assist with
+  troubleshooting performance issues.  </p>
+</li>
+</ul>
+<p>Please provide all relevant information to Support when opening a new
+  service request.</p>
+<ul>
+<li>Resolution<br />
+  **Troubleshooting steps/questions:  </li>
+</ul>
+<p>*1. Determine where the performance issue is, i.e., front-end tools
+  like Manager; IT Shop; dbqueue.<br />
+    *
+  Turn on SQL logging:<br />
+    **
+  <a href="https://support.oneidentity.com/identity-manager/kb/261074/how-to-enable-trace-logging">How to Enable TRACE
+  Logging</a>  </p>
+<p><strong><em>2. Identity Manager Performance (including the web portal and
+  DBQueue processing) is very often a result of database performance.<br />
+    *
+  Is the Database server meeting the minimum system
+  requirements? (Please refer to the Release Notes for the specific
+  version)  **
+  Execute </em>*Select * from qbmvsystemoverview</strong> to confirm database
+  server statistics, as well as the One Identity Manager (1IM) version
+  and module information.  Please save as .csv file.  </p>
+<p>See also: <a href="https://support.oneidentity.com/identity-manager/kb/290330/how-to-configure-settings-as-per-the-system-information-overview">How to configure settings as per the System Information
+  Overview</a>  </p>
+<p>***3. Is there a long running query (or queries) in the SQL logs?
+   What happens when this is run manually?<br />
+    *
+  Create an actual execution plan for this query (see below).<br />
+    **
+  Execution plans provide feedback for DBAs on why a query may be
+  performing badly, how to improve this, i.e. indexes, defragmentation,
+  etc.  DBAs should review the actual execution plan and provide a copy
+  to Support for review.  </p>
+<p><strong>Note:</strong> Ensure this is the actual execution plan: <a href="https://docs.microsoft.com/en-us/sql/relational-databases/performance/display-an-actual-execution-plan?view=sql-server-ver15">Display an Actual
+  Execution
+  Plan</a>.  </p>
+<p>***4. Is the SQL server running on a virtual system?<br />
+    ***
+  <a href="https://support.oneidentity.com/identity-manager/kb/96167">Identity Manager Database Virtualization
+  Recommendations</a>  </p>
+<p>**Synchronization Performance<br />
+    **
+  Several factors can contribute to how long a synchronization with a
+  target system takes to complete.  </p>
+<ul>
+<li>
+<p>Are there outstanding patches for the synchronization project?  In
+  the Synchronization Editor go to <strong>Edit | Update synchronization
+  project... </strong>then apply any applicable patches.  </p>
+</li>
+<li>
+<p>Is the latest service pack installed?  Ensure the latest service
+  pack has been applied so that the synchronization is not affected by
+  any resolved issues.  Check for existing patches as well for the
+  applicable version: <a href="https://support.oneidentity.com/identity-manager/download-new-releases">Identity Manager - Download
+  Software</a>.  </p>
+</li>
+<li>
+<p>Support may request the synchronization project for further
+  review: <a href="https://support.oneidentity.com/identity-manager/kb/187752/how-to-export-the-synchronization-project-shell-from-the-synchronization-editor">How to export the Synchronization Project shell from the
+  Synchronization
+  Editor</a>  </p>
+</li>
+</ul>
+<p><strong>Database Performance:<br />
+    **
+  For version 8.x and above please run </strong>Select * from
+  qbmvsystemoverview <strong>and review (as well as provide to Support). 
+  Additionally, review the System Information Overview (available from
+  the </strong>Help<strong> menu in front end tools: </strong>Help | Info...** ) <br />
+  The recommended setup values for DBServer are included in the overview
+  where indicated by (rec.), for example:  </p>
+<ul>
+<li>maximum degree of parallelism ( rec. 2 \&lt;= maxdop \&lt;= 2)  </li>
+<li>optimize for ad hoc workload (rec. 1)  </li>
+<li>Cost Threshold for Parallelism (rec. &gt;= 60)  </li>
+</ul>
+<p><strong>Input/Output (I/O):</strong>   </p>
+<p>SQL Server is usually high in I/O activity and in most cases the
+  database is larger than the amount of memory installed on a server and
+  therefore SQL Server has to pull data from the disk to satisfy query
+  requirements.  For more information please see: <a href="https://www.mssqltips.com/sqlservertutorial/254/investigating-io-bottlenecks/">Investigating I/O
+  bottlenecks</a>.  </p>
+<p>The following query will provide latency values for databases.  The
+  Average Total Latency column represents the total latency.<br />
+<br />
+  SELECT  DB_NAME(vfs.database_id) AS database_name ,physical_name AS
+  [Physical Name],<br />
+          size_on_disk_bytes / 1024 / 1024. AS [Size of Disk] ,<br />
+          CAST(io_stall_read_ms/(1.0 + num_of_reads) AS NUMERIC(10,1))
+  AS [Average Read latency] ,<br />
+          CAST(io_stall_write_ms/(1.0 + num_of_writes) AS NUMERIC(10,1))
+  AS [Average Write latency] ,<br />
+          CAST((io_stall_read_ms + io_stall_write_ms)<br />
+  /(1.0 + num_of_reads + num_of_writes) <br />
+  AS NUMERIC(10,1)) AS [Average Total Latency],<br />
+          num_of_bytes_read / NULLIF(num_of_reads, 0) AS    [Average
+  Bytes Per Read],<br />
+          num_of_bytes_written / NULLIF(num_of_writes, 0) AS   [Average
+  Bytes Per Write]<br />
+  FROM    sys.dm_io_virtual_file_stats(NULL, NULL) AS vfs<br />
+    JOIN sys.master_files AS mf <br />
+      ON vfs.database_id = mf.database_id AND vfs.file_id = mf.file_id<br />
+  ORDER BY [Average Total Latency] DESC<br />
+  The following values may help to evaluate the disk performance against
+  latency:<br />
+</p>
+<table>
+<thead>
+<tr>
+<th><strong>Average Total Latency (ms)</strong></th>
+<th><strong>Rating</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\&lt;1 ms</td>
+<td>Excellent</td>
+</tr>
+<tr>
+<td>\&lt;5 ms</td>
+<td>Very good</td>
+</tr>
+<tr>
+<td>\&lt;5 – 10 ms</td>
+<td>Good</td>
+</tr>
+<tr>
+<td>\&lt; 10 – 20 ms</td>
+<td>Poor</td>
+</tr>
+<tr>
+<td>\&lt; 20 – 100 ms</td>
+<td>Bad</td>
+</tr>
+<tr>
+<td>\&lt;100 ms -500 ms</td>
+<td>Very Bad</td>
+</tr>
+<tr>
+<td>&gt; 500 ms </td>
+<td>Awful</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Please see <a href="https://www.sqlshack.com/sql-server-troubleshooting-disk-i-o-problems/">SQL Server troubleshooting: Disk I/O
+problems</a> for
+more information.</p>
+<p><strong>Fragmentation:</strong></p>
+<p>Fragmented indexes can cause poor performance.  Database
+Administrators (DBA) should look into any fragmented indexes on
+affected tables.  See also,<strong> </strong><a href="https://msdn.microsoft.com/en-us/library/ms188917.aspx">sys.dm_db_index_physical_stats
+(Transact-SQL)</a>.</p>
+<p>The following query will display table indexes, ordered by the highest
+fragmented:</p>
+<p>SELECT OBJECT_NAME(ips.OBJECT_ID)</p>
+<p>,i.NAME</p>
+<p>,ips.index_id</p>
+<p>,index_type_desc</p>
+<p>,avg_fragmentation_in_percent</p>
+<p>,avg_page_space_used_in_percent</p>
+<p>,page_count</p>
+<p>FROM sys.dm_db_index_physical_stats(DB_ID(), NULL, NULL, NULL,
+'SAMPLED') ips</p>
+<p>INNER JOIN sys.indexes i ON (ips.object_id = i.object_id)</p>
+<p>AND (ips.index_id = i.index_id)</p>
+<p>ORDER BY avg_fragmentation_in_percent DESC</p>
+<p><strong>SQL Logging:</strong></p>
+<p>SQL logs should ALWAYS be gathered for performance related issues.
+ This will confirm if there is some long running query causing the
+slowdown.</p>
+<p>SQL logs can be gathered in various places, depending on the issue.
+ For example, slow response in the web portal requires gathering SQL
+logging from the web.config, which is not enabled by default.  Please
+refer to the relevant documentation for the version of tool requiring
+SQL logging.  See also <a href="https://support.oneidentity.com/identity-manager/kb/230911/how-to-enable-and-collect-it-shop-logs">How to Enable and Collect IT Shop
+Logs</a>.</p>
+<p><strong>Execution Plan</strong></p>
+<p>Any long running SQL queries (as determined from the SQL logs) should
+be run manually.  And from that the DBA should create an execution
+plan for analysis.</p>
+<p><a href="https://docs.microsoft.com/en-us/sql/relational-databases/performance/execution-plans?view=sql-server-ver15">Execution
+Plans</a></p>
+<p><strong>Note:</strong> Ensure this is the <strong><u>actual </u></strong>execution
+plan: <a href="https://docs.microsoft.com/en-us/sql/relational-databases/performance/display-an-actual-execution-plan?view=sql-server-ver15">Display an Actual Execution
+Plan</a>.</p>
+<p><strong>System Requirements</strong></p>
+<p><strong>SQL Server and Oracle Database servers should ALWAYS meet the
+minimum system requirements!</strong>  Please refer to the system
+requirements for the specific version of One Identity Manager.</p>
+<p><a href="https://support.oneidentity.com/identity-manager/9.1.1/technical-documents">Identity Manager - Technical
+Documentation</a></p>
+<p><strong>Trace Flag</strong></p>
+<p>Enabling Trace flag 2453 may improve overall database performance. 
+The Database Journal may report this, "Trace flag 2453 should be
+enabled."  Steps to enable this are included in <strong>Knowledge Base
+Article 226333</strong>, <a href="https://support.oneidentity.com/identity-manager/kb/226333/what-does-trace-flag-2453-should-be-enabled-mean-">What does "Trace flag 2453 should be enabled."
+mean?</a></p>
+</blockquote>
+<ul>
+<li>
+<p>Attachments<br />
+<a href="https://prod.cfm.quest.com/5a05cec0-c1cf-4e34-beac-d3024647df9b.sql?Expires=1710830984&amp;Signature=k3kEjlGVTrvIxJjZRYRUDhyrOQM8wmloxAGlOIx2qjg2SLMTc7~cIQNFinIo1QOAqM6COSawRHFgAxcbcBDcGzLwaXyPSnh23DupTKcqqBCzoM7gHz25TzJkDykSbcZnw6Bs9fHGfJ-zqZMpKLqdORhZKmepVgN0mpNrgUcjuhQ_&amp;Key-Pair-Id=APKAJULNUFRJGX4WE3FQ">Serverinfo</a></p>
+</li>
+<li>
+<p>Additional Information<br />
+  Further reading: <a href="https://www.sqlskills.com/blogs/paul/are-io-latencies-killing-your-performance/">Are I/O latencies killing your
+  performance?</a>  </p>
+</li>
+</ul>
+<p><a href="https://www.red-gate.com/simple-talk/sql/database-administration/do-not-forget-to-maintain-your-indexes/">Do Not Forget to Maintain Your
+  Indexes</a>  </p>
+<p><a href="https://www.i-programmer.info/programming/database/3208-improve-sql-performance-find-your-missing-indexes.html">Improve SQL performance – find your missing
+  indexes</a></p>
+<p><em>From
+\&lt;<a href="https://support.oneidentity.com/kb/4342412/troubleshooting-performance-issues">https://support.oneidentity.com/kb/4342412/troubleshooting-performance-issues</a>&gt;</em></p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
