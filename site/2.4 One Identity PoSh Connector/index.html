@@ -330,8 +330,8 @@ Description="Sample Powershell Connector"&gt;</p>
 <p>\$user = "OneIMConnector";</p>
 <p>\$pass = "pass";</p>
 <p>\$SqlConnection = New-Object System.Data.SqlClient.SqlConnection;</p>
-<p>\$SqlConnection.ConnectionString = "Server=\$SQLServer;
-Database=\$SQLDBName; User ID = \$user; Password = [REDACTED];";</p>
+<p>\$SqlConnection.ConnectionString = "Server=[REDACTED_HOST];
+Database=\$SQLDBName; User ID = [REDACTED_USER]; Password = [REDACTED];";</p>
 <p>\$SqlCmd = New-Object System.Data.SqlClient.SqlCommand;</p>
 <p>\$SqlCmd.Connection = \$SqlConnection;</p>
 <p>\$SqlAdapter = New-Object System.Data.SqlClient.SqlDataAdapter;</p>
@@ -351,8 +351,8 @@ Database=\$SQLDBName; User ID = \$user; Password = [REDACTED];";</p>
 <p>\$pwd = "pass";</p>
 <p>\$SqlQuery = "SELECT * from OIM_Groups;"</p>
 <p>\$SqlConnection = New-Object System.Data.SqlClient.SqlConnection;</p>
-<p>\$SqlConnection.ConnectionString = "Server=\$SqlServer;
-Database=\$SqlDBName; User ID = \$uid; Password = [REDACTED];"</p>
+<p>\$SqlConnection.ConnectionString = "Server=[REDACTED_HOST];
+Database=\$SqlDBName; User ID = [REDACTED_USER]; Password = [REDACTED];"</p>
 <p>\$SqlCmd = New-Object System.Data.SqlClient.SqlCommand;</p>
 <p>\$SqlCmd.CommandText = \$SqlQuery;</p>
 <p>\$SqlCmd.Connection = \$SqlConnection;</p>
@@ -371,8 +371,8 @@ Database=\$SqlDBName; User ID = \$uid; Password = [REDACTED];"</p>
 <p>\$pwd = "pass";</p>
 <p>\$SqlQuery = "SELECT * from OIM_GroupsToAccount;"</p>
 <p>\$SqlConnection = New-Object System.Data.SqlClient.SqlConnection;</p>
-<p>\$SqlConnection.ConnectionString = "Server=\$SqlServer;
-Database=\$SqlDBName; User ID = \$uid; Password = [REDACTED];"</p>
+<p>\$SqlConnection.ConnectionString = "Server=[REDACTED_HOST];
+Database=\$SqlDBName; User ID = [REDACTED_USER]; Password = [REDACTED];"</p>
 <p>\$SqlCmd = New-Object System.Data.SqlClient.SqlCommand;</p>
 <p>\$SqlCmd.CommandText = \$SqlQuery;</p>
 <p>\$SqlCmd.Connection = \$SqlConnection;</p>

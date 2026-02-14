@@ -360,7 +360,7 @@ name …</strong></p>
 </table>
 <blockquote>
 <p>У роли можно отключить наследование - это важно делать, чтобы не было
-оч много задачь!</p>
+оч много задач!</p>
 <hr />
 <h1 id="5-compliance-rule"><strong>5) Compliance rule</strong></h1>
 <p>Для того, чтобы предотвратить нахождение одного пользователя в двух
@@ -1032,7 +1032,7 @@ CCC_Test2)</p>
 <p>cs.ServiceName = "OIM_SD"</p>
 <p>cs.UserId = "OIM_SD"</p>
 <p>cs.Password = "Password123"</p>
-<p>cs.Server = "192.168.31.15"</p>
+<p>cs.Server = "[REDACTED_IP]"</p>
 <p>cs.Direct = True</p>
 <p>Return cs.ConnectionString</p>
 <p>End Function</p>
@@ -1066,8 +1066,8 @@ DbApp.ConnectTo(GetOracleConnectionString()).Using(dbFac).BuildSessionFactory()<
 VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-CB992DB7D1CA2E49A313987CCF7AAA82\&lt;/P&gt;\&lt;/Key&gt;,
 CCC_Test3)</p>
 <p>Public Sub CCC_Test3()</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
 <p>Dim cmd As New OracleCommand With {</p>
@@ -1087,8 +1087,8 @@ Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-CB992DB7D1CA2E49A313987CCF7AAA82\&lt;/P&gt;\&lt;/Key&gt;,
 CCC_Test3)</p>
 <p>Public Sub CCC_Test3()</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
 <p>Dim cmd As New OracleCommand With {</p>
@@ -1108,8 +1108,8 @@ OracleDbType.VarChar, ParameterDirection.Input)).Value = "873"</p>
 VI-KEY(\&lt;Key&gt;\&lt;T&gt;DialogScript\&lt;/T&gt;\&lt;P&gt;CCC-CB992DB7D1CA2E49A313987CCF7AAA82\&lt;/P&gt;\&lt;/Key&gt;,
 CCC_Test3)</p>
 <p>Public Sub CCC_Test3()</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
 <p>Dim cmd As New OracleCommand With {</p>
@@ -1141,11 +1141,11 @@ ParameterDirection.Input)).Value = "111234"</p>
 SingleDbObjectSnapshot) As String</p>
 <p>'return value should be the UNSAccountB.ObjectGUID</p>
 <p>'ussc_create_user - Create user account in HP Service desk</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
 <p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
-<p>Dim email As String = login + "&lt;@surgut.gazprom.ru&gt;"</p>
+<p>Dim email As String = login + "&lt;@surgut.[redacted-domain]&gt;"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
 <p>Dim cmd As New OracleCommand With {</p>
@@ -1187,11 +1187,11 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 SingleDbObjectSnapshot) As String</p>
 <p>'return value should be the UNSAccountB.ObjectGUID</p>
 <p>'ussc_create_employee - Create employee in HP Service desk</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
 <p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
-<p>Dim email As String = login + "&lt;@surgut.gazprom.ru&gt;"</p>
+<p>Dim email As String = login + "&lt;@surgut.[redacted-domain]&gt;"</p>
 <p>Dim adlogin As String = login + "&lt;@sgp.ru&gt;"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
@@ -1249,8 +1249,8 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 <p><strong>Скрипт добавления пользователя в группу HP</strong></p>
 <p>Public Sub CCC_UnsAccountBInUnsGroupB_HP_Add(ByVal dbsUnsAccount As
 SingleDbObjectSnapshot, ByVal dbsUnsGroup As SingleDbObjectSnapshot)</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
@@ -1278,8 +1278,8 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 <p><strong>Скрипт обновления пользователя HP</strong></p>
 <p>Public Sub CCC_UNSAccountB_HPusers_Update(ByVal dbsUnsAccount As
 SingleDbObjectSnapshot)</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName As String = "c:\data\HP\hp.log"</p>
 <p>Dim tabnum As String = dbsUnsAccount.GetValue("Description").String</p>
 <p>Dim tabnum_correct As String = tabnum.Substring(3)</p>
@@ -1331,8 +1331,8 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 <p><strong>Скрипт отключения пользователя HP</strong></p>
 <p>Public Function CCC_UNSAccountB_HPusers_Disabled(ByVal tabnum As String)
 As String</p>
-<p>Dim oradb As String = "Data Source=192.168.31.15;User
-Id=OIM_SD;Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
+<p>Dim oradb As String = "Data Source=[REDACTED_IP];User
+Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName As String = "c:\data\HP\hp.log"</p>
 <p>'Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
@@ -1359,9 +1359,9 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 создается учетка в SQL и доступ с Windows аутентификацией)</strong></p>
 <p>Public Function CCC_UNSAccountB_Directum_Insert(ByVal dbsUnsAccount As
 SingleDbObjectSnapshot) As String</p>
-<p>Dim connetionString As String = "Data Source=192.168.31.19\MSSQLSERVER;
+<p>Dim connetionString As String = "Data Source=[REDACTED_IP]\MSSQLSERVER;
 Initial Catalog=DIRECTUM;Integrated Security=false; User
-ID=Administrator;Password=;"</p>
+ID=[REDACTED_USER];Password=;"</p>
 <p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
 <p>Using cmd As New System.Data.SqlClient.SqlCommand("INSERT INTO Employees
 (Name, Department, Salary) VALUES (@Name, @Department, @Salary)", conn)</p>
@@ -1381,9 +1381,9 @@ ID=Administrator;Password=;"</p>
 <p>Public Sub CCC_UNSAccountB_Directum_Update(ByVal dbsUnsAccount As
 SingleDbObjectSnapshot)</p>
 <p>Dim strLOGFileName As String = "c:\data\Directum\Directum.log"</p>
-<p>Dim connetionString As String = "Data Source=192.168.31.19; Initial
+<p>Dim connetionString As String = "Data Source=[REDACTED_IP]; Initial
 Catalog=DIRECTUM;Integrated Security=false; User
-ID=Administrator;Password=[REDACTED];"</p>
+ID=[REDACTED_USER];Password=[REDACTED];"</p>
 <p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
 <p>Using cmd As New System.Data.SqlClient.SqlCommand("OIM_UpdateUser",
 conn)</p>
@@ -1412,9 +1412,9 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 <p>Public Function CCC_UNSAccountB_Directum_Disabled(ByVal login As String)
 As String</p>
 <p>Dim strLOGFileName As String = "c:\data\Directum\Directum.log"</p>
-<p>Dim connetionString As String = "Data Source=192.168.31.19; Initial
+<p>Dim connetionString As String = "Data Source=[REDACTED_IP]; Initial
 Catalog=DIRECTUM;Integrated Security=false; User
-ID=Administrator;Password=[REDACTED];"</p>
+ID=[REDACTED_USER];Password=[REDACTED];"</p>
 <p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
 <p>Using cmd As New System.Data.SqlClient.SqlCommand("OIM_DisableUser",
 conn)</p>
@@ -1439,9 +1439,9 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 <p>Public Function CCC_UNSAccountB_Directum_Enabled(ByVal login As String)
 As String</p>
 <p>Dim strLOGFileName As String = "c:\data\Directum\Directum.log"</p>
-<p>Dim connetionString As String = "Data Source=192.168.31.19; Initial
+<p>Dim connetionString As String = "Data Source=[REDACTED_IP]; Initial
 Catalog=DIRECTUM;Integrated Security=false; User
-ID=Administrator;Password=[REDACTED];"</p>
+ID=[REDACTED_USER];Password=[REDACTED];"</p>
 <p>Using conn As New System.Data.SqlClient.SqlConnection(connetionString)</p>
 <p>Using cmd As New System.Data.SqlClient.SqlCommand("OIM_EnableUser",
 conn)</p>
@@ -1543,7 +1543,7 @@ OutStanding objects</p>
 <p><strong>--------------</strong></p>
 <p><strong>API</strong></p>
 <p>\$authdata = @{AuthString =
-"Module=DialogUser;User=alex;Password=" }</p>
+"Module=DialogUser;User=[REDACTED_USER];Password=" }</p>
 <p>\$authJson = ConvertTo-Json \$authdata -Depth 2</p>
 <p># Login (important, pass the NAME for your session variable in
 -SessionVariable)</p>
@@ -1558,7 +1558,7 @@ OutStanding objects</p>
 <p><strong>-------</strong></p>
 <p><strong>API</strong></p>
 <p>\$authdata = @{AuthString =
-"Module=DialogUser;User=alex;Password=[REDACTED]" }</p>
+"Module=DialogUser;User=[REDACTED_USER];Password=[REDACTED]" }</p>
 <p>\$authJson = ConvertTo-Json \$authdata -Depth 2</p>
 <p># Login (important, pass the NAME for your session variable in
 -SessionVariable)</p>

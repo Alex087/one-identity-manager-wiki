@@ -1243,8 +1243,8 @@ ADO.NET
 <p>Public Sub CCC_Test_GreenPlum_TestConnection()</p>
 <p>Dim MyCon As New Odbc.OdbcConnection</p>
 <p>MyCon.ConnectionString = "<strong>Driver={PostgreSQL
-ANSI</strong>};database=test001;server=mdw.open.ru;port=5432;uid=test001;sslmode=disable;readonly=0;protocol=7.4;User
-ID=test001;password=[REDACTED];"</p>
+ANSI</strong>};database=test001;server=[REDACTED_HOST];port=5432;uid=[REDACTED_USER];sslmode=disable;readonly=0;protocol=7.4;User
+ID=[REDACTED_USER];password=[REDACTED];"</p>
 <p>MyCon.Open()</p>
 <p>If MyCon.State = ConnectionState.Open Then</p>
 <p>MsgBox("Connected To PostGres", MsgBoxStyle.MsgBoxSetForeground)</p>
@@ -1317,8 +1317,8 @@ EntityLoadType.Interactive)~~</strong></p>
 <p>Dim qUser = Query.From("UNSAccountBInUNSGroupB").Where(Function(c)
 c.Column("UID_UNSAccountB") =
 UID_UNSAccountB).<strong>Select("UID_UNSGroupB","UID_UNSAccountB")</strong></p>
-<p><a href="onenote:#One%20Identity%20скрипты&amp;section-id={FD4FD596-28D1-4816-BAC5-31DB69F28B0F}&amp;page-id={B1BB34D5-ED7C-420D-B712-BA20F8CD0501}&amp;object-id={EDE3F8C0-038F-4B76-97AB-78DD59C85494}&amp;97&amp;base-path=https://d.docs.live.net/0e9fab58bc219e3c/Документы2/Записная%20книжка%20пользователя[redacted-email]/УЦСБ.one">Для
-FK</a></p>
+<p>[Для
+FK](onenote:#One%20Identity%20скрипты&amp;section-id=[REDACTED_USER]</p>
 <p>dbDepartment = dbPerson.GetFk(Session, "UID_Department").GetParent()</p>
 <hr />
 </blockquote>
