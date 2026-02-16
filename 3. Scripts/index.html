@@ -212,6 +212,51 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#unsaccountb" class="nav-link">Стандартные процессы для UNSAccountB</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_11" class="nav-link">Увеличение производительности работы скриптов</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#target-system-type-custom-target-system-uid_person" class="nav-link">Вычисление Target System type (Custom Target System) по UID_Person</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#random" class="nav-link">Random число</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_12" class="nav-link">Расшифровка зашифрованного значения из параметров</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_13" class="nav-link">Вставка переменной в строку</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_14" class="nav-link">Извлечь текст из строки до и после символа (.)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#csv-samaccountname-person" class="nav-link">Чтение из файла csv имен пользователей (SamAccountName) и запись в файл дополнительной информации по связанным Person</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#jobserver" class="nav-link">Логирование в вывод JobServer</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -1762,7 +1807,216 @@ End Function
 <p>Для postgress, чтобы создать роль с точкой в имени, надо заключить имя
  в кавычки</p>
 <p>Чтобы сделать это в Vb.Net надо написать</p>
-<p>&lt;span class="mark""""" (4 кавычки!!!)</p></div>
+<pre><code> '&lt;span class=&quot;mark&quot;&quot;&quot;&quot;&quot; (4 кавычки!!!)&lt;/span
+</code></pre>
+<p>Одна кавычки - это ""</p>
+<p>Dim MyVar as string = "some text ""hello"" " = some text "hello"</p>
+<p>*From
+ \&lt;&lt;https://stackoverflow.com/questions/7767037/how-to-put-data-containing-double-quotes-in-string-variable*</p>
+<hr />
+<h1 id="unsaccountb">Стандартные процессы для UNSAccountB</h1>
+<p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/administration-guide-for-connecting-to-custom-target-systems#TOPIC-852085">Identity Manager 8.0 - Administration Guide for Connecting to Custom
+ Target Systems
+ (oneidentity.com)</a></p>
+<hr />
+<h1 id="_11">Увеличение производительности работы скриптов</h1>
+<p>Если не проводишь операции на объектами БД (Person, ..) такие, как
+ удаление, изменение и т.п., то лучше не использовать SingleDBObject -
+ это когда пробегаешься по коллекции и делаешь</p>
+<p>For Each <strong>colUser_unique</strong> As IEntity In colUsers_unique</p>
+<p><strong>~~dbUser_unique = colUser_unique.Create(Session,
+ EntityLoadType.Interactive)~~</strong></p>
+<p>можно получать значение записи так:</p>
+<p>strGroupUID = <strong>colUser_unique</strong>.GetValue("UID_UNSGroupB").String</p>
+<p>Причем, запрос формируем так:</p>
+<p>Dim qUser = Query.From("UNSAccountBInUNSGroupB").Where(Function(c)
+ c.Column("UID_UNSAccountB") =
+ UID_UNSAccountB).<strong>Select("UID_UNSGroupB","UID_UNSAccountB")</strong></p>
+<p>[Для
+ FK](onenote:#One%20Identity%20скрипты&amp;section-id=[REDACTED_USER]</p>
+<p>dbDepartment = dbPerson.GetFk(Session, "UID_Department").GetParent()</p>
+<hr />
+<h1 id="target-system-type-custom-target-system-uid_person">Вычисление Target System type (Custom Target System) по UID_Person</h1>
+<pre><code> Public Function CCC_Test_ChildRelation_UNSAccountB (ByVal UID_Person
+ As String) As String
+
+ Dim dbPerson As ISingleDbObject
+
+ Dim dbUNSRootB As IEntity
+
+ Dim crUNSAccountB As IChildRelation
+
+ 'Dim crDPRNameSpace As IChildRelation
+
+ Dim dbUNSAccountB As ISingleDbObject = Nothing
+
+ Dim dbDPRNameSpace As ISingleDbObject = Nothing
+
+ Dim UID_UNSRootB As String
+
+ Dim strIdent_DPRNameSpace As String
+
+  
+
+ dbPerson = Connection.CreateSingle(&quot;Person&quot;, UID_Person)
+
+ crUNSAccountB = dbPerson.GetCR(&quot;UNSAccountB&quot;, &quot;UID_Person&quot;)
+
+ If crUNSAccountB.Children.Count = 1 Then
+
+ For Each colElement As IColElem In crUNSAccountB.Children
+
+ dbUNSAccountB = colElement.Create()
+
+ Next
+
+ UID_UNSRootB = dbUNSAccountB.GetValue(&quot;UID_UNSRootB&quot;)
+
+ dbUNSRootB = Session.Source.Get(&quot;UNSRootB&quot;, UID_UNSRootB)
+
+ strIdent_DPRNameSpace =
+ dbUNSRootB.CreateWalker(Session).GetValue(&quot;FK(UID_DPRNameSpace).Ident_DPRNameSpace&quot;).String
+
+ Return strIdent_DPRNameSpace
+
+ End If
+
+ return &quot;1&quot;
+
+ End Function
+</code></pre>
+<hr />
+<h1 id="random">Random число</h1>
+<pre><code> Public Function CCC_Test_Random() As String
+
+ Dim value As Integer = CInt(Int((120 \* Rnd())))
+
+ Return value.ToString
+
+ End Function
+</code></pre>
+<hr />
+<h1 id="_12">Расшифровка зашифрованного значения из параметров</h1>
+<p>Имеем Encrypt значение в параметрах</p>
+<p>В скрипте, чтобы его расшифровать надо:</p>
+<p>' Caution: This only work if the script is running in the Job Service.</p>
+<p><strong>DecryptVal = Session.Decrypt(EncryptedString)</strong></p>
+<p>Работать будет только при выполнении с JobServer - поэтому надо
+ сделать расписание и процесс и запускать этот процесс, через Process
+ Automation.</p>
+<p>&lt;https://www.oneidentity.com/community/identity-manager/f/forum/27672/onedb-encrypted-how-to-decrypt-an-encrypted-password-on-config-parameters</p>
+<hr />
+<h1 id="_13">Вставка переменной в строку</h1>
+<p>Dim tmpVal As String =
+ Connection.GetSingleProperty("Person","UID_PersonHead","UID_Person =
+ <strong>'"+UID_Owner+"'")</strong></p>
+<p><strong>---</strong></p>
+<h1 id="_14">Извлечь текст из строки до и после символа (.)</h1>
+<pre><code> Dim IndexDotInCustomTable As Integer = **CustomTable**.IndexOf(&quot;.&quot;)
+
+ If (IndexDotInCustomTable \ -1) Then
+
+ SchemaName = CustomTable.Substring(0,IndexDotInCustomTable)
+
+ TableName = CustomTable.Substring(IndexDotInCustomTable + 1)
+
+ Else
+
+ SchemaName = &quot;public&quot;
+
+ TableName = CustomTable
+
+ End If
+
+  
+
+ *Если CustomTable = qwe.ddd, то*
+
+ *SchemaName = qwe*
+
+ *TableName = ddd*
+
+  
+
+ *Если не найдет символ в строке, то* **CustomTable**.IndexOf(&quot;.&quot;) =
+ **-1**
+
+ **---**
+</code></pre>
+<h1 id="csv-samaccountname-person">Чтение из файла csv имен пользователей (SamAccountName) и запись в файл дополнительной информации по связанным Person</h1>
+<pre><code> Public Sub CCC_Test_GetDepartmentFullPath(ByVal InputFile As String,
+ ByVal ResultFile As String)Dim strQuery As String = &quot;&quot;
+
+ Dim strQuery1 As String = &quot;&quot;
+
+ Dim strQuery2 As String = &quot;&quot;
+
+ Dim strQuery3 As String = &quot;&quot;
+
+ Dim UID_Person As String = &quot;&quot;
+
+ Dim UID_Department As String = &quot;&quot;
+
+ Dim FullPath As String = &quot;&quot;
+
+ Dim Title As String = &quot;&quot;
+
+ Dim AccountName As String = &quot;&quot;
+
+  
+
+ 'Dim tfp As New FileIO.TextFieldParser(&quot;C:\temp\users1.txt&quot;)
+
+ **FileOpen(1, InputFile, OpenMode.Input)**
+
+ While Not EOF(1)
+
+  
+
+ Input(1, AccountName)
+
+ strQuery = String.Format(&quot;SAMAccountName = '{0}'&quot;, AccountName)
+
+ Session.Source().TryGetSingleValue(Of
+ String)(&quot;ADSAccount&quot;,&quot;UID_Person&quot;,strQuery,UID_Person)
+
+  
+
+ strQuery1 = String.Format(&quot;UID_Person = '{0}'&quot;, UID_Person)
+
+ Session.Source().TryGetSingleValue(Of
+ String)(&quot;Person&quot;,&quot;UID_Department&quot;,strQuery1,UID_Department)
+
+  
+
+ strQuery2 = String.Format(&quot;UID_Person = '{0}'&quot;, UID_Person)
+
+ Session.Source().TryGetSingleValue(Of
+ String)(&quot;Person&quot;,&quot;Title&quot;,strQuery2,Title)
+
+  
+
+ strQuery3 = String.Format(&quot;UID_Department = '{0}'&quot;, UID_Department)
+
+ Session.Source().TryGetSingleValue(Of
+ String)(&quot;Department&quot;,&quot;FullPath&quot;,strQuery3,FullPath)
+
+  
+
+ **CCC_Write2Log(ResultFile,AccountName + &quot;;&quot; + FullPath)**
+
+ End While
+
+ End Sub
+
+ **---**
+</code></pre>
+<h1 id="jobserver">Логирование в вывод JobServer</h1>
+<p>При отработке скрипта на JobServer информация будет выводиться в его
+ лог</p>
+<p>RaiseMessage("Table_count 002: "+Table_count.tostring()+ "
+ RemoveExistsCustomTables 002: " + RemoveExistsCustomTables.ToString())</p>
+<p>RaiseMessage(&lt;span class="mark"MsgSeverity.Serious</p></div>
             </div>
         </div>
 
