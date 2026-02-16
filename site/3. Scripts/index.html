@@ -83,6 +83,11 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
+            <li class="nav-item" data-bs-level="1"><a href="#end-if" class="nav-link">End If</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
             <li class="nav-item" data-bs-level="1"><a href="#sql" class="nav-link">SQL запрос</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-bs-level="2"><a href="#join-orderby" class="nav-link">С использованием Join и OrderBy</a>
@@ -437,11 +442,12 @@ End Function
 </code></pre>
 <blockquote>
 <hr />
-<p><strong>Параметр в переменную (скрипт отправки почты)</strong></p>
-<p>#If Not SCRIPTDEBUGGER Then</p>
+<p><strong>Параметр в переменную (скрипт отправки почты)</strong>
+```
+ #If Not SCRIPTDEBUGGER Then</p>
 <p>Imports System.Collections.Generic</p>
 <p>Imports System.Net.Mail</p>
-<p>#End If</p>
+<h1 id="end-if">End If</h1>
 <p>toAddress =
 Connection.GetConfigParm("Common\MailNotification\RedirectAllMailsTo")</p>
 <p>/////////////////////////////////////////////////////////////////////////////////////////////////////</p>
@@ -500,10 +506,12 @@ subject &amp; "; body = " &amp; body &amp; " to " &amp; toAddress)</p>
 <p>Throw ex</p>
 <p>End If</p>
 <p>End Try</p>
-<p>End Sub</p>
+<p>End Sub
+```</p>
 <hr />
-<p><strong>Создание учетки SfB</strong></p>
-<p>Public Function Z_Connector_Skype_Add_Account(account As
+<p><strong>Создание учетки SfB</strong>
+```
+Public Function Z_Connector_Skype_Add_Account(account As
 SingleDbObjectSnapshot) As String</p>
 <p>Dim scriptText As String = Z_Get_Email_Template_Body("Z_Skype_Create")</p>
 <p>Dim output As New List(Of String)</p>
@@ -551,10 +559,12 @@ object 'XdsPublishItems', database 'xds', schema 'dbo'." ) {</p>
 <p>Set-CsUser –Identity \$guid –Enabled \$True</p>
 <p>} else {</p>
 <p>Write-output "lync account already enabled"</p>
-<p>}</p>
+<p>}
+```</p>
 <hr />
-<p><strong>Создание учетки SfB 2 (в скприте процесса)</strong></p>
-<p>'Value="get-alias | Where-Object {\$_.name -like 'tee*'}"</p>
+<p><strong>Создание учетки SfB 2 (в скприте процесса)</strong>
+```
+ 'Value="get-alias | Where-Object {\$_.name -like 'tee*'}"</p>
 <p>Dim theScript As New StringBuilder()</p>
 <p>' load modules</p>
 <p>' theScript.AppendLine("import-module activedirectory" )</p>
@@ -584,35 +594,53 @@ System.Management.Automation.PSCredential ('"+Username+"',
 -SipAddressType '"+SipAddressType+"' -SipDomain '"+SipDomain +"'")</p>
 <p>theScript.AppendLine("Remove-PSSession -Session \$s")</p>
 <p>Value = theScript.ToString()</p>
+<p>```</p>
 <hr />
-<p><strong>Поддержка SQL в сприптах</strong></p>
+<p><strong>Поддержка SQL в сприптах</strong>
+```</p>
+<blockquote>
 <p>' Get the SQL formatter for our connection</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
+</blockquote>
+<p>Dim f As ISqlFormatter = Session.SqlFormatter
+```</p>
 <hr />
 </blockquote>
 <h1 id="sql">SQL запрос</h1>
+<pre><code>Public Function CCC_GetSingleValueWithOrderBy(UID_PersonWantsOrg As  
+String) As String
+
+Dim f As ISqlFormatter = Session.SqlFormatter
+
+Dim WhereClause As String = f.AndRelation(
+
+f.Comparison(&quot;DecisionType&quot;, &quot;Unsubscribe&quot;, ValType.String),
+
+f.Comparison(&quot;UID_PersonWantsOrg&quot;, UID_PersonWantsOrg,  
+ValType.String))
+
+Return Session.Source.GetSingleValue(Of String)(Query.
+
+From(&quot;PWODecisionHistory&quot;).
+
+Where(WhereClause).
+
+OrderBy(&quot;DateHead DESC&quot;).
+
+Select(&quot;ReasonHead&quot;))
+
+End Function
+</code></pre>
 <blockquote>
-<p>Public Function CCC_GetSingleValueWithOrderBy(UID_PersonWantsOrg As
-String) As String</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim WhereClause As String = f.AndRelation(</p>
-<p>f.Comparison("DecisionType", "Unsubscribe", ValType.String),</p>
-<p>f.Comparison("UID_PersonWantsOrg", UID_PersonWantsOrg,
-ValType.String))</p>
-<p>Return Session.Source.GetSingleValue(Of String)(Query.</p>
-<p>From("PWODecisionHistory").</p>
-<p>Where(WhereClause).</p>
-<p>OrderBy("DateHead DESC").</p>
-<p>Select("ReasonHead"))</p>
-<p>End Function</p>
 <p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/21728/orderby-quering-the-database-with-script">https://www.oneidentity.com/community/identity-manager/f/forum/21728/orderby-quering-the-database-with-script</a></p>
-<p><span class="mark">Dim qApprover = Query.From(Table.PWOHelperPWO,
+<p>```
+<span class="mark">Dim qApprover = Query.From(Table.PWOHelperPWO,
 "php").Join(Table.PersonWantsOrg,
 "pwo").On(<strong>Table.PWOHelperPWO.UID_PersonWantsOrg</strong>).</span></p>
 <p><span class="mark">Select(Table.PersonWantsOrg.DecisionLevel).</span></p>
 <p><span class="mark">Where("php.UID_PersonHead =
 'e94fd1f7-ecf2-4d5f-9955-f2311a110c39' AND php.LevelNumber =
-pwo.DecisionLevel")</span></p>
+pwo.DecisionLevel")</span>
+```</p>
 <p><a href="https://www.oneidentity.com/community/identity-manager/f/forum/27601/expression-clauses-in-a-query">Expression Clauses in a query - Forum - Identity Manager Community -
 One Identity
 Community</a></p>
