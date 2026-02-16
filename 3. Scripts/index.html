@@ -621,126 +621,201 @@ End Function
 <h2 id="join-orderby">С использованием Join и OrderBy</h2>
 <p>При использовании OrderBy меняется тип query на Iselect. Чтобы это
  исправить, меняет тив при получении коллекции.</p>
-<p>Dim qContentShort = Query.From("DialogWatchProperty",
- "watchprop").Join(Table.DialogWatchOperation,
- "watchop").On(Table.DialogWatchOperation.UID_DialogWatchOperation).SelectAll().Where(strWhere).OrderBy("DialogWatchOperation.OperationDate")</p>
-<p>colRecords = Session.Source.GetCollection(CType(qContentShort, Query))</p>
+<pre><code> Dim qContentShort = Query.From(&quot;DialogWatchProperty&quot;,
+ &quot;watchprop&quot;).Join(Table.DialogWatchOperation,
+ &quot;watchop&quot;).On(Table.DialogWatchOperation.UID_DialogWatchOperation).SelectAll().Where(strWhere).OrderBy(&quot;DialogWatchOperation.OperationDate&quot;)
+
+
+ colRecords = Session.Source.GetCollection(CType(qContentShort, Query))
+</code></pre>
 <hr />
 <p><strong>Получение значения из БД</strong></p>
-<p>Dim xValue As String  </p>
-<p>If (Session.Source().TryGetSingleValue(Of String)("\&lt;tablename\",
- "\&lt;columnname\", "\&lt;whereclause\", xValue)) Then<br />
- 'work with xValue<br />
- 'Else 'make something different<br />
- End If</p>
+<pre><code> Dim xValue As String  
+
+ If (Session.Source().TryGetSingleValue(Of String)(&quot;\&lt;tablename\&quot;,
+ &quot;\&lt;columnname\&quot;, &quot;\&lt;whereclause\&quot;, xValue)) Then  
+ 'work with xValue  
+ 'Else 'make something different  
+ End If
+</code></pre>
 <p>&lt;https://support.oneidentity.com/identity-manager/kb/204144/changed-behaviour-in-the-new-object-layer-api</p>
 <hr />
 <p><strong>Получение значения из БД 2</strong></p>
-<p>Dim xValue As String<br />
- Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim WhereClause As String = f.Comparison("UID_PersonWantsOrg",
+<pre><code> Dim xValue As String  
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim WhereClause As String = f.Comparison(&quot;UID_PersonWantsOrg&quot;,
  UID_PersonWantsOrg, ValType.String,CompareOperator.Equal,
- FormatterOptions.None)</p>
-<p>Session.Source().TryGetSingleValue(Of
- String)("Table","ColumnName",WhereClause,xValue)</p>
-<p><strong>ИЛИ</strong></p>
-<p>XValue = Connection.GetSingleProperty("AccProductGroup",
- "UID_AccProductGroup", WhereClause)</p>
+ FormatterOptions.None)
+
+ Session.Source().TryGetSingleValue(Of
+ String)(&quot;Table&quot;,&quot;ColumnName&quot;,WhereClause,xValue)
+
+ **ИЛИ**
+
+ XValue = Connection.GetSingleProperty(&quot;AccProductGroup&quot;,
+ &quot;UID_AccProductGroup&quot;, WhereClause)
+</code></pre>
 <hr />
 <p><strong>Вычисление родительского подразделения</strong></p>
-<p>Dim CompanyCode As String</p>
-<p>Dim ObjectID as String = Right(\$ObjectID\$,8)</p>
-<p>Dim GroupName As String</p>
-<p>Dim ShortName as String = \$ShortName\$</p>
-<p>Dim dbDepartment as IEntity 'объявляем переменную, как объект</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter 'для поддержки sql
- запросов и синтаксиса</p>
-<p>Dim strUID_ParentDepartment As String</p>
-<p>Dim strWhere As String</p>
-<p>dbDepartment = session.Source.Get("Department", \$UID_Department\$)
- 'помещаем объект подразделения по его UID</p>
-<p>CompanyCode = dbDepartment.GetValue("CustomProperty02").ToString()
- 'помещаем в переменную код компании подразделения</p>
-<p>strUID_ParentDepartment =
- dbDepartment.GetValue("UID_ParentDepartment") 'помещаем в переменную
- родительский департамент</p>
-<p>strWhere = f.UidComparison("UID_Department", strUID_ParentDepartment)
- 'условия сравнения UID подразделения и родительского подразделения</p>
-<p>While string.IsNullOrWhiteSpace(CompanyCode) AND
- Session.Source.Exists("Department",strWhere) 'до тех пор, пока Код
- компании = Null и существует родительский департамент</p>
-<p>dbDepartment= session.Source.Get("Department",strUID_ParentDepartment)</p>
-<p>CompanyCode = dbDepartment.GetValue("CustomProperty02").ToString()</p>
-<p>strUID_ParentDepartment =
- dbDepartment.GetValue("UID_ParentDepartment")</p>
-<p>strWhere = f.UidComparison("UID_Department", strUID_ParentDepartment)</p>
-<p>End While</p>
-<p>If (not string.IsNullOrWhiteSpace(CompanyCode)) Then</p>
-<p>values("CompanyCode") = CompanyCode</p>
-<p>End if</p>
-<p>GroupName = "hab-" + CompanyCode + "-" + ObjectID</p>
-<p>values("ObjectID") = ObjectID</p>
-<p>values("ShortName") = ShortName</p>
-<p>values("GroupName") = GroupName</p>
-<p>values("Alias") = GroupName</p>
-<p>values("CanonicalName") = "ao.nlmk/HAB/" + GroupName</p>
-<p>values("DistinguishedName") = "CN=" + GroupName +
- ",OU=HAB,DC=ao,DC=nlmk"</p>
+<pre><code> Dim CompanyCode As String
+
+ Dim ObjectID as String = Right(\$ObjectID\$,8)
+
+ Dim GroupName As String
+
+ Dim ShortName as String = \$ShortName\$
+
+ Dim dbDepartment as IEntity 'объявляем переменную, как объект
+
+ Dim f As ISqlFormatter = Session.SqlFormatter 'для поддержки sql
+ запросов и синтаксиса
+
+ Dim strUID_ParentDepartment As String
+
+ Dim strWhere As String
+
+ dbDepartment = session.Source.Get(&quot;Department&quot;, \$UID_Department\$)
+ 'помещаем объект подразделения по его UID
+
+ CompanyCode = dbDepartment.GetValue(&quot;CustomProperty02&quot;).ToString()
+ 'помещаем в переменную код компании подразделения
+
+ strUID_ParentDepartment =
+ dbDepartment.GetValue(&quot;UID_ParentDepartment&quot;) 'помещаем в переменную
+ родительский департамент
+
+ strWhere = f.UidComparison(&quot;UID_Department&quot;, strUID_ParentDepartment)
+ 'условия сравнения UID подразделения и родительского подразделения
+
+ While string.IsNullOrWhiteSpace(CompanyCode) AND
+ Session.Source.Exists(&quot;Department&quot;,strWhere) 'до тех пор, пока Код
+ компании = Null и существует родительский департамент
+
+ dbDepartment= session.Source.Get(&quot;Department&quot;,strUID_ParentDepartment)
+
+ CompanyCode = dbDepartment.GetValue(&quot;CustomProperty02&quot;).ToString()
+
+ strUID_ParentDepartment =
+ dbDepartment.GetValue(&quot;UID_ParentDepartment&quot;)
+
+ strWhere = f.UidComparison(&quot;UID_Department&quot;, strUID_ParentDepartment)
+
+ End While
+
+ If (not string.IsNullOrWhiteSpace(CompanyCode)) Then
+
+ values(&quot;CompanyCode&quot;) = CompanyCode
+
+ End if
+
+ GroupName = &quot;hab-&quot; + CompanyCode + &quot;-&quot; + ObjectID
+
+ values(&quot;ObjectID&quot;) = ObjectID
+
+ values(&quot;ShortName&quot;) = ShortName
+
+ values(&quot;GroupName&quot;) = GroupName
+
+ values(&quot;Alias&quot;) = GroupName
+
+ values(&quot;CanonicalName&quot;) = &quot;ao.nlmk/HAB/&quot; + GroupName
+
+ values(&quot;DistinguishedName&quot;) = &quot;CN=&quot; + GroupName +
+ &quot;,OU=HAB,DC=ao,DC=nlmk&quot;
+</code></pre>
 <hr />
 <p><strong>Получение DistinguishedName по UID</strong></p>
-<p>Public Function CCC_Test_UID_ADSContainer(ByVal strUID_ADSContainer As
- String) As String</p>
-<p>' Get the SQL formatter for our connection</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>'Dim a As String</p>
-<p>' Build the WHERE clause for our request</p>
-<p>Dim where As String = f.Comparison("UID_ADSContainer",
- strUID_ADSContainer, ValType.String)</p>
-<p>' Get Ident_Domain of the ADSContainer</p>
-<p>'a = Session.Source.GetSingleValue(Of String)("ADSContainer",
- "DistinguishedName", where)</p>
-<p>Dim xValue As String = "1"</p>
-<p>If (Session.Source().TryGetSingleValue(Of String)("ADSContainer",
- "DistinguishedName", where, xValue)) Then</p>
-<p>'work with xValue</p>
-<p>'Else 'make something different</p>
-<p>End If</p>
-<p>Return xValue</p>
-<p>End Function</p>
+<pre><code> Public Function CCC_Test_UID_ADSContainer(ByVal strUID_ADSContainer As
+ String) As String
+
+ ' Get the SQL formatter for our connection
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ 'Dim a As String
+
+ ' Build the WHERE clause for our request
+
+ Dim where As String = f.Comparison(&quot;UID_ADSContainer&quot;,
+ strUID_ADSContainer, ValType.String)
+
+ ' Get Ident_Domain of the ADSContainer
+
+ 'a = Session.Source.GetSingleValue(Of String)(&quot;ADSContainer&quot;,
+ &quot;DistinguishedName&quot;, where)
+
+ Dim xValue As String = &quot;1&quot;
+
+ If (Session.Source().TryGetSingleValue(Of String)(&quot;ADSContainer&quot;,
+ &quot;DistinguishedName&quot;, where, xValue)) Then
+
+ 'work with xValue
+
+ 'Else 'make something different
+
+ End If
+
+ Return xValue
+
+ End Function
+</code></pre>
 <hr />
 <p><strong>Получение UID по имени домена</strong></p>
-<p>Public Function CCC_Test_Get_UID_from_Name(ByVal Name As String) As
- String</p>
-<p>' Get the SQL formatter for our connection</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>' Build the WHERE clause for our request</p>
-<p>Dim where As String = f.Comparison("ADSDomainName", Name,
- ValType.String)</p>
-<p>' Get Ident_Domain of the ADSContainer</p>
-<p>'a = Session.Source.GetSingleValue(Of String)("ADSContainer",
- "DistinguishedName", where)</p>
-<p>Dim xValue As String = "1"</p>
-<p>'If (Session.Source().TryGetSingleValue(Of String)("ADSContainer",
- "DistinguishedName", where, xValue)) Then</p>
-<p>'work with xValue</p>
-<p>'Else 'make something different</p>
-<p>'End If</p>
-<p>xValue = Connection.GetSingleProperty("ADSDomain", "UID_ADSDomain",
- where)</p>
-<p>Return xValue</p>
-<p>End Function</p>
+<pre><code> Public Function CCC_Test_Get_UID_from_Name(ByVal Name As String) As
+ String
+
+ ' Get the SQL formatter for our connection
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ ' Build the WHERE clause for our request
+
+ Dim where As String = f.Comparison(&quot;ADSDomainName&quot;, Name,
+ ValType.String)
+
+ ' Get Ident_Domain of the ADSContainer
+
+ 'a = Session.Source.GetSingleValue(Of String)(&quot;ADSContainer&quot;,
+ &quot;DistinguishedName&quot;, where)
+
+ Dim xValue As String = &quot;1&quot;
+
+ 'If (Session.Source().TryGetSingleValue(Of String)(&quot;ADSContainer&quot;,
+ &quot;DistinguishedName&quot;, where, xValue)) Then
+
+ 'work with xValue
+
+ 'Else 'make something different
+
+ 'End If
+
+ xValue = Connection.GetSingleProperty(&quot;ADSDomain&quot;, &quot;UID_ADSDomain&quot;,
+ where)
+
+ Return xValue
+
+ End Function
+</code></pre>
 <hr />
 <p><strong>Получаем значение из конфиг параметра</strong></p>
-<p>Dim URL As String =
- Connection.GetConfigParm("Custom\Exchange\URL_ExchPowerShell")</p>
+<pre><code> Dim URL As String =
+ Connection.GetConfigParm(&quot;Custom\Exchange\URL_ExchPowerShell&quot;)
+</code></pre>
 <hr />
 <p><strong>Where в процессе</strong></p>
-<p>Процесс SQLComponent - Existsvalues("GroupOUName").ToString вычисляем
- в Pre-Script первого блока процесса</p>
-<p><strong>Dim f As ISqlFormatter = Connection.SqlFormatter</strong></p>
-<p><strong>Value = f.Comparison("cn", values("GroupOUName"), ValType.String,
- CompareOperator.Equal)</strong></p>
-<p>values("GroupOUName") = GroupOUName</p>
+<pre><code> Процесс SQLComponent - Existsvalues(&quot;GroupOUName&quot;).ToString вычисляем
+ в Pre-Script первого блока процесса
+
+ **Dim f As ISqlFormatter = Connection.SqlFormatter**
+
+ **Value = f.Comparison(&quot;cn&quot;, values(&quot;GroupOUName&quot;), ValType.String,
+ CompareOperator.Equal)**
+
+  
+
+ values(&quot;GroupOUName&quot;) = GroupOUName
+</code></pre>
 <p>&lt;img src="../media/3. Scripts/media/image1.png"
  style="width:8.5625in;height:1.51042in"
  alt="Param eters Parameter name Connectionprovider ConnectionString TableName Parameter value Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo.ConnectionString Value = •ADSContainer• Dim f ISqIFormatter = = f.Comparison(&#39; cn&#39; " /</p>
@@ -750,52 +825,86 @@ End Function
 <hr />
 <p><strong>SQL выражение</strong></p>
 <p>Для SQLComponent - Execute SQL</p>
-<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
-<p>Value = "delete ADSAccount where " &amp; f.UIDComparison("UID_ADSAccount",
- \$UID_ADSAccount\$)</p>
+<pre><code> Dim f As ISqlFormatter = Connection.SqlFormatter
+
+ Value = &quot;delete ADSAccount where &quot; &amp; f.UIDComparison(&quot;UID_ADSAccount&quot;,
+ \$UID_ADSAccount\$)
+</code></pre>
 <hr />
 <p><strong>Работа с коллекциями из объектов БД</strong></p>
-<p>Public Function CCC_Test_Unique_CompanyCode(ByVal CompanyCode As
- Integer) As String</p>
-<p>Dim colPersons As IEntityCollection</p>
-<p>Dim strSubType As String</p>
-<p>Dim dbPerson As IEntity</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim Res As String</p>
-<p><strong>' create the query object</strong></p>
-<p>Dim qPerson = Query.From("CCCOrgUnitMapping").SelectAll()</p>
-<p><strong>' Load a collection of Person objects</strong></p>
-<p>colPersons = Session.Source.GetCollection(qPerson)</p>
-<p>' Run through the list</p>
-<p>For Each colElement As IEntity In colPersons</p>
-<p>dbPerson = colElement.Create(Session, EntityLoadType.Interactive)</p>
-<p>strSubType = dbPerson.GetValue("CCC_CompanyCode").String</p>
-<p>Dim qPerson1 = Query.From("CCCOrgUnitMapping").Where(Function(c)
- c.Column("CCC_CompanyCode") = strSubType).SelectCount()</p>
-<p>Dim iCount = Session.Source.GetCount(qPerson1)</p>
-<p>If iCount = CompanyCode Then</p>
-<p>Return strSubType</p>
-<p>End If</p>
-<p>Next</p>
-<p>Return CompanyCode.ToString()</p>
-<p>End Function</p>
+<pre><code> Public Function CCC_Test_Unique_CompanyCode(ByVal CompanyCode As
+ Integer) As String
+
+ Dim colPersons As IEntityCollection
+
+ Dim strSubType As String
+
+ Dim dbPerson As IEntity
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim Res As String
+
+ **' create the query object**
+
+ Dim qPerson = Query.From(&quot;CCCOrgUnitMapping&quot;).SelectAll()
+
+ **' Load a collection of Person objects**
+
+ colPersons = Session.Source.GetCollection(qPerson)
+
+ ' Run through the list
+
+ For Each colElement As IEntity In colPersons
+
+ dbPerson = colElement.Create(Session, EntityLoadType.Interactive)
+
+ strSubType = dbPerson.GetValue(&quot;CCC_CompanyCode&quot;).String
+
+ Dim qPerson1 = Query.From(&quot;CCCOrgUnitMapping&quot;).Where(Function(c)
+ c.Column(&quot;CCC_CompanyCode&quot;) = strSubType).SelectCount()
+
+ Dim iCount = Session.Source.GetCount(qPerson1)
+
+ If iCount = CompanyCode Then
+
+ Return strSubType
+
+ End If
+
+ Next
+
+ Return CompanyCode.ToString()
+
+ End Function
+</code></pre>
 <hr />
 <p><strong>Шаблон параметра деактивации департамента</strong></p>
-<p>Dim oDate As DateTime = Convert.ToDateTime(\$CustomProperty08\$)</p>
-<p>If oDate \&lt; Date.UtcNow then</p>
-<p>Value = True</p>
-<p>Else</p>
-<p>Value = False</p>
-<p>End If</p>
+<pre><code> Dim oDate As DateTime = Convert.ToDateTime(\$CustomProperty08\$)
+
+ If oDate \&lt; Date.UtcNow then
+
+ Value = True
+
+ Else
+
+ Value = False
+
+ End If
+</code></pre>
 <hr />
 <p><strong>Вывести ошибку в Manager при сохранении (Для таблицы - OnSaving)</strong></p>
-<p>Dim IPAddress As String = Convert.ToString(Value)</p>
-<p>If Not Regex.IsMatch(IPAddress,
- "^\d{1,3}\\d{1,3}\\d{1,3}\\d{1,3}\$",
- RegexOptions.CultureInvariant) Then</p>
-<p>Throw New <strong>VIException</strong>("IP Address submitted is not valid.",
- ExceptionRelevance.EndUser)</p>
-<p>End If</p>
+<pre><code> Dim IPAddress As String = Convert.ToString(Value)
+
+ If Not Regex.IsMatch(IPAddress,
+ &quot;^\d{1,3}\\\d{1,3}\\\d{1,3}\\\d{1,3}\$&quot;,
+ RegexOptions.CultureInvariant) Then
+
+ Throw New **VIException**(&quot;IP Address submitted is not valid.&quot;,
+ ExceptionRelevance.EndUser)
+
+ End If
+</code></pre>
 <hr />
 <h1 id="insert">Не создается запись в БД Insert через тестирование скрипта</h1>
 <p>Надо при тестировании скрипта отключить Use Transaction</p>
@@ -805,281 +914,499 @@ End Function
 <p>&lt;https://www.oneidentity.com/community/identity-manager/f/forum/30974/create-db-objects</p>
 <hr />
 <h1 id="insert_1">Создание записи в БД Insert</h1>
-<p>Public Function CCC_Test_Insert_DbObject(ByVal UID_Person As String,
+<pre><code> Public Function CCC_Test_Insert_DbObject(ByVal UID_Person As String,
  ByVal CCC_UID_Point_of_View As String, ByVal UID_Org As String) As
- String</p>
-<p>Dim dbCCCPointOfViewInAccProd As IEntity</p>
-<p>dbCCCPointOfViewInAccProd =
- Session.Source.CreateNew("CCCPointOfViewInAccProd")</p>
-<p>Using t As New Transaction(Session)</p>
-<p>dbCCCPointOfViewInAccProd.PutValue("CCC_UID_Person", UID_Person)</p>
-<p>dbCCCPointOfViewInAccProd.PutValue("CCC_UID_Point_of_View",
- CCC_UID_Point_of_View)</p>
-<p><strong>Using uow As IUnitOfWork = Session.StartUnitOfWork()</strong></p>
-<p><strong>uow.Put(dbCCCPointOfViewInAccProd)</strong></p>
-<p><strong>uow.Commit()</strong></p>
-<p><strong>End Using</strong></p>
-<p><strong>t.Commit()</strong></p>
-<p>End Using</p>
-<p>Return UID_Person</p>
-<p>End Function</p>
+ String
+
+  
+
+ Dim dbCCCPointOfViewInAccProd As IEntity
+
+ dbCCCPointOfViewInAccProd =
+ Session.Source.CreateNew(&quot;CCCPointOfViewInAccProd&quot;)
+
+ Using t As New Transaction(Session)
+
+ dbCCCPointOfViewInAccProd.PutValue(&quot;CCC_UID_Person&quot;, UID_Person)
+
+ dbCCCPointOfViewInAccProd.PutValue(&quot;CCC_UID_Point_of_View&quot;,
+ CCC_UID_Point_of_View)
+
+ **Using uow As IUnitOfWork = Session.StartUnitOfWork()**
+
+ **uow.Put(dbCCCPointOfViewInAccProd)**
+
+ **uow.Commit()**
+
+ **End Using**
+
+ **t.Commit()**
+
+ End Using
+
+ Return UID_Person
+
+ End Function
+</code></pre>
 <hr />
 <h1 id="_1">Удаление записи из БД</h1>
-<p>Public Function CCC_Test_Delete_DbObject(ByVal UID_Person As String,
+<pre><code> Public Function CCC_Test_Delete_DbObject(ByVal UID_Person As String,
  ByVal UID_ShoppingCartOrder As String, ByVal UID_PWO As String) As
- String</p>
-<p>Dim CCC_UID_Point_of_View As String</p>
-<p>Dim dbPointOfView As IEntity</p>
-<p>Dim dbPointOfView_new As IEntity</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim Res As String</p>
-<p>' create the query object</p>
-<p>Dim qPointOfView =
- Query.From("CCCPointOfViewInAccProd_T").Where(Function(c)
- c.Column("CCC_UID_ShoppingCartOrder") =
- UID_ShoppingCartOrder).SelectAll()</p>
-<p>' Load a collection of Person objects</p>
-<p>Dim colPointsOfView =
- Session.Source.GetCollection(qPointOfView,EntityCollectionLoadType.Bulk)</p>
-<p>Using uow = Session.StartUnitOfWork()</p>
-<p>' Walk through the list of all persons</p>
-<p>For Each colElement As IEntity In colPointsOfView</p>
-<p>' Mark for deletion</p>
-<p>colElement.MarkForDeletion()</p>
-<p>' put the object in the unit of work</p>
-<p>uow.Put(colElement)</p>
-<p>Next</p>
-<p>' All person objects will be saved here!</p>
-<p>uow.Commit()</p>
-<p>End Using</p>
-<p>Return UID_Person</p>
-<p>End Function</p>
+ String
+
+ Dim CCC_UID_Point_of_View As String
+
+ Dim dbPointOfView As IEntity
+
+ Dim dbPointOfView_new As IEntity
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim Res As String
+
+ ' create the query object
+
+ Dim qPointOfView =
+ Query.From(&quot;CCCPointOfViewInAccProd_T&quot;).Where(Function(c)
+ c.Column(&quot;CCC_UID_ShoppingCartOrder&quot;) =
+ UID_ShoppingCartOrder).SelectAll()
+
+ ' Load a collection of Person objects
+
+ Dim colPointsOfView =
+ Session.Source.GetCollection(qPointOfView,EntityCollectionLoadType.Bulk)
+
+ Using uow = Session.StartUnitOfWork()
+
+ ' Walk through the list of all persons
+
+ For Each colElement As IEntity In colPointsOfView
+
+ ' Mark for deletion
+
+ colElement.MarkForDeletion()
+
+ ' put the object in the unit of work
+
+ uow.Put(colElement)
+
+ Next
+
+ ' All person objects will be saved here!
+
+ uow.Commit()
+
+ End Using
+
+ Return UID_Person
+
+ End Function
+</code></pre>
 <hr />
 <h1 id="_2">Обновление записи в БД</h1>
-<p>dbcolCCCPersonnelActionsAPI = colElement.Create(Session,
- EntityLoadType.Interactive)</p>
-<p>dbcolCCCPersonnelActionsAPI.<strong>PutValue</strong>("CCC_InsertedDate",Date.UtcNow)</p>
-<p>Using t As New Transaction(Session)</p>
-<p>Using uow As IUnitOfWork = Session.StartUnitOfWork()</p>
-<p>uow.Put(dbcolCCCPersonnelActionsAPI)</p>
-<p>uow.Commit()</p>
-<p>End Using</p>
-<p>t.Commit()</p>
-<p>End Using</p>
+<pre><code> dbcolCCCPersonnelActionsAPI = colElement.Create(Session,
+ EntityLoadType.Interactive)
+
+ dbcolCCCPersonnelActionsAPI.**PutValue**(&quot;CCC_InsertedDate&quot;,Date.UtcNow)
+
+  
+
+ Using t As New Transaction(Session)
+
+         Using uow As IUnitOfWork = Session.StartUnitOfWork()
+
+ uow.Put(dbcolCCCPersonnelActionsAPI)
+
+ uow.Commit()
+
+         End Using
+
+         t.Commit()
+
+         End Using
+
+</code></pre>
 <hr />
 <h1 id="where">Сложный Where</h1>
-<p>WhereClause = f.AndRelation( _</p>
-<p>f.Comparison("CCC_CompanyCode", CompanyCode, ValType.String), _</p>
-<p>f.Comparison("CCC_City", City, ValType.String), _</p>
-<p>f.Comparison("CCC_CompanySubCode", CompanySubCode, ValType.String))</p>
-<p>End If</p>
+<pre><code> WhereClause = f.AndRelation( \_
+
+ f.Comparison(&quot;CCC_CompanyCode&quot;, CompanyCode, ValType.String), \_
+
+ f.Comparison(&quot;CCC_City&quot;, City, ValType.String), \_
+
+ f.Comparison(&quot;CCC_CompanySubCode&quot;, CompanySubCode, ValType.String))
+
+ End If
+</code></pre>
 <hr />
 <h1 id="ad-account-definition">Для получения информации по наличии AD Account Definition у сотрудника для почтового шаблона оповещения согласующего при назначении режима доступа</h1>
-<p>Public Function CCC_PersonHasTSBAccountDef() As String</p>
-<p>'Таблица PWOHelperPWO</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim UID_PersonOrdered As String =
- \$FK(UID_PersonWantsOrg).UID_PersonOrdered\$</p>
-<p>Dim colPersonHasTSBAccountDef As IEntityCollection</p>
-<p>Dim colTSBAccountDef As IEntityCollection</p>
-<p>Dim dbTSBAccountDef As IEntity</p>
-<p>Dim UID_AccDef As String</p>
-<p>Dim Result As String</p>
-<p>Dim qTSBAccountDef = Query.From("TSBAccountDef").Where(Function(c)
- c.Column("UID_DialogTableAccountType") =
- "ADS-T-ADSAccount").SelectAll()</p>
-<p>colTSBAccountDef = Session.Source.GetCollection(qTSBAccountDef)</p>
-<p>For Each colElement As IEntity In colTSBAccountDef</p>
-<p>dbTSBAccountDef = colElement.Create(Session,
- EntityLoadType.Interactive)</p>
-<p>UID_AccDef = dbTSBAccountDef.GetValue("UID_TSBAccountDef").String</p>
-<p>Dim qPersonHasTSBAccountDef =
- Query.From("PersonHasTSBAccountDef").Where(Function(c)
- c.Column("UID_Person") = UID_PersonOrdered And
- c.Column("UID_TSBAccountDef") = UID_AccDef ).SelectCount()</p>
-<p>Dim iCount = Session.Source.GetCount(qPersonHasTSBAccountDef)</p>
-<p>If iCount \ 0 Then</p>
-<p>Return "Да"</p>
-<p>End If</p>
-<p>Next</p>
-<p>Return "Нет"</p>
-<p>End Function</p>
+<pre><code> Public Function CCC_PersonHasTSBAccountDef() As String
+
+ 'Таблица PWOHelperPWO
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim UID_PersonOrdered As String =
+ \$FK(UID_PersonWantsOrg).UID_PersonOrdered\$
+
+ Dim colPersonHasTSBAccountDef As IEntityCollection
+
+ Dim colTSBAccountDef As IEntityCollection
+
+ Dim dbTSBAccountDef As IEntity
+
+ Dim UID_AccDef As String
+
+ Dim Result As String
+
+ Dim qTSBAccountDef = Query.From(&quot;TSBAccountDef&quot;).Where(Function(c)
+ c.Column(&quot;UID_DialogTableAccountType&quot;) =
+ &quot;ADS-T-ADSAccount&quot;).SelectAll()
+
+ colTSBAccountDef = Session.Source.GetCollection(qTSBAccountDef)
+
+ For Each colElement As IEntity In colTSBAccountDef
+
+ dbTSBAccountDef = colElement.Create(Session,
+ EntityLoadType.Interactive)
+
+ UID_AccDef = dbTSBAccountDef.GetValue(&quot;UID_TSBAccountDef&quot;).String
+
+ Dim qPersonHasTSBAccountDef =
+ Query.From(&quot;PersonHasTSBAccountDef&quot;).Where(Function(c)
+ c.Column(&quot;UID_Person&quot;) = UID_PersonOrdered And
+ c.Column(&quot;UID_TSBAccountDef&quot;) = UID_AccDef ).SelectCount()
+
+ Dim iCount = Session.Source.GetCount(qPersonHasTSBAccountDef)
+
+ If iCount \ 0 Then
+
+ Return &quot;Да&quot;
+
+ End If
+
+ Next
+
+ Return &quot;Нет&quot;
+
+ End Function
+</code></pre>
 <hr />
 <h1 id="_3">Работа с объектом</h1>
-<p>Dim dbPWOHelperPWO As IEntity = Session.Source.Get("PWOHelperPWO",
- strUID_PWOHelperPWO)</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim strCCC_UID_ShoppingCartOrder As String =
- dbPWOHelperPWO.CreateWalker(Session).GetValue("FK(UID_PersonWantsOrg).UID_ShoppingCartOrder").String</p>
-<p>Dim res As String =
- dbPWOHelperPWO.CreateWalker(Session).GetValue("FK(UID_PersonWantsOrg).FK(ObjectKeyOrdered),QERAssign.FK(ObjectKeyAssignTarget),Org.Ident_Org").String</p>
-<p>Dim qCCCPointOfViewInAccProd_T =
- Query.From("CCCPointOfViewInAccProd_T") _</p>
-<p>.Where(f.AndRelation( f.UidComparison("CCC_UID_ShoppingCartOrder",
- strCCC_UID_ShoppingCartOrder),</p>
-<p>f.UidComparison("CCC_UID_Person",strUID_PersonOrdered))) _</p>
-<p>.Select("CCC_UID_Point_Of_View")</p>
-<p>colqCCCPointOfViewInAccProd_T =
- Session.Source.GetCollection(qCCCPointOfViewInAccProd_T)</p>
-<p>For Each colElement As IEntity In colqCCCPointOfViewInAccProd_T</p>
-<p>dbCCCPointOfView = Connection.CreateSingle("CCCPoint_Of_View",
- colElement.GetValue("CCC_UID_Point_Of_View").String)</p>
-<p>res= res + (dbCCCPointOfView.GetValue("CCC_Pov_Name").String) &amp; " "</p>
-<p>Next</p>
+<pre><code> Dim dbPWOHelperPWO As IEntity = Session.Source.Get(&quot;PWOHelperPWO&quot;,
+ strUID_PWOHelperPWO)
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim strCCC_UID_ShoppingCartOrder As String =
+ dbPWOHelperPWO.CreateWalker(Session).GetValue(&quot;FK(UID_PersonWantsOrg).UID_ShoppingCartOrder&quot;).String
+
+ Dim res As String =
+ dbPWOHelperPWO.CreateWalker(Session).GetValue(&quot;FK(UID_PersonWantsOrg).FK(ObjectKeyOrdered),QERAssign.FK(ObjectKeyAssignTarget),Org.Ident_Org&quot;).String
+
+ Dim qCCCPointOfViewInAccProd_T =
+ Query.From(&quot;CCCPointOfViewInAccProd_T&quot;) \_
+
+ .Where(f.AndRelation( f.UidComparison(&quot;CCC_UID_ShoppingCartOrder&quot;,
+ strCCC_UID_ShoppingCartOrder),
+
+ f.UidComparison(&quot;CCC_UID_Person&quot;,strUID_PersonOrdered))) \_
+
+ .Select(&quot;CCC_UID_Point_Of_View&quot;)
+
+ colqCCCPointOfViewInAccProd_T =
+ Session.Source.GetCollection(qCCCPointOfViewInAccProd_T)
+
+ For Each colElement As IEntity In colqCCCPointOfViewInAccProd_T
+
+ dbCCCPointOfView = Connection.CreateSingle(&quot;CCCPoint_Of_View&quot;,
+ colElement.GetValue(&quot;CCC_UID_Point_Of_View&quot;).String)
+
+ res= res + (dbCCCPointOfView.GetValue(&quot;CCC_Pov_Name&quot;).String) &amp; &quot; &quot;
+
+ Next
+</code></pre>
 <hr />
 <h1 id="update">Update таблицы</h1>
-<p>WhereClause</p>
-<p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
-<p>Value = f.Comparison("UID_Department", values("UID_Dep"),
- ValType.String, CompareOperator.Equal)</p>
+<pre><code> WhereClause
+
+ Dim f As ISqlFormatter = Connection.SqlFormatter
+
+ Value = f.Comparison(&quot;UID_Department&quot;, values(&quot;UID_Dep&quot;),
+ ValType.String, CompareOperator.Equal)
+</code></pre>
 <hr />
 <h1 id="sql_1">SQL запрос</h1>
-<p>Public Function CCC_GetSingleValueWithOrderBy(UID_PersonWantsOrg As
- String) As String</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim WhereClause As String = f.AndRelation(</p>
-<p>f.Comparison("DecisionType", "Unsubscribe", ValType.String),</p>
-<p>f.Comparison("UID_PersonWantsOrg", UID_PersonWantsOrg,
- ValType.String))</p>
-<p>Return Session.Source.GetSingleValue(Of String)(Query.</p>
-<p>From("PWODecisionHistory").</p>
-<p>Where(WhereClause).</p>
-<p>OrderBy("DateHead DESC").</p>
-<p>Select("ReasonHead"))</p>
-<p>End Function</p>
+<pre><code> Public Function CCC_GetSingleValueWithOrderBy(UID_PersonWantsOrg As
+ String) As String
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim WhereClause As String = f.AndRelation(
+
+ f.Comparison(&quot;DecisionType&quot;, &quot;Unsubscribe&quot;, ValType.String),
+
+ f.Comparison(&quot;UID_PersonWantsOrg&quot;, UID_PersonWantsOrg,
+ ValType.String))
+
+  
+
+ Return Session.Source.GetSingleValue(Of String)(Query.
+
+ From(&quot;PWODecisionHistory&quot;).
+
+ Where(WhereClause).
+
+ OrderBy(&quot;DateHead DESC&quot;).
+
+ Select(&quot;ReasonHead&quot;))
+
+ End Function
+</code></pre>
 <hr />
 <h1 id="_4">Добавление в массив уникальных значений из другого массива</h1>
-<p>Dim arr1 As New ArrayList()</p>
-<p>Dim Col As New ArrayList()</p>
-<p>Arr1.add("123")</p>
-<p>Arr1.add("123")</p>
-<p>For Each I As String In arr1</p>
-<p>If Not Col.Contains(I) Then</p>
-<p>Col.Add(I)</p>
-<p>End If</p>
-<p>Next</p>
-<p>Return Col.Count.ToString()</p>
+<pre><code> Dim arr1 As New ArrayList()
+
+ Dim Col As New ArrayList()
+
+  
+
+ Arr1.add(&quot;123&quot;)
+
+ Arr1.add(&quot;123&quot;)
+
+  
+
+ For Each I As String In arr1
+
+ If Not Col.Contains(I) Then
+
+ Col.Add(I)
+
+ End If
+
+ Next
+
+ Return Col.Count.ToString()
+</code></pre>
 <hr />
 <p>Сначала выгружаем все записи таблицы, а потом проходимся по каждой и
  добавляем в Лист. Потом в другой лист пишем только уникальные значения
  того листа.</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim colUsers As IEntityCollection</p>
-<p>Dim colUsers_unique As IEntityCollection</p>
-<p>Dim dbUser As IEntity</p>
-<p>Dim listUID_UNSAccountB As New List(Of String)</p>
-<p>Dim listUID_UNSAccountBAll As New List(Of String)</p>
-<p>Dim qUsers =
- Query.From("UNSAccountBInUNSGroupB").Select("UID_UNSAccountB")</p>
-<p>colUsers =
- Session.Source.GetCollection(qUsers,EntityCollectionLoadType.Slim)</p>
-<p>For Each colElement As IEntity In colUsers</p>
-<p>dbUser = colElement.Create(Session, EntityLoadType.Interactive)</p>
-<p>UID_UNSAccountB = dbUser.GetValue("UID_UNSAccountB").String</p>
-<p>listUID_UNSAccountB.Add(UID_UNSAccountB)</p>
-<p>Next</p>
-<p><strong>listUID_UNSAccountBAll = listUID_UNSAccountB.Distinct().ToList()</strong></p>
-<p>Return listUID_UNSAccountBAll.count().tostring</p>
+<pre><code>  
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim colUsers As IEntityCollection
+
+ Dim colUsers_unique As IEntityCollection
+
+ Dim dbUser As IEntity
+
+ Dim listUID_UNSAccountB As New List(Of String)
+
+ Dim listUID_UNSAccountBAll As New List(Of String)
+
+  
+
+ Dim qUsers =
+ Query.From(&quot;UNSAccountBInUNSGroupB&quot;).Select(&quot;UID_UNSAccountB&quot;)
+
+ colUsers =
+ Session.Source.GetCollection(qUsers,EntityCollectionLoadType.Slim)
+
+  
+
+ For Each colElement As IEntity In colUsers
+
+ dbUser = colElement.Create(Session, EntityLoadType.Interactive)
+
+ UID_UNSAccountB = dbUser.GetValue(&quot;UID_UNSAccountB&quot;).String
+
+ listUID_UNSAccountB.Add(UID_UNSAccountB)
+
+ Next
+
+ **listUID_UNSAccountBAll = listUID_UNSAccountB.Distinct().ToList()**
+
+ Return listUID_UNSAccountBAll.count().tostring
+</code></pre>
 <hr />
 <h1 id="-">Вычисление кол-ва согласующих по точкам зрения</h1>
-<p>PreScript процесса для таблицы PersonWantsOrg</p>
-<p>Dim UID_ShoppingCartOrder as String = \$UID_ShoppingCartOrder\$</p>
-<p>Dim UID_PWO as String = \$UID_PersonWantsOrg\$</p>
-<p>Dim dbPoV As IEntity 'объявляем переменную, как объект</p>
-<p>Dim dbBalanceUnit As IEntity</p>
-<p>Dim dbDepartment As IEntity</p>
-<p>Dim dbPerson As IEntity</p>
-<p>Dim strCCC_UID_BalanceUnit As String</p>
-<p>Dim strCCC_UID_SanctionDepartment As String</p>
-<p>Dim strUID_PersonHeadDep As String</p>
-<p>Dim strMail_PersonHeadDep As String</p>
-<p>Dim strMail_PersonHeadDep_all As String</p>
-<p>Dim XObjectKey as String</p>
-<p>Dim arr As New ArrayList()</p>
-<p>Dim Col As New ArrayList()</p>
-<p>Dim colPointsOfView As IEntityCollection</p>
-<p>Dim colPWOHelperPWO As IEntityCollection</p>
-<p>Dim CCC_UID_Point_of_View As String</p>
-<p>Dim dbPointOfView As IEntity</p>
-<p>Dim dbPWOHelperPWO As IEntity</p>
-<p>Dim dbPointOfView_new As IEntity</p>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter</p>
-<p>Dim Res As String</p>
-<p>' create the query object</p>
-<p>Dim qPointOfView =
- Query.From("CCCPointOfViewInAccProd_T").Where(Function(c)
- c.Column("CCC_UID_ShoppingCartOrder") =
- UID_ShoppingCartOrder).SelectAll()</p>
-<p>Dim qPointOfView_count =
- Query.From("CCCPointOfViewInAccProd_T").Where(Function(c)
- c.Column("CCC_UID_ShoppingCartOrder") =
- UID_ShoppingCartOrder).SelectCount()</p>
-<p>Dim CountApprover = Session.Source.GetCount(qPointOfView_count)</p>
-<p>' Load a collection of Person objects</p>
-<p>colPointsOfView = Session.Source.GetCollection(qPointOfView)</p>
-<p>' Run through the list</p>
-<p>For Each colElement As IEntity In colPointsOfView</p>
-<p>dbPointOfView = colElement.Create(Session, EntityLoadType.Interactive)</p>
-<p>CCC_UID_Point_of_View =
- dbPointOfView.GetValue("CCC_UID_Point_of_View").String</p>
-<p>dbPoV = session.Source.Get("CCCPoint_of_View", CCC_UID_Point_of_View)
- 'помещаем объект Point of View по его UID</p>
-<p>strCCC_UID_BalanceUnit = dbPoV.GetValue("CCC_UID_BalanceUnit")</p>
-<p>dbBalanceUnit = session.Source.Get("CCCBalance_units",
- strCCC_UID_BalanceUnit) 'помещаем объект Balance_unit по его UID</p>
-<p>strCCC_UID_SanctionDepartment =
- dbBalanceUnit.GetValue("CCC_UID_SanctionDepartment")</p>
-<p>dbDepartment = session.Source.Get("Department",
- strCCC_UID_SanctionDepartment) 'помещаем объект Department по его UID</p>
-<p>strUID_PersonHeadDep = dbDepartment.GetValue("UID_PersonHead")</p>
-<p><strong>arr.Add(strUID_PersonHeadDep) ' Add to array uid person</strong></p>
-<p>dbPerson = session.Source.Get("Person", strUID_PersonHeadDep)
- 'помещаем объект Person по его UID</p>
-<p>strMail_PersonHeadDep = dbPerson.GetValue("DefaultEmailAddress")
- 'получаем значение DefaultEmailAddress у руководителя департамента</p>
-<p>If (not string.IsNullOrWhiteSpace(strMail_PersonHeadDep)) Then</p>
-<p>strMail_PersonHeadDep_all = strMail_PersonHeadDep + "; " +
- strMail_PersonHeadDep_all</p>
-<p>End If</p>
-<p>Next</p>
-<p>'Calculate XObject PWOHelperPWO for mail template</p>
-<p>Dim qPWOHelperPWO = Query.From("PWOHelperPWO").Where(Function(c)
- c.Column("UID_PersonWantsOrg") = UID_PWO and
- c.Column("UID_PWODecisionRule") =
- "QER-PWODecisionRule-EX").SelectAll()</p>
-<p>colPWOHelperPWO = Session.Source.GetCollection(qPWOHelperPWO)</p>
-<p>For Each colElement As IEntity In colPWOHelperPWO</p>
-<p>dbPWOHelperPWO = colElement.Create(Session,
- EntityLoadType.Interactive)</p>
-<p>XObjectKey = dbPWOHelperPWO.GetValue("XObjectKey").String</p>
-<p>Next</p>
-<p>'Create array from arr with unique values</p>
-<p>For Each I As String In arr</p>
-<p>If Not Col.Contains(I) Then</p>
-<p>Col.Add(I)</p>
-<p>End If</p>
-<p>Next</p>
-<p>values("Addresses") = strMail_PersonHeadDep_all</p>
-<p>values("XObjectKey") = XObjectKey</p>
-<p>values("CountApprover") = Col.Count.ToString()</p>
+<pre><code> PreScript процесса для таблицы PersonWantsOrg
+
+ Dim UID_ShoppingCartOrder as String = \$UID_ShoppingCartOrder\$
+
+ Dim UID_PWO as String = \$UID_PersonWantsOrg\$
+
+ Dim dbPoV As IEntity 'объявляем переменную, как объект
+
+ Dim dbBalanceUnit As IEntity
+
+ Dim dbDepartment As IEntity
+
+ Dim dbPerson As IEntity
+
+ Dim strCCC_UID_BalanceUnit As String
+
+ Dim strCCC_UID_SanctionDepartment As String
+
+ Dim strUID_PersonHeadDep As String
+
+ Dim strMail_PersonHeadDep As String
+
+ Dim strMail_PersonHeadDep_all As String
+
+ Dim XObjectKey as String
+
+ Dim arr As New ArrayList()
+
+ Dim Col As New ArrayList()
+
+ Dim colPointsOfView As IEntityCollection
+
+ Dim colPWOHelperPWO As IEntityCollection
+
+ Dim CCC_UID_Point_of_View As String
+
+ Dim dbPointOfView As IEntity
+
+ Dim dbPWOHelperPWO As IEntity
+
+ Dim dbPointOfView_new As IEntity
+
+ Dim f As ISqlFormatter = Session.SqlFormatter
+
+ Dim Res As String
+
+ ' create the query object
+
+ Dim qPointOfView =
+ Query.From(&quot;CCCPointOfViewInAccProd_T&quot;).Where(Function(c)
+ c.Column(&quot;CCC_UID_ShoppingCartOrder&quot;) =
+ UID_ShoppingCartOrder).SelectAll()
+
+ Dim qPointOfView_count =
+ Query.From(&quot;CCCPointOfViewInAccProd_T&quot;).Where(Function(c)
+ c.Column(&quot;CCC_UID_ShoppingCartOrder&quot;) =
+ UID_ShoppingCartOrder).SelectCount()
+
+ Dim CountApprover = Session.Source.GetCount(qPointOfView_count)
+
+ ' Load a collection of Person objects
+
+ colPointsOfView = Session.Source.GetCollection(qPointOfView)
+
+ ' Run through the list
+
+ For Each colElement As IEntity In colPointsOfView
+
+ dbPointOfView = colElement.Create(Session, EntityLoadType.Interactive)
+
+ CCC_UID_Point_of_View =
+ dbPointOfView.GetValue(&quot;CCC_UID_Point_of_View&quot;).String
+
+ dbPoV = session.Source.Get(&quot;CCCPoint_of_View&quot;, CCC_UID_Point_of_View)
+ 'помещаем объект Point of View по его UID
+
+ strCCC_UID_BalanceUnit = dbPoV.GetValue(&quot;CCC_UID_BalanceUnit&quot;)
+
+ dbBalanceUnit = session.Source.Get(&quot;CCCBalance_units&quot;,
+ strCCC_UID_BalanceUnit) 'помещаем объект Balance_unit по его UID
+
+ strCCC_UID_SanctionDepartment =
+ dbBalanceUnit.GetValue(&quot;CCC_UID_SanctionDepartment&quot;)
+
+ dbDepartment = session.Source.Get(&quot;Department&quot;,
+ strCCC_UID_SanctionDepartment) 'помещаем объект Department по его UID
+
+ strUID_PersonHeadDep = dbDepartment.GetValue(&quot;UID_PersonHead&quot;)
+
+ **arr.Add(strUID_PersonHeadDep) ' Add to array uid person**
+
+ dbPerson = session.Source.Get(&quot;Person&quot;, strUID_PersonHeadDep)
+ 'помещаем объект Person по его UID
+
+ strMail_PersonHeadDep = dbPerson.GetValue(&quot;DefaultEmailAddress&quot;)
+ 'получаем значение DefaultEmailAddress у руководителя департамента
+
+ If (not string.IsNullOrWhiteSpace(strMail_PersonHeadDep)) Then
+
+ strMail_PersonHeadDep_all = strMail_PersonHeadDep + &quot;; &quot; +
+ strMail_PersonHeadDep_all
+
+ End If
+
+ Next
+
+ 'Calculate XObject PWOHelperPWO for mail template
+
+ Dim qPWOHelperPWO = Query.From(&quot;PWOHelperPWO&quot;).Where(Function(c)
+ c.Column(&quot;UID_PersonWantsOrg&quot;) = UID_PWO and
+ c.Column(&quot;UID_PWODecisionRule&quot;) =
+ &quot;QER-PWODecisionRule-EX&quot;).SelectAll()
+
+ colPWOHelperPWO = Session.Source.GetCollection(qPWOHelperPWO)
+
+ For Each colElement As IEntity In colPWOHelperPWO
+
+ dbPWOHelperPWO = colElement.Create(Session,
+ EntityLoadType.Interactive)
+
+ XObjectKey = dbPWOHelperPWO.GetValue(&quot;XObjectKey&quot;).String
+
+ Next
+
+ 'Create array from arr with unique values
+
+ For Each I As String In arr
+
+ If Not Col.Contains(I) Then
+
+ Col.Add(I)
+
+ End If
+
+ Next
+
+ values(&quot;Addresses&quot;) = strMail_PersonHeadDep_all
+
+ values(&quot;XObjectKey&quot;) = XObjectKey
+
+ values(&quot;CountApprover&quot;) = Col.Count.ToString()
+</code></pre>
 <p>&lt;img src="../media/3. Scripts/media/image4.png"
  style="width:9.9375in;height:5.90625in"
  alt="O PersonWantsOrg Calculate CountAp.„ Person Wan tsOrg Calcu late Coun tApprover for Decision Step Update CountApprover for Decisio n Step Make positive decision for requ Process - PersonWantsOrg Calcula... O Perso nWa ntsOrg create PWOHe1perPW0 I O ShoppingCartOrder Send mail Schema Editor Param eters Parameter name V SuthenticationString Connectionprovider ConnectionString ObjectType WhereCIause val_CountApprover ConnectionVariabIes Parameter value value = Connectionlnfo.ÅuthString Value = Connectionlnfo.ConnectionProvider Value = Connectionlnfo.ConnectionString Value = •PVVODecisionStep• Dim f As ISqIFormatter = Connection.SqIFormatter Value = f.ComparisonCUID_PVVODecisionStep , • •ccc-23FA8465854A064181A8113F9F8DIC84•, Val Value = valuesCCountApprover•) Value = •VarllVar21VarY " /</p>
 <hr />
 <h1 id="_5">Вывод в шаблоне построчно из массива</h1>
-<p>Dim DetailStrg As New StringBuilder</p>
-<p>DetailStrg.AppendLine(FIO_Attestor)</p>
-<p>Return DetailStrg.ToString()</p>
+<pre><code> Dim DetailStrg As New StringBuilder
+
+  
+
+ DetailStrg.AppendLine(FIO_Attestor)
+
+  
+
+ Return DetailStrg.ToString()
+</code></pre>
 <hr />
 <h1 id="objectwalker">ObjectWalker</h1>
-<p>dbPWOHelperPWO_1 = colElement.Create(Session,
- EntityLoadType.Interactive)</p>
-<p>FIO_Attestor =
- dbPWOHelperPWO_1.CreateWalker(Session).GetValue("FK(UID_PersonHead).InternalName").String</p>
-<p>Dim Pers as ISingleDbObject = Connection.CreateSingle("Person",
- \$UID_PersonHead\$)</p>
-<p>Dim culture as String = Pers.Custom.CallMethod("GetCulture").ToString</p>
-<p><strong>Pers.ObjectWalker.GetValue("FK(UID_DialogCultureFormat).Ident_DialogCulture").String</strong></p>
+<pre><code> dbPWOHelperPWO_1 = colElement.Create(Session,
+ EntityLoadType.Interactive)
+
+ FIO_Attestor =
+ dbPWOHelperPWO_1.CreateWalker(Session).GetValue(&quot;FK(UID_PersonHead).InternalName&quot;).String
+
+  
+
+ Dim Pers as ISingleDbObject = Connection.CreateSingle(&quot;Person&quot;,
+ \$UID_PersonHead\$)
+
+ Dim culture as String = Pers.Custom.CallMethod(&quot;GetCulture&quot;).ToString
+
+ **Pers.ObjectWalker.GetValue(&quot;FK(UID_DialogCultureFormat).Ident_DialogCulture&quot;).String**
+</code></pre>
 <hr />
 <h1 id="_6">Глобальные и локальные переменные</h1>
 <ul>
@@ -1155,107 +1482,195 @@ End Function
  (oneidentity.com)</a></p>
 <hr />
 <h1 id="_7">Логирование</h1>
-<p>#If Not SCRIPTDEBUGGER Then</p>
-<p>References VI.DataImport.dll</p>
-<p>Imports System.Collections.Generic</p>
-<p>Imports System.IO</p>
-<p>Imports System.Globalization</p>
-<p>Imports VI.DataImport</p>
-<p>#End If</p>
-<p>Dim SCLOG As String = Session.Config.GetConfigParm("Custom\LogPath") +
- "CCC_Department_ImportFromAPI_" +
- DateTime.Now.ToString("yyyy-MM-dd") + ".txt"</p>
-<p>Try</p>
-<p>colCCCDepartmentsAPI =
- Session.Source.GetCollection(qCCCDepartmentsAPI)</p>
-<p>Catch ex As Exception</p>
-<p>If Not ex.InnerException Is Nothing AndAlso Not
- ex.InnerException.InnerException Is Nothing Then</p>
-<p>CCC_VID_Write2Log(SCLOG, Environment.NewLine +
- Date.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + "ERROR @ " +
- ex.Message + " " + ex.InnerException.Message + " " +
- ex.InnerException.InnerException.Message + " " + ex.StackTrace)</p>
-<p>ElseIf Not ex.InnerException Is Nothing Then</p>
-<p>CCC_VID_Write2Log(SCLOG, Environment.NewLine +
- Date.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + "ERROR @ " +
- ex.Message + " " + ex.InnerException.Message + " " + ex.StackTrace)</p>
-<p>Else</p>
-<p>CCC_VID_Write2Log(SCLOG, Environment.NewLine +
- Date.Now.ToString("yyyy-MM-dd HH:mm:ss") + " " + "ERROR @ " +
- ex.Message + " " + ex.StackTrace)</p>
-<p>End If</p>
-<p>End Try</p>
+<pre><code> \#If Not SCRIPTDEBUGGER Then
+
+ References VI.DataImport.dll
+
+ Imports System.Collections.Generic
+
+ Imports System.IO
+
+ Imports System.Globalization
+
+ Imports VI.DataImport
+
+ \#End If
+
+  
+
+ Dim SCLOG As String = Session.Config.GetConfigParm(&quot;Custom\LogPath&quot;) +
+ &quot;CCC_Department_ImportFromAPI\_&quot; +
+ DateTime.Now.ToString(&quot;yyyy-MM-dd&quot;) + &quot;.txt&quot;
+
+  
+
+ Try
+
+ colCCCDepartmentsAPI =
+ Session.Source.GetCollection(qCCCDepartmentsAPI)
+
+ Catch ex As Exception
+
+ If Not ex.InnerException Is Nothing AndAlso Not
+ ex.InnerException.InnerException Is Nothing Then
+
+ CCC_VID_Write2Log(SCLOG, Environment.NewLine +
+ Date.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;) + &quot; &quot; + &quot;ERROR @ &quot; +
+ ex.Message + &quot; &quot; + ex.InnerException.Message + &quot; &quot; +
+ ex.InnerException.InnerException.Message + &quot; &quot; + ex.StackTrace)
+
+ ElseIf Not ex.InnerException Is Nothing Then
+
+ CCC_VID_Write2Log(SCLOG, Environment.NewLine +
+ Date.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;) + &quot; &quot; + &quot;ERROR @ &quot; +
+ ex.Message + &quot; &quot; + ex.InnerException.Message + &quot; &quot; + ex.StackTrace)
+
+ Else
+
+ CCC_VID_Write2Log(SCLOG, Environment.NewLine +
+ Date.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;) + &quot; &quot; + &quot;ERROR @ &quot; +
+ ex.Message + &quot; &quot; + ex.StackTrace)
+
+ End If
+
+  
+
+ End Try
+</code></pre>
 <hr />
 <h2 id="ccc_vid_write2log">CCC_VID_Write2Log</h2>
-<p>#If Not SCRIPTDEBUGGER Then</p>
-<p>References VI.Samba.Tools.dll</p>
-<p>#End If</p>
-<p>Public Sub CCC_VID_Write2Log(ByVal LogFile As String, ByVal Line As
- String)</p>
-<p>Dim logFilePath As System.String</p>
-<p>If Not AppData.Instance.RuntimeEnvironment.IsMono Then</p>
-<p>logFilePath = PathHelper.ConvertSeparators(LogFile)</p>
-<p>Else</p>
-<p>Dim sambaUncPath As New VI.Samba.Tools.SambaUncPath(LogFile)</p>
-<p>If Not sambaUncPath.IsLocal Then</p>
-<p>Throw New System.Exception(#LD("UNC-path ""{0}"" does not reference a
- local path.", LogFile)#)</p>
-<p>Else</p>
-<p>logFilePath = sambaUncPath.LocalPath</p>
-<p>End If</p>
-<p>End If</p>
-<p>Dim f As System.IO.StreamWriter = Nothing</p>
-<p>Try</p>
-<p>f = New System.IO.StreamWriter(logFilePath, True,
- System.Text.Encoding.UTF8)</p>
-<p>f.NewLine() = Chr(13) &amp; Chr(10)</p>
-<p>f.WriteLine(Line)</p>
-<p>Catch exc As System.Exception</p>
-<p>Throw New System.Exception(#LD("The path is '{0}'.", logFilePath)#,
- exc)</p>
-<p>Finally</p>
-<p>If Not f Is Nothing Then</p>
-<p>f.Flush()</p>
-<p>f.Close()</p>
-<p>End If</p>
-<p>End Try</p>
-<p>End Sub</p>
+<pre><code> \#If Not SCRIPTDEBUGGER Then
+
+ References VI.Samba.Tools.dll
+
+ \#End If
+
+  
+
+ Public Sub CCC_VID_Write2Log(ByVal LogFile As String, ByVal Line As
+ String)
+
+ Dim logFilePath As System.String
+
+ If Not AppData.Instance.RuntimeEnvironment.IsMono Then
+
+ logFilePath = PathHelper.ConvertSeparators(LogFile)
+
+ Else
+
+ Dim sambaUncPath As New VI.Samba.Tools.SambaUncPath(LogFile)
+
+ If Not sambaUncPath.IsLocal Then
+
+ Throw New System.Exception(#LD(&quot;UNC-path &quot;&quot;{0}&quot;&quot; does not reference a
+ local path.&quot;, LogFile)#)
+
+ Else
+
+ logFilePath = sambaUncPath.LocalPath
+
+ End If
+
+ End If
+
+  
+
+ Dim f As System.IO.StreamWriter = Nothing
+
+  
+
+ Try
+
+ f = New System.IO.StreamWriter(logFilePath, True,
+ System.Text.Encoding.UTF8)
+
+  
+
+ f.NewLine() = Chr(13) &amp; Chr(10)
+
+ f.WriteLine(Line)
+
+ Catch exc As System.Exception
+
+ Throw New System.Exception(#LD(&quot;The path is '{0}'.&quot;, logFilePath)#,
+ exc)
+
+ Finally
+
+ If Not f Is Nothing Then
+
+ f.Flush()
+
+ f.Close()
+
+ End If
+
+ End Try
+
+ End Sub
+</code></pre>
 <hr />
 <h2 id="_8">Строки</h2>
 <p>Несколько строк</p>
-<p>Dim DetailStrg As New StringBuilder</p>
-<p>DetailStrg.AppendLine("qq")</p>
-<p>Return DetailStrg.ToString()</p>
+<pre><code> Dim DetailStrg As New StringBuilder
+
+ DetailStrg.AppendLine(&quot;qq&quot;)
+
+ Return DetailStrg.ToString()
+</code></pre>
 <hr />
 <h1 id="where_1">WHERE</h1>
-<p>Dim f As ISqlFormatter = Session.SqlFormatter()</p>
-<p>Value = f.UidComparison("UID_ADSAccount", \$UID_ADSAccount\$)</p>
+<pre><code> Dim f As ISqlFormatter = Session.SqlFormatter()
+
+ Value = f.UidComparison(&quot;UID_ADSAccount&quot;, \$UID_ADSAccount\$)
+</code></pre>
 <hr />
 <h1 id="export-to-csv">EXPORT TO CSV</h1>
 <h1 id="csvexportsingle">CSVExportSingle</h1>
 <p>&lt;https://www.oneidentity.com/community/identity-manager/f/forum/30780/export-selectet-data-from-a-new-created-user-into-a-csv-file</p>
 <h2 id="_9">Формат даты</h2>
-<p>Dim asd As String = expenddt.ToString("dd/MM/yyyy")</p>
+<pre><code> Dim asd As String = expenddt.ToString(&quot;dd/MM/yyyy&quot;)
+</code></pre>
 <p>*From
  \&lt;&lt;https://coderoad.ru/8644398/%D0%A4%D0%BE%D1%80%D0%BC%D0%B0%D1%82-%D0%B4%D0%B0%D1%82%D1%8B-%D0%B2-vb-net*</p>
 <h2 id="objectwalker_1">ObjectWalker</h2>
-<p>Public Function CCC_Test_ObjectWalker (ByVal UID_PWO As String) As
- String</p>
-<p>Dim dbPWO As IEntity</p>
-<p>Dim strDisplayOrg As String</p>
-<p>Dim strDisplayOrgParent As String</p>
-<p>Dim strCCC_BPMServiceID As String</p>
-<p>dbPWO = Session.Source.Get("PersonWantsOrg", UID_PWO)</p>
-<p>strDisplayOrg =
- dbPWO.CreateWalker(Session).GetValue("DisplayOrg").String</p>
-<p>strDisplayOrgParent =
- dbPWO.CreateWalker(Session).GetValue("DisplayOrgParent").String</p>
-<p>'strCCC_BPMServiceID =
- dbPWO.CreateWalker(Session).GetValue("FK(UID_OrgParentOfParent).FK(UID_AccProduct).FK(UID_AccProductGroup).CCC_BPMServiceID").String</p>
-<p>strCCC_BPMServiceID =
- dbPWO.CreateWalker(Session).GetValue("FK(UID_Org).FK(UID_AccProduct).FK(UID_AccProductGroup).CCC_BPMServiceID").String</p>
-<p>Return strCCC_BPMServiceID</p>
-<p>End Function</p>
+<pre><code> Public Function CCC_Test_ObjectWalker (ByVal UID_PWO As String) As
+ String
+
+ Dim dbPWO As IEntity
+
+ Dim strDisplayOrg As String
+
+ Dim strDisplayOrgParent As String
+
+ Dim strCCC_BPMServiceID As String
+
+  
+
+  
+
+ dbPWO = Session.Source.Get(&quot;PersonWantsOrg&quot;, UID_PWO)
+
+ strDisplayOrg =
+ dbPWO.CreateWalker(Session).GetValue(&quot;DisplayOrg&quot;).String
+
+ strDisplayOrgParent =
+ dbPWO.CreateWalker(Session).GetValue(&quot;DisplayOrgParent&quot;).String
+
+ 'strCCC_BPMServiceID =
+ dbPWO.CreateWalker(Session).GetValue(&quot;FK(UID_OrgParentOfParent).FK(UID_AccProduct).FK(UID_AccProductGroup).CCC_BPMServiceID&quot;).String
+
+ strCCC_BPMServiceID =
+ dbPWO.CreateWalker(Session).GetValue(&quot;FK(UID_Org).FK(UID_AccProduct).FK(UID_AccProductGroup).CCC_BPMServiceID&quot;).String
+
+  
+
+  
+
+ Return strCCC_BPMServiceID
+
+ End Function
+</code></pre>
 <hr />
 <h1 id="greenplum-postgress">Взаимодействие с GreenPlum (Postgress)</h1>
 <p>Надо установить odbc драйвер</p>
@@ -1263,46 +1678,85 @@ End Function
 <p>После этого можно юзать подключение, через ADO .NET (<a href="read://https_metanit.com/?url=https%3A%2F%2Fmetanit.com%2Fsharp%2Fadonet%2F1.1.php">Введение в
  ADO.NET
  (https_metanit.com)</a>)</p>
-<p>Public Sub CCC_Test_GreenPlum_TestConnection()</p>
-<p>Dim MyCon As New Odbc.OdbcConnection</p>
-<p>MyCon.ConnectionString = "<strong>Driver={PostgreSQL
- ANSI</strong>};database=test001;server=[REDACTED_HOST];port=5432;uid=[REDACTED_USER];sslmode=disable;readonly=0;protocol=7.4;User
- ID=[REDACTED_USER];password=[REDACTED];"</p>
-<p>MyCon.Open()</p>
-<p>If MyCon.State = ConnectionState.Open Then</p>
-<p>MsgBox("Connected To PostGres", MsgBoxStyle.MsgBoxSetForeground)</p>
-<p>End If</p>
-<p>End Sub</p>
+<pre><code> Public Sub CCC_Test_GreenPlum_TestConnection()
+
+ Dim MyCon As New Odbc.OdbcConnection
+
+ MyCon.ConnectionString = &quot;**Driver={PostgreSQL
+ ANSI**};database=test001;server=[REDACTED_HOST];port=5432;uid=[REDACTED_USER];sslmode=disable;readonly=0;protocol=7.4;User
+ ID=[REDACTED_USER];password=[REDACTED];&quot;
+
+  
+
+ MyCon.Open()
+
+ If MyCon.State = ConnectionState.Open Then
+
+ MsgBox(&quot;Connected To PostGres&quot;, MsgBoxStyle.MsgBoxSetForeground)
+
+ End If
+
+ End Sub
+</code></pre>
 <hr />
 <h6 id="idbcommand-interface"><em>IDbCommand Interface</em></h6>
 <p>*From
  \&lt;&lt;https://docs.microsoft.com/en-us/dotnet/api/system.data.idbcommand?view=net-5.0*</p>
 <p>Обновляем данные в таблице постгресс</p>
-<p>Public Sub CCC_Test_GreenPlum_UpdateValue()</p>
-<p>Dim MyCon As New Odbc.OdbcConnection</p>
-<p>Dim DB = Connection.GetConfigParm("Custom\GreenPlum\GreenplumDB")</p>
-<p>Dim ConnPort =
- Connection.GetConfigParm("Custom\GreenPlum\ConnectionPort")</p>
-<p>Dim Srv = Connection.GetConfigParm("Custom\GreenPlum\GreenplumMaster")</p>
-<p>Dim ConnUser =
- Connection.GetConfigParm("Custom\GreenPlum\ConnectionUser")</p>
-<p>Dim ConnUserPass =
- Connection.GetConfigParm("Custom\GreenPlum\ConnectionUserPassword")</p>
-<p>Dim strSQL As String = "UPDATE AccessRights SET dimensionvalue =
- 'TestValue003' WHERE username = 'Alex';"</p>
-<p>Dim strUserName As String</p>
-<p>MyCon.ConnectionString = "Driver={PostgreSQL ANSI};Database=" + DB +
- ";Server=" + Srv + ";Port=" + ConnPort + ";Uid=" + ConnUser +
- ";Pwd=" + ConnUserPass +";"</p>
-<p>MyCon.Open()</p>
-<p>' Create a database command object</p>
-<p>Using dbCommand As IDbCommand = MyCon.CreateCommand()</p>
-<p>' Set the SQL statement to execute</p>
-<p>dbCommand.CommandText = strSQL</p>
-<p>dbCommand.ExecuteNonQuery()</p>
-<p>End Using</p>
-<p>MyCon.Close()</p>
-<p>End Sub</p>
+<pre><code> Public Sub CCC_Test_GreenPlum_UpdateValue()
+
+ Dim MyCon As New Odbc.OdbcConnection
+
+ Dim DB = Connection.GetConfigParm(&quot;Custom\GreenPlum\GreenplumDB&quot;)
+
+ Dim ConnPort =
+ Connection.GetConfigParm(&quot;Custom\GreenPlum\ConnectionPort&quot;)
+
+ Dim Srv = Connection.GetConfigParm(&quot;Custom\GreenPlum\GreenplumMaster&quot;)
+
+ Dim ConnUser =
+ Connection.GetConfigParm(&quot;Custom\GreenPlum\ConnectionUser&quot;)
+
+ Dim ConnUserPass =
+ Connection.GetConfigParm(&quot;Custom\GreenPlum\ConnectionUserPassword&quot;)
+
+  
+
+ Dim strSQL As String = &quot;UPDATE AccessRights SET dimensionvalue =
+ 'TestValue003' WHERE username = 'Alex';&quot;
+
+ Dim strUserName As String
+
+  
+
+ MyCon.ConnectionString = &quot;Driver={PostgreSQL ANSI};Database=&quot; + DB +
+ &quot;;Server=&quot; + Srv + &quot;;Port=&quot; + ConnPort + &quot;;Uid=&quot; + ConnUser +
+ &quot;;Pwd=&quot; + ConnUserPass +&quot;;&quot;
+
+  
+
+ MyCon.Open()
+
+ ' Create a database command object
+
+ Using dbCommand As IDbCommand = MyCon.CreateCommand()
+
+ ' Set the SQL statement to execute
+
+ dbCommand.CommandText = strSQL
+
+  
+
+ dbCommand.ExecuteNonQuery()
+
+ End Using
+
+  
+
+ MyCon.Close()
+
+ End Sub
+</code></pre>
 <hr />
 <h1 id="_10">Кавычки в скриптах</h1>
 <p>Для postgress, чтобы создать роль с точкой в имени, надо заключить имя
