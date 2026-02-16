@@ -354,49 +354,88 @@
 <p><em>From
 \&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/29">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/29</a>&gt;</em></p>
 <p><strong>Оповещение о пользователях, которые будут скоро уволены</strong></p>
-<p>Public Function Z_Notify_Upcoming_User_Termination() As String</p>
-<p>Dim timeSqlParts As New List(Of String)</p>
-<p>For Each nextTimeDiff As String In {"0", "5", "10"}</p>
-<p>timeSqlParts.Add("DATEADD(DD," &amp; nextTimeDiff &amp; ",CAST(getdate() AS
-Date))=cast(ExitDate as date)")</p>
-<p>Next</p>
-<p>Dim items As IColDbObject = Nothing</p>
-<p>items = Connection.CreateCol("Person")</p>
-<p>items.Prototype("UID_Person").IsDisplayItem = True</p>
-<p>items.Prototype("UID_PersonHead").IsDisplayItem = True</p>
-<p>items.Prototype.WhereClause = "ExitDate is not null and IsInActive=0
-and IsExternal=1 and (" &amp; String.Join(" or ", timeSqlParts) &amp; ")"</p>
-<p>items.Prototype.OrderBy = "internalname"</p>
-<p>items.Load()</p>
-<p>logger.Trace("pending termination count: " &amp; items.Count)</p>
-<p>Dim managersToUsers As New Dictionary(Of String, List(Of String))</p>
-<p>For Each nextOp As IColElem In items</p>
-<p>Dim managerId = nextOp.GetValue("UID_PersonHead").String</p>
-<p>Dim persId = nextOp.GetValue("UID_Person").String</p>
-<p>If Not String.IsNullOrEmpty(managerId) Then</p>
-<p>Z_Dictionary_Put_If_Absent(managersToUsers, managerId, New List(Of
-String))</p>
-<p>managersToUsers.Item(managerId).Add(persId)</p>
-<p>End If</p>
-<p>Next</p>
-<p>For Each nextManager As String In managersToUsers.Keys</p>
-<p>Try</p>
-<p>Dim userIds As List(Of String) = managersToUsers.Item(nextManager)</p>
-<p>logger.Trace("sending upcoming termination mail with " &amp; userIds.Count
-&amp; " users (" &amp; String.Join(", ", userIds) &amp; ") to " &amp; nextManager)</p>
-<p>Dim toEmail As String = Connection.CreateSingle("Person",
-nextManager).GetValue("DefaultEmailAddress").String</p>
-<p>Dim emailParams As New Dictionary(Of String, Object)</p>
-<p>emailParams.Add("userIds", userIds)</p>
-<p>emailParams.Add("Receiver", nextManager)</p>
-<p>Z_Send_Html_Mail_With_Template(toEmail, "Z_Upcoming_Termination",
-emailParams)</p>
-<p>Catch ex As Exception</p>
-<p>logger.Error(ex, "error hile sending mail to " &amp; nextManager)</p>
-<p>End Try</p>
-<p>Next</p>
-<p>Return "ok"</p>
-<p>End Function</p>
+</blockquote>
+<pre><code>Public Function Z_Notify_Upcoming_User_Termination() As String
+
+Dim timeSqlParts As New List(Of String)
+
+For Each nextTimeDiff As String In {&quot;0&quot;, &quot;5&quot;, &quot;10&quot;}
+
+timeSqlParts.Add(&quot;DATEADD(DD,&quot; &amp; nextTimeDiff &amp; &quot;,CAST(getdate() AS  
+Date))=cast(ExitDate as date)&quot;)
+
+Next
+
+Dim items As IColDbObject = Nothing
+
+items = Connection.CreateCol(&quot;Person&quot;)
+
+items.Prototype(&quot;UID_Person&quot;).IsDisplayItem = True
+
+items.Prototype(&quot;UID_PersonHead&quot;).IsDisplayItem = True
+
+items.Prototype.WhereClause = &quot;ExitDate is not null and IsInActive=0  
+and IsExternal=1 and (&quot; &amp; String.Join(&quot; or &quot;, timeSqlParts) &amp; &quot;)&quot;
+
+items.Prototype.OrderBy = &quot;internalname&quot;
+
+items.Load()
+
+logger.Trace(&quot;pending termination count: &quot; &amp; items.Count)
+
+Dim managersToUsers As New Dictionary(Of String, List(Of String))
+
+For Each nextOp As IColElem In items
+
+Dim managerId = nextOp.GetValue(&quot;UID_PersonHead&quot;).String
+
+Dim persId = nextOp.GetValue(&quot;UID_Person&quot;).String
+
+If Not String.IsNullOrEmpty(managerId) Then
+
+Z_Dictionary_Put_If_Absent(managersToUsers, managerId, New List(Of  
+String))
+
+managersToUsers.Item(managerId).Add(persId)
+
+End If
+
+Next
+
+For Each nextManager As String In managersToUsers.Keys
+
+Try
+
+Dim userIds As List(Of String) = managersToUsers.Item(nextManager)
+
+logger.Trace(&quot;sending upcoming termination mail with &quot; &amp; userIds.Count  
+&amp; &quot; users (&quot; &amp; String.Join(&quot;, &quot;, userIds) &amp; &quot;) to &quot; &amp; nextManager)
+
+Dim toEmail As String = Connection.CreateSingle(&quot;Person&quot;,  
+nextManager).GetValue(&quot;DefaultEmailAddress&quot;).String
+
+Dim emailParams As New Dictionary(Of String, Object)
+
+emailParams.Add(&quot;userIds&quot;, userIds)
+
+emailParams.Add(&quot;Receiver&quot;, nextManager)
+
+Z_Send_Html_Mail_With_Template(toEmail, &quot;Z_Upcoming_Termination&quot;,  
+emailParams)
+
+Catch ex As Exception
+
+logger.Error(ex, &quot;error hile sending mail to &quot; &amp; nextManager)
+
+End Try
+
+Next
+
+Return &quot;ok&quot;
+
+End Function
+</code></pre>
+<blockquote>
 <hr />
 <p><strong>Параметр в переменную (скрипт отправки почты)</strong></p>
 <p>#If Not SCRIPTDEBUGGER Then</p>
