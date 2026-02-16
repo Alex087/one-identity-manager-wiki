@@ -98,7 +98,7 @@
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#3-person-designer-table-person-central" class="nav-link">3) Создание Person в БД (Designer - Table – Person - Central</a>
+            <li class="nav-item" data-bs-level="1"><a href="#3-person-designer-table-person-centralaccount" class="nav-link">3) Создание Person в БД (Designer - Table – Person - CentralAccount)</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -193,22 +193,7 @@
               </ul>
             </li>
             
-            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link"></a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
             <li class="nav-item" data-bs-level="1"><a href="#22-fullsync" class="nav-link">22) FULLSYNC</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#_3" class="nav-link"></a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link"></a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -242,7 +227,7 @@ alt="Department -Target columns and key ObjectlD DEPARTMEBITCODE DepartmentName 
 <p>Уникальность имени аккаунта</p>
 <p><img src="../media/misc/media/image4.png"
 style="width:5in;height:4.09375in"
-alt="Designer - alex@t oneim db-4.sgp.ru\OneIM (Main Database) Qatabase Configuration parameters Yiew Help a Commit to database •e Sack • Next • • Search Navigation Getting Started Create system user Edit configuration parameters Add job server Edit schedules Schema Editor Configuration parameters Common Custom OPR Hardware QER Attestation CalculateRiskIndex ComplianceCheck Eset ITShop Org Person I O Getting Sti Value CentralÅccountGIobaILlnique DefaultMaiIOomain Configuratic Defender " /></p>
+alt="Designer - alex@t oneim db-4.domain\OneIM (Main Database) Qatabase Configuration parameters Yiew Help a Commit to database •e Sack • Next • • Search Navigation Getting Started Create system user Edit configuration parameters Add job server Edit schedules Schema Editor Configuration parameters Common Custom OPR Hardware QER Attestation CalculateRiskIndex ComplianceCheck Eset ITShop Org Person I O Getting Sti Value CentralÅccountGIobaILlnique DefaultMaiIOomain Configuratic Defender " /></p>
 <p>Mapping</p>
 <p><img src="../media/misc/media/image5.png"
 style="width:12.57292in;height:5.60417in"
@@ -315,46 +300,54 @@ AD.</p>
 <p>Делаем выгрузку в csv на основании запроса.</p>
 <p>Затем делает Data Import этой csv в БД, чтобы корректно заполнить
 таблицу TSBITData.</p>
+<p>```</p>
+<blockquote>
 <p>select newid() as uid_TSBITData, Department.UID_Department as
 UID_ORG,'\&lt;Key&gt;\&lt;T&gt;TSBAccountDef\&lt;/T&gt;\&lt;P&gt;8b826aeb-9a5f-4c84-a528-6af40976b6f7\&lt;/P&gt;\&lt;/Key&gt;'
 as ObjectKeyAppliesTo, 'ADS-D7251336DB99478B8616695F0DF66584' as
 UID_DialogColumnTarget, ADSContainer.UID_ADSContainer, 'TSBAccountDef:
 Std. user account Domain SGP - ADSAccount.UID_ADSContainer' as
 DisplayValue from Department INNER JOIN ADSContainer ON
-Department.Commentary=ADSContainer.DistinguishedName</p>
+Department.Commentary=ADSContainer.DistinguishedName
+```</p>
+</blockquote>
 <p><strong>После импорта csv надо проверить, что в базе Department и TSBITDATA
 одинаковое кол-во департаментов и связей! Иначе, надо вручную
 добавлять связи!</strong></p>
-<h1 id="3-person-designer-table-person-central">3) Создание Person в БД (Designer - Table – Person - Central</h1>
-<p>Account)**</p>
-<p>'\$CustomProperty01\$</p>
-<p>If CStr(\$ImportSource\$) \&lt;&gt; "ADS" And CStr(\$Lastname\$) \&lt;&gt; ""
-And CStr(\$Firstname\$) \&lt;&gt; "" And CStr(\$Middlename\$) \&lt;&gt; "" And
-_</p>
+<h1 id="3-person-designer-table-person-centralaccount">3) Создание Person в БД (Designer - Table – Person - CentralAccount)</h1>
+<p>```
+'$CustomProperty01$</p>
+<p>If CStr($ImportSource$) \&lt;&gt; "ADS" And CStr($Lastname$) \&lt;&gt; ""
+And CStr($Firstname$) \&lt;&gt; "" And CStr($Middlename$) \&lt;&gt; "" And _</p>
 <p>(Not CBool(Connection.Variables.Get("FULLSYNC")) Or
-CStr(\$ImportSource\$).StartsWith("EBS") Or
-CStr(\$ImportSource\$).StartsWith("SAP") ) Then</p>
+CStr($ImportSource$).StartsWith("EBS") Or
+CStr($ImportSource$).StartsWith("SAP") ) Then</p>
 <p>If
 CStr(Connection.GetConfigParm("QER\Person\CentralAccountGlobalUnique"))="1"
 Then</p>
 <p>Value = CCC_AE_BuildCentralAccountGlobalUnique(
-GetValue("UID_Person").String, \$Lastname\$, \$Firstname\$,
-\$Middlename\$)</p>
+GetValue("UID_Person").String, $Lastname$, $Firstname$,
+$Middlename$)</p>
 <p>Else</p>
 <p>Value = CCC_AE_BuildCentralAccount( GetValue("UID_Person").String,
-\$Lastname\$, \$Firstname\$, \$Middlename\$)</p>
+$Lastname$, $Firstname$, $Middlename$)</p>
 <p>End If</p>
-<p>End If</p>
+<p>End If
+```</p>
 <p><strong>Чтобы при создании пользователя в AD корректно прописывался cn, Full
 name …</strong></p>
-<p>Надо для cn прописать</p>
-<p>If \$Givenname\$ \&lt;&gt; \$Givenname[o]\$ Or \$Surname\$ \&lt;&gt;
-\$Surname[o]\$ Or <strong>\$FK(UID_Person).Middlename\$</strong> \&lt;&gt;
-\$FK(UID_Person).Middlename[o]\$ Then</p>
-<p>If \$Givenname\$\&lt;&gt;"" AndAlso \$Surname\$\&lt;&gt;"" AndAlso
-\$FK(UID_Person).Middlename\$\&lt;&gt;"" Then</p>
-<p>CN = \$Surname\$ &amp; " " &amp; \$Givenname\$ &amp; " " &amp;
-<strong>\$FK(UID_Person).Middlename\$</strong></p>
+<p>Надо для cn прописать
+```</p>
+<blockquote>
+<p>If $Givenname$ \&lt;&gt; $Givenname[o]$ Or $Surname$ \&lt;&gt;
+$Surname[o]$ Or <strong>$FK(UID_Person).Middlename$</strong> \&lt;&gt;
+$FK(UID_Person).Middlename[o]$ Then</p>
+</blockquote>
+<p>If $Givenname$\&lt;&gt;"" AndAlso $Surname$\&lt;&gt;"" AndAlso
+$FK(UID_Person).Middlename$\&lt;&gt;"" Then</p>
+<p>CN = $Surname$ &amp; " " &amp; $Givenname$ &amp; " " &amp;
+<strong>$FK(UID_Person).Middlename$</strong>
+```</p>
 <h1 id="4"><strong>4) Роли классов</strong></h1>
 <p>Можно создавать много деревьев ролей.</p>
 <p>Каждому дереву ролей нужен корневой элемент, который называется ролью
@@ -452,13 +445,13 @@ OneIMService)  </p>
 <p>Отчет System entitlement drifts in all target systems</p>
 <p>Через Insert в таблицу сделать процесс свой</p>
 <p>Можно, через параметры передавать информацию прямо в скрипты</p>
-<p>Value = \$FK(UID_ADSAccount).UserPrincipalName\$</p>
+<p>Value = $FK(UID_ADSAccount).UserPrincipalName$</p>
 <p>Можно сделать процесс по отправке email</p>
 <p>Message:</p>
-<p>Value = "User " + \$FK(UID_ADSAccount).UserPrincipalName\$ + " add in
-group " + \$FK(UID_ADSGroup).cn\$ + " in " + Now().ToString()</p>
+<p>Value = "User " + $FK(UID_ADSAccount).UserPrincipalName$ + " add in
+group " + $FK(UID_ADSGroup).cn$ + " in " + Now().ToString()</p>
 <p>Subject</p>
-<p>Value = "Changes in group " + \$FK(UID_ADSGroup).cn\$</p>
+<p>Value = "Changes in group " + $FK(UID_ADSGroup).cn$</p>
 <p><img src="../media/misc/media/image7.png"
 style="width:6.61458in;height:1.36458in"
 alt="Parameter name Address Authenticationstring SenderAddress Message SmtpPort SmtpServer Subject Parameter value Value = •[redacted-email]• Value = Connectionlnfo.AuthString Value = •[redacted-email]• Value = •user * * • add in group Value = Connection. Value = Connection. GetCo in * NowO.ToStringO &#39;Chan ±sin rou SFKiU10 " /></p>
@@ -507,11 +500,11 @@ PropertyLog (x) – AllDefaultPropertiesForModel (x)</p>
 <strong>DialogWatchOperation</strong></p>
 <h1 id="14-api"><strong>14) API</strong></h1>
 <p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/rest-api-reference-guide/15">https://support.oneidentity.com/technical-documents/identity-manager/8.0/rest-api-reference-guide/15</a></p>
-<p><a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471">https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471</a></p>
+<p><a href="https://t-oneim-4.domain/AppServer/api/entity/Department/30002471">https://t-oneim-4.domain/AppServer/api/entity/Department/30002471</a></p>
 <h1 id="15-sync-editor"><strong>15) Формирование ФИО в Sync Editor в атрибутах</strong></h1>
 <p>Dim probel as String = " "</p>
-<p>Dim fio as String = \$LASTNAME\$ &amp; probel &amp; \$FIRSTNAME\$ &amp; probel &amp;
-\$MIDDLENAME\$</p>
+<p>Dim fio as String = $LASTNAME$ &amp; probel &amp; $FIRSTNAME$ &amp; probel &amp;
+$MIDDLENAME$</p>
 <p>return fio</p>
 <h1 id="16-active-directory-"><strong>16) Active Directory - как можно сцепить учетки и пользователей</strong></h1>
 <p>По ФИО</p>
@@ -553,9 +546,9 @@ alt="AD Admin account - Alexander, June C - 3/1 4/2017 AM (Request) Simulation r
 <p>Изменил дефолтный шаблон</p>
 <p>#If EX2K Or NOTES Then</p>
 <p>Dim defaultMailAddress As String</p>
-<p>If Len(\$CentralAccount\$) &gt; 0 AndAlso Len (\$UID_Person\$) &gt; 0 Then</p>
+<p>If Len($CentralAccount$) &gt; 0 AndAlso Len ($UID_Person$) &gt; 0 Then</p>
 <p>defaultMailAddress =
-VI_AE_CreatedefaultMailAddress(\$centralaccount\$,\$uid_person\$)</p>
+VI_AE_CreatedefaultMailAddress($centralaccount$,$uid_person$)</p>
 <p>' check if mail address is valid</p>
 <p>If VID_IsSMTPAddress(defaultMailAddress) Then</p>
 <p>Value = defaultMailAddress</p>
@@ -566,8 +559,8 @@ VI_AE_CreatedefaultMailAddress(\$centralaccount\$,\$uid_person\$)</p>
 <p>Dim defaultMailAddress As String</p>
 <p>Dim maildom As String = String.Empty</p>
 <p>maildom = Connection.GetConfigParm("QER\Person\DefaultMailDomain")</p>
-<p>If Len(\$CentralAccount\$) &gt; 0 Then</p>
-<p>defaultMailAddress = \$centralaccount\$ + "@" + maildom</p>
+<p>If Len($CentralAccount$) &gt; 0 Then</p>
+<p>defaultMailAddress = $centralaccount$ + "@" + maildom</p>
 <p>Value = defaultMailAddress</p>
 <p>End if</p>
 <hr />
@@ -703,12 +696,9 @@ alt="rarameters Parameter Value body &quot;parameters &quot; &quot;3c93f2b9-SS24
 <p>Param4: Value = \&lt;standard reason&gt;</p>
 <p>Param5: Value = \&lt;number approval steps&gt;
 (PWODecisionStep.SubLevelNumber)</p>
-<p>WhereClause: Value = "UID_PersonWantsOrg ='"&amp; \$UID_PersonWantsOrg\$
+<p>WhereClause: Value = "UID_PersonWantsOrg ='"&amp; $UID_PersonWantsOrg$
 &amp;"'"</p>
 <p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/29">https://support.oneidentity.com/technical-documents/identity-manager/8.0/it-shop-administration-guide/29</a></p>
-</blockquote>
-<h1 id="_2"></h1>
-<blockquote>
 <p><strong>Первый параметр надо указывать UID пользователя, который принимает
 запрос!!!</strong></p>
 <p><strong>По событию!</strong></p>
@@ -868,7 +858,6 @@ alt="Manager - (Main Database) Database Object Yiew Help e aack • *Forward •
 style="width:8.09375in;height:2.88542in"
 alt="Navigation Custom Target Systems GreenPIum I (GreenPIumI) user accounts Groups Container structure Permissions contro Is GreenPIum 2 (GreenPIum2) Target system synchronization: Greenplum UNSAccountB UNSAccount81nUNSGroup8 UNSGroup8 UNSGroup81nUNSGroup8 x Result list UNSAccount8 Delete Reset Publish Table &#39;Object user accounts (4) UNSGr x GreenPIum/user0025t (GreenPIum I) GreenPIum,&#39;User006 Test (GreenPIum I) GreenPIum/user008t (GreenPIum I) GreenPIum/user024t (GreenPIum I) " /></p>
 </blockquote>
-<h1 id="_3"></h1>
 <p><a href="https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-custom-target-systems/3"><span class="mark">https://support.oneidentity.com/technical-documents/identity-manager/8.1/administration-guide-for-connecting-to-custom-target-systems/3</span></a></p>
 <blockquote>
 <p>Чтобы иметь возможность вновь создавать удаленные объекты в целевой
@@ -926,7 +915,6 @@ alt="Manager - (Main Database) Database Home Object Yiew Help e aack • Forward
 <p><em>From
 \&lt;<a href="https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/84">https://support.oneidentity.com/technical-documents/identity-manager/8.0/configuration-guide/84</a>&gt;</em></p>
 </blockquote>
-<h1 id="_4"></h1>
 <ul>
 <li>Расширение схемы хранимыми процедурами</li>
 </ul>
@@ -974,37 +962,37 @@ alt="Navigation [T Shop Info system ITShop Identity &amp; Access Lifecycle Shop 
 <p>Dim CN, CNfix, DNold, DNnew,Domain, wherePart As String</p>
 <p>Dim i As Integer</p>
 <p>Dim f As ISqlFormatter = Connection.SqlFormatter</p>
-<p>If \$Givenname\$ \&lt;&gt; \$Givenname[o]\$ Or \$Surname\$ \&lt;&gt;
-\$Surname[o]\$ Then</p>
-<p>If \$Givenname\$\&lt;&gt;"" AndAlso \$Surname\$\&lt;&gt;"" Then</p>
-<p>CN = \$Surname\$ &amp; " " &amp; \$Givenname\$</p>
-<p>ElseIf \$Givenname\$\&lt;&gt;"" Then</p>
-<p>CN = \$Givenname\$</p>
-<p>ElseIf \$Surname\$\&lt;&gt;"" Then</p>
-<p>CN = \$Surname\$</p>
+<p>If $Givenname$ \&lt;&gt; $Givenname[o]$ Or $Surname$ \&lt;&gt;
+$Surname[o]$ Then</p>
+<p>If $Givenname$\&lt;&gt;"" AndAlso $Surname$\&lt;&gt;"" Then</p>
+<p>CN = $Surname$ &amp; " " &amp; $Givenname$</p>
+<p>ElseIf $Givenname$\&lt;&gt;"" Then</p>
+<p>CN = $Givenname$</p>
+<p>ElseIf $Surname$\&lt;&gt;"" Then</p>
+<p>CN = $Surname$</p>
 <p>Else</p>
-<p>CN = \$cn\$</p>
+<p>CN = $cn$</p>
 <p>End If</p>
 <p>Else</p>
-<p>CN = \$cn\$</p>
+<p>CN = $cn$</p>
 <p>End If</p>
 <p>Dim cnLen as Integer = Base.TableDef.Columns("CN").MaxLen</p>
 <p>CN = VID_Left(CN, cnLen)</p>
-<p>If \$cn[o]\$\&lt;&gt;CN Or
-\$UID_ADSContainer[o]\$\&lt;&gt;\$UID_ADSContainer\$ Then</p>
+<p>If $cn[o]$\&lt;&gt;CN Or
+$UID_ADSContainer[o]$\&lt;&gt;$UID_ADSContainer$ Then</p>
 <p>i=1</p>
 <p>CNFix = CN</p>
-<p>If \$UID_ADSContainer[o]\$ \&lt;&gt; "" Then</p>
-<p>DNold = \$FK(UID_ADSContainer[o]).DistinguishedName\$</p>
+<p>If $UID_ADSContainer[o]$ \&lt;&gt; "" Then</p>
+<p>DNold = $FK(UID_ADSContainer[o]).DistinguishedName$</p>
 <p>Else</p>
-<p>DNold = \$FK(UID_ADSDomain[o]).DistinguishedName\$</p>
+<p>DNold = $FK(UID_ADSDomain[o]).DistinguishedName$</p>
 <p>End If</p>
-<p>If \$UID_ADSContainer\$ \&lt;&gt; "" Then</p>
-<p>DNnew = \$FK(UID_ADSContainer).DistinguishedName\$</p>
+<p>If $UID_ADSContainer$ \&lt;&gt; "" Then</p>
+<p>DNnew = $FK(UID_ADSContainer).DistinguishedName$</p>
 <p>Else</p>
-<p>DNnew = \$FK(UID_ADSDomain).DistinguishedName\$</p>
+<p>DNnew = $FK(UID_ADSDomain).DistinguishedName$</p>
 <p>End If</p>
-<p>Domain = \$UID_ADSDomain\$</p>
+<p>Domain = $UID_ADSDomain$</p>
 <p>If DNold \&lt;&gt; "" And DNold \&lt;&gt; DNnew Then</p>
 <p>wherePart = f.OrRelation( _</p>
 <p>f.Comparison("DistinguishedName", ADS_CreateDN("cn", CN, DNnew),
@@ -1018,7 +1006,7 @@ DNnew), ValType.String)</p>
 <p>End If</p>
 <p>Do While Connection.Exists( "ADSAccount", _</p>
 <p>f.AndRelation( _</p>
-<p>f.UidComparison("UID_ADSAccount", \$UID_ADSAccount\$,
+<p>f.UidComparison("UID_ADSAccount", $UID_ADSAccount$,
 CompareOperator.NotEqual), _</p>
 <p>f.UidComparison("UID_ADSDomain", Domain), _</p>
 <p>wherePart _</p>
@@ -1222,7 +1210,7 @@ Id=[REDACTED_USER];Password=[REDACTED];Service name=OIM_SD;Direct=True"</p>
 <p>Dim strLOGFileName = "c:\data\HP\hp.log"</p>
 <p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
 <p>Dim email As String = login + "&lt;@surgut.[redacted-domain]&gt;"</p>
-<p>Dim adlogin As String = login + "&lt;@sgp.ru&gt;"</p>
+<p>Dim adlogin As String = login + "&lt;@domain&gt;"</p>
 <p>Using OracleConnection = New OracleConnection(oradb)</p>
 <p>OracleConnection.Open()</p>
 <p>Dim cmd As New OracleCommand With {</p>
@@ -1335,7 +1323,7 @@ Now.ToString(), ViException.ErrorString(ex)))</p>
 <p>End If</p>
 <p>If dbsUnsAccount.GetValue("Accountname").String \&lt;&gt; "" Then</p>
 <p>Dim login As String = dbsUnsAccount.GetValue("Accountname").String</p>
-<p>Dim adlogin As String = login + "&lt;@sgp.ru&gt;"</p>
+<p>Dim adlogin As String = login + "&lt;@domain&gt;"</p>
 <p>Dim cmd1 As New OracleCommand With {</p>
 <p>.Connection = OracleConnection,</p>
 <p>.CommandText = "USSC_UPDATE_EMP_ADLOGIN",</p>
@@ -1572,123 +1560,123 @@ OutStanding objects</p>
 <p>End Sub</p>
 <p><strong>--------------</strong></p>
 <p><strong>API</strong></p>
-<p>\$authdata = @{AuthString =
+<p>$authdata = @{AuthString =
 "Module=DialogUser;User=[REDACTED_USER];Password=" }</p>
-<p>\$authJson = ConvertTo-Json \$authdata -Depth 2</p>
+<p>$authJson = ConvertTo-Json $authdata -Depth 2</p>
 <p># Login (important, pass the NAME for your session variable in
 -SessionVariable)</p>
 <p>Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/auth/apphost">https://t-oneim-4.sgp.ru/AppServer/auth/apphost</a>" -Body
-\$authJson.ToString() -Method Post -UseDefaultCredentials -Headers
+"<a href="https://t-oneim-4.domain/AppServer/auth/apphost">https://t-oneim-4.domain/AppServer/auth/apphost</a>" -Body
+$authJson.ToString() -Method Post -UseDefaultCredentials -Headers
 @{Accept = "application/json" } -SessionVariable wsession</p>
-<p>#"https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471"</p>
+<p>#"https://t-oneim-4.domain/AppServer/api/entity/Department/30002471"</p>
 <p>Invoke-WebRequest -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471">https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471</a>"
--WebSession \$wsession</p>
+"<a href="https://t-oneim-4.domain/AppServer/api/entity/Department/30002471">https://t-oneim-4.domain/AppServer/api/entity/Department/30002471</a>"
+-WebSession $wsession</p>
 <p><strong>-------</strong></p>
 <p><strong>API</strong></p>
-<p>\$authdata = @{AuthString =
+<p>$authdata = @{AuthString =
 "Module=DialogUser;User=[REDACTED_USER];Password=[REDACTED]" }</p>
-<p>\$authJson = ConvertTo-Json \$authdata -Depth 2</p>
+<p>$authJson = ConvertTo-Json $authdata -Depth 2</p>
 <p># Login (important, pass the NAME for your session variable in
 -SessionVariable)</p>
 <p>Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/auth/apphost">https://t-oneim-4.sgp.ru/AppServer/auth/apphost</a>" -Body
-\$authJson.ToString() -Method Post -UseDefaultCredentials -Headers
+"<a href="https://t-oneim-4.domain/AppServer/auth/apphost">https://t-oneim-4.domain/AppServer/auth/apphost</a>" -Body
+$authJson.ToString() -Method Post -UseDefaultCredentials -Headers
 @{Accept = "application/json" } -SessionVariable wsession</p>
-<p>#"https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471"</p>
+<p>#"https://t-oneim-4.domain/AppServer/api/entity/Department/30002471"</p>
 <p>#Get Department</p>
 <p>Invoke-WebRequest -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471">https://t-oneim-4.sgp.ru/AppServer/api/entity/Department/30002471</a>"
--WebSession \$wsession</p>
+"<a href="https://t-oneim-4.domain/AppServer/api/entity/Department/30002471">https://t-oneim-4.domain/AppServer/api/entity/Department/30002471</a>"
+-WebSession $wsession</p>
 <p>#Get list users with where</p>
-<p>\$a = Invoke-WebRequest -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entities/Person?lastname=Тестовый4&amp;limit=2">https://t-oneim-4.sgp.ru/AppServer/api/entities/Person?lastname=Тестовый4&amp;limit=2</a>"
--WebSession \$wsession</p>
+<p>$a = Invoke-WebRequest -Uri
+"<a href="https://localhost/AppServer/api/entities/Person?lastname=Тестовый4&amp;limit=2">https://localhost/AppServer/api/entities/Person?lastname=Тестовый4&amp;limit=2</a>"
+-WebSession $wsession</p>
 <p>#Create a new object and return URI of new object</p>
-<p>\$FirstName = "Пользователь"</p>
-<p>\$LastName = "Тестовый4"</p>
-<p>\$MiddleName = "Иванович"</p>
-<p>\$UID_Department = "10013364"</p>
-<p>\$body = @{values = @{FirstName = \$FirstName; LastName = \$LastName;
-MiddleName = \$MiddleName; UID_Department = \$UID_Department; IsExternal
+<p>$FirstName = "Пользователь"</p>
+<p>$LastName = "Тестовый4"</p>
+<p>$MiddleName = "Иванович"</p>
+<p>$UID_Department = "10013364"</p>
+<p>$body = @{values = @{FirstName = $FirstName; LastName = $LastName;
+MiddleName = $MiddleName; UID_Department = $UID_Department; IsExternal
 = 0; BirthDate = "1993-05-14"; Gender = 1 } } | ConvertTo-Json</p>
-<p>\$newURI = (Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person</a>" -WebSession
-\$wsession -Method Post -Body \$body -ContentType "application/json;
+<p>$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.domain/AppServer/api/entity/Person">https://t-oneim-4.domain/AppServer/api/entity/Person</a>" -WebSession
+$wsession -Method Post -Body $body -ContentType "application/json;
 charset=utf-8").uri</p>
 <p>#Change Employee Description</p>
-<p>\$Description = "Мастер цеха"</p>
-<p>\$body = @{values = @{Description = \$Description } } | ConvertTo-Json</p>
-<p>\$newURI = (Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
--WebSession \$wsession -Method Put -Body \$body -ContentType
+<p>$Description = "Мастер цеха"</p>
+<p>$body = @{values = @{Description = $Description } } | ConvertTo-Json</p>
+<p>$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.domain/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.domain/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession $wsession -Method Put -Body $body -ContentType
 "application/json; charset=utf-8").uri</p>
 <p>#Change Employee Department</p>
-<p>\$Department = "10013365"</p>
-<p>\$body = @{values = @{UID_Department = \$Department } } |
+<p>$Department = "10013365"</p>
+<p>$body = @{values = @{UID_Department = $Department } } |
 ConvertTo-Json</p>
-<p>\$newURI = (Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
--WebSession \$wsession -Method Put -Body \$body -ContentType
+<p>$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.domain.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.domain.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession $wsession -Method Put -Body $body -ContentType
 "application/json; charset=utf-8").uri</p>
 <p>#Deactivation</p>
-<p>\$Deactivation_start = [DateTime]::ParseExact('2019.11.24 18:55:00',
-'yyyy.MM.dd HH:mm:ss', \$null)</p>
-<p>\$Deactivation_start1 = \$Deactivation_start.ToString("yyyy-MM-dd
+<p>$Deactivation_start = [DateTime]::ParseExact('2019.11.24 18:55:00',
+'yyyy.MM.dd HH:mm:ss', $null)</p>
+<p>$Deactivation_start1 = $Deactivation_start.ToString("yyyy-MM-dd
 HH:mm:ss.000")</p>
-<p>\$Deactivation_end = [DateTime]::ParseExact('2019.12.06 18:55:00',
-'yyyy.MM.dd HH:mm:ss', \$null)</p>
-<p>\$Deactivation_end1 = \$Deactivation_end.ToString("yyyy-MM-dd
+<p>$Deactivation_end = [DateTime]::ParseExact('2019.12.06 18:55:00',
+'yyyy.MM.dd HH:mm:ss', $null)</p>
+<p>$Deactivation_end1 = $Deactivation_end.ToString("yyyy-MM-dd
 HH:mm:ss.000")</p>
-<p>\$body = @{values = @{DeactivationStart = \$Deactivation_start1;
-DeactivationEnd = \$Deactivation_end1 } } | ConvertTo-Json</p>
-<p>\$newURI = (Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
--WebSession \$wsession -Method Put -Body \$body -ContentType
+<p>$body = @{values = @{DeactivationStart = $Deactivation_start1;
+DeactivationEnd = $Deactivation_end1 } } | ConvertTo-Json</p>
+<p>$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.domain/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.domain/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession $wsession -Method Put -Body $body -ContentType
 "application/json; charset=utf-8").uri</p>
 <p>#Delete Employee</p>
-<p>\$newURI = (Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.sgp.ru/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
--WebSession \$wsession -Method Delete -Body \$body -ContentType
+<p>$newURI = (Invoke-RestMethod -Uri
+"<a href="https://t-oneim-4.domain/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e">https://t-oneim-4.domain/AppServer/api/entity/Person/8b93c671-fafb-466b-9148-ad0d340c310e</a>"
+-WebSession $wsession -Method Delete -Body $body -ContentType
 "application/json; charset=utf-8").uri</p>
 <p>#logout</p>
 <p>Invoke-RestMethod -Uri
-"<a href="https://t-oneim-4.sgp.ru/AppServer/auth/logout">https://t-oneim-4.sgp.ru/AppServer/auth/logout</a>" -WebSession
-\$wsession -Method Post</p>
+"<a href="https://t-oneim-4.domain/AppServer/auth/logout">https://t-oneim-4.domain/AppServer/auth/logout</a>" -WebSession
+$wsession -Method Post</p>
 <p><strong>------</strong></p>
 <p><strong>Central Account</strong></p>
-<p>'\$CustomProperty01\$</p>
-<p>If CStr(\$ImportSource\$) \&lt;&gt; "ADS" And CStr(\$Lastname\$) \&lt;&gt; "" And
-CStr(\$Firstname\$) \&lt;&gt; "" And CStr(\$Middlename\$) \&lt;&gt; "" And _</p>
+<p>'$CustomProperty01$</p>
+<p>If CStr($ImportSource$) \&lt;&gt; "ADS" And CStr($Lastname$) \&lt;&gt; "" And
+CStr($Firstname$) \&lt;&gt; "" And CStr($Middlename$) \&lt;&gt; "" And _</p>
 <p>(Not CBool(Connection.Variables.Get("FULLSYNC")) Or
-CStr(\$ImportSource\$).StartsWith("EBS") Or
-CStr(\$ImportSource\$).StartsWith("SAP") ) Then</p>
+CStr($ImportSource$).StartsWith("EBS") Or
+CStr($ImportSource$).StartsWith("SAP") ) Then</p>
 <p>If
 CStr(Connection.GetConfigParm("QER\Person\CentralAccountGlobalUnique"))="1"
 Then</p>
 <p>Value = CCC_AE_BuildCentralAccountGlobalUnique(
-GetValue("UID_Person").String, \$Lastname\$, \$Firstname\$,
-\$Middlename\$)</p>
+GetValue("UID_Person").String, $Lastname$, $Firstname$,
+$Middlename$)</p>
 <p>Else</p>
 <p>Value = CCC_AE_BuildCentralAccount( GetValue("UID_Person").String,
-\$Lastname\$, \$Firstname\$, \$Middlename\$)</p>
+$Lastname$, $Firstname$, $Middlename$)</p>
 <p>End If</p>
 <p>End If</p>
-<p>If CStr(\$ImportSource\$) \&lt;&gt; "ADS" And CStr(\$Lastname\$) \&lt;&gt; "" And
-CStr(\$Firstname\$) \&lt;&gt; "" And CStr(\$Middlename\$) = "" And _</p>
+<p>If CStr($ImportSource$) \&lt;&gt; "ADS" And CStr($Lastname$) \&lt;&gt; "" And
+CStr($Firstname$) \&lt;&gt; "" And CStr($Middlename$) = "" And _</p>
 <p>(Not CBool(Connection.Variables.Get("FULLSYNC1")) Or
-CStr(\$ImportSource\$).StartsWith("EBS") Or
-CStr(\$ImportSource\$).StartsWith("SAP") ) Then</p>
+CStr($ImportSource$).StartsWith("EBS") Or
+CStr($ImportSource$).StartsWith("SAP") ) Then</p>
 <p>If
 CStr(Connection.GetConfigParm("QER\Person\CentralAccountGlobalUnique"))="1"
 Then</p>
 <p>Value = CCC_AE_BuildCentralAccountGlobalUnique(
-GetValue("UID_Person").String, \$Lastname\$, \$Firstname\$,
-\$Middlename\$)</p>
+GetValue("UID_Person").String, $Lastname$, $Firstname$,
+$Middlename$)</p>
 <p>Else</p>
 <p>Value = CCC_AE_BuildCentralAccount( GetValue("UID_Person").String,
-\$Lastname\$, \$Firstname\$, \$Middlename\$)</p>
+$Lastname$, $Firstname$, $Middlename$)</p>
 <p>End If</p>
 <p>End If</p>
 <hr />
@@ -1857,30 +1845,30 @@ count(ad.UID_Person) AS CountADAcc FROM Person AS p</p>
 <hr />
 <p><strong>Таблица AdSAccount поле DisplayName</strong></p>
 <p>If Not CBool(Variables("FULLSYNC")) _</p>
-<p>AndAlso (\$GivenName[o]\$ \&lt;&gt; \$GivenName\$ _</p>
-<p>OrElse \$Surname[o]\$ \&lt;&gt; \$Surname\$ orElse
-\$FK(UID_Person).Middlename\$ \&lt;&gt; \$FK(UID_Person).Middlename[o]\$)
+<p>AndAlso ($GivenName[o]$ \&lt;&gt; $GivenName$ _</p>
+<p>OrElse $Surname[o]$ \&lt;&gt; $Surname$ orElse
+$FK(UID_Person).Middlename$ \&lt;&gt; $FK(UID_Person).Middlename[o]$)
 Then</p>
-<p>If \$Givenname\$\&lt;&gt;"" AndAlso \$Surname\$\&lt;&gt;"" AndAlso
-\$FK(UID_Person).Middlename\$\&lt;&gt;"" Then</p>
-<p>Value = \$Surname\$ &amp; " " &amp; \$Givenname\$ &amp; " " &amp;
-\$FK(UID_Person).Middlename\$</p>
-<p>ElseIf \$FK(UID_Person).Middlename\$="" AndAlso \$Givenname\$\&lt;&gt;""
-AndAlso \$Surname\$\&lt;&gt;"" Then</p>
-<p>Value = \$Surname\$ &amp; " " &amp; \$Givenname\$</p>
-<p>ElseIf \$Givenname\$\&lt;&gt;"" Then</p>
-<p>Value = \$Givenname\$</p>
-<p>ElseIf \$Surname\$\&lt;&gt;"" Then</p>
-<p>Value = \$Surname\$</p>
+<p>If $Givenname$\&lt;&gt;"" AndAlso $Surname$\&lt;&gt;"" AndAlso
+$FK(UID_Person).Middlename$\&lt;&gt;"" Then</p>
+<p>Value = $Surname$ &amp; " " &amp; $Givenname$ &amp; " " &amp;
+$FK(UID_Person).Middlename$</p>
+<p>ElseIf $FK(UID_Person).Middlename$="" AndAlso $Givenname$\&lt;&gt;""
+AndAlso $Surname$\&lt;&gt;"" Then</p>
+<p>Value = $Surname$ &amp; " " &amp; $Givenname$</p>
+<p>ElseIf $Givenname$\&lt;&gt;"" Then</p>
+<p>Value = $Givenname$</p>
+<p>ElseIf $Surname$\&lt;&gt;"" Then</p>
+<p>Value = $Surname$</p>
 <p>End If</p>
 <p>End If</p>
 <hr />
 <p><strong>Таблица Person поле DefaultEmailAddress</strong></p>
 <p>#If EX2K Or NOTES Then</p>
 <p>Dim defaultMailAddress As String</p>
-<p>If Len(\$CentralAccount\$) &gt; 0 AndAlso Len (\$UID_Person\$) &gt; 0 Then</p>
+<p>If Len($CentralAccount$) &gt; 0 AndAlso Len ($UID_Person$) &gt; 0 Then</p>
 <p>defaultMailAddress =
-VI_AE_CreatedefaultMailAddress(\$centralaccount\$,\$uid_person\$)</p>
+VI_AE_CreatedefaultMailAddress($centralaccount$,$uid_person$)</p>
 <p>' check if mail address is valid</p>
 <p>If VID_IsSMTPAddress(defaultMailAddress) Then</p>
 <p>Value = defaultMailAddress</p>
