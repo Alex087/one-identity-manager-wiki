@@ -162,6 +162,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#qerworkingstep" class="nav-link">Объяснение путей согласования в таблице QERWorkingStep</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -362,7 +367,17 @@ style="width:6.33333in;height:6.33333in" /></p>
 <p><img src="../media/16. Processes/media/image14.png"
 style="width:4.15625in;height:6.02083in" /></p>
 <p><img src="../media/16. Processes/media/image15.png"
-style="width:5.08333in;height:2.63542in" /></p></div>
+style="width:5.08333in;height:2.63542in" /></p>
+<hr />
+<h1 id="qerworkingstep">Объяснение  путей согласования в таблице QERWorkingStep</h1>
+<p>В QERWorkingStep это поля маршрутизации шага согласования.</p>
+<p>PositiveSteps — куда идти при положительном результате шага.
+NegativeSteps — куда идти при отрицательном результате шага.</p>
+<p>Практически это работает как “смещение по уровням” (jump) внутри UID_QERWorkingMethod:
+1 = следующий уровень
+2 = пропустить один и перейти через уровень
+5 = перейти на уровень +5
+0 = не переходить дальше (обычно завершение ветки на этом результате)</p></div>
             </div>
         </div>
 
